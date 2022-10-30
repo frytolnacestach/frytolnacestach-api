@@ -2,25 +2,13 @@
   "name": "api-frytolnacestach",
   "version": "1.0.0",
   "description": "",
-  "main": "functions/server.js",
+  "main": "index.js",
   "scripts": {
-    "build": "netlify-lambda build express",
-    "start": "nodemon server-local.js"
+    "start": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/neverendingqs/netlify-express.git"
-  },
-  "keywords": [
-    "netlify",
-    "express.js"
-  ],
-  "dependencies": {},
-  "devDependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "netlify-lambda": "^1.6.3",
-    "nodemon": "^1.19.2",
-    "serverless-http": "^2.3.0"
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }
