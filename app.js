@@ -7,8 +7,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/clanky', (req, res) => {
-    const jokes = require('./json/clanky.json')
-    res.json(jokes)
+    const clanky = require('./json/clanky.json')
+    res.json(clanky)
 })
 
 app.listen(8080, () => console.log('Server is Running ;)'))
