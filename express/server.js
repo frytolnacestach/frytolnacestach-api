@@ -18,5 +18,11 @@ app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
+//clanky
+app.get('/clanky', (req, res) => {
+    const clanky = require('../json/clanky.json')
+    res.json(clanky)
+});
+
 module.exports = app;
 module.exports.handler = serverless(app);
