@@ -5,24 +5,27 @@ const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
 
+//const clanky = require('../json/clanky.json')
+//const clankyDemo = require('../json/clanky-demo.json')
+
 const router = express.Router();
-/*router.get('/', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
+router.get('/', (req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/html' })
     res.write('<h1>Hello from Express.js!</h1>');
     res.end();
 });
-router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
+router.get('/another', (req, res) => res.json({ route: req.originalUrl }))
 router.post('/', (req, res) => res.json({ postBody: req.body }));
 
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
-app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
-*/
+app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')))
 
+/*
 //clanky
-/*router.get('/clanky', (req, res) => {
+router.get('/clanky', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write('<h1>Hello from Express.js!</h1>');
+    res.write('<h1>Hello from Express.js! - clanky</h1>');
     res.end();
 });
 router.get('/clanky', (req, res) => res.json({ route: req.originalUrl }));
@@ -30,13 +33,13 @@ router.post('/clanky', (req, res) => res.json({ postBody: req.body }));
 
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
-app.use('/clanky', (req, res) => res.sendFile(path.join(__dirname, '../json/clanky.json')));
+app.use('/clanky', (req, res) => {res.json(clanky)});
 
 
 //clanky-demo
 router.get('/clanky-demo', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.write('<h1>Hello from Express.js!</h1>');
+    res.write('<h1>Hello from Express.js! - clanky - demo </h1>');
     res.end();
 });
 router.get('/clanky-demo', (req, res) => res.json({ route: req.originalUrl }));
@@ -44,19 +47,19 @@ router.post('/clanky-demo', (req, res) => res.json({ postBody: req.body }));
 
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
-app.use('/clanky-demo', (req, res) => res.sendFile(path.join(__dirname, '../json/clanky-demo.json')));
-
+app.use('/clanky-demo', (req, res) => {res.json(clankyDemo)});
 */
 
 
 //clanky
-/*app.use('/clanky', (req, res) => {
+app.get('/clanky', (req, res) => {
     const clanky = require('../json/clanky.json')
     res.json(clanky)
-})*/
+})
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+app.get('/clanky-demo', (req, res) => {
+    const clanky = require('../json/clanky-demo.json')
+    res.json(clanky)
 })
 
 module.exports = app;
