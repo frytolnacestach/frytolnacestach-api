@@ -21,5 +21,14 @@ app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 //clanky
 app.use('/clanky', (req, res) => res.sendFile(path.join(__dirname, '../json/clanky.json')));
 
+/*app.get('/clanky', (req, res) => {
+    const clanky = require('../json/clanky.json')
+    res.json(clanky)
+});*/
+
+app.get('/clanky', (req, res) => {
+    res.json({msg: 'Hello World :D'})
+})
+
 module.exports = app;
 module.exports.handler = serverless(app);
