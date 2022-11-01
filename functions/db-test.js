@@ -24,6 +24,26 @@ exports.handler = async (event, context) => {
     })
 
 
+    /*const clanky = await faunaClient.query(
+        q.Map(
+          q.Paginate(q.Match(q.Index("all_posts"), true)),
+          q.Lambda("userRef", q.Get(q.Var("userRef")))
+        )
+      )*/
+
+
+      const clanky = client.query(
+        q.Paginate(q.Match(q.Index('all_posts')))
+      )
+      .then((ret) => console.log(ret))
+      .catch((err) => console.error(
+        'Error: [%s] %s: %s',
+        err.name,
+        err.message,
+        err.errors()[0].description,
+      ))
+
+      /*
     const clanky = client.query(
         q.Get(q.Index('all_posts'))
       )
@@ -33,7 +53,7 @@ exports.handler = async (event, context) => {
         err.name,
         err.message,
         err.errors()[0].description,
-      ))
+      ))*/
 
       console.log("testy: " + clanky)
       console.log(JSON.stringify(clanky))
