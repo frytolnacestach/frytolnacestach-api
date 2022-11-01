@@ -21,12 +21,14 @@
     "url": "https://github.com/frytolnacestach/frytolnacestach-api/issues"
   },
   "homepage": "https://github.com/frytolnacestach/frytolnacestach-api#readme",
-  "dependencies": {},
   "devDependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "netlify-lambda": "^1.6.3",
     "nodemon": "^1.19.2",
     "serverless-http": "^2.3.0"
+  },
+  "dependencies": {
+    "faunadb": "^4.7.1"
   }
 }
