@@ -2,13 +2,21 @@ const faunadb = require('faunadb')
 const q = faunadb.query
 
 const client = new faunadb.Client({
-    secret: process.env.FAUNADB_SECRET_KEY,
+    secret: 347139750152372818,
     domain: 'db.fauna.com',
     port: 443,
     scheme: 'https',
 })
 
-exports.handler = async (event, context) => {    
+client.query(
+    q.Get(q.CreateCollection({name: "atest"}))
+)
+
+exports.handler = async (event, context) => {  
+    client.query(
+        q.Get(q.CreateCollection({name: "btest"}))
+    )  
+/*
     const clanky = client.query(
         q.Get(q.Collection('posts'), '347140487201686092')
     )
@@ -23,7 +31,12 @@ exports.handler = async (event, context) => {
     return {
         statusCode: 200,
         body: JSON.stringify(clanky) + "C2:" + clanky + "C3:" + {clanky}
-    }   
+    } */
+
+    return {
+        statusCode: 200,
+        body: "Test tvorby"
+    } 
 }
 
     /*
