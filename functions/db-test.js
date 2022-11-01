@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
 
 
     const clanky = client.query(
-        q.Get(q.Collection('clanky'))
+        q.Get(q.Collection('posts'))
       )
       .then((ret) => console.log(ret))
       .catch((err) => console.error(
