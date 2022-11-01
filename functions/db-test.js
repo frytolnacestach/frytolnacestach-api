@@ -32,7 +32,7 @@ exports.handler = async (event, context) => {
       )*/
 
       const clanky = client.query(
-        q.Ref(q.Collection('posts'), '347140487201686092')
+        q.Get(q.Ref(q.Collection('posts'), '347140487201686092'))
       )
       .then((ret) => console.log(ret))
       .catch((err) => console.error(
