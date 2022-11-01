@@ -14,7 +14,7 @@ pool.query(`select * from apidb.users`, (err, res) => {
 
 exports.handler = async (event, context) => {
     var faunadb = require('faunadb')
-    //var q = faunadb.query
+    var q = faunadb.query
 
     const client = new faunadb.Client({
         secret: '347139750152372818',
