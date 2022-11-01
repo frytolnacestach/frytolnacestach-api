@@ -31,9 +31,8 @@ exports.handler = async (event, context) => {
         )
       )*/
 
-
       const clanky = client.query(
-        q.Paginate(q.Match(q.Index('all_posts')))
+        q.Ref(q.Collection('posts'), '347140487201686092')
       )
       .then((ret) => console.log(ret))
       .catch((err) => console.error(
@@ -43,6 +42,18 @@ exports.handler = async (event, context) => {
         err.errors()[0].description,
       ))
 
+/*
+      const clanky = client.query(
+        q.Get(q.Index('all_posts'))
+      )
+      .then((ret) => console.log(ret))
+      .catch((err) => console.error(
+        'Error: [%s] %s: %s',
+        err.name,
+        err.message,
+        err.errors()[0].description,
+      ))
+*/
       /*
     const clanky = client.query(
         q.Get(q.Index('all_posts'))
