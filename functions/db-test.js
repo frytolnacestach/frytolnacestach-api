@@ -24,7 +24,8 @@ exports.handler = async (event, context) => {
     })
 
 
-    const clanky = require(Get(Ref(Collection('posts'), '1')))
+
+    const clanky = client.query(Get(Ref(Collection('posts'), '1')))
 
     return {
         statusCode: 200,
