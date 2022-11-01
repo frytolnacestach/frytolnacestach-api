@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
     var q = faunadb.query
 
     const client = new faunadb.Client({
-        secret: '347139750152372818',
+        secret: 347139750152372818,
         domain: 'db.fauna.com',
         port: 443,
         scheme: 'https',
