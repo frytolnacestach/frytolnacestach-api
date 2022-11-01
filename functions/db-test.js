@@ -18,22 +18,25 @@ exports.handler = async (event, context) => {
 
     const client = new faunadb.Client({
         secret: '347139750152372818',
-        domain: 'db.us.fauna.com',
+        domain: 'db.fauna.com',
         port: 443,
         scheme: 'https',
     })
 
 
     const clanky = client.query(
-        q.Get(q.Collection('posts'))
+        q.Get(q.Index('all_posts'))
       )
-      .then((ret) => console.log(ret))
+      .then((ret) => ret)
       .catch((err) => console.error(
         'Error: [%s] %s: %s',
         err.name,
         err.message,
         err.errors()[0].description,
       ))
+
+      console.log("testy: " + clanky)
+      console.log(JSON.stringify(clanky))
 
     return {
         statusCode: 200,
