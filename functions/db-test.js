@@ -2,23 +2,30 @@ const faunadb = require('faunadb')
 const q = faunadb.query
 
 const client = new faunadb.Client({
-    secret: 347139750152372818,
+    secret: 'fnAE0WVDYOACSxIJL219MKm7uGDyyNt_itjoew5i',
     domain: 'db.fauna.com',
     port: 443,
     scheme: 'https',
 })
 
-client.query(
-    q.Get(q.CreateCollection({name: "atest"}))
-)
-
 exports.handler = async (event, context) => {  
-    client.query(
-        q.Get(q.CreateCollection({name: "btest"}))
-    )  
-/*
-    const clanky = client.query(
-        q.Get(q.Collection('posts'), '347140487201686092')
+ 
+    const {
+        Ref,
+        Paginate,
+        Get,
+        Match,
+        Index,
+        Create,
+        Collection,
+        Join,
+        Call,
+        Function: Fn,
+    } = faunadb.query;
+
+    //post
+    const clanek = client.query(
+        q.Get(q.Ref(q.Collection('posts'), '347140487201686092'))
     )
     .then((ret) => console.log(ret))
     .catch((err) => console.error(
@@ -28,18 +35,30 @@ exports.handler = async (event, context) => {
         err.errors()[0].description,
     ))
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify(clanky) + "C2:" + clanky + "C3:" + {clanky}
-    } */
+    //posts
+    const clanky = client.query(
+        q.Index('all_posts')
+      )
+      .then((ret) => console.log(ret))
+      .catch((err) => console.error(
+        'Error: [%s] %s: %s',
+        err.name,
+        err.message,
+        err.errors()[0].description,
+      ))
 
     return {
         statusCode: 200,
-        body: "Test tvorby"
-    } 
+        body: "C1:" + JSON.stringify(clanek) + "C2:" + clanek + "C3:" + {clanek} + "C4:" + JSON.stringify(clanky) + "C5:" + clanky + "C6:" + {clanky}
+    }
 }
 
     /*
+
+    client.query(
+        q.CreateCollection({name: "atest"})
+    )
+
     const {
         Ref,
         Paginate,
