@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
-const express = require('express');
 
+'use strict';
+
+const express = require('express');
 const app = express();
 
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
