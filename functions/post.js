@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 exports.handler = async (event, context) => {
 
-    const postSlug = 'svet-meduz'
+    let postSlug = 'svet-meduz'
 
     app.get('/post/:postSlug', (request, response) => {
         postSlug = request.params.productSlug; 
