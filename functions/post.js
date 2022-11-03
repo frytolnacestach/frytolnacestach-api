@@ -1,5 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
+const app = express();
+
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
