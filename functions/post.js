@@ -6,10 +6,16 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 exports.handler = async (event, context) => {
 
+    const postSlug = 'svet-meduz'
+
+    app.get('/post/:postSlug', (request, response) => {
+        postSlug = request.params.productSlug; 
+    })
+
     const { data, error } = await supabase
     .from('posts')
     .select()
-    .eq('slug', 'svet-meduz')
+    .eq('slug', postSlug)
 
     return {
         statusCode: 200,
