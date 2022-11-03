@@ -4,7 +4,7 @@ const supabaseUrl = 'https://pplyaowxrctmsqubsnqv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-exports.handler = async (event, context) => {  
+exports.handler = async (event, context) => {
 
     const { data, error } = await supabase
     .from('test')
