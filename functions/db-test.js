@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = 'https://pplyaowxrctmsqubsnqv.supabase.co'
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBwbHlhb3d4cmN0bXNxdWJzbnF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2Njc0NjczNjEsImV4cCI6MTk4MzA0MzM2MX0.P-E-U_4XeVzQ0pb3zupuM5TjvnIO9yCXoOg-BtFdtpw'
+const supabaseKey = process.env.FAUNADB_SECRET_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 exports.handler = async (event, context) => {  
