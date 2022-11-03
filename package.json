@@ -29,6 +29,6 @@
     "serverless-http": "^2.3.0"
   },
   "dependencies": {
-    "faunadb": "^4.7.1"
+    "@supabase/supabase-js": "^2.0.5"
   }
 }

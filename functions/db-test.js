@@ -1,4 +1,23 @@
-const faunadb = require('faunadb')
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = 'https://pplyaowxrctmsqubsnqv.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
+
+exports.handler = async (event, context) => {  
+
+    const { data, error } = await supabase
+    .from('posts')
+    .select()
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify({"test":"test"})
+    }
+    
+}
+
+/*const faunadb = require('faunadb')
 const q = faunadb.query
 
 const client = new faunadb.Client({
@@ -6,11 +25,9 @@ const client = new faunadb.Client({
     domain: 'db.fauna.com',
     port: 443,
     scheme: 'https',
-})
+})*/
 
-exports.handler = async (event, context) => {  
- 
-    const {
+    /*const {
         Ref,
         Paginate,
         Get,
@@ -23,8 +40,7 @@ exports.handler = async (event, context) => {
         Function: Fn,
     } = faunadb.query;
 
-
-    console.log("______________________ START_4");
+    console.log("______________________ START_4");*/
 
     //post slug
     /*const clanekid = client.query(
@@ -35,7 +51,7 @@ exports.handler = async (event, context) => {
       .then((ret) => console.log(ret))*/
 
     //clanky
-    const jsonGet = client.query(
+    /*const jsonGet = client.query(
         q.Map(
             q.Paginate(q.Match(q.Index("all_posts"))),q.Lambda("X", q.Get(q.Var("X")))
         )
@@ -55,8 +71,17 @@ exports.handler = async (event, context) => {
     return {
         statusCode: 200,
         body: JSON.stringify(printJson())
-    }
-}
+    }*/
+
+/*const faunadb = require('faunadb')
+const q = faunadb.query
+
+const client = new faunadb.Client({
+    secret: process.env.FAUNADB_SECRET_KEY,
+    domain: 'db.fauna.com',
+    port: 443,
+    scheme: 'https',
+})*/
 
     /*
     const printAddress = async () => {
