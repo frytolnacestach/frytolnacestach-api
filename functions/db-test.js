@@ -6,13 +6,13 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 exports.handler = async (event, context) => {  
 
-    const getPosts = await supabase
+    const { data, error } = await supabase
     .from('test')
     .select()
 
     return {
         statusCode: 200,
-        body: JSON.stringify(getPosts)
+        body: JSON.stringify(data)
     }
     
 }
