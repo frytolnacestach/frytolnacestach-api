@@ -7,12 +7,12 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 exports.handler = async (event, context) => {  
 
     const { data, error } = await supabase
-    .from('test')
+    .from('test2')
     .select()
 
     return {
         statusCode: 200,
-        body: data
+        body: JSON.stringify(data)
     }
     
 }
