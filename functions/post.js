@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 
-import app from 'express'
+import * as express from "express";
+
+const app =  express();
 
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
