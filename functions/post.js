@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-import * as express from "express";
+import express from "express";
 
 const app =  express();
 
