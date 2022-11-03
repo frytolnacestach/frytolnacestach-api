@@ -19,7 +19,7 @@ exports.handler = async (event, context) => {
     const { data, error } = await supabase
     .from('posts')
     .select()
-    .eq('slug', postSlug)
+    .eq('slug', getPostSlug)
 
     return {
         statusCode: 200,
