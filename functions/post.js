@@ -23,6 +23,6 @@ exports.handler = async (event, context) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify(data) + getPostSlug
+        body: JSON.stringify(data) + getPostSlug.res
     } 
 }
