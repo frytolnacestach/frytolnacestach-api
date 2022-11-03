@@ -1,12 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
-'use strict';
-const express = require('express');
-const path = require('path');
-const serverless = require('serverless-http');
-const app = express();
-const bodyParser = require('body-parser');
 
-const router = express.Router();
+import app from 'express'
 
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
@@ -30,6 +24,3 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(data)
     } 
 }
-
-module.exports = app;
-module.exports.handler = serverless(app);
