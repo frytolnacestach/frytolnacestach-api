@@ -1,11 +1,17 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from "@supabase/supabase-js"
 
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-exports.handler = async (event, context) => {
+const express = require('express');
+const cors = require('cors');
 
+const router = express.Router();
+
+router.use(cors());
+
+async function start() {
     const { data, error } = await supabase
     .from('posts')
     .select()
@@ -13,5 +19,8 @@ exports.handler = async (event, context) => {
     return {
         statusCode: 200,
         body: JSON.stringify(data)
-    } 
+    }
 }
+start()
+
+module.exports = router;
