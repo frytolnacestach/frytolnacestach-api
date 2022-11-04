@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     }
     .api {
         background-image: url('/assets/images/hero.png');
-        background-size: contain;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-color: #444;
@@ -30,9 +30,14 @@ router.get('/', (req, res) => {
     .api__title {
         font-size: 40px;
         color: white;
+        text-align: center;
+    }
+    .api__title-api {
+        font-size: 60px;
+        color: white;
     }
     </style>`)
-    res.write('<div class="api"><h1 class="api__title">Hello from Express.js!</h1></div>')
+    res.write('<div class="api"><h1 class="api__title"><span class="api__title-api">API</span><br>Frytol na cestách</h1></div>')
     res.end();
 });
 router.get('/another', (req, res) => res.json({ route: req.originalUrl }))
