@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
 
     const response = {
         statusCode: 200,
-        body: JSON.stringify(data)
+        body: JSON.stringify({"name": "Michal"})
     }
 
     return response
