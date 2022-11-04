@@ -28,13 +28,14 @@ exports.handler = async (event, context) => {
     readingfile();
     console.log(content);
 ///
+    var getSlugR = ''
 
     router.get(':slug', function (req, res, next) {
         if (req.params.slug === 'trikrizovy-vrch') {
             return next();
         }
         
-        // get user data and render
+        getSlugR = req.params.slug
         res.render('user', userdata);
     });
 
@@ -58,6 +59,6 @@ exports.handler = async (event, context) => {
 
     return {
         statusCode: 200,
-        body: "T1:" + JSON.stringify(data) + "T2:" + getPostSlug + "T3:" + postSlug + "T4:" + content
+        body: "T1:" + JSON.stringify(data) + "T2:" + getPostSlug + "T3:" + postSlug + "T4:" + content + "T5:" + getSlugR
     } 
 }
