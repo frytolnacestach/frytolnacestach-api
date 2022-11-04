@@ -11,20 +11,18 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 exports.handler = async (event, context) => {
     var postSlug
     
-    function getSlug () {
-        app.get(':postSlug', async (req, res) =>  {
-            postSlug = req.params.postSlug;
-    
-            const { data, error } = await supabase
-            .from('posts')
-            .select()
-            .eq('slug', getPostSlug)
-        })
-    }
+    app.get(':postSlug', async (req, res) =>  {
+        postSlug = req.params.postSlug;
+
+        const { data, error } = await supabase
+        .from('posts')
+        .select()
+        .eq('slug', getPostSlug)
+    })
 
 
     return {
         statusCode: 200,
-        body: JSON.stringify(getSlug())
+        body: JSON.stringify(data)
     }
 }
