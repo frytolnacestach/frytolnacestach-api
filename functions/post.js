@@ -16,13 +16,15 @@ exports.handler = async (event, context) => {
         return postSlug
     })
 
-    function makeSlug(){
+    function makeSlug(slug){
         app.get('/post/:postSlug', (request, response) => {
             postSlug = request.params.postSlug;
     
             return postSlug
         })
     }
+
+    let slug = makeSlug()
 
     const { data, error } = await supabase
     .from('posts')
@@ -31,6 +33,6 @@ exports.handler = async (event, context) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify(data) + getPostSlug + makeSlug()
+        body: JSON.stringify(data) + getPostSlug + slug
     } 
 }
