@@ -22,6 +22,7 @@ async function start() {
         .select()
         .eq('slug', postSlug)
         
+        const response = {
             statusCode: 200,
             body: JSON.stringify(data)
         }
