@@ -16,6 +16,17 @@ exports.handler = async (event, context) => {
         return postSlug
     })
 
+///
+    var content;
+    function readingfile() {
+        var fs = require('fs');
+        content = "test call";
+        return content;
+    }
+    readingfile();
+    console.log(content);
+///
+
     function makeSlug(slug){
         app.get('/post/:postSlug', (request, response) => {
             postSlug = request.params.postSlug;
@@ -33,6 +44,6 @@ exports.handler = async (event, context) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify(data) + getPostSlug + slug
+        body: "T1:" + JSON.stringify(data) + "T2:" + getPostSlug + "T3:" + slug + "T4:" + content
     } 
 }
