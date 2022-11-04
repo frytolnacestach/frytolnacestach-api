@@ -20,7 +20,7 @@ exports.handler = async (event, context) => {
         app.get('/post/:postSlug', (request, response) => {
             postSlug = request.params.postSlug;
     
-            return postSlug
+            return "_test return_"
         })
     }
 
