@@ -8,6 +8,8 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
+let getPostSlug = "test"
+
 exports.handler = async (event, context) => {
 
     const { dataSlug } = app.get('/post/:postSlug', (request, response) => {
