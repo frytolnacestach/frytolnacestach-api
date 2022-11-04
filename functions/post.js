@@ -16,6 +16,8 @@ exports.handler = async (event, context) => {
         return postSlug
     })
 
+    console.log(request)
+
     const { data, error } = await supabase
     .from('posts')
     .select()
@@ -23,6 +25,6 @@ exports.handler = async (event, context) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify(data) + getPostSlug
+        body: JSON.stringify(data) + getPostSlug + request
     } 
 }
