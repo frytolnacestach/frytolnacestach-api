@@ -8,9 +8,11 @@ const express = require('express');
 const cors = require('cors');
 
 const router = express.Router();
+const body_parser = require('body-parser')
 const app =  express();
 
 router.use(cors());
+router.use(body_parser.json())
 
 async function start() {
     

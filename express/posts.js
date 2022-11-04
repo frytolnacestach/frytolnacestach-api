@@ -8,8 +8,10 @@ const express = require('express');
 const cors = require('cors');
 
 const router = express.Router();
+const body_parser = require('body-parser')
 
 router.use(cors());
+router.use(body_parser.json())
 
 async function start() {
     const { data, error } = await supabase
