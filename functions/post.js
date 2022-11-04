@@ -2,6 +2,8 @@ import { createClient } from '@supabase/supabase-js'
 
 import express from "express";
 
+const router = express.Router();
+
 const app =  express();
 
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
