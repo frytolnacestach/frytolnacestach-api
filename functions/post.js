@@ -8,15 +8,21 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-let getPostSlug = "test"
-
 exports.handler = async (event, context) => {
 
-    const { dataSlug } = app.get('/post/:postSlug', (request, response) => {
+    const getPostSlug = app.get('/post/:postSlug', (request, response) => {
         postSlug = request.params.postSlug;
 
         return postSlug
     })
+
+    function makeSlug(){
+        app.get('/post/:postSlug', (request, response) => {
+            postSlug = request.params.postSlug;
+    
+            return postSlug
+        })
+    }
 
     const { data, error } = await supabase
     .from('posts')
@@ -25,6 +31,6 @@ exports.handler = async (event, context) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify(data) + getPostSlug + dataSlug
+        body: JSON.stringify(data) + getPostSlug + makeSlug()
     } 
 }
