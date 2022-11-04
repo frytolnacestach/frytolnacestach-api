@@ -9,7 +9,9 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 exports.handler = async (event, context) => {
-    
+
+console.log(req.params.postSlug)
+
     app.get(':postSlug', async (req, res) =>  {
         var postSlug = req.params.postSlug;
 
@@ -26,7 +28,6 @@ exports.handler = async (event, context) => {
         return response
         
     })
-
 
     /*return {
         statusCode: 200,
