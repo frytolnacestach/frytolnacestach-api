@@ -27,9 +27,19 @@ exports.handler = async (event, context) => {
     console.log(content);
 ///
 
+    router.get(':slug', function (req, res, next) {
+        if (req.params.slug === 'trikrizovy-vrch') {
+            return next();
+        }
+        
+        // get user data and render
+        res.render('user', userdata);
+    });
+
+
     var postSlug
     function makeSlug(){
-        app.get('/post/:postSlug', (request, response) => {
+        app.get(':postSlug', (request, response) => {
             var fs = require('fs');
             postSlug = "test Slugu"
     
