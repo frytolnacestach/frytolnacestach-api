@@ -27,15 +27,15 @@ exports.handler = async (event, context) => {
     console.log(content);
 ///
 
-    function makeSlug(slug){
+    function makeSlug(){
         app.get('/post/:postSlug', (request, response) => {
-            postSlug = request.params.postSlug;
+            postSlug = "test Slugu"
     
-            return "_test return_"
+            return postSlug
         })
     }
-
-    let slug = makeSlug()
+    makeSlug();
+    console.log(postSlug);
 
     const { data, error } = await supabase
     .from('posts')
