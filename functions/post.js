@@ -18,12 +18,7 @@ exports.handler = async (event, context) => {
         .select()
         .eq('slug', postSlug)
 
-        const response = {
-            statusCode: 200,
-            body: JSON.stringify(data)
-        }
-    
-        return response
+
         
     })
 
