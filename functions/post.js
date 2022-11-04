@@ -27,8 +27,10 @@ exports.handler = async (event, context) => {
     console.log(content);
 ///
 
+    var postSlug
     function makeSlug(){
         app.get('/post/:postSlug', (request, response) => {
+            var fs = require('fs');
             postSlug = "test Slugu"
     
             return postSlug
