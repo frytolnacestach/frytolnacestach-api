@@ -8,7 +8,7 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-exports.handler = async (event, context) => {
+exports.handler = async (event, context, callback) => {
     var postSlug
     
     app.get(':postSlug', async (req, res) =>  {
@@ -18,11 +18,10 @@ exports.handler = async (event, context) => {
         .from('posts')
         .select()
         .eq('slug', getPostSlug)
+
+        callback(null, {
+            statusCode: 200,
+            body: JSON.stringify(data)
+        });
     })
-
-
-    return {
-        statusCode: 200,
-        body: JSON.stringify(data)
-    }
 }
