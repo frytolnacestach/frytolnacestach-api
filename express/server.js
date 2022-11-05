@@ -16,7 +16,8 @@ router.get('/', (req, res) => {
     }
     
     body {
-        min-width: 100vw;
+        width: 100%;
+        height: auto;
         min-height: 100vh;
         margin: 0;
         padding-top: 40px;
