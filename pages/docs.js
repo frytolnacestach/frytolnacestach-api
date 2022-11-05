@@ -40,6 +40,7 @@ exports.handler = async (event, context) => {
         display: flex;
         justify-content: center;
         margin: 0;
+        padding: 5px 15px;
         list-style: none;
     }
     
