@@ -1,14 +1,12 @@
-'use strict';
-const express = require('express');
-const path = require('path');
-const serverless = require('serverless-http');
-const app = express();
-const bodyParser = require('body-parser');
+import express from "express";
 
-const router = express.Router();
-router.get('/', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
-    res.write(`<style type="text/css">
+const app =  express();
+
+exports.handler = async (event, context) => {
+    
+    
+    const pageBody = `
+    <style type="text/css">
     body {
         min-width: 100vw;
         min-height: 100vh;
@@ -68,8 +66,7 @@ router.get('/', (req, res) => {
         font-size: 60px;
         color: white;
     }
-    </style>`)
-    res.write(`
+    </style>
     <header class="o-header">
         <nav class="m-nav">
             <ul class="m-nav__items">
@@ -81,18 +78,13 @@ router.get('/', (req, res) => {
     </header>
     <div class="o-hero">
         <h1 class="o-hero__title">
-            <span class="o-hero__title-api">API</span>
+            <span class="o-hero__title-api">Documentace API</span>
             <br>Frytol na cestách
         </h1>
-    </div>`)
-    res.end();
-});
-router.get('/another', (req, res) => res.json({ route: req.originalUrl }))
-router.post('/', (req, res) => res.json({ postBody: req.body }));
-
-app.use(bodyParser.json());
-app.use('/.netlify/functions/server', router);  // path must route to lambda
-app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')))
-
-module.exports = app;
-module.exports.handler = serverless(app);
+    </div>`
+    
+    return {
+        statusCode: 200,
+        body: pageBody
+    }
+}
