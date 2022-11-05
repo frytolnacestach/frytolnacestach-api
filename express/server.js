@@ -61,7 +61,7 @@ router.get('/', (req, res) => {
     }
     
     .o-hero {
-        background-image: url('/assets/images/hero.png');
+        background-image: url('/public/images/hero.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
