@@ -27,7 +27,7 @@ exports.handler = async (event, context) => {
         top: 0;
         left: 0;
         right: 0;
-        background-color: white;
+        background: rgba(255, 255, 255, .95);
     }
     
     .m-nav {
