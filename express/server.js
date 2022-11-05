@@ -9,8 +9,6 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' })
     res.write('<link rel="stylsheet" type="text/css" href="/public/css/main.css">')
-    res.writeHead(200, {'Content-Type': 'text/css'});
-    readFile(`/public/css/main.css`, res);
     res.write(`
     <header class="o-header">
         <nav class="m-nav">
