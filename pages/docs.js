@@ -18,7 +18,6 @@ exports.handler = async (event, context) => {
         height: auto;
         min-height: 100vh;
         margin: 0;
-        padding-top: 40px;
     }
     
     .o-header {
@@ -69,6 +68,7 @@ exports.handler = async (event, context) => {
         display: flex;
         justify-content: center;
         align-items: center;
+        padding-top: 40px;
     }
     
     .o-hero__title {

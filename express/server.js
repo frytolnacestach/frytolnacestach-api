@@ -20,7 +20,6 @@ router.get('/', (req, res) => {
         height: auto;
         min-height: 100vh;
         margin: 0;
-        padding-top: 40px;
     }
     
     .o-header {
@@ -71,6 +70,7 @@ router.get('/', (req, res) => {
         display: flex;
         justify-content: center;
         align-items: center;
+        padding-top: 40px;
     }
     
     .o-hero__title {
