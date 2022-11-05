@@ -30,17 +30,27 @@ router.get('/', (req, res) => {
     </div>`)
     res.end();
 });
+
+
 router.get('/another', (req, res) => res.json({ route: req.originalUrl }))
 router.post('/', (req, res) => res.json({ postBody: req.body }));
+
+app.use(bodyParser.json());
+app.use('/.netlify/functions/server', router);  // path must route to lambda
+app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')))
+
+//static
+const path = require('path')
+app.use('/public', express.static(path.join(__dirname, 'public')))
 
 //css
 app.get('/css/main.css' , (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'css', 'main.css'))
 })
 
-app.use(bodyParser.json());
-app.use('/.netlify/functions/server', router);  // path must route to lambda
-app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')))
+//pages docs
+const wiki = require("../pages/docs.js");
+app.use("/pages/docs", wiki);
 
 module.exports = app;
 module.exports.handler = serverless(app);
