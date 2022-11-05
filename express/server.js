@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
         line-height: 20px;
     }
 
-    .api {
+    .o-hero {
         background-image: url('/assets/images/hero.png');
         background-size: cover;
         background-position: center;
@@ -59,12 +59,12 @@ router.get('/', (req, res) => {
         align-items: center;
     }
     
-    .api__title {
+    .o-hero__title {
         font-size: 40px;
         color: white;
         text-align: center;
     }
-    .api__title-api {
+    .o-hero__title-api {
         font-size: 60px;
         color: white;
     }
