@@ -7,12 +7,19 @@ exports.handler = async (event, context) => {
     
     const pageBody = `
     <style type="text/css">
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+    
     body {
         min-width: 100vw;
         min-height: 100vh;
         margin: 0;
+        padding-top: 40px;
     }
-
+    
     .o-header {
         position: absolute;
         width: 100%;
@@ -20,30 +27,36 @@ exports.handler = async (event, context) => {
         top: 0;
         left: 0;
         right: 0;
+        background-color: white;
     }
-
+    
     .m-nav {
         width: 100%;
         max-width: 1000px;
     }
-
+    
     .m-nav__items {
         width: 100%;
         display: flex;
         justify-content: center;
+        margin: 0;
+        list-style: none;
     }
-
+    
     .m-nav__item {
         padding: 5px 10px;
     }
-
+    
     .m-nav__link {
         color: black;
         padding: 5px;
         font-size: 16px;
         line-height: 20px;
+        height: 20px;
+        text-decoration: none;
+        text-transform: uppercase;
     }
-
+    
     .o-hero {
         background-image: url('/assets/images/hero.png');
         background-size: cover;
@@ -62,6 +75,7 @@ exports.handler = async (event, context) => {
         color: white;
         text-align: center;
     }
+    
     .o-hero__title-api {
         font-size: 60px;
         color: white;
@@ -70,6 +84,9 @@ exports.handler = async (event, context) => {
     <header class="o-header">
         <nav class="m-nav">
             <ul class="m-nav__items">
+                <li class="m-nav__item">
+                    <a class="m-nav__link" href="/">Úvod</a>
+                </li>
                 <li class="m-nav__item">
                     <a class="m-nav__link" href="/.netlify/pages/docs">Dokumentace</a>
                 </li>
