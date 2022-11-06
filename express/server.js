@@ -4,7 +4,6 @@ const path = require('path');
 const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
-
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -52,7 +51,6 @@ app.get('/css/main.css' , (req, res) => {
 //pages docs
 const wiki = require("../pages/docs.js");
 app.use("/pages/docs", wiki);
-
 
 module.exports = app;
 module.exports.handler = serverless(app);
