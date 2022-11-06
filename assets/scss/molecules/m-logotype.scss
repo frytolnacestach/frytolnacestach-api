@@ -4,6 +4,13 @@
     z-index: 1001;
     left: 15px;
     top: 10px;
+    background-color: white;
+    border-radius: 30px;
+
+    @media only screen and (min-width: $lg) {
+        background-color: transparent;
+        border-radius: inherit;
+    }
 
     &__image {
         width: 40px;
@@ -39,7 +46,7 @@
         font-weight: 700;
         color: $gray7;
         line-height: 30px;
-        padding: 5px 0 5px 15px;
+        padding: 5px 0 5px 10px;
     }
 
     &__text-sub {
@@ -48,6 +55,6 @@
         font-size: $fs-normal-sss;
         font-weight: 300;
         line-height: 20px;
-        padding: 15px 0 5px 3px;
+        padding: 15px 15px 5px 3px;
     }
 }
