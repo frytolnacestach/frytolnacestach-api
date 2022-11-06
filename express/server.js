@@ -43,6 +43,7 @@ app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')))
 /*const path = require('path')
 app.use('/public', express.static(path.join(__dirname, 'public')))*/
 
+
 //css
 app.get('/css/main.css' , (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'css', 'main.css'))
