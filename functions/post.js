@@ -8,7 +8,7 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-exports.handler = async (event, context) => {
+module.exports = async function(_, res) {
 
     app.get(':postSlug', async (req, res) =>  {
         var postSlug = req.params.postSlug;
