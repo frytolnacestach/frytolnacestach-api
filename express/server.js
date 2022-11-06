@@ -40,8 +40,8 @@ app.use('/.netlify/functions/server', router);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')))
 
 //static
-const path = require('path')
-app.use('/public', express.static(path.join(__dirname, 'public')))
+/*const path = require('path')
+app.use('/public', express.static(path.join(__dirname, 'public')))*/
 
 //css
 app.get('/css/main.css' , (req, res) => {
