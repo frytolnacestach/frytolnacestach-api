@@ -9,6 +9,7 @@ body {
     height: auto;
     min-height: 100vh;
     margin: 0;
+    display: grid;
 }
 
 .o-header {
@@ -24,6 +25,7 @@ body {
 .m-nav {
     width: 100%;
     max-width: 1000px;
+    margin: 0 auto;
 }
 
 .m-nav__items {
@@ -50,7 +52,7 @@ body {
 }
 
 .o-hero {
-    background-image: url('/public/images/hero.png');
+    background-image: url('/public/img/hero.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
