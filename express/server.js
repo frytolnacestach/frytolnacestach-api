@@ -4,19 +4,9 @@ const path = require('path');
 const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
+
 const router = express.Router();
 
-const pages = {
-    prefectures: require('../functions/posts'),
-    population: require('../functions/post'),
-    docs: require('../functions/docs')
-  }
-
-  router.get('/posts', pages.prefectures);
-  router.get('/post/:slug', pages.population);
-  router.get('/docs', pages.docs);
-
-  /*
 router.get('/', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' })
     res.write('<link rel="stylsheet" type="text/css" href="/public/css/main.css">')
@@ -40,13 +30,9 @@ router.get('/', (req, res) => {
         </h1>
     </div>`)
     res.end();
-});*/
+});
 
-app.use('/.netlify/functions/server', router); 
 
-module.exports = app;
-module.exports.handler = serverless(app);
-/*
 router.get('/another', (req, res) => res.json({ route: req.originalUrl }))
 router.post('/', (req, res) => res.json({ postBody: req.body }));
 
@@ -67,6 +53,6 @@ app.get('/css/main.css' , (req, res) => {
 const wiki = require("../pages/docs.js");
 app.use("/pages/docs", wiki);
 
+
 module.exports = app;
 module.exports.handler = serverless(app);
-*/

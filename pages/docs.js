@@ -2,7 +2,7 @@ import express from "express";
 
 const app =  express();
 
-module.exports = async function(_, res) {
+exports.handler = async (event, context) => {
     
     const pageBody = `
         <header class="o-header">
