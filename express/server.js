@@ -6,18 +6,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const router = express.Router();
 
-const pages = {
-    prefectures: require('../functions/posts'),
-    population: require('../functions/post'),
-    docs: require('../functions/docs')
-}
-
-router.get('/posts', pages.prefectures);
-router.get('/post/:prefCode', pages.population);
-router.get('/docs', pages.docs);
-
-app.use('/.netlify/functions/server', router);
-/*
 router.get('/', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html' })
     res.write('<link rel="stylsheet" type="text/css" href="/public/css/main.css">')
@@ -50,7 +38,7 @@ router.post('/', (req, res) => res.json({ postBody: req.body }));
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')))
-*/
+
 //static
 /*const path = require('path')
 app.use('/public', express.static(path.join(__dirname, 'public')))*/
