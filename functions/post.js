@@ -21,7 +21,22 @@ exports.handler = async (event, context) => {
             
             return data
         })
-    }   
+    }  
+    
+    function foo(address, fn){
+        app.get(':postSlug', async (req, res) =>  {
+            var postSlug = req.params.postSlug;
+
+            const { data, error } = await supabase
+            .from('posts')
+            .select()
+            .eq('slug', postSlug)     
+            
+            fn(data);
+        })
+    }
+
+
 
     function testFunction() {
         return {"test": "Testuji"}
@@ -29,7 +44,7 @@ exports.handler = async (event, context) => {
 
     const response = {
         statusCode: 200,
-        body: JSON.stringify(testFunction()) + JSON.stringify(testFunction2())
+        body: JSON.stringify(testFunction()) + JSON.stringify(testFunction2()) + testFunction2() + foo("address", function(location){location})
     }
 
     return response
