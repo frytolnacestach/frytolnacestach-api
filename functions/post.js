@@ -10,15 +10,18 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 exports.handler = async (event, context) => {
 
-    app.get(':postSlug', async (req, res) =>  {
-        var postSlug = req.params.postSlug;
+    async function testFunction2() {
+        app.get(':postSlug', async (req, res) =>  {
+            var postSlug = req.params.postSlug;
 
-        const { data, error } = await supabase
-        .from('posts')
-        .select()
-        .eq('slug', postSlug)        
-    })
-
+            const { data, error } = await supabase
+            .from('posts')
+            .select()
+            .eq('slug', postSlug)     
+            
+            return data
+        })
+    }   
 
     function testFunction() {
         return {"test": "Testuji"}
@@ -26,7 +29,7 @@ exports.handler = async (event, context) => {
 
     const response = {
         statusCode: 200,
-        body: JSON.stringify(testFunction())
+        body: JSON.stringify(testFunction()) + JSON.stringify(testFunction2())
     }
 
     return response
