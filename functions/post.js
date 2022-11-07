@@ -57,7 +57,7 @@ exports.handler = async (event, context) => {
 
     const response = {
         statusCode: 200,
-        body: "T1" + JSON.stringify(testFunction()) + "T2" + JSON.stringify(testFunction2()) + "T3" + testFunction2() + "T4" + foo("address", function(location){location}) + "T5" + testFunction3()
+        body: "T1" + JSON.stringify(testFunction()) + "T2" + JSON.stringify(testFunction2()) + "T3" + testFunction2() + "T4" + foo("address", function(location){location}) + "T5" + testFunction3() + "T6" + JSON.stringify(testFunction3())
     }
 
     return response
