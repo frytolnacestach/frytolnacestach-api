@@ -40,7 +40,7 @@ exports.handler = async (event, context) => {
         app.get(':postSlug', async (req, res) =>  {
             var postSlug = req.params.postSlug;
             
-            return postSlug
+            return JSON.stringify(postSlug)
         })
     }  
     
