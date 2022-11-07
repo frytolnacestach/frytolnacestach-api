@@ -16,16 +16,20 @@ exports.handler = async (event, context) => {
         const { data, error } = await supabase
         .from('posts')
         .select()
-        .eq('slug', postSlug)
-
-        const response = {
-            statusCode: 200,
-            body: JSON.stringify(data)
-        }
-    
-        return response
-        
+        .eq('slug', postSlug)        
     })
+
+
+    function testFunction() {
+        return {"test": "Testuji"}
+    }
+
+    const response = {
+        statusCode: 200,
+        body: JSON.stringify(testFunction())
+    }
+
+    return response
 
     /*return {
         statusCode: 200,
