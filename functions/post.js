@@ -15,18 +15,21 @@ exports.handler = async (event) => {
         //var postSlug = req.params.postSlug;
         //const data2 = postSlug
         const data2 = app.get(':postSlug', async (req, res) =>  {
-            var postSlug = req.params.postSlug;
+            /*var postSlug = req.params.postSlug;
     
             const { data, error } = await supabase
             .from('posts')
             .select()
-            .eq('slug', postSlug)   
-            
-            response = {
-                statusCode: 200,
-                body: "Test response"
-            }
+            .eq('slug', postSlug)   */
+            const { data, error } = await supabase
+            .from('posts')
+            .select()
         })
+
+        response = {
+            statusCode: 200,
+            body: "Test response" + JSON.stringify(data2)
+        }
     } catch (e) {
         console.log(e);
     }
