@@ -19,11 +19,11 @@ exports.handler = async (event) => {
             .select()
             .eq('slug', postSlug)   
             
-            data
+            return JSON.stringify({"test": "test2"})
         })
         return {
             statusCode: 200,
-            body: JSON.stringify({"test": "test2"})
+            body: JSON.stringify(data2)
         }
     } catch (e) {
         console.log(e);
