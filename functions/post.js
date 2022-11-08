@@ -19,7 +19,7 @@ exports.handler = async (event) => {
             .select()
             .eq('slug', postSlug)   
             
-            return JSON.stringify({"test": "test2"})
+            JSON.stringify({"test": "test2"})
         })
         return {
             statusCode: 200,
