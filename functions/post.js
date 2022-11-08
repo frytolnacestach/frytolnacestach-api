@@ -9,6 +9,27 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 
+exports.handler = async (event) => {
+    try {
+        const data2 = app.get(':postSlug', async (req, res) =>  {
+            var postSlug = req.params.postSlug;
+    
+            const { data, error } = await supabase
+            .from('posts')
+            .select()
+            .eq('slug', postSlug)   
+            
+            data
+        })
+        return {
+            statusCode: 200,
+            body: JSON.stringify(data2)
+        }
+    } catch (e) {
+        console.log(e);
+    }
+};
+/*
 app.get(':postSlug', async (req, res) =>  {
     var postSlug = req.params.postSlug;
 
@@ -27,7 +48,7 @@ app.get(':postSlug', async (req, res) =>  {
         }
     }
 })
-
+*/
 /*
 exports.handler = async (event, context) => {
 
