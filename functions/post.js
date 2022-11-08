@@ -8,12 +8,13 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
+let response;
 
 exports.handler = async (event) => {
     try {
-        var postSlug = req.params.postSlug;
-        const data2 = postSlug
-        /*const data2 = app.get(':postSlug', async (req, res) =>  {
+        //var postSlug = req.params.postSlug;
+        //const data2 = postSlug
+        const data2 = app.get(':postSlug', async (req, res) =>  {
             var postSlug = req.params.postSlug;
     
             const { data, error } = await supabase
@@ -21,8 +22,11 @@ exports.handler = async (event) => {
             .select()
             .eq('slug', postSlug)   
             
-            JSON.stringify({"test": "test2"})
-        })*/
+            response = {
+                statusCode: 200,
+                body: "Test response"
+            }
+        })
         return {
             statusCode: 200,
             body: data2
@@ -30,6 +34,8 @@ exports.handler = async (event) => {
     } catch (e) {
         console.log(e);
     }
+
+    return response
 };
 /*
 app.get(':postSlug', async (req, res) =>  {
