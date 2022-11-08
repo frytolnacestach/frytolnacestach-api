@@ -12,9 +12,13 @@ let response;
 
 exports.handler = async (event) => {
     try {
+        response = {
+            statusCode: 200,
+            body: "Test response"
+        }
         //var postSlug = req.params.postSlug;
         //const data2 = postSlug
-        const data2 = app.get(':postSlug', async (req, res) =>  {
+        /*const data2 = app.get(':postSlug', async (req, res) =>  {
             var postSlug = req.params.postSlug;
     
             const { data, error } = await supabase
@@ -26,11 +30,7 @@ exports.handler = async (event) => {
                 statusCode: 200,
                 body: "Test response"
             }
-        })
-        return {
-            statusCode: 200,
-            body: data2
-        }
+        })*/
     } catch (e) {
         console.log(e);
     }
