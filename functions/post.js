@@ -21,9 +21,11 @@ exports.handler = async (event) => {
             .from('posts')
             .select()
             .eq('slug', postSlug)   */
-            const { data, error } = await supabase
+            /*const { data, error } = await supabase
             .from('posts')
-            .select()
+            .select()*/
+
+            let data = {"test": "Testuji"}
 
             res.send(data)
         })
