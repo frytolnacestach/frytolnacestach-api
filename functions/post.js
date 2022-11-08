@@ -11,8 +11,8 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 exports.handler = async (event) => {
     try {
-
-        const data2 = {"test": "test2"}
+        var postSlug = req.params.postSlug;
+        const data2 = postSlug
         /*const data2 = app.get(':postSlug', async (req, res) =>  {
             var postSlug = req.params.postSlug;
     
