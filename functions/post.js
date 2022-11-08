@@ -24,6 +24,8 @@ exports.handler = async (event) => {
             const { data, error } = await supabase
             .from('posts')
             .select()
+
+            res.send(data)
         })
 
         response = {
