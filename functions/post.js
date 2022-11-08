@@ -11,7 +11,9 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 exports.handler = async (event) => {
     try {
-        const data2 = app.get(':postSlug', async (req, res) =>  {
+
+        const data2 = {"test": "test2"}
+        /*const data2 = app.get(':postSlug', async (req, res) =>  {
             var postSlug = req.params.postSlug;
     
             const { data, error } = await supabase
@@ -20,7 +22,7 @@ exports.handler = async (event) => {
             .eq('slug', postSlug)   
             
             JSON.stringify({"test": "test2"})
-        })
+        })*/
         return {
             statusCode: 200,
             body: JSON.stringify(data2)
