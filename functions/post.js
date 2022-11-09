@@ -29,10 +29,14 @@ exports.handler = async (event) => {
 
             res.send(data)
         })
+        const data3 = await supabase
+            .from('posts')
+            .select()
+        res.send(data3)
 
         response = {
             statusCode: 200,
-            body: "T1" + "Test response" + "T2" + JSON.stringify(data2) + "T3" + data2
+            body: "T1:" + "Test response" + "T2:" + JSON.stringify(data2) + "T3:" + data2 + "T4:" + data3 + "T5:" + JSON.stringify(data3)
         }
     } catch (e) {
         console.log(e);
