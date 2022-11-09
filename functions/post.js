@@ -12,7 +12,8 @@ let response;
 
 exports.handler = async (event) => {
     try {
-        const slug = "svet-meduz"
+
+        const slug = this.href.substring(this.href.lastIndexOf('/') + 1)
 
         //var postSlug = req.params.postSlug;
         //const data2 = postSlug
