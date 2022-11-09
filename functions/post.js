@@ -13,7 +13,11 @@ let response;
 exports.handler = async (event) => {
     try {
 
-        const slug = this.href.substring(this.href.lastIndexOf('/') + 1)
+        const actualURL = window.location.href
+
+        const getLastItem = thePath => thePath.substring(thePath.lastIndexOf('/') + 1)
+
+        const slug = getLastItem(actualURL)
 
         //var postSlug = req.params.postSlug;
         //const data2 = postSlug
