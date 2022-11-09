@@ -32,7 +32,7 @@ exports.handler = async (event) => {
             res.send(data)
         })
 
-        const data4 = app.get(':postSlug', async (req, res) =>  {
+        const data4 = app.get(':postSlug', (req, res) =>  {
             var postSlug = req.params.postSlug;
             res.send(postSlug)
         })
