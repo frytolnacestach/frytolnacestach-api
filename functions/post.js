@@ -12,7 +12,7 @@ let response;
 
 exports.handler = async (event) => {
     try {
-        const slug = event.params.slug
+        const slug = "svet-meduz"
 
         //var postSlug = req.params.postSlug;
         //const data2 = postSlug
