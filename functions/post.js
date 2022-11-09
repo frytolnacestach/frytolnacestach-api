@@ -12,6 +12,8 @@ let response;
 
 exports.handler = async (event) => {
     try {
+        const slug = event.params.slug
+
         //var postSlug = req.params.postSlug;
         //const data2 = postSlug
         const data2 = app.get(':postSlug', async (req, res) =>  {
@@ -57,7 +59,7 @@ exports.handler = async (event) => {
 
         response = {
             statusCode: 200,
-            body: "T1:" + "Test response" + "T2:" + JSON.stringify(data2) + "T3:" + data2 + "T4:" + data3 + "T5:" + JSON.stringify(data3) + "T6:" + data4 + "T7:" + data5 + "T8:" + data6 + "T9:" + data7
+            body: "T1:" + "Test response" + "T2:" + JSON.stringify(data2) + "T3:" + data2 + "T4:" + data3 + "T5:" + JSON.stringify(data3) + "T6:" + data4 + "T7:" + data5 + "T8:" + data6 + "T9:" + data7 + "T10:" + slug
         }
     } catch (e) {
         console.log(e);
