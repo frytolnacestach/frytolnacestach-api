@@ -34,13 +34,21 @@ exports.handler = async (event) => {
             var postSlug = req.params.postSlug;
             res.send(postSlug)
         })
+
+        const data5 = app.get(':slug', async (req, res) =>  {
+            var postSlug = req.params.slug;
+            res.send(postSlug)
+        })
+
+
+
         const data3 = await supabase
             .from('posts')
             .select()
 
         response = {
             statusCode: 200,
-            body: "T1:" + "Test response" + "T2:" + JSON.stringify(data2) + "T3:" + data2 + "T4:" + data3 + "T5:" + JSON.stringify(data3)  + "T6:" + data4
+            body: "T1:" + "Test response" + "T2:" + JSON.stringify(data2) + "T3:" + data2 + "T4:" + data3 + "T5:" + JSON.stringify(data3) + "T6:" + data4 + "T7:" + data5
         }
     } catch (e) {
         console.log(e);
