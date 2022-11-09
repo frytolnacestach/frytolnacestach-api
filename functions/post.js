@@ -32,7 +32,6 @@ exports.handler = async (event) => {
         const data3 = await supabase
             .from('posts')
             .select()
-        res.send(data3)
 
         response = {
             statusCode: 200,
