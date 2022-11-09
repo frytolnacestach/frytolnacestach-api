@@ -40,9 +40,13 @@ exports.handler = async (event) => {
             res.send(postSlug)
         })
 
-        const data6 = app.get('/:id', function (req, res) {
+        const data6 = app.get('/.netlify/functions/post/:id', function (req, res) {
             console.log(req.params['id']);
             res.send();
+          });
+
+          const data7 = app.get('/.netlify/functions/post/:id', function (req, res) {
+            res.send({"test": "Testuji"});
           });
 
 
@@ -53,7 +57,7 @@ exports.handler = async (event) => {
 
         response = {
             statusCode: 200,
-            body: "T1:" + "Test response" + "T2:" + JSON.stringify(data2) + "T3:" + data2 + "T4:" + data3 + "T5:" + JSON.stringify(data3) + "T6:" + data4 + "T7:" + data5 + "T8:" + data6
+            body: "T1:" + "Test response" + "T2:" + JSON.stringify(data2) + "T3:" + data2 + "T4:" + data3 + "T5:" + JSON.stringify(data3) + "T6:" + data4 + "T7:" + data5 + "T8:" + data6 + "T9:" + data7
         }
     } catch (e) {
         console.log(e);
