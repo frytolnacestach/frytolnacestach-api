@@ -17,14 +17,14 @@ exports.handler = async (event) => {
    
         try {
 
-            const fullUrl = app.get('/page', (req, res, next) => {
+            const fullUrl = app.get('/.netlify/functions/post/:slug', (req, res, next) => {
                 // Show some content to the user
                 req.protocol + '://' + req.get('host') + req.originalUrl;
             })
 
             response = {
                 statusCode: 200,
-                body: fullUrl
+                body: "T1:" + fullUrl
             }
 
 
