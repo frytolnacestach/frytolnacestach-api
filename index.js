@@ -21,9 +21,25 @@ router.get('/docs',function(req,res){
     res.sendFile(path.join(__dirname+'/pages/docs.html'));
 });
 
-//styles
+//CSS
 router.get('/public/css/main.css',function(req,res){
     res.sendFile(path.join(__dirname+'/public/css/main.css'));
+});
+
+//JS
+router.get('/public/js/js_m-hamburger.js',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/js/js_m-hamburger.js'));
+});
+router.get('/public/js/js_o-cookies-dialog.js',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/js/js_o-cookies-dialog.js'));
+});
+
+//IMG
+router.get('/public/img/base/hero.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/img/base/hero.png'));
+});
+router.get('/public/img/base/logotype.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/img/base/logotype.png'));
 });
 
 app.use('/', router);
