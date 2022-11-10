@@ -1,7 +1,3 @@
-const express = require("express");
-const router = express.Router();
-
-const html = `<!DOCTYPE html>
 <html lang="cs">
     <head>
         <meta charset="UTF-8">
@@ -104,18 +100,4 @@ const html = `<!DOCTYPE html>
             </div>
         </footer>
     </body>
-</html>`
-
-router.get("/", async (req, res) => {
-  try {
-    res.json({
-      status: 200,
-      body: html,
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send("Server error");
-  }
-});
-
-module.exports = router;
+</html>
