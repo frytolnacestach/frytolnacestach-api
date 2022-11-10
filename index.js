@@ -21,6 +21,7 @@ router.get('/docs',function(req,res){
     res.sendFile(path.join(__dirname+'/pages/docs.html'));
 });
 
+app.use('/', router);
 const PORT = process.env.PORT || 5050
 
 app.listen(PORT, () => console.log(`Server is running is port ${PORT}`))
