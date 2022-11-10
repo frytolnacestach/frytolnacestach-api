@@ -1,4 +1,4 @@
-//import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js'
 
 import express from "express";
 
@@ -6,13 +6,13 @@ const app =  express();
 
 const router = express.Router();
 
-//const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
-//const supabaseKey = process.env.SUPABASE_KEY
-//const supabase = createClient(supabaseUrl, supabaseKey)
+const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 let response;
 
-exports.handler = async (event) => {
+export const handler = async () => {
 
    
         try {
@@ -20,13 +20,13 @@ exports.handler = async (event) => {
             app.get('/*', (req, res, next) => {
                 // Show some content to the user
                 fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-
-                response = {
-                    statusCode: 200,
-                    body: "T1:" + fullUrl
-                }
             })
             
+
+            response = {
+                statusCode: 200,
+                body: "T1:" + fullUrl
+            }
 
 
         } catch (err) {
@@ -35,6 +35,9 @@ exports.handler = async (event) => {
 
 
     return response
+
+}
+
 /*
     try {
 
@@ -102,7 +105,6 @@ exports.handler = async (event) => {
     }
 
     return response*/
-};
 /*
 app.get(':postSlug', async (req, res) =>  {
     var postSlug = req.params.postSlug;
