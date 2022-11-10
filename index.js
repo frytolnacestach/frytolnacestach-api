@@ -14,10 +14,10 @@ app.use("/api/posts", posts);
 
 //pages
 app.get('/',function(req,res) {
-    res.sendFile('./pages/index.html');
+    res.sendFile(path.join(__dirname+'/pages/index.html'));
 });
 app.get('/docs',function(req,res) {
-    res.sendFile('./pages/docs.html');
+    res.sendFile(path.join(__dirname+'/pages/docs.html'));
 });
 
 
