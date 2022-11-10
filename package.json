@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Frytol na cestách API",
   "main": "index.js",
-  "engines":{
+  "engines": {
     "node": "14.x"
   },
   "scripts": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/frytolnacestach/frytolnacestach-api#readme",
   "dependencies": {
+    "@supabase/supabase-js": "^2.0.5",
     "express": "^4.18.2"
   }
 }
