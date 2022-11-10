@@ -16,10 +16,7 @@ router.get('/:slug', async (req, res) => {
     .select()
     .eq('slug', slug)
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify(data)
-    } 
+    res.send(JSON.stringify(data))
 
   } catch (error) {
 
