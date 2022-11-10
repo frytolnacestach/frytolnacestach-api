@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
+//import { createClient } from '@supabase/supabase-js'
 
 import express from "express";
 
@@ -6,9 +6,9 @@ const app =  express();
 
 const router = express.Router();
 
-const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
-const supabaseKey = process.env.SUPABASE_KEY
-const supabase = createClient(supabaseUrl, supabaseKey)
+//const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
+//const supabaseKey = process.env.SUPABASE_KEY
+//const supabase = createClient(supabaseUrl, supabaseKey)
 
 let response;
 
@@ -16,7 +16,7 @@ exports.handler = async (event) => {
 
     router.get('/.netlify/functions/post/:slug', async (req, res) => {
         try {
-            const book = req.params.slug;
+            const book = req.params.slug
             res.json(book);
 
             response = {
