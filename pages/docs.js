@@ -25,7 +25,7 @@ const html = `<!DOCTYPE html>
                                     <div class="m-nav-main__inner">
                                         <ul class="m-nav-main__items">
                                             <li class="m-nav-main__item">
-                                                <a class="m-nav-main__link" href="/pages/docs">Dokumentace</a>
+                                                <a class="m-nav-main__link" href="/docs">Dokumentace</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -70,8 +70,8 @@ const html = `<!DOCTYPE html>
         </div>
 
         <section class="t-section">
-            <a href="/.netlify/functions/posts">Všechny příspěvky</a>
-            <a href="/.netlify/functions/posts/trikrizovy-vrch">Konkrétní příspěvek</a>
+            <a href="/api/posts">Všechny příspěvky</a>
+            <a href="/api/post/trikrizovy-vrch">Konkrétní příspěvek</a>
         </section>
 
         <footer class="t-footer">
@@ -85,7 +85,7 @@ const html = `<!DOCTYPE html>
                                         <a class="m-nav-footer__link" href="/">Úvod</a>
                                     </li>
                                     <li class="m-nav-footer__item">
-                                        <a class="m-nav-footer__link" href="/pages/docs">Dokumentace</a>
+                                        <a class="m-nav-footer__link" href="/docs">Dokumentace</a>
                                     </li>
                                 </ul>
                             </div>
