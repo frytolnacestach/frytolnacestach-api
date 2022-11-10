@@ -13,7 +13,7 @@ let response;
 exports.handler = async (event) => {
     try {
 
-        const actualURL = req.protocol
+        const actualURL = event.protocol
 
         const getLastItem = thePath => thePath.substring(thePath.lastIndexOf('/') + 1)
 
