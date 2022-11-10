@@ -111,7 +111,7 @@ router.get("/", async (req, res) => {
     try {
       res.json({
         status: 200,
-        message: html,
+        body: html,
       });
     } catch (error) {
       console.error(error);
