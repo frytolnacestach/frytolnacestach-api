@@ -14,20 +14,24 @@ let response;
 
 exports.handler = async (event) => {
 
-    router.get('/.netlify/functions/post/:slug', async (req, res) => {
+   
         try {
-            const book = req.params.slug
-            res.json(book);
 
-            response = {
-                statusCode: 200,
-                body: book
-            }
+            app.get('/page', (req, res, next) => {
+                // Show some content to the user
+                let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+
+                response = {
+                    statusCode: 200,
+                    body: fullUrl
+                }
+            })
+
 
         } catch (err) {
             res.json({ error: err.message || err.toString() });
         }
-    });
+
 
     return response
 /*
