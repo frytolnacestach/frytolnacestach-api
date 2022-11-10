@@ -17,7 +17,7 @@ exports.handler = async (event) => {
    
         try {
 
-            const fullUrl = app.get('/.netlify/functions/post/:slug', (req, res, next) => {
+            const fullUrl = app.get('/.netlify/functions/post/svet-meduz', (req, res, next) => {
                 // Show some content to the user
                 req.protocol + '://' + req.get('host') + req.originalUrl;
             })
