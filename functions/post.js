@@ -4,6 +4,8 @@ import express from "express";
 
 const app =  express();
 
+const router = express.Router();
+
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
