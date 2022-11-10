@@ -21,6 +21,11 @@ router.get('/docs',function(req,res){
     res.sendFile(path.join(__dirname+'/pages/docs.html'));
 });
 
+//styles
+router.get('/public/css/main.css',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/css/main.css'));
+});
+
 app.use('/', router);
 const PORT = process.env.PORT || 5050
 
