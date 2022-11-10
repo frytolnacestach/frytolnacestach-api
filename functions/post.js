@@ -15,7 +15,7 @@ let response;
 export const handler = async () => {
 
    
-        try {
+        /*try {
             var fullUrl = "test"
             app.get('/*', (req, res, next) => {
                 // Show some content to the user
@@ -34,7 +34,28 @@ export const handler = async () => {
         }
 
 
-    return response
+    return response*/
+
+    const asyncHandler = (fun) => (req, res, next) => {
+        Promise.resolve(fun(req, res, next))
+          .catch(next)
+      }
+      
+      const asyncFunc = (text) => {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(text), 1000)
+        })
+      }
+      
+      app.get('/', asyncHandler(async (req, res) => {
+        const result1 = await asyncFunc('Hello,')
+        const [result2, result3] = await Promise.all([
+          asyncFunc('my name is'),
+          asyncFunc('Ioannis')
+        ])
+        const result = `${result1} ${result2} ${result3}`
+        return res.send(result)
+      }))
 
 }
 
