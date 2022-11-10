@@ -14,10 +14,7 @@ router.get("/", async (req, res) => {
     .from('posts')
     .select()
 
-    res.json({
-      status: 200,
-      message: data,
-    });
+    res.send(JSON.stringify(data))
 
   } catch (error) {
 
