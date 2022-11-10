@@ -9,8 +9,8 @@ const posts = require("./api/posts");
 
 app.use(express.json({ extended: false }));
 
-app.use("/pages/index", index);
-app.use("/pages/docs", docs);
+app.use("/", index);
+app.use("/docs", docs);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
 
