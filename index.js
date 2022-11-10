@@ -2,8 +2,8 @@ const express = require('express')
 
 const app = express()
 
-const index = require("./pages/index.html");
-const docs = require("./pages/docs.html");
+const index = require("./pages/index");
+const docs = require("./pages/docs");
 const post = require("./api/post");
 const posts = require("./api/posts");
 

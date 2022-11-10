@@ -1,11 +1,14 @@
-<!DOCTYPE html>
+const express = require("express");
+const router = express.Router();
+
+const html = `<!DOCTYPE html>
 <html lang="cs">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="/public/css/main.css" />
 
-        <title>Dokumentace | API Frytol na cestách</title>
+        <title>API Frytol na cestách</title>
 
         <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
         <script src="/public/js/js_m-hamburger.js" type="text/javascript"></script>
@@ -55,22 +58,22 @@
                 <span class="m-hamburger__line m-hamburger__line--3"></span>
             </span>
         </span>
-
+        
         <div class="o-hero-big">
             <div class="o-hero-big__outer">
                 <div class="o-hero-big__inner">
                     <h1 class="o-hero-big__headline">
-                        Documentace API
+                        API
                     </h1>
+                    <p class="o-hero-big__perex">Frytol na cestách</p>
                 </div>
             </div>
         </div>
-
+        
         <section class="t-section">
-            <a href="/.netlify/functions/posts">Všechny příspěvky</a>
-            <a href="/.netlify/functions/posts/trikrizovy-vrch">Konkrétní příspěvek</a>
+        
         </section>
-
+        
         <footer class="t-footer">
             <div class="o-footer">
                 <div class="o-footer__nav">
@@ -102,3 +105,18 @@
         </footer>
     </body>
 </html>
+`
+
+router.get("/", async (req, res) => {
+    try {
+      res.json({
+        status: 200,
+        message: html,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send("Server error");
+    }
+  });
+  
+  module.exports = router;
