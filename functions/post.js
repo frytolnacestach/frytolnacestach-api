@@ -16,13 +16,13 @@ exports.handler = async (event) => {
 
    
         try {
-
-            /*const fullUrl = app.get('/.netlify/functions/post/svet-meduz', (req, res, next) => {
+            var fullUrl = "test"
+            app.get('/*', (req, res, next) => {
                 // Show some content to the user
-                req.protocol + '://' + req.get('host') + req.originalUrl;
-            })*/
-
-            var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+                fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+                console.log(fullUrl)
+            })
+            
 
             response = {
                 statusCode: 200,
