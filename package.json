@@ -20,8 +20,17 @@
     "url": "https://github.com/frytolnacestach/frytolnacestach-api/issues"
   },
   "homepage": "https://github.com/frytolnacestach/frytolnacestach-api#readme",
+  "devDependencies": {
+    "sass": "^1.55.0"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.0.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "browser-sync": "^2.27.10",
+    "gulp": "^4.0.2",
+    "gulp-livereload": "^4.0.2",
+    "gulp-order": "^1.2.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0"
   }
 }
