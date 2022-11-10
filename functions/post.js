@@ -27,9 +27,9 @@ exports.handler = async (event) => {
         } catch (err) {
             res.json({ error: err.message || err.toString() });
         }
-
-        return response
     });
+
+    return response
 /*
     try {
 
