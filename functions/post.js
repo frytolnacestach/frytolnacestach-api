@@ -20,14 +20,13 @@ exports.handler = async (event) => {
             app.get('/*', (req, res, next) => {
                 // Show some content to the user
                 fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-                console.log(fullUrl)
+
+                response = {
+                    statusCode: 200,
+                    body: "T1:" + fullUrl
+                }
             })
             
-
-            response = {
-                statusCode: 200,
-                body: "T1:" + fullUrl
-            }
 
 
         } catch (err) {
