@@ -13,7 +13,7 @@ let response;
 exports.handler = async (event) => {
     try {
 
-        const actualURL = window.location.href
+        const actualURL = "https://helpful-nougat-109dab.netlify.app/.netlify/functions/post/svet-meduz"
 
         const getLastItem = thePath => thePath.substring(thePath.lastIndexOf('/') + 1)
 
