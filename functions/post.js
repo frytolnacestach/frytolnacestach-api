@@ -30,7 +30,7 @@ exports.handler = async (event) => {
 
         return response
     });
-
+/*
     try {
 
         const actualURL = "https://helpful-nougat-109dab.netlify.app/.netlify/functions/post/svet-meduz"
@@ -42,6 +42,7 @@ exports.handler = async (event) => {
         //var postSlug = req.params.postSlug;
         //const data2 = postSlug
         const data2 = app.get(':postSlug', async (req, res) =>  {
+            */
             /*var postSlug = req.params.postSlug;
     
             const { data, error } = await supabase
@@ -51,7 +52,7 @@ exports.handler = async (event) => {
             /*const { data, error } = await supabase
             .from('posts')
             .select()*/
-
+/*
             let data = {"test": "Testuji"}
 
             res.send(data)
@@ -87,15 +88,15 @@ exports.handler = async (event) => {
             .from('posts')
             .select()
 
-        /*response = {
+        response = {
             statusCode: 200,
             body: "T1:" + "Test response" + "T2:" + JSON.stringify(data2) + "T3:" + data2 + "T4:" + data3 + "T5:" + JSON.stringify(data3) + "T6:" + data4 + "T7:" + data5 + "T8:" + data6 + "T9:" + data7 + "T10:" + slug
-        }*/
+        }
     } catch (e) {
         console.log(e);
     }
 
-    return response
+    return response*/
 };
 /*
 app.get(':postSlug', async (req, res) =>  {
