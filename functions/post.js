@@ -11,9 +11,27 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 let response;
 
 exports.handler = async (event) => {
+
+    router.get('/.netlify/functions/post/:slug', async (req, res) => {
+        try {
+            const book = req.params.slug;
+            res.json(book);
+
+            response = {
+                statusCode: 200,
+                body: book
+            }
+
+        } catch (err) {
+            res.json({ error: err.message || err.toString() });
+        }
+
+        return response
+    });
+
     try {
 
-        const actualURL = event.protocol
+        const actualURL = "https://helpful-nougat-109dab.netlify.app/.netlify/functions/post/svet-meduz"
 
         const getLastItem = thePath => thePath.substring(thePath.lastIndexOf('/') + 1)
 
@@ -56,16 +74,21 @@ exports.handler = async (event) => {
             res.send({"test": "Testuji"});
           });
 
+          const data8 = app.get('/', (req, res) =>  {
+            var postSlug = req.params.postSlug;
+            res.send(postSlug)
+        })
+
 
 
         const data3 = await supabase
             .from('posts')
             .select()
 
-        response = {
+        /*response = {
             statusCode: 200,
             body: "T1:" + "Test response" + "T2:" + JSON.stringify(data2) + "T3:" + data2 + "T4:" + data3 + "T5:" + JSON.stringify(data3) + "T6:" + data4 + "T7:" + data5 + "T8:" + data6 + "T9:" + data7 + "T10:" + slug
-        }
+        }*/
     } catch (e) {
         console.log(e);
     }
