@@ -17,15 +17,15 @@ exports.handler = async (event) => {
    
         try {
 
-            app.get('/page', (req, res, next) => {
+            const fullUrl = app.get('/page', (req, res, next) => {
                 // Show some content to the user
-                let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-
-                response = {
-                    statusCode: 200,
-                    body: fullUrl
-                }
+                req.protocol + '://' + req.get('host') + req.originalUrl;
             })
+
+            response = {
+                statusCode: 200,
+                body: fullUrl
+            }
 
 
         } catch (err) {
