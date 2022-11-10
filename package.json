@@ -1,42 +1,26 @@
 {
   "name": "frytolnacestach-api",
-  "version": "0.0.1",
-  "description": "Example of how to deploy a Express.js Netlify app.",
-  "main": "functions/server.js",
+  "version": "1.0.0",
+  "description": "Frytol na cestách API",
+  "main": "index.js",
+  "engines":{
+    "node": "14.x"
+  },
   "scripts": {
-    "build": "netlify-lambda build express",
-    "start": "nodemon server-local.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/frytolnacestach/frytolnacestach-api"
   },
-  "keywords": [
-    "netlify",
-    "express.js"
-  ],
-  "author": "neverendingqs",
-  "license": "Apache-2.0",
+  "keywords": [],
+  "author": "Frytol na cestách",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/frytolnacestach/frytolnacestach-api/issues"
   },
   "homepage": "https://github.com/frytolnacestach/frytolnacestach-api#readme",
-  "devDependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "netlify-lambda": "^1.6.3",
-    "nodemon": "^1.19.2",
-    "sass": "^1.55.0",
-    "serverless-http": "^2.3.0",
-    "supabase": "^1.11.7"
-  },
   "dependencies": {
-    "@supabase/supabase-js": "^2.0.5",
-    "browser-sync": "^2.27.10",
-    "gulp": "^4.0.2",
-    "gulp-livereload": "^4.0.2",
-    "gulp-order": "^1.2.0",
-    "gulp-sass": "^5.1.0",
-    "gulp-sourcemaps": "^3.0.0"
+    "express": "^4.18.2"
   }
 }
