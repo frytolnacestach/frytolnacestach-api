@@ -42,6 +42,20 @@ router.get('/public/img/_base/logotype.png',function(req,res){
     res.sendFile(path.join(__dirname+'/public/img/_base/logotype.png'));
 });
 
+//Favicons
+router.get('/public/img/favicons/apple-touch-icon.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/img/favicons/apple-touch-icon.png'));
+});
+router.get('/public/img/favicons/favicon-32x32.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/img/favicons/favicon-32x32.png'));
+});
+router.get('/public/img/favicons/favicon-16x16.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/img/favicons/favicon-16x16.png'));
+});
+router.get('/public/img/favicons/site.webmanifest',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/img/favicons/site.webmanifest'));
+});
+
 app.use('/', router);
 const PORT = process.env.PORT || 5050
 
