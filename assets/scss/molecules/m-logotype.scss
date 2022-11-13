@@ -38,6 +38,7 @@
     &__text {
         height: 40px;
         position: relative;
+        padding-right: 15px;
     }
 
     &__text-main {
@@ -55,6 +56,6 @@
         font-size: $fs-normal-sss;
         font-weight: 300;
         line-height: 20px;
-        padding: 15px 15px 5px 3px;
+        padding: 15px 0 5px 3px;
     }
 }
