@@ -55,6 +55,18 @@ router.get('/public/img/favicons/favicon-16x16.png',function(req,res){
 router.get('/public/img/favicons/site.webmanifest',function(req,res){
     res.sendFile(path.join(__dirname+'/public/img/favicons/site.webmanifest'));
 });
+router.get('/public/img/favicons/android-chrome-192x192.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/img/favicons/android-chrome-192x192.png'));
+});
+router.get('/public/img/favicons/android-chrome-512x512.png',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/img/favicons/android-chrome-512x512.png'));
+});
+router.get('/public/img/favicons/favicon.ico',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/img/favicons/favicon.ico'));
+});
+router.get('/public/img/favicons/browserconfig.xml',function(req,res){
+    res.sendFile(path.join(__dirname+'/public/img/favicons/browserconfig.xml'));
+});
 
 app.use('/', router);
 const PORT = process.env.PORT || 5050
