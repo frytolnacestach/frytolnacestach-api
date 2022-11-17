@@ -7,14 +7,15 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-router.get('/:email', async (req, res) => {
+router.get('/:email/:password', async (req, res) => {
   var email = req.params.email
+  var password = req.params.password
   try {
 
     const { data, error } = await supabase
     .from('users-admin')
     .select()
-    .eq('emal', email)
+    .eq('email', email)
 
     res.send(JSON.stringify(data))
 
