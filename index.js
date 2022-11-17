@@ -3,6 +3,7 @@ const app = express()
 const path = require('path');
 const router = express.Router();
 
+const login = require("./api/login");
 const post = require("./api/post");
 const posts = require("./api/posts");
 
@@ -10,6 +11,7 @@ app.use(express.json({ extended: false }));
 
 
 //api
+app.use("/api/login", login);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
 
