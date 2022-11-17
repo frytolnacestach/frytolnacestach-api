@@ -16,6 +16,7 @@ router.get('/:email/:password', async (req, res) => {
     .from('users-admin')
     .select()
     .eq('email', email)
+    .eq('password', password)
 
     res.send(JSON.stringify(data))
 
