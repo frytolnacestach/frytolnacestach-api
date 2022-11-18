@@ -18,7 +18,11 @@ router.get('/:email/:password', async (req, res) => {
     .eq('email', email)
     .eq('password', password)
 
-    res.send(JSON.stringify(data))
+
+    res.json({
+        status: 200,
+        message: data,
+      });
 
   } catch (error) {
 
