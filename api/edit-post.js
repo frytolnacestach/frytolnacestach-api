@@ -8,7 +8,16 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
- 
+
+    try {
+        const { error } = await supabase
+        .from('posts')
+        .insert({ title: 'Denmark' })
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send("Server error");
+    }
 });
 
 module.exports = router;
