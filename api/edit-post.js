@@ -9,12 +9,10 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.post("/", async (req, res) => {
 
-    console.log(req.body);
-
     try {
         const { error } = await supabase
         .from('posts')
-        .insert({ title: 'Denmark' })
+        .insert({ title: req.body.title })
 
         return res.status(201).send("Edit post");
 
