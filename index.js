@@ -6,14 +6,17 @@ const router = express.Router();
 const login = require("./api/login");
 const post = require("./api/post");
 const posts = require("./api/posts");
+const editPost = require("./api/edit-post");
 
 app.use(express.json({ extended: false }));
 
 
-//api
+//api - get
 app.use("/api/login", login);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
+//api - post
+app.use("/api/edit-post", editPost);
 
 //pages
 router.get('/',function(req,res){
