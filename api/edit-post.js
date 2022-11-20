@@ -14,6 +14,8 @@ router.get("/", async (req, res) => {
         .from('posts')
         .insert({ title: 'Denmark' })
 
+        return res.status(201).send("Edit post");
+
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
