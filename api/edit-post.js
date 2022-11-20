@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
         .from('posts')
         .insert({ title: req.body })
 
-        return res.status(201).send("Edit post: " + req.body);
+        return res.status(201).send("Edit post: " + req.body.body);
 
     } catch (error) {
         console.error(error);
