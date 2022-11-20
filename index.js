@@ -12,6 +12,7 @@ const login = require("./api/login");
 const post = require("./api/post");
 const posts = require("./api/posts");
 const editPost = require("./api/edit-post");
+const createPost = require("./api/create-post");
 
 app.use(express.json({ extended: false }));
 
@@ -29,6 +30,7 @@ app.use("/api/post", post);
 app.use("/api/posts", posts);
 //api - post
 app.use("/api/edit-post", editPost);
+app.use("/api/create-post", createPost);
 
 //pages
 router.get('/',function(req,res){
