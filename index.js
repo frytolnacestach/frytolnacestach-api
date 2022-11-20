@@ -3,14 +3,15 @@ const app = express()
 const path = require('path');
 const router = express.Router();
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+
 const login = require("./api/login");
 const post = require("./api/post");
 const posts = require("./api/posts");
 const editPost = require("./api/edit-post");
-const bodyParser = require('body-parser');
-
-app.use(bodyParser.json());
-
 
 app.use(express.json({ extended: false }));
 
