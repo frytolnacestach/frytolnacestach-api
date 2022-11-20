@@ -12,9 +12,10 @@ router.post("/", async (req, res) => {
     try {
         const { error } = await supabase
         .from('posts')
-        .insert({ title: req.body.body.title })
+        .eq('slug', req.body.body.slug)
+        .update({ title: req.body.body.title })
 
-        return res.status(201).send("Edit post: " + req.body.body.title);
+        return res.status(201).send("Edit post");
 
     } catch (error) {
         console.error(error);
