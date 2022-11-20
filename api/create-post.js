@@ -13,8 +13,7 @@ router.post("/", async (req, res) => {
         const { error } = await supabase
         .from('posts')
         .insert({ 
-            dir: "test",
-
+            slug: req.body.body.slug
         })
 
         return res.status(201).send("Create post");
