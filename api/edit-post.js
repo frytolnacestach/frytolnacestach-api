@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
         const { error } = await supabase
         .from('posts')
         .update({ title: req.body.body.title })
-        .eq('slug', 'trikrizovy-vrch')
+        .eq('slug', req.body.body.slug)
 
         return res.status(201).send("Edit post");
 
