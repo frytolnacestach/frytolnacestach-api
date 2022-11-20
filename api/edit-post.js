@@ -3,8 +3,6 @@ import { createClient } from '@supabase/supabase-js'
 const express = require("express");
 const router = express.Router();
 
-const bodyParser = require('body-parser');
-
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
@@ -16,7 +14,7 @@ router.post("/", async (req, res) => {
         .from('posts')
         .insert({ title: req.body.title })
 
-        return res.status(201).send("Edit post");
+        return res.status(201).send("Edit post: " + req.body.title);
 
     } catch (error) {
         console.error(error);
