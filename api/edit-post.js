@@ -12,9 +12,9 @@ router.post("/", async (req, res) => {
     try {
         const { error } = await supabase
         .from('posts')
-        .insert({ title: req.body.body })
+        .insert({ title: req.body.body.title })
 
-        return res.status(201).send("Edit post: " + req.body.body);
+        return res.status(201).send("Edit post: " + req.body.body.title);
 
     } catch (error) {
         console.error(error);
