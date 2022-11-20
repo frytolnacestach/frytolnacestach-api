@@ -15,6 +15,13 @@ router.post("/", async (req, res) => {
         .insert({ 
             dir: req.body.body.dir,
             slug: req.body.body.slug,
+            path: req.body.body.path,
+            date: req.body.body.date,
+            dateUpdate: req.body.body.dateUpdate,
+            dateInformation: req.body.body.dateInformation,
+            imageList: req.body.body.imageList,
+            imageHero: req.body.body.imageHero,
+            imageMap: req.body.body.imageMap,
             urlYoutube: req.body.body.urlYoutube,
             urlWiki: req.body.body.urlWiki,
             urlMap: req.body.body.urlMap,
