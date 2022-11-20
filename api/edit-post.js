@@ -35,12 +35,12 @@ router.post("/", async (req, res) => {
             perexPrice: req.body.body.perexPrice,
             perexTriplength: req.body.body.perexTriplength,
             perexTime: req.body.body.perexTime,
-            tags: req.body.body.tags,
-            locations: req.body.body.locations,
-            travels: req.body.body.travels,
-            prices: req.body.body.prices,
-            triplengths: req.body.body.triplengths,
-            times: req.body.body.times
+            tags: str.replace(/\\/g, req.body.body.tags),
+            locations: str.replace(/\\/g, req.body.body.locations),
+            travels: str.replace(/\\/g, req.body.body.travels),
+            prices: str.replace(/\\/g, req.body.body.prices),
+            triplengths: str.replace(/\\/g, req.body.body.triplengths),
+            times: str.replace(/\\/g, req.body.body.times)
         })
         .eq('slug', req.body.body.slug)
 
