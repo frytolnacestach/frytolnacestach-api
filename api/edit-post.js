@@ -3,6 +3,8 @@ import { createClient } from '@supabase/supabase-js'
 const express = require("express");
 const router = express.Router();
 
+const bodyParser = require('body-parser');
+
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
