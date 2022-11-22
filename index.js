@@ -10,10 +10,13 @@ app.use(bodyParser.json());
 
 //pages
 const login = require("./api/login");
+const base = require("./api/base");
+const platforms = require("./api/platforms");
+const videos = require("./api/videos");
 const post = require("./api/post");
 const posts = require("./api/posts");
-const editPost = require("./api/edit-post");
-const createPost = require("./api/create-post");
+const postEdit = require("./api/post-edit");
+const postCreate = require("./api/post-create");
 
 app.use(express.json({ extended: false }));
 
@@ -27,11 +30,14 @@ app.use(function(req, res, next) {
 
 //api - get
 app.use("/api/login", login);
+app.use("/api/base", base);
+app.use("/api/platforms", platforms);
+app.use("/api/videos", videos);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
 //api - post
-app.use("/api/edit-post", editPost);
-app.use("/api/create-post", createPost);
+app.use("/api/post-edit", postEdit);
+app.use("/api/post-create", postCreate);
 
 //pages
 router.get('/',function(req,res){
