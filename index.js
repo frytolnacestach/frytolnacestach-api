@@ -13,9 +13,15 @@ const login = require("./api/login");
 const base = require("./api/base");
 const baseEdit = require("./api/base-edit");
 const platforms = require("./api/platforms");
+const platform = require("./api/platform");
+const platformEdit = require("./api/platform-edit");
+const platformCreate = require("./api/platform-create");
 const videos = require("./api/videos");
-const post = require("./api/post");
+const video = require("./api/video");
+const videoEdit = require("./api/video-edit");
+const videoCreate = require("./api/video-create");
 const posts = require("./api/posts");
+const post = require("./api/post");
 const postEdit = require("./api/post-edit");
 const postCreate = require("./api/post-create");
 
@@ -32,13 +38,19 @@ app.use(function(req, res, next) {
 //api - get
 app.use("/api/login", login);
 app.use("/api/base", base);
+app.use("/api/platform", platform);
 app.use("/api/platforms", platforms);
+app.use("/api/video", video);
 app.use("/api/videos", videos);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
 //api - post
 app.use("/api/base-edit", baseEdit);
+app.use("/api/platform-edit", platformEdit);
+app.use("/api/video-edit", videoEdit);
 app.use("/api/post-edit", postEdit);
+app.use("/api/platform-create", platformCreate);
+app.use("/api/video-create", videoCreate);
 app.use("/api/post-create", postCreate);
 
 //pages

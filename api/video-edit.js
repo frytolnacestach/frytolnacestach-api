@@ -7,12 +7,18 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
 
     const { data, error } = await supabase
-    .from('platforms')
-    .select()
+    .from('videos')
+    .update({
+      slug: req.body.body.slug,
+      platform: req.body.body.platform,
+      title: req.body.body.title,
+      url: req.body.body.url
+    })
+    .eq('slug', req.body.body.slug)
 
     res.send(JSON.stringify(data))
 
