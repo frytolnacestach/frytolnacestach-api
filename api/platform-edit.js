@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
       name: req.body.body.name,
       perex: req.body.body.perex,
       url: req.body.body.url,
-      facts: req.body.body.facts,
+      facts: JSON.parse(req.body.body.facts),
       date: req.body.body.date
     })
     .eq('slug', req.body.body.slug)
