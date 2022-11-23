@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 //pages
 const login = require("./api/login");
 const base = require("./api/base");
+const baseEdit = require("./api/base-edit");
 const platforms = require("./api/platforms");
 const videos = require("./api/videos");
 const post = require("./api/post");
@@ -36,6 +37,7 @@ app.use("/api/videos", videos);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
 //api - post
+app.use("/api/base-edit", baseEdit);
 app.use("/api/post-edit", postEdit);
 app.use("/api/post-create", postCreate);
 
