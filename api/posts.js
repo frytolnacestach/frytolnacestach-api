@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 
     const { data, error } = await supabase
     .from('posts')
-    .select()
+    .order('id', { ascending: false })
 
     res.send(JSON.stringify(data))
 
