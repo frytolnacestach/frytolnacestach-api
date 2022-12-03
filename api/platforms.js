@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     const { data, error } = await supabase
     .from('platforms')
     .select()
-    .order('id', { ascending: false })
+    .order('id', { ascending: true })
 
     res.send(JSON.stringify(data))
 
