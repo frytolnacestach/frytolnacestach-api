@@ -14,12 +14,7 @@ router.post("/", async (req, res) => {
         .from('places-1-continents')
         .insert({ 
             slug: req.body.body.slug,
-            name: req.body.body.name,
-            name_cz: req.body.body.name_cz,
-            area: req.body.body.area,
-            population: req.body.body.population,
-            populationDensity: req.body.body.populationDensity,
-            states: req.body.body.states
+            name: req.body.body.name
         })
 
         return res.status(201).send("Create Continents");
