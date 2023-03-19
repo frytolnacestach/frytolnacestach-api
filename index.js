@@ -49,10 +49,10 @@ app.use("/api/videos", videos);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
 //api - places
-app.use("/api/post", placesContinent);
-app.use("/api/posts", placesContinents);
-app.use("/api/post-edit", placesContinentEdit);
-app.use("/api/post-create", placesContinentCreate);
+app.use("/api/places-1-continent", placesContinent);
+app.use("/api/places-1-continents", placesContinents);
+app.use("/api/places-1-continent-edit", placesContinentEdit);
+app.use("/api/places-1-continent-create", placesContinentCreate);
 //api - post
 app.use("/api/base-edit", baseEdit);
 app.use("/api/platform-edit", platformEdit);
