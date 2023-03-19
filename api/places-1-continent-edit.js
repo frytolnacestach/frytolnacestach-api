@@ -15,7 +15,6 @@ router.post("/", async (req, res) => {
 		.update({
 			slug: req.body.body.slug,
             name: req.body.body.name,
-            name_cz: req.body.body.name_cz,
             area: req.body.body.area,
             population: req.body.body.population,
             populationDensity: req.body.body.populationDensity,
