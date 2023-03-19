@@ -7,13 +7,14 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-router.get("/", async (req, res) => {
+router.get('/:slug', async (req, res) => {
+  var slug = req.params.slug
   try {
 
     const { data, error } = await supabase
     .from('places-1-continents')
     .select()
-    .order('id', { ascending: true })
+    .eq('slug', slug)
 
     res.send(JSON.stringify(data))
 

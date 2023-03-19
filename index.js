@@ -12,6 +12,10 @@ app.use(bodyParser.json());
 const login = require("./api/login");
 const base = require("./api/base");
 const baseEdit = require("./api/base-edit");
+const placesContinents = require("./api/places-1-continents");
+const placesContinent = require("./api/places-1-continent");
+const placesContinentEdit = require("./api/places-1-continent-edit");
+const placesContinentCreate = require("./api/places-1-continent-create");
 const platforms = require("./api/platforms");
 const platform = require("./api/platform");
 const platformEdit = require("./api/platform-edit");
@@ -44,6 +48,11 @@ app.use("/api/video", video);
 app.use("/api/videos", videos);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
+//api - places
+app.use("/api/post", placesContinent);
+app.use("/api/posts", placesContinents);
+app.use("/api/post-edit", placesContinentEdit);
+app.use("/api/post-create", placesContinentCreate);
 //api - post
 app.use("/api/base-edit", baseEdit);
 app.use("/api/platform-edit", platformEdit);
