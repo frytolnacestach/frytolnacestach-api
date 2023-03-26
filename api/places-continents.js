@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
   try {
 
     const { data, error } = await supabase
-    .from('places-1-continents')
+    .from('places-continents')
     .select()
     .order('id', { ascending: true })
 
