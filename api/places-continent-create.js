@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
 
     try {
         const { error } = await supabase
-        .from('places-continents')
+        .from('places_continents')
         .insert({ 
             slug: req.body.body.slug,
             name: req.body.body.name,
