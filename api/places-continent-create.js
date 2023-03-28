@@ -18,7 +18,10 @@ router.post("/", async (req, res) => {
             area: req.body.body.area,
             population: req.body.body.population,
             population_density: req.body.body.populationDensity,
-            number_states: req.body.body.states
+            number_states: req.body.body.states,
+            information_chatgpt: req.body.body.information_chatgpt,
+            image_cover: req.body.body.image_cover,
+            image_hero: req.body.body.image_hero
         })
 
         return res.status(201).send("Create Continents");

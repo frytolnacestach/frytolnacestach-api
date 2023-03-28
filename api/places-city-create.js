@@ -17,7 +17,10 @@ router.post("/", async (req, res) => {
             name: req.body.body.name,
             area: req.body.body.area,
             population: req.body.body.population,
-            altitude: req.body.body.altitude
+            altitude: req.body.body.altitude,
+            information_chatgpt: req.body.body.information_chatgpt,
+            image_cover: req.body.body.image_cover,
+            image_hero: req.body.body.image_hero
         })
 
         return res.status(201).send("Create Continents");
