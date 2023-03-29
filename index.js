@@ -65,7 +65,7 @@ app.use("/api/places-continent-edit", placesContinentEdit);
 app.use("/api/places-continent-create", placesContinentCreate);
 app.use("/api/places-state", placesState);
 app.use("/api/places-states", placesStates);
-app.use("/api/places-states-continet", placesStatesContinent);
+app.use("/api/places-states-continent", placesStatesContinent);
 app.use("/api/places-state-edit", placesStateEdit);
 app.use("/api/places-state-create", placesStateCreate);
 app.use("/api/places-city", placesCity);
