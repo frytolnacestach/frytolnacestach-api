@@ -14,6 +14,7 @@ const base = require("./api/base");
 const baseEdit = require("./api/base-edit");
 const placesContinents = require("./api/places-continents");
 const placesContinent = require("./api/places-continent");
+const placesContinentID = require("./api/places-continent-id");
 const placesContinentEdit = require("./api/places-continent-edit");
 const placesContinentCreate = require("./api/places-continent-create");
 const placesStates = require("./api/places-states");
@@ -60,6 +61,7 @@ app.use("/api/post", post);
 app.use("/api/posts", posts);
 //api - places
 app.use("/api/places-continent", placesContinent);
+app.use("/api/places-continent-id", placesContinentID);
 app.use("/api/places-continents", placesContinents);
 app.use("/api/places-continent-edit", placesContinentEdit);
 app.use("/api/places-continent-create", placesContinentCreate);
