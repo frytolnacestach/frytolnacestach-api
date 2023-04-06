@@ -14,7 +14,7 @@ router.get('/:slug', async (req, res) => {
     const { data, error } = await supabase
     .from('videos')
     .select()
-    .eq('id_continet', id)
+    .eq('id_continent', id)
 
     res.send(JSON.stringify(data))
 
