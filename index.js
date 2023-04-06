@@ -34,7 +34,7 @@ const platform = require("./api/platform");
 const platformEdit = require("./api/platform-edit");
 const platformCreate = require("./api/platform-create");
 const videos = require("./api/videos");
-const videosIDstate = require("./api/videosIDstate");
+const videosIDstate = require("./api/videos-id-state");
 const video = require("./api/video");
 const videoEdit = require("./api/video-edit");
 const videoCreate = require("./api/video-create");
@@ -60,7 +60,7 @@ app.use("/api/platform", platform);
 app.use("/api/platforms", platforms);
 app.use("/api/video", video);
 app.use("/api/videos", videos);
-app.use("/api/videosIDstate", videosIDstate);
+app.use("/api/videos-id-state", videosIDstate);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
 //api - places
