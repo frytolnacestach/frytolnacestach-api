@@ -62,7 +62,7 @@ app.use("/api/platforms", platforms);
 app.use("/api/video", video);
 app.use("/api/videos", videos);
 app.use("/api/videos-id-state", videosIDstate);
-app.use("/api/videos-id-city", videosIDstate);
+app.use("/api/videos-id-city", videosIDcity);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
 //api - places
