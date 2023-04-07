@@ -8,11 +8,14 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
+  const search = req.query.search || ''
+  
   try {
 
     const { data, error } = await supabase
     .from('places_cities')
     .select()
+    .ilike('name', `%${search}%`)
     .order('id', { ascending: true })
 
     res.send(JSON.stringify(data))
