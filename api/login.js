@@ -13,7 +13,7 @@ router.get('/:email/:password', async (req, res) => {
   try {
 
     const { data, error } = await supabase
-    .from('users-admin')
+    .from('users_admin')
     .select()
     .eq('email', email)
     .eq('password', password)
