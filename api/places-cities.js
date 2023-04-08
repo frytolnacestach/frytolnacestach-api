@@ -9,24 +9,23 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
   const search = req.query.search || ''
-  const startsWith = req.query.startsWith || ''
+  const letter = req.query.letter || ''
   
   try {
-
     const { data, error } = await supabase
-    .from('places_cities')
-    .select()
-    .ilike('name', `%${search}%`)
-    .and(`name ILIKE '${startsWith}%'`)
-    .order('id', { ascending: true })
+      .from('places_cities')
+      .select()
+      .and(
+        supabase.filter.iLike('name', `${letter}%`),
+        supabase.filter.iLike('name', `%${search}%`)
+      )
+      .order('id', { ascending: true })
 
     res.send(JSON.stringify(data))
 
   } catch (error) {
-
     console.error(error);
     return res.status(500).send("Server error");
-    
   }
 });
 
