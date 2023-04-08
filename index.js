@@ -83,7 +83,7 @@ app.use("/api/places-state-create", placesStateCreate);
 app.use("/api/places-city", placesCity);
 app.use("/api/places-city-id", placesCityID);
 app.use("/api/places-cities", placesCities);
-app.use("/api/places-cities-initial", placesCities);
+app.use("/api/places-cities-initial", placesCitiesInitial);
 app.use("/api/places-cities-state", placesCitiesState);
 app.use("/api/places-city-edit", placesCityEdit);
 app.use("/api/places-city-create", placesCityCreate);
