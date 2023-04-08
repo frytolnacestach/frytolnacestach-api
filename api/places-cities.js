@@ -9,6 +9,8 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
   const search = req.query.search || ''
+  const start = parseInt(req.query.start || '1')
+  const end = parseInt(req.query.end || '1000')
   
   try {
 
@@ -17,6 +19,7 @@ router.get("/", async (req, res) => {
     .select()
     .ilike('name', `%${search}%`)
     .order('name', { ascending: true })
+    .range(start, end)
 
     res.send(JSON.stringify(data))
 
