@@ -9,15 +9,12 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
   const search = req.query.search || ''
-  const startsWith = req.query.startsWith || ''
   
   try {
-
     const { data, error } = await supabase
     .from('places_cities')
     .select()
     .ilike('name', `%${search}%`)
-    .and(`name ILIKE '${startsWith}%'`)
     .order('id', { ascending: true })
 
     res.send(JSON.stringify(data))
