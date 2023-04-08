@@ -7,14 +7,14 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-router.get("/", async (req, res) => {
-  const initial = req.query.initial || ''
+router.get("/:initial", async (req, res) => {
+  const initial = req.params.initial;
   
   try {
     const { data, error } = await supabase
       .from('places_cities')
       .select()
-      .ilike('name', `${initial}%`)
+      .ilike('name', initial + '%')
       .order('id', { ascending: true })
 
     res.send(JSON.stringify(data))
