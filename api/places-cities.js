@@ -15,10 +15,7 @@ router.get("/", async (req, res) => {
     const { data, error } = await supabase
       .from('places_cities')
       .select()
-      .and(
-        supabase.filter.iLike('name', `${letter}%`),
-        supabase.filter.iLike('name', `%${search}%`)
-      )
+      .ilike('name', `${letter}%`)
       .order('id', { ascending: true })
 
     res.send(JSON.stringify(data))
