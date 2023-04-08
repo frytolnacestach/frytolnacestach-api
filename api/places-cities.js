@@ -16,6 +16,7 @@ router.get("/", async (req, res) => {
     .from('places_cities')
     .select()
     .ilike('name', `%${search}%`)
+    .and(`name ILIKE '${startsWith}%'`)
     .order('id', { ascending: true })
 
     res.send(JSON.stringify(data))
