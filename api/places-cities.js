@@ -9,8 +9,8 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
   const search = req.query.search || ''
-  const start = parseInt(req.query.start || '1')
-  const end = parseInt(req.query.end || '1000')
+  const start = parseInt(req.query.start || '0')
+  const end = parseInt(req.query.end || '999')
   
   try {
 
