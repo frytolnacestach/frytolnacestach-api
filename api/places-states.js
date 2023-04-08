@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     .from('places_states')
     .select()
     .ilike('name', `%${search}%`)
-    .order('id', { ascending: true })
+    .order('name', { ascending: true })
 
     res.send(JSON.stringify(data))
 

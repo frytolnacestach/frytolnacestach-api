@@ -15,6 +15,7 @@ router.get('/:slug', async (req, res) => {
     .from('places_cities')
     .select()
     .eq('id_state', id)
+    .order('name', { ascending: true })
 
     res.send(JSON.stringify(data))
 
