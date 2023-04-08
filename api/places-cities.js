@@ -9,6 +9,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
   const search = req.query.search || ''
+  const startsWith = req.query.startsWith || ''
   
   try {
 
