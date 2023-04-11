@@ -41,6 +41,7 @@ const videosIDcity = require("./api/videos-id-city");
 const video = require("./api/video");
 const videoEdit = require("./api/video-edit");
 const videoCreate = require("./api/video-create");
+const imageID = require("./api/image-id");
 const posts = require("./api/posts");
 const post = require("./api/post");
 const postEdit = require("./api/post-edit");
@@ -66,6 +67,7 @@ app.use("/api/videos", videos);
 app.use("/api/videos-id-continent", videosIDcontinent);
 app.use("/api/videos-id-state", videosIDstate);
 app.use("/api/videos-id-city", videosIDcity);
+app.use("/api/image-id", imageID);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
 //api - places
