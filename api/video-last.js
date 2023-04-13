@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     const { data, error } = await supabase
     .from('videos')
     .select()
-    .order('created_at', { ascending: false })
+    .order('id', { ascending: false })
     .limit(1);
 
     res.send(JSON.stringify(data))
