@@ -8,46 +8,60 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+
 //pages
 const login = require("./api/login");
+
 const base = require("./api/base");
 const baseEdit = require("./api/base-edit");
+
 const placesContinents = require("./api/places-continents");
 const placesContinent = require("./api/places-continent");
 const placesContinentID = require("./api/places-continent-id");
 const placesContinentEdit = require("./api/places-continent-edit");
 const placesContinentCreate = require("./api/places-continent-create");
+
 const placesStates = require("./api/places-states");
-const placesStatesContinent = require("./api/places-states-continent");
 const placesState = require("./api/places-state");
 const placesStateID = require("./api/places-state-id");
+const placesStatesContinent = require("./api/places-states-continent");
 const placesStateEdit = require("./api/places-state-edit");
 const placesStateCreate = require("./api/places-state-create");
-const placesCitiesInitial = require("./api/places-cities-initial");
+
 const placesCities = require("./api/places-cities");
-const placesCitiesState = require("./api/places-cities-state");
 const placesCity = require("./api/places-city");
 const placesCityID = require("./api/places-city-id");
+const placesCitiesInitial = require("./api/places-cities-initial");
+const placesCitiesState = require("./api/places-cities-state");
 const placesCityEdit = require("./api/places-city-edit");
 const placesCityCreate = require("./api/places-city-create");
+
 const platforms = require("./api/platforms");
 const platform = require("./api/platform");
 const platformEdit = require("./api/platform-edit");
 const platformCreate = require("./api/platform-create");
+
 const videos = require("./api/videos");
+const video = require("./api/video");
 const videosIDcontinent = require("./api/videos-id-continent");
 const videosIDstate = require("./api/videos-id-state");
 const videosIDcity = require("./api/videos-id-city");
-const video = require("./api/video");
 const videoLast = require("./api/video-last");
 const videoEdit = require("./api/video-edit");
 const videoCreate = require("./api/video-create");
-const images = require("./api/images");
-const imageID = require("./api/image-id");
+
 const posts = require("./api/posts");
 const post = require("./api/post");
+const postsIDcontinent = require("./api/videos-id-continent");
+const postsIDstate = require("./api/videos-id-state");
+const postsIDcity = require("./api/videos-id-city");
 const postEdit = require("./api/post-edit");
 const postCreate = require("./api/post-create");
+
+const images = require("./api/images");
+const imageID = require("./api/image-id");
+
+
 
 app.use(express.json({ extended: false }));
 
@@ -74,6 +88,9 @@ app.use("/api/images", images);
 app.use("/api/image-id", imageID);
 app.use("/api/post", post);
 app.use("/api/posts", posts);
+app.use("/api/posts-id-continent", postsIDcontinent);
+app.use("/api/posts-id-state", postsIDstate);
+app.use("/api/posts-id-city", postsIDcity);
 //api - places
 app.use("/api/places-continent", placesContinent);
 app.use("/api/places-continent-id", placesContinentID);
@@ -101,6 +118,7 @@ app.use("/api/post-edit", postEdit);
 app.use("/api/platform-create", platformCreate);
 app.use("/api/video-create", videoCreate);
 app.use("/api/post-create", postCreate);
+
 
 //pages
 router.get('/',function(req,res){
