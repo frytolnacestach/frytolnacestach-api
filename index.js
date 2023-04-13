@@ -52,9 +52,9 @@ const videoCreate = require("./api/video-create");
 
 const posts = require("./api/posts");
 const post = require("./api/post");
-const postsIDcontinent = require("./api/videos-id-continent");
-const postsIDstate = require("./api/videos-id-state");
-const postsIDcity = require("./api/videos-id-city");
+const postsIDcontinent = require("./api/posts-id-continent");
+const postsIDstate = require("./api/posts-id-state");
+const postsIDcity = require("./api/posts-id-city");
 const postEdit = require("./api/post-edit");
 const postCreate = require("./api/post-create");
 
