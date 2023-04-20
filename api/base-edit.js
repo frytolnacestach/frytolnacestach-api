@@ -13,8 +13,8 @@ router.post("/", async (req, res) => {
     const { data, error } = await supabase
     .from('base')
     .update({
-      iam: req.body.body.iam,
-      donate: req.body.body.donate
+      iam: req.body.iam,
+      donate: req.body.donate
     })
     .eq('id', 1)
 
