@@ -1,7 +1,10 @@
 import { createClient } from '@supabase/supabase-js'
 
 const express = require("express");
+const cors = require('cors');
 const router = express.Router();
+
+app.use(cors());
 
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
