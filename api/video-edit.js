@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
       title: req.body.title,
       url: req.body.url
     })
-    .eq('slug', req.body.body.slug)
+    .eq('slug', req.body.slug)
 
     res.send(JSON.stringify(data))
 
