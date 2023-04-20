@@ -10,7 +10,9 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000' // Povolí CORS pouze pro požadavky ze zdroje http://localhost:3000
+}));
 
 //pages
 const login = require("./api/login");
