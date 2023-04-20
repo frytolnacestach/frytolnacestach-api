@@ -13,10 +13,10 @@ router.post("/", async (req, res) => {
     const { data, error } = await supabase
     .from('videos')
     .update({
-      slug: req.body.body.slug,
-      platform: req.body.body.platform,
-      title: req.body.body.title,
-      url: req.body.body.url
+      slug: req.body.slug,
+      platform: req.body.platform,
+      title: req.body.title,
+      url: req.body.url
     })
     .eq('slug', req.body.body.slug)
 
