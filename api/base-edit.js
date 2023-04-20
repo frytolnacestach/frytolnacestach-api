@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require('cors');
 const router = express.Router();
 
+const app = express();
 app.use(cors());
 
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
@@ -31,4 +32,6 @@ router.post("/", async (req, res) => {
 	}
 });
 
-module.exports = router;
+app.use(router);
+
+module.exports = app;
