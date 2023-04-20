@@ -8,24 +8,24 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.post("/", async (req, res) => {
-  try {
+	try {
 
-    const { data, error } = await supabase
-    .from('base')
-    .update({
-      iam: req.body.iam,
-      donate: req.body.donate
-    })
-    .eq('id', 1)
+		const { data, error } = await supabase
+		.from('base')
+		.update({
+			iam: req.body.iam,
+			donate: req.body.donate
+		})
+		.eq('id', 1)
 
-    res.send(JSON.stringify(data))
+		res.send(JSON.stringify(data))
 
-  } catch (error) {
+	} catch (error) {
 
-    console.error(error);
-    return res.status(500).send("Server error");
-    
-  }
+		console.error(error);
+		return res.status(500).send("Server error");
+
+	}
 });
 
 module.exports = router;
