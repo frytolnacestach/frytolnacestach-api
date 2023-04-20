@@ -1,13 +1,16 @@
 const express = require('express')
+const cors = require('cors');
 const app = express()
 const path = require('path');
 const router = express.Router();
+
 
 //body-paser
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.use(cors());
 
 //pages
 const login = require("./api/login");
