@@ -13,14 +13,13 @@ router.post("/", async (req, res) => {
         const { error } = await supabase
         .from('videos')
         .insert({ 
-            slug: req.body.body.slug,
-            platform: req.body.body.platform,
-            title: req.body.body.title,
-            url: req.body.body.url
+            slug: req.body.slug,
+            platform: req.body.platform,
+            title: req.body.title,
+            url: req.body.url
         })
 
         return res.status(201).send("Create post");
-
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");

@@ -13,18 +13,17 @@ router.post("/", async (req, res) => {
         const { error } = await supabase
         .from('places_cities')
         .insert({ 
-			slug: req.body.body.slug,
-            name: req.body.body.name,
-            area: req.body.body.area,
-            population: req.body.body.population,
-            altitude: req.body.body.altitude,
-            information_chatgpt: req.body.body.information_chatgpt,
-            image_cover: req.body.body.image_cover,
-            image_hero: req.body.body.image_hero
+			slug: req.body.slug,
+            name: req.body.name,
+            area: req.body.area,
+            population: req.body.population,
+            altitude: req.body.altitude,
+            information_chatgpt: req.body.information_chatgpt,
+            image_cover: req.body.image_cover,
+            image_hero: req.body.image_hero
         })
 
         return res.status(201).send("Create Continents");
-
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");

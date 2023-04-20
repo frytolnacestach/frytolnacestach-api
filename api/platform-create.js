@@ -13,20 +13,20 @@ router.post("/", async (req, res) => {
         const { error } = await supabase
         .from('platforms')
         .insert({ 
-            slug: req.body.body.slug,
-            name: req.body.body.name,
-            perex: req.body.body.perex,
-            url: req.body.body.url,
-            facts: JSON.parse(req.body.body.facts),
-            date: req.body.body.date
+            slug: req.body.slug,
+            name: req.body.name,
+            perex: req.body.perex,
+            url: req.body.url,
+            facts: JSON.parse(req.body.facts),
+            date: req.body.date
         })
 
         return res.status(201).send("Create post");
-
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
     }
+    
 });
 
 module.exports = router;

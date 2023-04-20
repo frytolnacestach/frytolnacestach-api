@@ -13,39 +13,38 @@ router.post("/", async (req, res) => {
         const { error } = await supabase
         .from('posts')
         .update({ 
-            dir: req.body.body.dir,
-            slug: req.body.body.slug,
-            path: req.body.body.path,
-            date: req.body.body.date,
-            dateUpdate: req.body.body.dateUpdate,
-            dateInformation: req.body.body.dateInformation,
-            imageList: req.body.body.imageList,
-            imageHero: req.body.body.imageHero,
-            imageMap: req.body.body.imageMap,
-            urlYoutube: req.body.body.urlYoutube,
-            urlWiki: req.body.body.urlWiki,
-            urlMap: req.body.body.urlMap,
-            title: req.body.body.title,
-            perex: req.body.body.perex,
-            textOpener: req.body.body.textOpener,
-            textAuthor: req.body.body.textAuthor,
-            textWiki: req.body.body.textWiki,
-            reviewText: req.body.body.reviewText,
-            reviewValue: req.body.body.reviewValue,
-            perexPrice: req.body.body.perexPrice,
-            perexTriplength: req.body.body.perexTriplength,
-            perexTime: req.body.body.perexTime,
-            tags: JSON.parse(req.body.body.tags),
-            locations: JSON.parse(req.body.body.locations),
-            travels: JSON.parse(req.body.body.travels),
-            prices: JSON.parse(req.body.body.prices),
-            triplengths: JSON.parse(req.body.body.triplengths),
-            times: JSON.parse(req.body.body.times)
+            dir: req.body.dir,
+            slug: req.body.slug,
+            path: req.body.path,
+            date: req.body.date,
+            dateUpdate: req.body.dateUpdate,
+            dateInformation: req.body.dateInformation,
+            imageList: req.body.imageList,
+            imageHero: req.body.imageHero,
+            imageMap: req.body.imageMap,
+            urlYoutube: req.body.urlYoutube,
+            urlWiki: req.body.urlWiki,
+            urlMap: req.body.urlMap,
+            title: req.body.title,
+            perex: req.body.perex,
+            textOpener: req.body.textOpener,
+            textAuthor: req.body.textAuthor,
+            textWiki: req.body.textWiki,
+            reviewText: req.body.reviewText,
+            reviewValue: req.body.reviewValue,
+            perexPrice: req.body.perexPrice,
+            perexTriplength: req.body.perexTriplength,
+            perexTime: req.body.perexTime,
+            tags: JSON.parse(req.body.tags),
+            locations: JSON.parse(req.body.locations),
+            travels: JSON.parse(req.body.travels),
+            prices: JSON.parse(req.body.prices),
+            triplengths: JSON.parse(req.body.triplengths),
+            times: JSON.parse(req.body.times)
         })
-        .eq('slug', req.body.body.slug)
+        .eq('slug', req.body.slug)
 
         return res.status(201).send("Edit post");
-
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
