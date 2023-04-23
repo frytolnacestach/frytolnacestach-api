@@ -19,8 +19,8 @@ router.post("/", async (req, res) => {
             population: req.body.population,
 			altitude: req.body.altitude,
             information_chatgpt: req.body.information_chatgpt,
-            image_cover: req.body.image_cover,
-            image_hero: req.body.image_hero
+            id_image_cover: req.body.id_image_cover,
+            id_image_hero: req.body.id_image_hero
 		})
 		.eq('slug', req.body.slug)
 
