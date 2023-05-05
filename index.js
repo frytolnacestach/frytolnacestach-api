@@ -41,6 +41,7 @@ const platformEdit = require("./api/platform-edit");
 
 //image
 const images = require("./api/images");
+const imagesArray = require("./api/images-array");
 const imageID = require("./api/image-id");
 
 //video
@@ -112,6 +113,7 @@ app.use("/api/platform-edit", platformEdit);
 
 //api - image
 app.use("/api/images", images);
+app.use("/api/images-array", imagesArray);
 app.use("/api/image-id", imageID);
 
 //api - video
