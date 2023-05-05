@@ -35,7 +35,7 @@ const placesCities = require("./api/places-cities");
 const placesCity = require("./api/places-city");
 const placesCityID = require("./api/places-city-id");
 const placesCitiesInitial = require("./api/places-cities-initial");
-const placesCitiesState = require("./api/places-cities-state");
+const placesCitiesIDstate = require("./api/places-cities-id-state");
 const placesCityEdit = require("./api/places-city-edit");
 const placesCityCreate = require("./api/places-city-create");
 
@@ -112,7 +112,7 @@ app.use("/api/places-city", placesCity);
 app.use("/api/places-city-id", placesCityID);
 app.use("/api/places-cities", placesCities);
 app.use("/api/places-cities-initial", placesCitiesInitial);
-app.use("/api/places-cities-state", placesCitiesState);
+app.use("/api/places-cities-id-state", placesCitiesIDstate);
 app.use("/api/places-city-edit", placesCityEdit);
 app.use("/api/places-city-create", placesCityCreate);
 //api - post
