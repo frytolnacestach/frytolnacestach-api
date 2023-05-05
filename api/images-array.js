@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     const { data, error } = await supabase
     .from('images')
     .select()
-    .in("id_image_cover", ids)
+    .in("id", ids)
     .order('id', { ascending: false })
 
     res.send(JSON.stringify(data))
