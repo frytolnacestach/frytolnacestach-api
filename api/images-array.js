@@ -10,8 +10,8 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 router.get("/", async (req, res) => {
   try {
 
-    const { id_image_cover } = req.query;
-    const ids = id_image_cover.split(",").map((id) => parseInt(id));
+    const { id } = req.query;
+    const ids = id.split(",").map((id) => parseInt(id));
 
     const { data, error } = await supabase
     .from('images')
