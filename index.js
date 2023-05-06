@@ -29,6 +29,9 @@ const base = require("./api/base");
 //base - post
 const baseEdit = require("./api/base-edit");
 
+//top
+const topPlaces = require("./api/top-places");
+
 //login
 const login = require("./api/login");
 
@@ -68,6 +71,7 @@ const postEdit = require("./api/post-edit");
 
 //places - continent
 const placesContinents = require("./api/places-continents");
+const placesContinentsArray = require("./api/places-continents-array");
 const placesContinent = require("./api/places-continent");
 const placesContinentID = require("./api/places-continent-id");
 //places - continent - post
@@ -76,6 +80,7 @@ const placesContinentEdit = require("./api/places-continent-edit");
 
 //places - state
 const placesStates = require("./api/places-states");
+const placesStatesArray = require("./api/places-states-array");
 const placesStatesContinent = require("./api/places-states-continent");
 const placesState = require("./api/places-state");
 const placesStateID = require("./api/places-state-id");
@@ -85,6 +90,7 @@ const placesStateEdit = require("./api/places-state-edit");
 
 //places - city
 const placesCities = require("./api/places-cities");
+const placesCitiesArray = require("./api/places-cities-array");
 const placesCitiesInitial = require("./api/places-cities-initial");
 const placesCitiesIDstate = require("./api/places-cities-id-state");
 const placesCity = require("./api/places-city");
@@ -100,6 +106,9 @@ const placesCityEdit = require("./api/places-city-edit");
 app.use("/api/base", base);
 //api - base - post
 app.use("/api/base-edit", baseEdit);
+
+//top
+app.use("/api/top-places", topPlaces);
 
 //api - login
 app.use("/api/login", login);
@@ -139,15 +148,17 @@ app.use("/api/post-create", postCreate);
 app.use("/api/post-edit", postEdit);
 
 //api - places - continent
+app.use("/api/places-continents", placesContinents);
+app.use("/api/places-continents-array", placesContinentsArray);
 app.use("/api/places-continent", placesContinent);
 app.use("/api/places-continent-id", placesContinentID);
-app.use("/api/places-continents", placesContinents);
 //api - places - continent - post
 app.use("/api/places-continent-create", placesContinentCreate);
 app.use("/api/places-continent-edit", placesContinentEdit);
 
 //api - places - state
 app.use("/api/places-states", placesStates);
+app.use("/api/places-states-array", placesStatesArray);
 app.use("/api/places-states-continent", placesStatesContinent);
 app.use("/api/places-state", placesState);
 app.use("/api/places-state-id", placesStateID);
@@ -157,6 +168,7 @@ app.use("/api/places-state-edit", placesStateEdit);
 
 //api - places - city
 app.use("/api/places-cities", placesCities);
+app.use("/api/places-cities-array", placesCitiesArray);
 app.use("/api/places-cities-initial", placesCitiesInitial);
 app.use("/api/places-cities-id-state", placesCitiesIDstate);
 app.use("/api/places-city", placesCity);
