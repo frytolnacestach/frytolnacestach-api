@@ -69,6 +69,11 @@ const postLast = require("./api/post-last");
 const postCreate = require("./api/post-create");
 const postEdit = require("./api/post-edit");
 
+//foods
+const foods = require("./api/foods");
+const foodsArray = require("./api/foods-array");
+const food = require("./api/food");
+
 //places - continent
 const placesContinents = require("./api/places-continents");
 const placesContinentsArray = require("./api/places-continents-array");
@@ -146,6 +151,11 @@ app.use("/api/post-last", postLast);
 //api - post - post
 app.use("/api/post-create", postCreate);
 app.use("/api/post-edit", postEdit);
+
+//api - foods
+app.use("/api/foods", foods);
+app.use("/api/foods-array", foodsArray);
+app.use("/api/food", food);
 
 //api - places - continent
 app.use("/api/places-continents", placesContinents);
