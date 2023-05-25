@@ -18,6 +18,14 @@ router.get('/:slug', async (req, res) => {
     .eq('ids_states->id', id)
     .order('name', { ascending: true })
 
+    if (Array.isArray(responseData)) {
+      data = responseData;
+    } else if (responseData) {
+      data = [responseData];
+    } else {
+      data = [];
+    }
+
     res.send(JSON.stringify(data))
 
   } catch (error) {
