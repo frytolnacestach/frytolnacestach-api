@@ -15,7 +15,6 @@ router.get('/:slug', async (req, res) => {
     const { data, error } = await supabase
     .from('foods')
     .select()
-    .ilike('name', `%${search}%`)
     .in('ids_states.id', id)
     .order('name', { ascending: true })
 
