@@ -8,28 +8,25 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get('/:slug', async (req, res) => {
-  const id = req.params.slug
+  var id = req.params.slug
 
   try {
-    let data;
-    const { data: responseData, error } = await supabase
-      .from('foods')
-      .select()
-      .matchPath('ids_states[id].id', id)
-      .order('name', { ascending: true });
 
-    if (Array.isArray(responseData)) {
-      data = responseData;
-    } else if (responseData) {
-      data = [responseData];
-    } else {
-      data = [];
-    }
+    const { data, error } = await supabase
+    .from('foods')
+    .select()
+    .contains('ids_states', [id])
+    //.eq('ids_states->id', id)
+    .order('name', { ascending: true })
+    
 
-    res.send(JSON.stringify(data));
+    res.send(JSON.stringify(data))
+
   } catch (error) {
+
     console.error(error);
     return res.status(500).send("Server error");
+    
   }
 });
 
