@@ -72,6 +72,7 @@ const postEdit = require("./api/post-edit");
 //foods
 const foods = require("./api/foods");
 const foodsArray = require("./api/foods-array");
+const foodsIDstate = require("./api/foods-id-state");
 const food = require("./api/food");
 
 //places - continent
@@ -155,6 +156,7 @@ app.use("/api/post-edit", postEdit);
 //api - foods
 app.use("/api/foods", foods);
 app.use("/api/foods-array", foodsArray);
+app.use("/api/foods-id-state", foodsIDstate);
 app.use("/api/food", food);
 
 //api - places - continent
