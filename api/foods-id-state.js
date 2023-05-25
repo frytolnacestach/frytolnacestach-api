@@ -15,7 +15,7 @@ router.get('/:slug', async (req, res) => {
     const { data, error } = await supabase
     .from('foods')
     .select()
-    .in('ids_states.id', [56])
+    .in('ids_states.id', [id])
     .order('name', { ascending: true })
 
     res.send(JSON.stringify(data))
