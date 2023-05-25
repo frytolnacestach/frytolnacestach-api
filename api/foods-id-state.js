@@ -15,7 +15,7 @@ router.get('/:slug', async (req, res) => {
     const { data: responseData, error } = await supabase
       .from('foods')
       .select()
-      .eq('ids_states', [{ id: id }])
+      .matchPath('ids_states[id].id', id)
       .order('name', { ascending: true });
 
     if (Array.isArray(responseData)) {
