@@ -16,12 +16,12 @@ router.get('/:slug', async (req, res) => {
     .from('foods')
     .select()
     //.contains("ids_states2", JSON.stringify([{ id: id }]))
-    .contains("ids_states2", [{"id": id}])
+    //.contains("ids_states2", [{"id": id}])
     //.contains('ids_states->id', id)
     //.filter('ids_states', '@>', `[{ "id": ${id} }]`) 
     //.filter('ids_states->id', '@>', `[{"id": ${id}}]`)
     //.eq('ids_states->id', id)
-    //.in('ids_states->id', id) 
+    .in('ids_states2->id', id) 
     .order('name', { ascending: true })
     
 
