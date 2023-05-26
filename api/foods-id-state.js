@@ -18,7 +18,7 @@ router.get('/:slug', async (req, res) => {
         id,
         ...
       `)
-    .contains("roster", JSON.stringify([{ id: "efgh" }]))
+    .contains("ids_states3", JSON.stringify([{ id: "efgh" }]))
 
     res.send(JSON.stringify(data))
 
