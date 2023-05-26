@@ -15,7 +15,7 @@ router.get('/:slug', async (req, res) => {
     const { data, error } = await supabase
     .from('foods')
     .select()
-    .contains("ids_states3", JSON.stringify([{ id: id }]))
+    .contains("ids_states3", JSON.stringify([{ id: parseInt(id) }]))
 
     res.send(JSON.stringify(data))
 
