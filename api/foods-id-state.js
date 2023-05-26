@@ -14,7 +14,7 @@ router.get('/:slug', async (req, res) => {
 
     const { data, error } = await supabase
     .from('foods')
-    select(`
+    .select(`
         id,
         ...
       `)
