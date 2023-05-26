@@ -15,16 +15,8 @@ router.get('/:slug', async (req, res) => {
     const { data, error } = await supabase
     .from('foods')
     .select()
-    .contains("ids_states2", JSON.stringify([{ id: 56 }]));
-    //.contains("ids_states2", JSON.stringify([{ id: id }]))
-    //.contains("ids_states2", [{"id": id}])
-    //.contains('ids_states->id', id)
-    //.filter('ids_states', '@>', `[{ "id": ${id} }]`) 
-    //.filter('ids_states->id', '@>', `[{"id": ${id}}]`)
-    //.eq('ids_states->id', id)
-    //.in('ids_states2->id', id) 
-    //.order('name', { ascending: true })
-    
+    .contains("ids_states2", [{ id: 56 }], { match: "all" })
+    //.contains("ids_states2", JSON.stringify([{ id: 56 }]))
 
     res.send(JSON.stringify(data))
 
@@ -37,3 +29,12 @@ router.get('/:slug', async (req, res) => {
 });
 
 module.exports = router;
+
+//.contains("ids_states2", JSON.stringify([{ id: id }]))
+    //.contains("ids_states2", [{"id": id}])
+    //.contains('ids_states->id', id)
+    //.filter('ids_states', '@>', `[{ "id": ${id} }]`) 
+    //.filter('ids_states->id', '@>', `[{"id": ${id}}]`)
+    //.eq('ids_states->id', id)
+    //.in('ids_states2->id', id) 
+    //.order('name', { ascending: true })
