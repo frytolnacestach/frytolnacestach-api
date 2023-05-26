@@ -15,7 +15,7 @@ router.get('/:slug', async (req, res) => {
     const { data, error } = await supabase
     .from('foods')
     .select()
-    .contains('ids_states2', [{ id: "efgh" }])
+    .eq('ids_states2', [{ id: "efgh" }])
 
     res.send(JSON.stringify(data))
 
@@ -28,6 +28,7 @@ router.get('/:slug', async (req, res) => {
 });
 
 module.exports = router;
+//.contains('ids_states2', [{ id: "efgh" }])
 //.contains('ids_states2', JSON.stringify([{ id: '56' }]))
 //.eq('ids_states2:id', 56)
 //.contains('ids_states2:jsonb->>ids_states2', ['ids_states2->id: 56'])
