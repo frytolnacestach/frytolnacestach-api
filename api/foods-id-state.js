@@ -15,7 +15,7 @@ router.get('/:slug', async (req, res) => {
     const { data, error } = await supabase
     .from('foods')
     .select()
-    .eq('ids_states2', [[{ "id": "efgh" }]])
+    .contains("ids_states2", JSON.stringify([{ "id": "efgh" }]))
 
     res.send(JSON.stringify(data))
 
@@ -28,6 +28,7 @@ router.get('/:slug', async (req, res) => {
 });
 
 module.exports = router;
+//.eq('ids_states2', [[{ "id": "efgh" }]])
 //.eq('ids_states2', [{ id: "efgh" }])
 //.contains('ids_states2', [{ id: "efgh" }])
 //.contains('ids_states2', JSON.stringify([{ id: '56' }]))
