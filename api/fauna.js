@@ -12,7 +12,7 @@ router.get('/:slug', async (req, res) => {
   try {
 
     const { data, error } = await supabase
-    .from('foods')
+    .from('fauna')
     .select()
     .eq('slug', slug)
 

@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
     const ids = id.split(",").map((id) => parseInt(id));
 
     const { data, error } = await supabase
-    .from('foods')
+    .from('fauna')
     .select()
     .in("id", ids)
     .order('id', { ascending: false })
