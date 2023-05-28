@@ -75,6 +75,18 @@ const foodsArray = require("./api/foods-array");
 const foodsIDstate = require("./api/foods-id-state");
 const food = require("./api/food");
 
+//fauna
+const faunas = require("./api/faunas");
+const faunasArray = require("./api/faunas-array");
+const faunasIDstate = require("./api/faunas-id-state");
+const fauna = require("./api/fauna");
+
+//flora
+const floras = require("./api/floras");
+const florasArray = require("./api/floras-array");
+const florasIDstate = require("./api/floras-id-state");
+const flora = require("./api/flora");
+
 //places - continent
 const placesContinents = require("./api/places-continents");
 const placesContinentsArray = require("./api/places-continents-array");
@@ -158,6 +170,18 @@ app.use("/api/foods", foods);
 app.use("/api/foods-array", foodsArray);
 app.use("/api/foods-id-state", foodsIDstate);
 app.use("/api/food", food);
+
+//api - fauna
+app.use("/api/faunas", faunas);
+app.use("/api/faunas-array", faunasArray);
+app.use("/api/faunas-id-state", faunasIDstate);
+app.use("/api/fauna", fauna);
+
+//api - flora
+app.use("/api/floras", floras);
+app.use("/api/floras-array", florasArray);
+app.use("/api/floras-id-state", florasIDstate);
+app.use("/api/flora", flora);
 
 //api - places - continent
 app.use("/api/places-continents", placesContinents);
