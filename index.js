@@ -70,10 +70,10 @@ const postCreate = require("./api/post-create");
 const postEdit = require("./api/post-edit");
 
 //brands
-const foods = require("./api/brands");
-const foodsArray = require("./api/brands-array");
-const foodsIDstate = require("./api/brands-id-state");
-const food = require("./api/brand");
+const brands = require("./api/brands");
+const brandsArray = require("./api/brands-array");
+const brandsIDstate = require("./api/brands-id-state");
+const brand = require("./api/brand");
 
 //foods
 const foods = require("./api/foods");
