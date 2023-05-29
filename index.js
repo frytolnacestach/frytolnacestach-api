@@ -69,6 +69,12 @@ const postLast = require("./api/post-last");
 const postCreate = require("./api/post-create");
 const postEdit = require("./api/post-edit");
 
+//brands
+const foods = require("./api/brands");
+const foodsArray = require("./api/brands-array");
+const foodsIDstate = require("./api/brands-id-state");
+const food = require("./api/brand");
+
 //foods
 const foods = require("./api/foods");
 const foodsArray = require("./api/foods-array");
@@ -165,11 +171,17 @@ app.use("/api/post-last", postLast);
 app.use("/api/post-create", postCreate);
 app.use("/api/post-edit", postEdit);
 
+//api - brands
+app.use("/api/brands", foods);
+app.use("/api/brands-array", foodsArray);
+app.use("/api/brands-id-state", foodsIDstate);
+app.use("/api/brand", food);
+
 //api - foods
-app.use("/api/foods", foods);
-app.use("/api/foods-array", foodsArray);
-app.use("/api/foods-id-state", foodsIDstate);
-app.use("/api/food", food);
+app.use("/api/foods", brands);
+app.use("/api/foods-array", brandsArray);
+app.use("/api/foods-id-state", brandsIDstate);
+app.use("/api/food", brand);
 
 //api - fauna
 app.use("/api/faunas", faunas);
