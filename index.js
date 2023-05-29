@@ -172,16 +172,16 @@ app.use("/api/post-create", postCreate);
 app.use("/api/post-edit", postEdit);
 
 //api - brands
-app.use("/api/brands", foods);
-app.use("/api/brands-array", foodsArray);
-app.use("/api/brands-id-state", foodsIDstate);
-app.use("/api/brand", food);
+app.use("/api/brands", brands);
+app.use("/api/brands-array", brandsArray);
+app.use("/api/brands-id-state", brandsIDstate);
+app.use("/api/brand", brand);
 
 //api - foods
-app.use("/api/foods", brands);
-app.use("/api/foods-array", brandsArray);
-app.use("/api/foods-id-state", brandsIDstate);
-app.use("/api/food", brand);
+app.use("/api/foods", foods);
+app.use("/api/foods-array", foodsArray);
+app.use("/api/foods-id-state", foodsIDstate);
+app.use("/api/food", food);
 
 //api - fauna
 app.use("/api/faunas", faunas);
