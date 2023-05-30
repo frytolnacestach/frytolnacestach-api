@@ -122,6 +122,14 @@ const placesCityID = require("./api/places-city-id");
 //places - city - post
 const placesCityCreate = require("./api/places-city-create");
 const placesCityEdit = require("./api/places-city-edit");
+
+//places - region
+const placesRegions = require("./api/places-regions");
+const placesRegion = require("./api/places-region");
+
+//places - spot
+const placesSpots = require("./api/places-spots");
+const placesSpot = require("./api/places-spot");
 //CONSTS - END
 
 
@@ -224,6 +232,14 @@ app.use("/api/places-city-id", placesCityID);
 //api - places - city - post
 app.use("/api/places-city-create", placesCityCreate);
 app.use("/api/places-city-edit", placesCityEdit);
+
+//api - places - region
+app.use("/api/places-regions", placesRegions);
+app.use("/api/places-region", placesRegion);
+
+//api - places - spot
+app.use("/api/places-spots", placesSpots);
+app.use("/api/places-spot", placesSpot);
 //API - END
 
 
