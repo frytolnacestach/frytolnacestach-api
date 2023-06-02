@@ -62,7 +62,7 @@ router.post("/", async (req, res) => {
             //posts
             const posts = await $axios.$get(`https://frytolnacestach-api.vercel.app/api/posts`)
 
-            return { posts }
+            return res.status(200).send( posts);
 
 
 
