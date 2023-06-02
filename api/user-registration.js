@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
 
         // Odeslat registrační e-mail
         try {
-            const response = await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', {
+            const response = axios.post('https://frytolnacestach-mail.vercel.app/api/registration', {
                 email: req.body.email,
             }, {
                 headers: {
