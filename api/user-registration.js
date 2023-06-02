@@ -2,6 +2,8 @@ import { createClient } from '@supabase/supabase-js'
 
 const bcrypt = require('bcrypt');
 
+const axios = require('axios');
+
 const express = require("express");
 const router = express.Router();
 
@@ -59,10 +61,10 @@ router.post("/", async (req, res) => {
 
         // Odeslat registrační e-mail
  
-            //posts
-            const posts = await $axios.$get(`https://frytolnacestach-api.vercel.app/api/posts`)
+        //posts
+        const posts = await axios.get(`https://frytolnacestach-api.vercel.app/api/posts`)
 
-            return res.status(200).send( posts);
+        return res.status(200).send( posts);
 
 
 
