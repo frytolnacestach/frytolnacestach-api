@@ -42,10 +42,10 @@ router.post("/", async (req, res) => {
 			nickname: req.body.nickname
         })
 
-        if (error) {
+        /*if (error) {
             console.error(error);
             return res.status(500).send("Server error");
-        }
+        }*/
 /*
         // Odeslat registrační e-mail
         try {
