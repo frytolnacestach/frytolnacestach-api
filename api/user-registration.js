@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-const axios = require('axios');
+const http = require('http');
 
 const bcrypt = require('bcrypt');
 
@@ -49,12 +49,42 @@ router.post("/", async (req, res) => {
 
         // Odeslat registrační e-mail
         try {
-            await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', { email: req.body.email });
+            const response = await new Promise((resolve, reject) => {
+              const data = JSON.stringify({ email: req.body.email });
+              const options = {
+                hostname: 'frytolnacestach-mail.vercel.app',
+                path: '/api/registration',
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Content-Length': data.length
+                }
+              };
+          
+              const req = http.request(options, res => {
+                let responseBody = '';
+                res.on('data', chunk => {
+                  responseBody += chunk;
+                });
+          
+                res.on('end', () => {
+                  resolve(responseBody);
+                });
+              });
+          
+              req.on('error', error => {
+                reject(error);
+              });
+          
+              req.write(data);
+              req.end();
+            });
+          
             return res.status(201).send("Účet vytvořen, registrační e-mail odeslán.");
-        } catch (emailError) {
+          } catch (emailError) {
             console.error('Chyba při odesílání registračního e-mailu:', emailError);
             return res.status(500).send("Server error");
-        }
+          }
 
         //return res.status(201).send("Učet vytvořen");
     } catch (error) {
