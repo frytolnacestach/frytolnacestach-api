@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const express = require("express");
 const router = express.Router();
@@ -12,14 +12,14 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 router.post("/", async (req, res) => {
 
     try {
-        //const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
         const { error } = await supabase
         .from('users_test')
         .insert({ 
 			email: req.body.email,
-			password: req.body.password,
-            //password: hashedPassword,
+			//password: req.body.password,
+            password: hashedPassword,
 			nickname: req.body.nickname
         })
 
