@@ -47,11 +47,28 @@ router.post("/", async (req, res) => {
 
         // Odeslat registrační e-mail
         try {
-            await axios.post('https://frytolnacestach-mail.vercel.app/api/registration');
-            return res.status(201).send("Účet vytvořen, registrační e-mail odeslán.");
-        } catch (emailError) {
-            console.error('Chyba při odesílání registračního e-mailu:', emailError);
-            return res.status(505).send("Server error");
+            const response = await fetch(`https://frytolnacestach-api.vercel.app/api/user-registration`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "http://localhost:3000",
+                    "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept",
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH"
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                    'email': req.body.email,
+                })
+            });
+
+            if (response.ok) {
+                return res.status(200).send("Účet vytvořen, registrační e-mail odeslán.");
+            } else if (response.status === 201) {
+                return res.status(201).send("Účet vytvořen, registrační e-mail odeslán.");
+            } else {
+                return res.status(500).send("Chyba při komunikaci s API");
+            }
+        } catch (err) {
+            return res.status(500).send("Chyba připojení k API MAIL");
         }
 
         //return res.status(201).send("Učet vytvořen");
