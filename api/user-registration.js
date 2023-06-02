@@ -1,5 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
+const axios = require('axios');
+
 const bcrypt = require('bcrypt');
 
 const express = require("express");
@@ -11,6 +13,24 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.post("/", async (req, res) => {
 
+    // Kontrola existence uživatele
+    const { data: existingUser, error: existingError } = await supabase
+    .from('users_test')
+    .select('id')
+    .eq('email', req.body.email)
+    .limit(1);
+
+    if (existingError) {
+        console.error(existingError);
+        return res.status(500).send("Server error");
+    }
+
+    if (existingUser.length > 0) {
+        return res.status(400).send("Uživatel s touto e-mailovou adresou již existuje.");
+    }
+
+
+    //Vytvoření účtu
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -22,7 +42,19 @@ router.post("/", async (req, res) => {
 			nickname: req.body.nickname
         })
 
-        return res.status(201).send("Create Continents");
+        if (error) {
+            console.error(error);
+            return res.status(500).send("Server error");
+        }
+
+        // Odeslat registrační e-mail
+        try {
+            await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', { email: req.body.email });
+            return res.status(201).send("Účet vytvořen, registrační e-mail odeslán.");
+        } catch (emailError) {
+            console.error('Chyba při odesílání registračního e-mailu:', emailError);
+            return res.status(500).send("Server error");
+        }
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
