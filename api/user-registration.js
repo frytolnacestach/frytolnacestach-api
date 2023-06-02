@@ -30,14 +30,25 @@ router.post("/", async (req, res) => {
 
     //Vytvoření účtu
     try {
+
+        // Funkce pro generování náhodného kódu
+        async function generateRandomCode(length) {
+            const saltRounds = 10;
+            const code = await bcrypt.genSalt(saltRounds);
+            return code.slice(0, length);
+        }
+
+        //hash hesla
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
+        //uložení do databaze
         const { error } = await supabase
         .from('users_test')
         .insert({ 
 			email: req.body.email,
             password: hashedPassword,
-			nickname: req.body.nickname
+			nickname: req.body.nickname,
+            activation_code: await generateRandomCode(8)
         })
 
         if (error) {
