@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-//const axios = require('axios');
+const axios = require('axios');
 
 const bcrypt = require('bcrypt');
 
@@ -42,11 +42,11 @@ router.post("/", async (req, res) => {
 			nickname: req.body.nickname
         })
 
-        /*if (error) {
+        if (error) {
             console.error(error);
             return res.status(500).send("Server error");
         }
-
+/*
         // Odeslat registrační e-mail
         try {
             await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', { email: req.body.email });
