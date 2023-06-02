@@ -48,13 +48,15 @@ router.post("/", async (req, res) => {
         }
 
         // Odeslat registrační e-mail
-        try {
+        /*try {
             await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', { email: req.body.email });
             return res.status(201).send("Účet vytvořen, registrační e-mail odeslán.");
         } catch (emailError) {
             console.error('Chyba při odesílání registračního e-mailu:', emailError);
             return res.status(500).send("Server error");
-        }
+        }*/
+
+        return res.status(201).send("Učet vytvořen");
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
