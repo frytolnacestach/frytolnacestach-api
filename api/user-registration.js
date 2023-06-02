@@ -62,7 +62,7 @@ router.post("/", async (req, res) => {
             const response = await fetch('https://frytolnacestach-mail.vercel.app/api/registration', {
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "http://localhost:3000",
+                    "Access-Control-Allow-Origin": "https://frytolnacestach-api.vercel.app",
                     "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept",
                     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH"
                 },
