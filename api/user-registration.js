@@ -11,6 +11,24 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.post("/", async (req, res) => {
 
+    // Kontrola existence uživatele
+    const { data: existingUser, error: existingError } = await supabase
+    .from('users_test')
+    .select('id')
+    .eq('email', req.body.email)
+    .limit(1);
+
+    if (existingError) {
+        console.error(existingError);
+        return res.status(500).send("Server error");
+    }
+
+    if (existingUser.length > 0) {
+        return res.status(400).send("Uživatel s touto e-mailovou adresou již existuje.");
+    }
+
+
+    //Vytvoření účtu
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -18,7 +36,6 @@ router.post("/", async (req, res) => {
         .from('users_test')
         .insert({ 
 			email: req.body.email,
-			//password: req.body.password,
             password: hashedPassword,
 			nickname: req.body.nickname
         })
