@@ -63,10 +63,12 @@ router.post("/", async (req, res) => {
  
         //posts
         try {
-            const posts = await axios.get(`https://frytolnacestach-api.vercel.app/api/posts`)
+            const response = await axios.get(`https://frytolnacestach-api.vercel.app/api/posts`)
 
-            return res.status(200).send( posts);
+            const posts = response.data;
+            return res.status(200).send(posts);
         } catch (error) {
+            console.error(error);
             return res.status(500).send('Chyba připojení k API MAIL');
         }
 
