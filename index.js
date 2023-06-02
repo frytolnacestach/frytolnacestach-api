@@ -24,6 +24,9 @@ app.use(function(req, res, next) {
 
 
 //CONSTS
+//user
+const userRegistration = require("./api/user-registration");
+
 //base
 const base = require("./api/base");
 //base - post
@@ -134,6 +137,9 @@ const placesSpot = require("./api/places-spot");
 
 
 //API
+//api - user
+app.use("/api/user-registration", userRegistration);
+
 //api - base
 app.use("/api/base", base);
 //api - base - post
