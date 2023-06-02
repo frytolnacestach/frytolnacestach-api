@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
 
         if (error) {
             console.error(error);
-            return res.status(504).send("Server error");
+            return res.status(500).send("Server error");
         }
 
         // Odeslat registrační e-mail
@@ -65,16 +65,16 @@ router.post("/", async (req, res) => {
             } else if (response.status === 201) {
                 return res.status(201).send("Účet vytvořen, registrační e-mail odeslán.");
             } else {
-                return res.status(500).send("Chyba při komunikaci s API");
+                return res.status(501).send("Chyba při komunikaci s API");
             }
         } catch (err) {
-            return res.status(500).send("Chyba připojení k API MAIL");
+            return res.status(502).send("Chyba připojení k API MAIL");
         }
 
         //return res.status(201).send("Učet vytvořen");
     } catch (error) {
         console.error(error);
-        return res.status(500).send("Server error");
+        return res.status(503).send("Server error");
     }
     
 });
