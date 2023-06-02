@@ -37,6 +37,7 @@ router.post("/", async (req, res) => {
             const code = await bcrypt.genSalt(saltRounds);
             return code.slice(0, length);
         }
+        const randomCode = await generateRandomCode(24)
 
         //hash hesla
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -48,7 +49,7 @@ router.post("/", async (req, res) => {
 			email: req.body.email,
             password: hashedPassword,
 			nickname: req.body.nickname,
-            activation_code: await generateRandomCode(24)
+            activation_code: randomCode
         })
 
         if (error) {
@@ -60,6 +61,7 @@ router.post("/", async (req, res) => {
         try {
             const response = axios.post('https://frytolnacestach-mail.vercel.app/api/registration', {
                 email: req.body.email,
+                activation_code: randomCode
             }, {
                 headers: {
                 'Content-Type': 'application/json',
