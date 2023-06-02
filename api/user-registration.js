@@ -43,8 +43,8 @@ router.post("/", async (req, res) => {
         })
 
         if (error) {
-        console.error(error);
-        return res.status(500).send("Server error");
+            console.error(error);
+            return res.status(500).send("Server error");
         }
 
         // Odeslat registrační e-mail
@@ -55,8 +55,6 @@ router.post("/", async (req, res) => {
             console.error('Chyba při odesílání registračního e-mailu:', emailError);
             return res.status(500).send("Server error");
         }
-
-        return res.status(201).send("Učet vytvořen");
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
