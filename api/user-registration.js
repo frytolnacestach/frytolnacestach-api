@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
-const axios = require('axios');
+//const axios = require('axios');
 
 const bcrypt = require('bcrypt');
 
@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
 			nickname: req.body.nickname
         })
 
-        if (error) {
+        /*if (error) {
             console.error(error);
             return res.status(500).send("Server error");
         }
@@ -54,7 +54,9 @@ router.post("/", async (req, res) => {
         } catch (emailError) {
             console.error('Chyba při odesílání registračního e-mailu:', emailError);
             return res.status(500).send("Server error");
-        }
+        }*/
+
+        return res.status(201).send("Učet vytvořen");
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
