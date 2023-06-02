@@ -62,7 +62,7 @@ router.post("/", async (req, res) => {
         // Odeslat registrační e-mail
  
         //posts
-        try {
+        /*try {
             const response = await axios.get(`https://frytolnacestach-api.vercel.app/api/posts`)
 
             const posts = response.data;
@@ -70,12 +70,12 @@ router.post("/", async (req, res) => {
         } catch (error) {
             console.error(error);
             return res.status(500).send('Chyba připojení k API MAIL');
-        }
+        }*/
 
 
 
-        /*try {
-            const response = await fetch('https://frytolnacestach-mail.vercel.app/api/registration', {
+        try {
+            const response = await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', {
                 headers: {
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "https://frytolnacestach-api.vercel.app",
@@ -96,7 +96,7 @@ router.post("/", async (req, res) => {
             }
         } catch (error) {
             return res.status(500).send('Chyba připojení k API MAIL');
-        }*/
+        }
 
         //return res.status(201).send("Učet vytvořen");
     } catch (error) {
