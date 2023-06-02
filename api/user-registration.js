@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
         .insert({ 
 			email: req.body.email,
 			password: req.body.password,
-			nick: req.body.nick
+			nickname: req.body.nickname
         })
 
         return res.status(201).send("Create Continents");
