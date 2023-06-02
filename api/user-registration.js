@@ -60,15 +60,17 @@ router.post("/", async (req, res) => {
         // Odeslat registrační e-mail
         try {
             const response = await fetch('https://frytolnacestach-mail.vercel.app/api/registration', {
-                email: req.body.email,
-                activation_code: randomCode
-            }, {
                 headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
-                'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Accept',
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH'
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "http://localhost:3000",
+                    "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept",
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH"
                 },
+                method: 'POST',
+                body: JSON.stringify({
+                    'email': req.body.email,
+                    'activation_code': randomCode
+                })
             });
 
             if (response.status === 200 || response.status === 201) {
