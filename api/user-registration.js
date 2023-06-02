@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
         }
 
         // Odeslat registrační e-mail
-        /*try {
+        try {
             const response = await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', {
                 email: req.body.email,
             }, {
@@ -65,9 +65,9 @@ router.post("/", async (req, res) => {
             }
         } catch (error) {
             return res.status(502).send('Chyba připojení k API MAIL');
-        }*/
+        }
 
-        return res.status(201).send("Učet vytvořen");
+        //return res.status(201).send("Učet vytvořen");
     } catch (error) {
         console.error(error);
         return res.status(503).send("Server error");
