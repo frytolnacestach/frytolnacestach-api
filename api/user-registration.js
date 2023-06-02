@@ -1,5 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
+const axios = require('axios');
+
 const bcrypt = require('bcrypt');
 
 const express = require("express");
