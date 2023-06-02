@@ -58,18 +58,15 @@ router.post("/", async (req, res) => {
                 },
             });
 
-            if (response.ok) {
-                return res.status(200).send("Účet vytvořen, registrační e-mail odeslán.");
-            } else if (response.status === 201) {
-                return res.status(201).send("Účet vytvořen, registrační e-mail odeslán.");
+            if (response.status === 200 || response.status === 201) {
+                return res.status(response.status).send('Účet vytvořen, registrační e-mail odeslán.');
             } else {
-                return res.status(501).send("Chyba při komunikaci s API");
+                return res.status(501).send('Chyba při komunikaci s API');
             }
-        } catch (err) {
-            return res.status(502).send("Chyba připojení k API MAIL");
+        } catch (error) {
+            return res.status(502).send('Chyba připojení k API MAIL');
         }
 
-        //return res.status(201).send("Učet vytvořen");
     } catch (error) {
         console.error(error);
         return res.status(503).send("Server error");
