@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
 			email: req.body.email,
             password: hashedPassword,
 			nickname: req.body.nickname,
-            activation_code: await generateRandomCode(8)
+            activation_code: await generateRandomCode(24)
         })
 
         if (error) {
