@@ -27,8 +27,9 @@ app.use(function(req, res, next) {
 //CONSTS
 //user
 const userRegistration = require("./api/user-registration");
-const userLogin = require("./api/user-login");
 const userActivation = require("./api/user-activation");
+const userLogin = require("./api/user-login");
+const userLoginCheck = require("./api/user-login-check");
 
 //base
 const base = require("./api/base");
@@ -142,8 +143,9 @@ const placesSpot = require("./api/places-spot");
 //API
 //api - user
 app.use("/api/user-registration", userRegistration);
-app.use("/api/user-login", userLogin);
 app.use("/api/user-activation", userActivation);
+app.use("/api/user-login", userLogin);
+app.use("/api/user-login-check", userLoginCheck);
 
 //api - base
 app.use("/api/base", base);
