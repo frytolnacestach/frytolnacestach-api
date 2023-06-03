@@ -60,18 +60,6 @@ router.post("/", async (req, res) => {
         }
 
         // Odeslat registrační e-mail
- 
-        //posts
-        /*try {
-            const response = await axios.get(`https://frytolnacestach-api.vercel.app/api/posts`)
-
-            const posts = response.data;
-            return res.status(200).send(posts);
-        } catch (error) {
-            console.error(error);
-            return res.status(500).send('Chyba připojení k API MAIL');
-        }*/
-
         try {
             const response = await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', {
                 email: req.body.email,
@@ -86,34 +74,6 @@ router.post("/", async (req, res) => {
         } catch (error) {
             return res.status(500).send('Chyba připojení k API MAIL');
         }
-
-
-
-        /*try {
-            const response = await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "https://frytolnacestach-api.vercel.app",
-                    "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept",
-                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH"
-                },
-                method: 'POST',
-                body: JSON.stringify({
-                    'email': req.body.email,
-                    'activation_code': randomCode
-                })
-            });
-
-            if (response.status === 200 || response.status === 201) {
-                return res.status(response.status).send('Účet vytvořen, registrační e-mail odeslán.');
-            } else {
-                return res.status(500).send('Chyba při komunikaci s API');
-            }
-        } catch (error) {
-            return res.status(500).send('Chyba připojení k API MAIL');
-        }*/
-
-        //return res.status(201).send("Učet vytvořen");
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
