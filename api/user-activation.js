@@ -19,10 +19,12 @@ router.post("/:email/:code_activation", async (req, res) => {
             .eq('email', email)
             .eq('code_activation', codeActivation)
 
-        res.json({
-            status: 200,
-            message: data,
-        });
+        if (data.length > 0) {
+            return res.status(200).send('Účet byl aktivován');
+        } else {
+            return res.status(404).send('Záznam neexistuje');
+        }
+        
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
