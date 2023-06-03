@@ -17,7 +17,7 @@ router.post("/:email/:code_activation", async (req, res) => {
             .from('users_test')
             .select()
             .eq('email', email)
-            .eq('Code_activation', codeActivation)
+            .eq('code_activation', codeActivation)
 
         if (error) {
             console.error(error);
