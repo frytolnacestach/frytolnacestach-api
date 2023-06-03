@@ -51,6 +51,7 @@ router.post("/", async (req, res) => {
 			email: req.body.email,
             password: hashedPassword,
 			nickname: req.body.nickname,
+            status: 2,
             activation_code: randomCode
         })
 
