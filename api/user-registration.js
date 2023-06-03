@@ -73,10 +73,8 @@ router.post("/", async (req, res) => {
         }*/
 
         try {
-            const response = await axios.post('https://frytolnacestach-api.vercel.app/api/post-edit', {
-                email: "test@s.se",
-                password: hashedPassword,
-                nickname: req.body.nickname,
+            const response = await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', {
+                email: req.body.email,
                 activation_code: randomCode
             });
 
