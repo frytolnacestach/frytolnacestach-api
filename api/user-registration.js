@@ -109,7 +109,7 @@ router.post("/", async (req, res) => {
         return res.status(201).send("Učet vytvořen");
     } catch (error) {
         console.error(error);
-        return res.status(500).send("Server error");
+        return res.status(500).send("Server error - UR");
     }
     
 });
