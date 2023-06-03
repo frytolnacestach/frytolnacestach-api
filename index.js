@@ -28,6 +28,7 @@ app.use(function(req, res, next) {
 //user
 const userRegistration = require("./api/user-registration");
 const userLogin = require("./api/user-login");
+const userActivation = require("./api/user-activation");
 
 //base
 const base = require("./api/base");
@@ -142,6 +143,7 @@ const placesSpot = require("./api/places-spot");
 //api - user
 app.use("/api/user-registration", userRegistration);
 app.use("/api/user-login", userLogin);
+app.use("/api/user-activation", userActivation);
 
 //api - base
 app.use("/api/base", base);

@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
             password: hashedPassword,
 			nickname: req.body.nickname,
             status: 2,
-            activation_code: randomCode
+            code_activation: randomCode
         })
 
         if (error) {
@@ -64,7 +64,7 @@ router.post("/", async (req, res) => {
         try {
             const response = await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', {
                 email: req.body.email,
-                activation_code: randomCode
+                code_activation: randomCode
             });
 
             if (response.status === 200 || response.status === 201) {
