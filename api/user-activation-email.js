@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/", async (req, res) => {
     // Odeslat Aktivačního e-mailu
     try {
-        const response = await axios.post('https://frytolnacestach-mail.vercel.app/api/registration', {
+        const response = await axios.post('https://frytolnacestach-mail.vercel.app/api/activation', {
             email: req.body.email,
             code_activation: randomCode
         });
