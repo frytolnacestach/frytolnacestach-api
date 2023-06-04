@@ -8,36 +8,19 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-router.post("/:email/:password", async (req, res) => {
+router.post("/:email", async (req, res) => {
     var email = req.params.email
-    var password = req.params.password
 
     try {
         const { data, error } = await supabase
-            .from('users_test')
-            .select()
-            .eq('email', email);
+        .from('users_test')
+        .update({
+            surname: req.body.surname,
+            lastname: req.body.lastname
+        })
+        .eq('email', email);
 
-        if (error) {
-            console.error(error);
-            return res.status(500).send("Server error");
-        }
-
-        if (data.length === 0) {
-            return res.status(404).send("User not found");
-        }
-
-        const user = data[0];
-        const passwordMatch = await bcrypt.compare(password, user.password);
-
-        if (!passwordMatch) {
-            return res.status(401).send("Invalid password");
-        }
-
-        res.json({
-            status: 200,
-            message: data,
-        });
+        res.send(JSON.stringify(data))
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
