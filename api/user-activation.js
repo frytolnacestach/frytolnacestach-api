@@ -18,6 +18,7 @@ router.post("/:email/:code_activation", async (req, res) => {
             .update({ status: 3 })
             .eq('email', email)
             .eq('code_activation', codeActivation)
+            .eq('status', 2)
 
         if (data.length > 0) {
             return res.status(200).send('Účet byl aktivován');
