@@ -26,7 +26,7 @@ router.post("/:email/:code_activation", async (req, res) => {
         }
 
         if (data.length === 0) {
-            return res.status(404).send('Záznam neexistuje');
+            return res.status(404).send('Záznam neexistuje' + codeActivation + '-CODE');
         }
 
         return res.status(200).send('Účet byl aktivován');
