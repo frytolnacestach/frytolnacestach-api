@@ -12,18 +12,9 @@ router.get("/:email", async (req, res) => {
 
     try {
         const { data, error } = await supabase
-            .from('users_test')
-            .select()
-            .eq('email', email);
-
-        if (error) {
-            console.error(error);
-            return res.status(500).send("Server error");
-        }
-
-        if (data.length === 0) {
-            return res.status(404).send("User not found");
-        }
+        .from('users_test')
+        .select()
+        .eq('email', email);
 
         res.send(JSON.stringify(data))
     } catch (error) {
