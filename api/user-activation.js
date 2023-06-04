@@ -24,7 +24,7 @@ router.post("/:email/:code_activation", async (req, res) => {
         if (response.status === 200 || response.status === 201) {
             return res.status(response.status).send('Účet byl aktivován');
         } else {
-            return res.status(500).send('Záznam neexistuje');
+            return res.status(404).send('Záznam neexistuje');
         }
     } catch (error) {
         console.error(error);
