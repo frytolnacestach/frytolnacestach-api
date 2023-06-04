@@ -7,7 +7,7 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-router.post("/:email", async (req, res) => {
+router.get("/:email", async (req, res) => {
     var email = req.params.email
 
     try {
