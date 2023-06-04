@@ -19,18 +19,19 @@ router.post("/:email/:code_activation", async (req, res) => {
         .eq('code_activation', codeActivation)
         .eq('status', 2)
 
-
-        console.log("data: " + data)
         if (error) {
             console.error(error);
-            return res.status(500).send("Chyba při aktualizaci");
+            return res.status(500).send("Server error");
         }
 
         if (data.length === 0) {
-            return res.status(404).send('Záznam neexistuje');
+            return res.status(404).send("User not found");
         }
 
-        return res.status(200).send('Účet byl aktivován');
+        res.json({
+            status: 200,
+            message: data,
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
