@@ -19,7 +19,7 @@ router.post("/:email/:code_activation", async (req, res) => {
 
     if (error) {
         console.error(error);
-        return res.status(500).send("Server error");
+        return res.status(500).send("Server error 2");
     }
 
     if (data.length === 0) {
@@ -34,7 +34,7 @@ router.post("/:email/:code_activation", async (req, res) => {
     res.sendStatus(200);
     } catch (error) {
         console.error(error);
-        return res.status(500).send("Server error");
+        return res.status(500).send("Server error 3");
     }
 });
 
