@@ -14,8 +14,11 @@ router.post("/:email/:code_activation", async (req, res) => {
     try {
         const { data, error } = await supabase
         .from('users_test')
+        //.update({ status: 3 })
         .select()
-        .eq('email', email);
+        .eq('email', email)
+        .eq('code_activation', codeActivation)
+        //.eq('status', 2)
 
         if (error) {
             console.error(error);
