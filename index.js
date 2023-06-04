@@ -30,6 +30,8 @@ const userRegistration = require("./api/user-registration");
 const userActivation = require("./api/user-activation");
 const userLogin = require("./api/user-login");
 const userLoginCheck = require("./api/user-login-check");
+const userProfile = require("./api/user-profile");
+const userProfileEdit = require("./api/user-profile-edit");
 
 //base
 const base = require("./api/base");
@@ -146,6 +148,8 @@ app.use("/api/user-registration", userRegistration);
 app.use("/api/user-activation", userActivation);
 app.use("/api/user-login", userLogin);
 app.use("/api/user-login-check", userLoginCheck);
+app.use("/api/user-profile", userProfile);
+app.use("/api/user-profile-edit", userProfileEdit);
 
 //api - base
 app.use("/api/base", base);
