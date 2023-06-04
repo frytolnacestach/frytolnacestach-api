@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
     try {
         const response = await axios.post('https://frytolnacestach-mail.vercel.app/api/activation', {
             email: req.body.email,
-            code_activation: randomCode
+            code_activation: req.body.code_activation
         });
 
         if (response.status === 200 || response.status === 201) {
