@@ -13,7 +13,7 @@ router.post("/:email", async (req, res) => {
 
     try {
         const { data, error } = await supabase
-        .from('users_test')
+        .from('users')
         .update({
             surname: req.body.surname,
             lastname: req.body.lastname

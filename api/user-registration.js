@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 
     // Kontrola existence uživatele
     const { data: existingUser, error: existingError } = await supabase
-    .from('users_test')
+    .from('users')
     .select('id')
     .eq('email', req.body.email)
     .limit(1);
@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
 
         //uložení do databaze
         const { error } = await supabase
-        .from('users_test')
+        .from('users')
         .insert({ 
 			email: req.body.email,
             password: hashedPassword,

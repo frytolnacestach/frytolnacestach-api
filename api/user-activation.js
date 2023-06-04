@@ -13,7 +13,7 @@ router.post("/:email/:code_activation", async (req, res) => {
 
     try {
         const { data, error } = await supabase
-        .from('users_test')
+        .from('users')
         .update({ status: 3 })
         .select()
         .eq('email', email)
