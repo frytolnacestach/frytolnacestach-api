@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js'
-const bcrypt = require('bcrypt');
 
 const express = require("express");
 const router = express.Router();
@@ -13,18 +12,20 @@ router.post("/:email/:code_activation", async (req, res) => {
     var codeActivation = req.params.code_activation
 
     try {
-        const { data, error } = await supabase
-            .from('users_test')
-            .update({ status: 3 })
-            .eq('email', email)
-            .eq('code_activation', codeActivation)
-            .eq('status', 2)
+        const { response, error } = await supabase
+        .from('users_test')
+        .update({ status: 3 })
+        .eq('email', email)
+        .eq('code_activation', codeActivation)
+        .eq('status', 2)
 
 
         if (response.status === 200 || response.status === 201) {
             return res.status(response.status).send('Účet byl aktivován');
+        } else if (response.status === 404) {
+            return res.status(response.status).send('Záznam neexistuje');
         } else {
-            return res.status(404).send('Záznam neexistuje');
+            return res.status(500).send('Chyba při aktualizaci');
         }
     } catch (error) {
         console.error(error);
