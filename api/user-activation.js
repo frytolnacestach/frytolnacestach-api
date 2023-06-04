@@ -20,6 +20,7 @@ router.post("/:email/:code_activation", async (req, res) => {
         .eq('status', 2)
 
 
+        console.log("data: " + data)
         if (error) {
             console.error(error);
             return res.status(500).send("Chyba při aktualizaci");
