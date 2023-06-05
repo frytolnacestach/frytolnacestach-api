@@ -8,9 +8,9 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-router.post("/:email/:password", async (req, res) => {
-    var email = req.params.email
-    var password = req.params.password
+router.post("/", async (req, res) => {
+    var email = req.body.email
+    var password = req.body.password
 
     try {
         const { data, error } = await supabase
