@@ -10,12 +10,14 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.post("/", async (req, res) => {
     var email = req.body.email
+    var password = req.body.password
 
     try {
         const { data, error } = await supabase
             .from('users')
             .select()
-            .eq('email', email);
+            .eq('email', email)
+            .eq('password', password);
 
         if (error) {
             console.error(error);
