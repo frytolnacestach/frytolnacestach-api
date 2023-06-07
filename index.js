@@ -269,7 +269,7 @@ app.use("/api/places-region", placesRegion);
 
 //api - places - spot
 app.use("/api/places-spots", placesSpots);
-app.use("/api/places-spots-array", placesSpotArray);
+app.use("/api/places-spots-array", placesSpotsArray);
 app.use("/api/places-spot", placesSpot);
 //API - END
 
