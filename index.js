@@ -34,6 +34,7 @@ const userLoginCheck = require("./api/user-login-check");
 const userProfile = require("./api/user-profile");
 const userProfileEdit = require("./api/user-profile-edit");
 const userVisitedPlace = require("./api/user-visited-place");
+const userVisitedPlaceEdit = require("./api/user-visited-place-edit");
 
 //base
 const base = require("./api/base");
@@ -154,6 +155,7 @@ app.use("/api/user-login-check", userLoginCheck);
 app.use("/api/user-profile", userProfile);
 app.use("/api/user-profile-edit", userProfileEdit);
 app.use("/api/user-visited-place", userVisitedPlace);
+app.use("/api/user-visited-place-edit", userVisitedPlaceEdit);
 
 //api - base
 app.use("/api/base", base);

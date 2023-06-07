@@ -9,12 +9,49 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-router.post("/", async (req, res) => {
+router.get("/", async (req, res) => {
+    var email = req.body.email
+    var passwordHash = req.body.password_hash
+    var idPlace = req.body.id_place
 
-
-    //Vytvoření účtu
     try {
+        const { data, error } = await supabase
+        .from('users')
+        .select()
+        .eq('email', email)
+        .eq('password', passwordHash)
 
+        if (error) {
+            console.error(error);
+            return res.status(500).send("Server error");
+        }
+
+        if (data.length === 0) {
+            return res.status(404).send('Uživatel neexistuje');
+        }
+        
+
+        //place load
+        try {
+            const { data, error } = await supabase
+            .from('users_visited_place')
+            .select()
+            .eq('id', idPlace)
+    
+            if (error) {
+                console.error(error);
+                return res.status(500).send("Chyba při aktualizaci");
+            }
+    
+            if (data.length === 0) {
+                return res.status(404).send('Uživatel neexistuje');
+            }
+    
+            return res.status(200).send('Úživatel byl autorizován');
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send("Server error");
+        }
        
     } catch (error) {
         console.error(error);
