@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
         try {
             const { data, error } = await supabase
             .from('users_visited_place')
-            .select()
+            .select('id')
             .eq('id', idPlace)
     
             if (error) {
@@ -49,16 +49,15 @@ router.post("/", async (req, res) => {
     
             if (data.length === 0) {
                 //Update visited place
+
+                const visitedId = data[0].id;
                 try {
                     const { data, error } = await supabase
                     .from('users_visited_place')
                     .update(
-                        { status: 3 }
+                        { status: status }
                     )
-                    .select()
-                    .eq('email', email)
-                    .eq('code_activation', codeActivation)
-                    .eq('status', 2)
+                    .eq('id', visitedId)
             
                     if (error) {
                         console.error(error);
