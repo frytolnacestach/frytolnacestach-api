@@ -28,32 +28,31 @@ router.get("/", async (req, res) => {
 
         if (data.length === 0) {
             return res.status(404).send('Uživatel neexistuje');
-        }
+        } else {
+            const userId = data[0].id;
 
-        const userId = data[0].id;
-
-
-        //place load
-        try {
-            const { data, error } = await supabase
-            .from('users_visited_place')
-            .select()
-            .eq('id', idPlace)
-            .eq('id_user', userId)
-    
-            if (error) {
+            //place load
+            try {
+                const { data, error } = await supabase
+                .from('users_visited_place')
+                .select()
+                .eq('id', idPlace)
+                .eq('id_user', userId)
+        
+                if (error) {
+                    console.error(error);
+                    return res.status(500).send("Chyba při aktualizaci");
+                }
+        
+                if (data.length === 0) {
+                    return res.status(405).send('Místo uživatel nemá uložené');
+                }
+        
+                return res.status(200).send('Úživatel byl autorizován');
+            } catch (error) {
                 console.error(error);
-                return res.status(500).send("Chyba při aktualizaci");
+                return res.status(500).send("Server error");
             }
-    
-            if (data.length === 0) {
-                return res.status(405).send('Místo uživatel nemá uložené');
-            }
-    
-            return res.status(200).send('Úživatel byl autorizován');
-        } catch (error) {
-            console.error(error);
-            return res.status(500).send("Server error");
         }
        
     } catch (error) {
