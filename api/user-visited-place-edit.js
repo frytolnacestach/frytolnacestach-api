@@ -30,71 +30,70 @@ router.post("/", async (req, res) => {
 
         if (data.length === 0) {
             return res.status(404).send('Uživatel neexistuje');
-        }
+        } else {
+            const userId = data[0].id;
 
-        const userId = data[0].id;
+            //place load
+            try {
+                const { data, error } = await supabase
+                .from('users_visited_place')
+                .select('id')
+                .eq('id', idPlace)
         
-
-        //place load
-        try {
-            const { data, error } = await supabase
-            .from('users_visited_place')
-            .select('id')
-            .eq('id', idPlace)
-    
-            if (error) {
-                console.error(error);
-                return res.status(501).send("Chyba při aktualizaci");
-            }
-    
-            if (data.length === 0) {
-                //Update visited place
-
-                const visitedId = data[0].id;
-                try {
-                    const { data, error } = await supabase
-                    .from('users_visited_place')
-                    .update(
-                        { status: status }
-                    )
-                    .eq('id', visitedId)
-            
-                    if (error) {
-                        console.error(error);
-                        return res.status(502).send("Chyba při aktualizaci");
-                    }
-            
-                    if (data.length === 0) {
-                        return res.status(404).send('Záznam neexistuje');
-                    }
-            
-                    return res.status(200).send('Účet byl aktivován');
-                } catch (error) {
+                if (error) {
                     console.error(error);
-                    return res.status(503).send("Server error");
+                    return res.status(501).send("Chyba při aktualizaci");
+                }
+        
+                if (data.length === 0) {
+                    //Update visited place
+
+                    const visitedId = data[0].id;
+                    try {
+                        const { data, error } = await supabase
+                        .from('users_visited_place')
+                        .update(
+                            { status: status }
+                        )
+                        .eq('id', visitedId)
+                
+                        if (error) {
+                            console.error(error);
+                            return res.status(502).send("Chyba při aktualizaci");
+                        }
+                
+                        if (data.length === 0) {
+                            return res.status(404).send('Záznam neexistuje');
+                        }
+                
+                        return res.status(200).send('Účet byl aktivován');
+                    } catch (error) {
+                        console.error(error);
+                        return res.status(503).send("Server error");
+                    }
+
                 }
 
-            }
-
-            //Add visited place
-            try {
-                const { error } = await supabase
-                .from('users_visited_place')
-                .insert({ 
-                    id_user: userId,
-                    id_place: idPlace,
-                    type: type,
-                    status: status
-                })
-        
-                return res.status(201).send("Přidáno do míst");
+                //Add visited place
+                try {
+                    const { error } = await supabase
+                    .from('users_visited_place')
+                    .insert({ 
+                        id_user: userId,
+                        id_place: idPlace,
+                        type: type,
+                        status: status
+                    })
+            
+                    return res.status(201).send("Přidáno do míst");
+                } catch (error) {
+                    console.error(error);
+                    return res.status(504).send("Server error");
+                }
             } catch (error) {
                 console.error(error);
-                return res.status(504).send("Server error");
+                return res.status(505).send("Server error");
             }
-        } catch (error) {
-            console.error(error);
-            return res.status(505).send("Server error");
         }
        
     } catch (error) {
