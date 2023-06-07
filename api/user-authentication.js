@@ -28,10 +28,7 @@ router.get("/", async (req, res) => {
             return res.status(404).send("User not found");
         }
 
-        res.json({
-            status: 200,
-            message: data,
-        });
+        res.send(JSON.stringify(data))
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");

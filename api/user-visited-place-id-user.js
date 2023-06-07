@@ -29,10 +29,7 @@ router.get("/", async (req, res) => {
             return res.status(405).send('Nemáš tu ždaná místa');
         }
 
-        res.json({
-            status: 200,
-            message: data,
-        });
+        res.send(JSON.stringify(data))
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
