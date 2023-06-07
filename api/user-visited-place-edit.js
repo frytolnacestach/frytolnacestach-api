@@ -99,7 +99,7 @@ router.post("/", async (req, res) => {
                             .eq('id', placeVisitedId)
                     
                             res.json({
-                                status: 200,
+                                status: 201,
                                 message: data,
                             });
                         } catch (error) {
