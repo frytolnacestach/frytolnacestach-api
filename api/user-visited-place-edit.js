@@ -70,7 +70,7 @@ router.post("/", async (req, res) => {
                 } else {
                     //Update visited place
                     const placeVisitedId = data[0].id;
-                    const placeStatus = parseInt(data[0].status);
+                    const placeStatus = data[0].status;
 
                     if (placeStatus === status ) {
                         try {
