@@ -81,10 +81,7 @@ router.post("/", async (req, res) => {
                             )
                             .eq('id', placeVisitedId)
                     
-                            res.json({
-                                status: 200,
-                                message: data,
-                            });
+                            return res.status(200).send("Záznam odebrán");
                         } catch (error) {
                             console.error(error);
                             return res.status(500).send("Server error");
@@ -98,10 +95,7 @@ router.post("/", async (req, res) => {
                             )
                             .eq('id', placeVisitedId)
                     
-                            res.json({
-                                status: 201,
-                                message: data,
-                            });
+                            return res.status(201).send("Záznam uložen");
                         } catch (error) {
                             console.error(error);
                             return res.status(500).send("Server error");
