@@ -26,12 +26,11 @@ router.get("/", async (req, res) => {
             return res.status(500).send("Server error");
         }
 
-        console.log("počet zápisu:" + data.length);
-
-        if (data.length !== 0) {
+        if (data.length === 0) {
             return res.status(404).send('Uživatel neexistuje');
         } else {
-            const userId = data[0].id;
+            return res.status(200).send('Úživatel byl autorizován');
+            /*const userId = data[0].id;
 
             //place load
             try {
@@ -54,7 +53,7 @@ router.get("/", async (req, res) => {
             } catch (error) {
                 console.error(error);
                 return res.status(500).send("Server error");
-            }
+            }*/
         }
        
     } catch (error) {
