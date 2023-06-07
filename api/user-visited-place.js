@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
     try {
         const { data, error } = await supabase
         .from('users')
-        .select()
+        .select('id')
         .eq('email', email)
         .eq('password', passwordHash)
 
