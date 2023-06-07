@@ -59,10 +59,7 @@ router.post("/", async (req, res) => {
                             status: status
                         })
 
-                        res.json({
-                            status: 200,
-                            message: data,
-                        });
+                        return res.status(201).send("Záznam uložen");
                     } catch (error) {
                         console.error(error);
                         return res.status(500).send("Server error");
