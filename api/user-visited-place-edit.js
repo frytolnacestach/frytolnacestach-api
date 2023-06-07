@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
                 if (data.length === 0) {
                     //Add visited place
                     try {
-                        const { error } = await supabase
+                        const { data, error } = await supabase
                         .from('users_visited_place')
                         .insert({ 
                             id_user: userId,
