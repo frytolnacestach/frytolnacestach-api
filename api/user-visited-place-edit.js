@@ -84,7 +84,7 @@ router.post("/", async (req, res) => {
                             return res.status(404).send('Záznam neexistuje');
                         }
                 
-                        return res.status(200).send('Účet byl aktivován');
+                        return res.status(201).send('Účet byl aktivován');
                     } catch (error) {
                         console.error(error);
                         return res.status(503).send("Server error");
