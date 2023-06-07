@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
     var passwordHash = req.body.password_hash
     var idPlace = req.body.id_place
     var type = req.body.type
-    var status = req.body.status
+    var status = parseInt(req.body.status)
 
     try {
         const { data, error } = await supabase
@@ -70,7 +70,7 @@ router.post("/", async (req, res) => {
                 } else {
                     //Update visited place
                     const placeVisitedId = data[0].id;
-                    const placeStatus = data[0].status;
+                    const placeStatus = parseInt(data[0].status);
 
                     if (placeStatus === status ) {
                         try {
@@ -81,7 +81,10 @@ router.post("/", async (req, res) => {
                             )
                             .eq('id', placeVisitedId)
                     
-                            return res.status(200).send("Data byla změněna");
+                            res.json({
+                                status: 200,
+                                message: data,
+                            });
                         } catch (error) {
                             console.error(error);
                             return res.status(500).send("Server error");
@@ -95,7 +98,10 @@ router.post("/", async (req, res) => {
                             )
                             .eq('id', placeVisitedId)
                     
-                            return res.status(201).send("Data byla změněna");
+                            res.json({
+                                status: 201,
+                                message: data,
+                            });
                         } catch (error) {
                             console.error(error);
                             return res.status(500).send("Server error");
