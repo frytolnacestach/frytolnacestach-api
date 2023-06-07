@@ -81,10 +81,7 @@ router.post("/", async (req, res) => {
                             )
                             .eq('id', placeVisitedId)
                     
-                            res.json({
-                                status: 200,
-                                message: data,
-                            });
+                            return res.status(200).send("Data byla změněna");
                         } catch (error) {
                             console.error(error);
                             return res.status(500).send("Server error");
