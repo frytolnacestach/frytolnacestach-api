@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
             try {
                 const { data, error } = await supabase
                 .from('users_visited_place')
-                .select('id')
+                .select('id', 'status')
                 .eq('id_place', idPlace)
                 .eq('id_user', userId)
                 .eq('type', type)
@@ -69,22 +69,43 @@ router.post("/", async (req, res) => {
                     }
                 } else {
                     //Update visited place
-                    const visitedId = data[0].id;
-                    try {
-                        const { data, error } = await supabase
-                        .from('users_visited_place')
-                        .update(
-                            { status: status }
-                        )
-                        .eq('id', visitedId)
-                
-                        res.json({
-                            status: 200,
-                            message: data,
-                        });
-                    } catch (error) {
-                        console.error(error);
-                        return res.status(500).send("Server error");
+                    const placeVisitedId = data[0].id;
+                    const placeStatus = data[0].status;
+
+                    if (placeStatus == status ) {
+                        try {
+                            const { data, error } = await supabase
+                            .from('users_visited_place')
+                            .update(
+                                { status: status }
+                            )
+                            .eq('id', placeVisitedId)
+                    
+                            res.json({
+                                status: 200,
+                                message: data,
+                            });
+                        } catch (error) {
+                            console.error(error);
+                            return res.status(500).send("Server error");
+                        }
+                    } else {
+                        try {
+                            const { data, error } = await supabase
+                            .from('users_visited_place')
+                            .update(
+                                { status: 0 }
+                            )
+                            .eq('id', placeVisitedId)
+                    
+                            res.json({
+                                status: 200,
+                                message: data,
+                            });
+                        } catch (error) {
+                            console.error(error);
+                            return res.status(500).send("Server error");
+                        }
                     }
                 }
             } catch (error) {
