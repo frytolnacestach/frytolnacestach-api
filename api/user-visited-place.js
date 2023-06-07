@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
     var email = req.query.email
     var passwordHash = req.query.password_hash
     var idPlace = req.query.id_place
+    var type = req.query.type
 
     try {
         const { data, error } = await supabase
@@ -38,6 +39,7 @@ router.get("/", async (req, res) => {
                 .select()
                 .eq('id', idPlace)
                 .eq('id_user', userId)
+                .eq('type', type)
         
                 if (error) {
                     console.error(error);
