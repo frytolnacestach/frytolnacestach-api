@@ -10,9 +10,12 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
-    var email = req.body.email
-    var passwordHash = req.body.password_hash
-    var idPlace = req.body.id_place
+    //var email = req.body.email
+    //var passwordHash = req.body.password_hash
+    //var idPlace = req.body.id_place
+    var email = "admin@frytolnacestach.cz"
+    var passwordHash = "$2b$10$.nUeaDeDYTPWaqgLYF2adOikhmhetxSKTQp.4fd/8HN712EnF/FNy"
+    var idPlace = 6
 
     try {
         const { data, error } = await supabase
