@@ -78,15 +78,6 @@ router.post("/", async (req, res) => {
                         )
                         .eq('id', visitedId)
                 
-                        if (error) {
-                            console.error(error);
-                            return res.status(500).send("Chyba při aktualizaci");
-                        }
-                
-                        if (data.length === 0) {
-                            return res.status(404).send('Záznam neexistuje');
-                        }
-                
                         res.json({
                             status: 200,
                             message: data,
