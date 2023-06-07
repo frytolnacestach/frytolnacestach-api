@@ -29,7 +29,9 @@ router.get("/", async (req, res) => {
         if (data.length === 0) {
             return res.status(404).send('Uživatel neexistuje');
         }
-        
+
+        const userId = data[0].id;
+
 
         //place load
         try {
@@ -37,6 +39,7 @@ router.get("/", async (req, res) => {
             .from('users_visited_place')
             .select()
             .eq('id', idPlace)
+            .eq('id_user', userId)
     
             if (error) {
                 console.error(error);
