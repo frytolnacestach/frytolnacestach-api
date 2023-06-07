@@ -47,7 +47,7 @@ router.get("/", async (req, res) => {
             }
     
             if (data.length === 0) {
-                return res.status(404).send('Uživatel neexistuje');
+                return res.status(405).send('Místo uživatel nemá uložené');
             }
     
             return res.status(200).send('Úživatel byl autorizován');
