@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
 
         if (error) {
             console.error(error);
-            return res.status(507).send("Server error");
+            return res.status(500).send("Server error");
         }
 
         if (data.length === 0) {
@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
         
                 if (error) {
                     console.error(error);
-                    return res.status(501).send("Chyba při aktualizaci");
+                    return res.status(500).send("Chyba při aktualizaci");
                 }
         
                 if (data.length === 0) {
@@ -65,7 +65,7 @@ router.post("/", async (req, res) => {
                         });
                     } catch (error) {
                         console.error(error);
-                        return res.status(504).send("Server error");
+                        return res.status(500).send("Server error");
                     }
                 } else {
                     //Update visited place
@@ -80,7 +80,7 @@ router.post("/", async (req, res) => {
                 
                         if (error) {
                             console.error(error);
-                            return res.status(502).send("Chyba při aktualizaci");
+                            return res.status(500).send("Chyba při aktualizaci");
                         }
                 
                         if (data.length === 0) {
@@ -98,13 +98,13 @@ router.post("/", async (req, res) => {
                 }
             } catch (error) {
                 console.error(error);
-                return res.status(505).send("Server error");
+                return res.status(500).send("Server error");
             }
         }
        
     } catch (error) {
         console.error(error);
-        return res.status(506).send("Server error");
+        return res.status(500).send("Server error");
     }
     
 });
