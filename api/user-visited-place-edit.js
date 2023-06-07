@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
                 const { data, error } = await supabase
                 .from('users_visited_place')
                 .select('id')
-                .eq('id', idPlace)
+                .eq('id_place', idPlace)
                 .eq('id_user', userId)
                 .eq('type', type)
         
