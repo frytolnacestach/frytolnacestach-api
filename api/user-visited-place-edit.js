@@ -39,6 +39,8 @@ router.post("/", async (req, res) => {
                 .from('users_visited_place')
                 .select('id')
                 .eq('id', idPlace)
+                .eq('id_user', userId)
+                .eq('type', type)
         
                 if (error) {
                     console.error(error);
