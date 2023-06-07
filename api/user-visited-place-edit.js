@@ -59,7 +59,10 @@ router.post("/", async (req, res) => {
                             status: status
                         })
 
-                        return res.status(201).send("Přidáno do míst");
+                        res.json({
+                            status: 200,
+                            message: data,
+                        });
                     } catch (error) {
                         console.error(error);
                         return res.status(504).send("Server error");
@@ -84,7 +87,10 @@ router.post("/", async (req, res) => {
                             return res.status(404).send('Záznam neexistuje');
                         }
                 
-                        return res.status(201).send('Účet byl aktivován');
+                        res.json({
+                            status: 200,
+                            message: data,
+                        });
                     } catch (error) {
                         console.error(error);
                         return res.status(503).send("Server error");
