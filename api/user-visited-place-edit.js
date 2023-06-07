@@ -48,8 +48,24 @@ router.post("/", async (req, res) => {
                 }
         
                 if (data.length === 0) {
-                    //Update visited place
+                    //Add visited place
+                    try {
+                        const { error } = await supabase
+                        .from('users_visited_place')
+                        .insert({ 
+                            id_user: userId,
+                            id_place: idPlace,
+                            type: type,
+                            status: status
+                        })
 
+                        return res.status(201).send("Přidáno do míst");
+                    } catch (error) {
+                        console.error(error);
+                        return res.status(504).send("Server error");
+                    }
+                } else {
+                    //Update visited place
                     const visitedId = data[0].id;
                     try {
                         const { data, error } = await supabase
@@ -73,24 +89,6 @@ router.post("/", async (req, res) => {
                         console.error(error);
                         return res.status(503).send("Server error");
                     }
-
-                }
-
-                //Add visited place
-                try {
-                    const { error } = await supabase
-                    .from('users_visited_place')
-                    .insert({ 
-                        id_user: userId,
-                        id_place: idPlace,
-                        type: type,
-                        status: status
-                    })
-            
-                    return res.status(201).send("Přidáno do míst");
-                } catch (error) {
-                    console.error(error);
-                    return res.status(504).send("Server error");
                 }
             } catch (error) {
                 console.error(error);
