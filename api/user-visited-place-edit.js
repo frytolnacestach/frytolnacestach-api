@@ -95,7 +95,7 @@ router.post("/", async (req, res) => {
                             )
                             .eq('id', placeVisitedId)
                     
-                            return res.status(201).send("Záznam uložen s1:" + placeStatus + "s2:" + placeStatus + "|");
+                            return res.status(201).send("Záznam uložen s1:" + placeStatus + "s2:" + status + "|");
                         } catch (error) {
                             console.error(error);
                             return res.status(500).send("Server error");
