@@ -102,6 +102,8 @@ router.post("/", async (req, res) => {
                                 status: 201,
                                 message: data,
                             });
+
+                            return res.status(201).send("Data byla změněna");
                         } catch (error) {
                             console.error(error);
                             return res.status(500).send("Server error");
