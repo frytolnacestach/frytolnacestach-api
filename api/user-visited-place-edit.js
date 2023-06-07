@@ -77,7 +77,7 @@ router.post("/", async (req, res) => {
                             const { data, error } = await supabase
                             .from('users_visited_place')
                             .update(
-                                { status: status }
+                                { status: 0 }
                             )
                             .eq('id', placeVisitedId)
                     
@@ -94,7 +94,7 @@ router.post("/", async (req, res) => {
                             const { data, error } = await supabase
                             .from('users_visited_place')
                             .update(
-                                { status: 0 }
+                                { status: status }
                             )
                             .eq('id', placeVisitedId)
                     
