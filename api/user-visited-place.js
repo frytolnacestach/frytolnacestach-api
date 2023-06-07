@@ -50,7 +50,10 @@ router.get("/", async (req, res) => {
                     return res.status(405).send('Místo uživatel nemá uložené');
                 }
         
-                return res.status(200).send('Úživatel byl autorizován');
+                res.json({
+                    status: 200,
+                    message: data,
+                });
             } catch (error) {
                 console.error(error);
                 return res.status(500).send("Server error");
