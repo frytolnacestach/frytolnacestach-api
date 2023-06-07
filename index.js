@@ -29,12 +29,14 @@ app.use(function(req, res, next) {
 const userRegistration = require("./api/user-registration");
 const userActivation = require("./api/user-activation");
 const userActivationEmail = require("./api/user-activation-email");
+const userAuthentication = require("./api/user-authentication");
 const userLogin = require("./api/user-login");
 const userLoginCheck = require("./api/user-login-check");
 const userProfile = require("./api/user-profile");
 const userProfileEdit = require("./api/user-profile-edit");
 const userVisitedPlace = require("./api/user-visited-place");
 const userVisitedPlaceEdit = require("./api/user-visited-place-edit");
+const userVisitedPlaceIDuser = require("./api/user-visited-place-id-user");
 
 //base
 const base = require("./api/base");
@@ -137,10 +139,12 @@ const placesCityEdit = require("./api/places-city-edit");
 
 //places - region
 const placesRegions = require("./api/places-regions");
+const placesRegionsArray = require("./api/places-regions-array");
 const placesRegion = require("./api/places-region");
 
 //places - spot
 const placesSpots = require("./api/places-spots");
+const placesSpotsArray = require("./api/places-spots-array");
 const placesSpot = require("./api/places-spot");
 //CONSTS - END
 
@@ -150,12 +154,14 @@ const placesSpot = require("./api/places-spot");
 app.use("/api/user-registration", userRegistration);
 app.use("/api/user-activation", userActivation);
 app.use("/api/user-activation-email", userActivationEmail);
+app.use("/api/user-authentication", userAuthentication);
 app.use("/api/user-login", userLogin);
 app.use("/api/user-login-check", userLoginCheck);
 app.use("/api/user-profile", userProfile);
 app.use("/api/user-profile-edit", userProfileEdit);
 app.use("/api/user-visited-place", userVisitedPlace);
 app.use("/api/user-visited-place-edit", userVisitedPlaceEdit);
+app.use("/api/user-visited-place-id-user", userVisitedPlaceIDuser);
 
 //api - base
 app.use("/api/base", base);
@@ -258,10 +264,12 @@ app.use("/api/places-city-edit", placesCityEdit);
 
 //api - places - region
 app.use("/api/places-regions", placesRegions);
+app.use("/api/places-regions-array", placesRegionsArray);
 app.use("/api/places-region", placesRegion);
 
 //api - places - spot
 app.use("/api/places-spots", placesSpots);
+app.use("/api/places-spots-array", placesSpotArray);
 app.use("/api/places-spot", placesSpot);
 //API - END
 
