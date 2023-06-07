@@ -26,6 +26,8 @@ router.get("/", async (req, res) => {
             return res.status(500).send("Server error");
         }
 
+        console.error("počet zápisu:" + data.length);
+
         if (data.length === 0) {
             return res.status(404).send('Uživatel neexistuje');
         } else {
