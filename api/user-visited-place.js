@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
 
         console.log("počet zápisu:" + data.length);
 
-        if (data.length === 0) {
+        if (data.length !== 0) {
             return res.status(404).send('Uživatel neexistuje');
         } else {
             const userId = data[0].id;
