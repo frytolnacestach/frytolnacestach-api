@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
 
         if (error) {
             console.error(error);
-            return res.status(500).send("Server error");
+            return res.status(507).send("Server error");
         }
 
         if (data.length === 0) {
