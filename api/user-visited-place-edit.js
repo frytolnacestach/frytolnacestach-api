@@ -72,7 +72,7 @@ router.post("/", async (req, res) => {
                     const placeVisitedId = data[0].id;
                     const placeStatus = data[0].status;
 
-                    if (placeStatus == status ) {
+                    if (placeStatus === status ) {
                         try {
                             const { data, error } = await supabase
                             .from('users_visited_place')
