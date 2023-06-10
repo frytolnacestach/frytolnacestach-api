@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
     }
 
     if (existingUserNicknama.length > 0) {
-        return res.status(400).send("Uživatel s touto přezdívkou již existuje.");
+        return res.status(401).send("Uživatel s touto přezdívkou již existuje.");
     }
 
 
