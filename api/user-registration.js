@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 
     // Kontrola existence uživatele
     const { data: existingUser, error: existingError } = await supabase
-    .from('users')
+    .from('usersdup')
     .select('id')
     .eq('email', req.body.email)
     .limit(1);
