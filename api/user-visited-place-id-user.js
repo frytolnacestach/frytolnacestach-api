@@ -24,11 +24,7 @@ router.get("/", async (req, res) => {
             console.error(error);
             return res.status(500).send("Chyba při aktualizaci");
         }
-
-        if (data.length === 0) {
-            return res.status(405).send('Nemáš tu ždaná místa');
-        }
-
+        
         res.send(JSON.stringify(data))
     } catch (error) {
         console.error(error);
