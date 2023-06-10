@@ -2,6 +2,8 @@ import { createClient } from '@supabase/supabase-js'
 
 const bcrypt = require('bcrypt');
 
+const slugify = require('slugify');
+
 const axios = require('axios');
 
 const express = require("express");
@@ -12,6 +14,8 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.post("/", async (req, res) => {
+
+    var slug = slugify(req.body.nickname, { lower: true });
 
     // Kontrola existence uživatele - email
     const { data: existingUser, error: existingError } = await supabase
@@ -29,11 +33,11 @@ router.post("/", async (req, res) => {
         return res.status(400).send("Uživatel s touto e-mailovou adresou již existuje.");
     }
 
-    // Kontrola existence uživatele - nickname
+    // Kontrola existence uživatele - slug
     const { data: existingUserNicknama, error: existingNicknameError } = await supabase
     .from('usersdup')
     .select('id')
-    .eq('nickname', req.body.nickname)
+    .eq('slug', slug)
     .limit(1);
 
     if (existingNicknameError) {
@@ -68,6 +72,7 @@ router.post("/", async (req, res) => {
 			email: req.body.email,
             password: hashedPassword,
 			nickname: req.body.nickname,
+            slug: slug,
             status: 2,
             code_activation: randomCode
         })
