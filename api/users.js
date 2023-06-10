@@ -9,10 +9,9 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
   try {
-
     const { data, error } = await supabase
     .from('users')
-    .select()
+    .select('id, nickname, slug, surname, lastname, status')
     .order('id', { ascending: false })
     .eq('status', 3)
 
