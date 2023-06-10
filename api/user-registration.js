@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
 
     // Kontrola existence uživatele - email
     const { data: existingUser, error: existingError } = await supabase
-    .from('usersdup')
+    .from('users')
     .select('id')
     .eq('email', req.body.email)
     .limit(1);
@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
 
     // Kontrola existence uživatele - slug
     const { data: existingUserNicknama, error: existingNicknameError } = await supabase
-    .from('usersdup')
+    .from('users')
     .select('id')
     .eq('slug', slug)
     .limit(1);
