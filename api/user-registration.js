@@ -13,7 +13,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.post("/", async (req, res) => {
 
-    // Kontrola existence uživatele
+    // Kontrola existence uživatele - email
     const { data: existingUser, error: existingError } = await supabase
     .from('usersdup')
     .select('id')
@@ -28,6 +28,23 @@ router.post("/", async (req, res) => {
     if (existingUser.length > 0) {
         return res.status(400).send("Uživatel s touto e-mailovou adresou již existuje.");
     }
+
+    // Kontrola existence uživatele - nickname
+    const { data: existingUserNicknama, error: existingNicknameError } = await supabase
+    .from('usersdup')
+    .select('id')
+    .eq('nickname', req.body.nickname)
+    .limit(1);
+
+    if (existingNicknameError) {
+        console.error(existingNicknameError);
+        return res.status(500).send("Server error");
+    }
+
+    if (existingUserNicknama.length > 0) {
+        return res.status(400).send("Uživatel s touto přezdívkou již existuje.");
+    }
+
 
 
     //Vytvoření účtu
