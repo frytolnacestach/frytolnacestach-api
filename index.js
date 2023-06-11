@@ -39,6 +39,7 @@ const userProfileEdit = require("./api/user-profile-edit");
 const userVisitedPlace = require("./api/user-visited-place");
 const userVisitedPlaceEdit = require("./api/user-visited-place-edit");
 const userVisitedPlaceIDuser = require("./api/user-visited-place-id-user");
+//user - post
 
 //base
 const base = require("./api/base");
@@ -132,6 +133,15 @@ const placesStateID = require("./api/places-state-id");
 const placesStateCreate = require("./api/places-state-create");
 const placesStateEdit = require("./api/places-state-edit");
 
+//places - region
+const placesRegions = require("./api/places-regions");
+const placesRegionsArray = require("./api/places-regions-array");
+const placesRegion = require("./api/places-region");
+const placesRegionID = require("./api/places-region-id");
+//places - region - post
+const placesRegionCreate = require("./api/places-region-create");
+const placesRegionEdit = require("./api/places-region-edit");
+
 //places - city
 const placesCities = require("./api/places-cities");
 const placesCitiesArray = require("./api/places-cities-array");
@@ -143,17 +153,14 @@ const placesCityID = require("./api/places-city-id");
 const placesCityCreate = require("./api/places-city-create");
 const placesCityEdit = require("./api/places-city-edit");
 
-//places - region
-const placesRegions = require("./api/places-regions");
-const placesRegionsArray = require("./api/places-regions-array");
-const placesRegion = require("./api/places-region");
-const placesRegionID = require("./api/places-region-id");
-
 //places - spot
 const placesSpots = require("./api/places-spots");
 const placesSpotsArray = require("./api/places-spots-array");
 const placesSpot = require("./api/places-spot");
 const placesSpotID = require("./api/places-spot-id");
+//places - spot - post
+const placesSpotCreate = require("./api/places-spot-create");
+const placesSpotEdit = require("./api/places-spot-edit");
 //CONSTS - END
 
 
@@ -172,6 +179,7 @@ app.use("/api/user-profile-edit", userProfileEdit);
 app.use("/api/user-visited-place", userVisitedPlace);
 app.use("/api/user-visited-place-edit", userVisitedPlaceEdit);
 app.use("/api/user-visited-place-id-user", userVisitedPlaceIDuser);
+//api - user - post
 
 //api - base
 app.use("/api/base", base);
@@ -265,6 +273,15 @@ app.use("/api/places-state-id", placesStateID);
 app.use("/api/places-state-create", placesStateCreate);
 app.use("/api/places-state-edit", placesStateEdit);
 
+//api - places - region
+app.use("/api/places-regions", placesRegions);
+app.use("/api/places-regions-array", placesRegionsArray);
+app.use("/api/places-region", placesRegion);
+app.use("/api/places-region-id", placesRegionID);
+//api - places - region - post
+app.use("/api/places-region-create", placesRegionCreate);
+app.use("/api/places-region-edit", placesRegionEdit);
+
 //api - places - city
 app.use("/api/places-cities", placesCities);
 app.use("/api/places-cities-array", placesCitiesArray);
@@ -276,17 +293,14 @@ app.use("/api/places-city-id", placesCityID);
 app.use("/api/places-city-create", placesCityCreate);
 app.use("/api/places-city-edit", placesCityEdit);
 
-//api - places - region
-app.use("/api/places-regions", placesRegions);
-app.use("/api/places-regions-array", placesRegionsArray);
-app.use("/api/places-region", placesRegion);
-app.use("/api/places-region-id", placesRegionID);
-
 //api - places - spot
 app.use("/api/places-spots", placesSpots);
 app.use("/api/places-spots-array", placesSpotsArray);
 app.use("/api/places-spot", placesSpot);
 app.use("/api/places-spot-id", placesSpotID);
+//api - places - spot - post
+app.use("/api/places-spot-create", placesSpotCreate);
+app.use("/api/places-spot-edit", placesSpotEdit);
 //API - END
 
 
