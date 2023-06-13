@@ -95,24 +95,36 @@ const brands = require("./api/brands");
 const brandsArray = require("./api/brands-array");
 const brandsIDstate = require("./api/brands-id-state");
 const brand = require("./api/brand");
+//brands - post
+const brandCreate = require("./api/brand-create");
+const brandEdit = require("./api/brand-edit");
 
 //foods
 const foods = require("./api/foods");
 const foodsArray = require("./api/foods-array");
 const foodsIDstate = require("./api/foods-id-state");
 const food = require("./api/food");
+//foods - post
+const foodCreate = require("./api/food-create");
+const foodEdit = require("./api/food-edit");
 
 //fauna
 const faunas = require("./api/faunas");
 const faunasArray = require("./api/faunas-array");
 const faunasIDstate = require("./api/faunas-id-state");
 const fauna = require("./api/fauna");
+//fauna - post
+const faunaCreate = require("./api/fauna-create");
+const faunaEdit = require("./api/fauna-edit");
 
 //flora
 const floras = require("./api/floras");
 const florasArray = require("./api/floras-array");
 const florasIDstate = require("./api/floras-id-state");
 const flora = require("./api/flora");
+//flora - post
+const floraCreate = require("./api/flora-create");
+const floraEdit = require("./api/flora-edit");
 
 //places - continent
 const placesContinents = require("./api/places-continents");
@@ -235,24 +247,36 @@ app.use("/api/brands", brands);
 app.use("/api/brands-array", brandsArray);
 app.use("/api/brands-id-state", brandsIDstate);
 app.use("/api/brand", brand);
+//api - brands - post
+app.use("/api/brand-create", brandCreate);
+app.use("/api/brand-edit", brandEdit);
 
 //api - foods
 app.use("/api/foods", foods);
 app.use("/api/foods-array", foodsArray);
 app.use("/api/foods-id-state", foodsIDstate);
 app.use("/api/food", food);
+//api - foods - post
+app.use("/api/food-create", foodCreate);
+app.use("/api/food-edit", foodEdit);
 
 //api - fauna
 app.use("/api/faunas", faunas);
 app.use("/api/faunas-array", faunasArray);
 app.use("/api/faunas-id-state", faunasIDstate);
 app.use("/api/fauna", fauna);
+//api - fauna - post
+app.use("/api/fauna-create", faunaCreate);
+app.use("/api/fauna-edit", faunaEdit);
 
 //api - flora
 app.use("/api/floras", floras);
 app.use("/api/floras-array", florasArray);
 app.use("/api/floras-id-state", florasIDstate);
 app.use("/api/flora", flora);
+//api - flora - post
+app.use("/api/flora-create", floraCreate);
+app.use("/api/flora-edit", floraEdit);
 
 //api - places - continent
 app.use("/api/places-continents", placesContinents);
