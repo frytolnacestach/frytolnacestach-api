@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
 			donate: req.body.donate,
 			cookies: req.body.cookies,
 			conditions: req.body.conditions,
-			conditions_user: req.body.conditionsUser
+			conditions_user: req.body.conditions_user
 		})
 		.eq('id', 1)
 
