@@ -14,7 +14,10 @@ router.post("/", async (req, res) => {
 		.from('base')
 		.update({
 			iam: req.body.iam,
-			donate: req.body.donate
+			donate: req.body.donate,
+			cookies: req.body.cookies,
+			conditions: req.body.conditions,
+			conditions_user: req.body.conditionsUser
 		})
 		.eq('id', 1)
 
