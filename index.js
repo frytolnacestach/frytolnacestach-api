@@ -126,6 +126,10 @@ const flora = require("./api/flora");
 const floraCreate = require("./api/flora-create");
 const floraEdit = require("./api/flora-edit");
 
+//travel-dictionary
+const travelDictionaries = require("./api/travel-dictionaries");
+const travelDictionary = require("./api/travel-dictionary");
+
 //places - continent
 const placesContinents = require("./api/places-continents");
 const placesContinentsArray = require("./api/places-continents-array");
@@ -277,6 +281,10 @@ app.use("/api/flora", flora);
 //api - flora - post
 app.use("/api/flora-create", floraCreate);
 app.use("/api/flora-edit", floraEdit);
+
+//api - travel-dictionary
+app.use("/api/travel-dictionaries", travelDictionaries);
+app.use("/api/travel-dictionary", travelDictionary);
 
 //api - places - continent
 app.use("/api/places-continents", placesContinents);
