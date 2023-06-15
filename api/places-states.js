@@ -12,6 +12,9 @@ router.get("/", async (req, res) => {
   const page = req.query.page
   const perPage = req.query.perPage
 
+  let data;
+  let error;
+
   try {
     
     if(page && perPage) {
