@@ -9,14 +9,25 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
   const search = req.query.search || ''
+  const page = req.query.page
+  const perPage = req.query.perPage
 
   try {
-
-    const { data, error } = await supabase
-    .from('places_states')
-    .select()
-    .ilike('name', `%${search}%`)
-    .order('name', { ascending: true })
+    
+    if(page && perPage) {
+      const { data, error } = await supabase
+      .from('places_states')
+      .select()
+      .ilike('name', `%${search}%`)
+      .order('name', { ascending: true })
+      .range(page, page + perPage - 1)
+    } else {
+      const { data, error } = await supabase
+      .from('places_states')
+      .select()
+      .ilike('name', `%${search}%`)
+      .order('name', { ascending: true })
+    }
 
     res.send(JSON.stringify(data))
 
