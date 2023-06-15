@@ -9,8 +9,8 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
   const search = req.query.search || ''
-  const page = req.query.page
-  const items = req.query.items
+  const page = parseInt(req.query.page, 10)
+  const items = parseInt(req.query.items, 10)
 
   try {
     let data;
@@ -18,14 +18,14 @@ router.get("/", async (req, res) => {
     
     if(page && items) {
       const itemsStart = (page * items) - items;
-      const itemsEnd = (page * items) + items;
+      const itemsEnd = (page * items) + items - 1;
 
       const response = await supabase
       .from('places_states')
       .select()
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true })
-      .range(itemsStart, itemsStart + items);
+      .range(itemsStart, itemsEnd);
 
       data = response.data;
       error = response.error;
