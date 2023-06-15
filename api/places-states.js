@@ -11,12 +11,13 @@ router.get("/", async (req, res) => {
   const search = req.query.search || ''
   const page = req.query.page
   const perPage = req.query.perPage
-  const start = (page - 1) * perPage;
-  const end = start + perPage - 1;
 
   try {
     
     if(page && perPage) {
+      const start = (page - 1) * perPage;
+      const end = start + perPage - 1;
+
       const response = await supabase
       .from('places_states')
       .select()
