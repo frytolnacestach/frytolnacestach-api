@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 router.get("/", async (req, res) => {
   const search = req.query.search || ''
   const page = req.query.page
-  const perPage = req.query.perPage
+  const perPage = 20
 
   try {
     let data;
