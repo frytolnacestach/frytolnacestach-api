@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     let data;
     let error;
     
-    if(page && perPage) {
+    if(page && items) {
       const itemsStart = (page * items) - items;
       const itemsEnd = itemsStart + items - 1;
 
