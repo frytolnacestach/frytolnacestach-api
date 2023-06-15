@@ -17,15 +17,15 @@ router.get("/", async (req, res) => {
     let error;
     
     if(page && perPage) {
-      const start = (page * perPage) - perPage;
-      const end = start + perPage - 1;
+      const itemsStart = (page * perPage) - perPage;
+      const itemsEnd = (itemsStart + perPage) - 1;
 
       const response = await supabase
       .from('places_states')
       .select()
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true })
-      .range(20, 40);
+      .range(itemsStart, itemsEnd);
 
       data = response.data;
       error = response.error;
