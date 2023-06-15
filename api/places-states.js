@@ -15,18 +15,24 @@ router.get("/", async (req, res) => {
   try {
     
     if(page && perPage) {
-      const { data, error } = await supabase
+      const response = await supabase
       .from('places_states')
       .select()
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true })
-      .range(page, page + perPage - 1)
+      .range(page, page + perPage - 1);
+
+      data = response.data;
+      error = response.error;
     } else {
-      const { data, error } = await supabase
+      const response = await supabase
       .from('places_states')
       .select()
       .ilike('name', `%${search}%`)
-      .order('name', { ascending: true })
+      .order('name', { ascending: true });
+
+      data = response.data;
+      error = response.error;
     }
 
     res.send(JSON.stringify(data))
