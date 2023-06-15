@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
     let error;
     
     if(page && perPage) {
-      const start = (page - 1) * perPage;
+      const start = (page * perPage) - perPage;
       const end = start + perPage - 1;
 
       const response = await supabase
