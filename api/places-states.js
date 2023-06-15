@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
     
     if(page && items) {
       const itemsStart = (page * items) - items;
-      const itemsEnd = (page * items) + items - 1;
+      const itemsEnd = itemsStart + items - 1;
 
       const response = await supabase
       .from('places_states')
