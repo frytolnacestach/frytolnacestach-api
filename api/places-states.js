@@ -13,6 +13,8 @@ router.get("/", async (req, res) => {
   const perPage = req.query.perPage
 
   try {
+    let data;
+    let error;
     
     if(page && perPage) {
       const start = (page - 1) * perPage;
