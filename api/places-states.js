@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
       .select()
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true })
-      .range(itemsStart, 100);
+      .range(itemsStart, itemsStart + 20);
 
       data = response.data;
       error = response.error;
