@@ -10,15 +10,15 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 router.get("/", async (req, res) => {
   const search = req.query.search || ''
   const page = req.query.page
-  const perPage = 20
+  const items = req.query.items
 
   try {
     let data;
     let error;
     
     if(page && perPage) {
-      const itemsStart = (page * perPage) - perPage;
-      const itemsEnd = (itemsStart + perPage) - 1;
+      const itemsStart = (page * items) - items;
+      const itemsEnd = itemsStart + items - 1;
 
       const response = await supabase
       .from('places_states')
