@@ -180,6 +180,13 @@ const placesSpotID = require("./api/places-spot-id");
 //places - spot - post
 const placesSpotCreate = require("./api/places-spot-create");
 const placesSpotEdit = require("./api/places-spot-edit");
+
+//event
+const events = require("./api/events");
+const event = require("./api/event");
+//event - post
+const eventCreate = require("./api/event-create");
+const eventEdit = require("./api/event-edit");
 //CONSTS - END
 
 
@@ -339,6 +346,13 @@ app.use("/api/places-spot-id", placesSpotID);
 //api - places - spot - post
 app.use("/api/places-spot-create", placesSpotCreate);
 app.use("/api/places-spot-edit", placesSpotEdit);
+
+//api - event
+app.use("/api/places-events", events);
+app.use("/api/places-event", event);
+//api - eventy - post
+app.use("/api/places-event-create", eventCreate);
+app.use("/api/places-event-edit", eventEdit);
 //API - END
 
 
