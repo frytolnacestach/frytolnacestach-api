@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
         .insert({
             id_state: req.body.id_state,
             id_city: req.body.id_city,
-            id_place: req.body.id_place,
+            id_spot: req.body.id_spot,
             id_image_cover: req.body.id_image_cover,
             id_image_hero: req.body.id_image_hero,
             date_update: req.body.date_update,
