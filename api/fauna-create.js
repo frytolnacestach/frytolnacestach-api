@@ -14,10 +14,15 @@ router.post("/", async (req, res) => {
         .from('fauna')
         .insert({ 
             slug: req.body.slug,
-            name: req.body.name,
-            information_chatgpt: req.body.information_chatgpt,
             id_image_cover: req.body.id_image_cover,
-            id_image_hero: req.body.id_image_hero
+            id_image_hero: req.body.id_image_hero,
+            ids_states: req.body.ids_states,
+            name: req.body.name,
+            name_lat: req.body.name_lat,
+            location: req.body.location,
+            status_iucn: req.body.status_iucn,
+            status_danger: req.body.status_danger,
+            description: req.body.description
         })
 
         return res.status(201).send("Create Continents");

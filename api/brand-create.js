@@ -12,12 +12,13 @@ router.post("/", async (req, res) => {
     try {
         const { error } = await supabase
         .from('brands')
-        .insert({ 
+        .insert({
             slug: req.body.slug,
-            name: req.body.name,
-            information_chatgpt: req.body.information_chatgpt,
             id_image_cover: req.body.id_image_cover,
-            id_image_hero: req.body.id_image_hero
+            id_image_hero: req.body.id_image_hero,
+            ids_states: req.body.ids_states,
+            name: req.body.name,
+            description: req.body.description,
         })
 
         return res.status(201).send("Create Continents");

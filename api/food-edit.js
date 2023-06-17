@@ -13,11 +13,14 @@ router.post("/", async (req, res) => {
 		const { data, error } = await supabase
 		.from('food')
 		.update({
-			slug: req.body.slug,
-            name: req.body.name,
-            information_chatgpt: req.body.information_chatgpt,
+            slug: req.body.slug,
             id_image_cover: req.body.id_image_cover,
-            id_image_hero: req.body.id_image_hero
+            id_image_hero: req.body.id_image_hero,
+            ids_states: req.body.ids_states,
+            name: req.body.name,
+            description: req.body.description,
+            ingredients: req.body.ingredients,
+            recipe: req.body.recipe
 		})
 		.eq('slug', req.body.slug)
 

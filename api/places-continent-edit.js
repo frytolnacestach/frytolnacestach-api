@@ -13,15 +13,18 @@ router.post("/", async (req, res) => {
 		const { data, error } = await supabase
 		.from('places_continents')
 		.update({
-			slug: req.body.slug,
+            id_image_cover: req.body.id_image_cover,
+            id_image_hero: req.body.id_image_hero,
+            type_place: req.body.type_place,
+            slug: req.body.slug,
             name: req.body.name,
+            information_chatgpt: req.body.information_chatgpt,
             area: req.body.area,
             population: req.body.population,
             population_density: req.body.populationDensity,
             number_states: req.body.states,
-            information_chatgpt: req.body.information_chatgpt,
-            id_image_cover: req.body.id_image_cover,
-            id_image_hero: req.body.id_image_hero
+            coordinates: req.body.coordinates,
+            zoom: req.body.zoom
 		})
 		.eq('slug', req.body.slug)
 

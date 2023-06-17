@@ -12,15 +12,22 @@ router.post("/", async (req, res) => {
     try {
         const { error } = await supabase
         .from('places_cities')
-        .insert({ 
+        .insert({
+            id_state: req.body.id_state,
+            id_image_cover: req.body.id_image_cover,
+            id_image_hero: req.body.id_image_hero,
+            type_place: req.body.type_place,
 			slug: req.body.slug,
             name: req.body.name,
-            area: req.body.area,
-            population: req.body.population,
-            altitude: req.body.altitude,
             information_chatgpt: req.body.information_chatgpt,
-            id_image_cover: req.body.id_image_cover,
-            id_image_hero: req.body.id_image_hero
+            population: req.body.population,
+            area: req.body.area,
+            altitude: req.body.altitude,
+            coordinates: req.body.coordinates,
+            zoom: req.body.zoom,
+            affiliate: req.body.affiliate,
+            alerts: req.body.alerts,
+            biggest: req.body.biggest
         })
 
         return res.status(201).send("Create Continents");
