@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   try {
 
     const { data, error } = await supabase
-    .from('travel_dictionary')
+    .from('travel_dictionaries')
     .select()
     .ilike('name', `%${search}%`)
     .order('name', { ascending: true })
