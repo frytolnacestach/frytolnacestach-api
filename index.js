@@ -348,11 +348,11 @@ app.use("/api/places-spot-create", placesSpotCreate);
 app.use("/api/places-spot-edit", placesSpotEdit);
 
 //api - event
-app.use("/api/places-events", events);
-app.use("/api/places-event", event);
+app.use("/api/events", events);
+app.use("/api/event", event);
 //api - eventy - post
-app.use("/api/places-event-create", eventCreate);
-app.use("/api/places-event-edit", eventEdit);
+app.use("/api/event-create", eventCreate);
+app.use("/api/event-edit", eventEdit);
 //API - END
 
 
