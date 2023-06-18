@@ -23,8 +23,8 @@ router.post("/", async (req, res) => {
             population: req.body.population,
             population_density: req.body.populationDensity,
             number_states: req.body.states,
-            coordinates: req.body.coordinates,
-            zoom: req.body.zoom
+            coordinates: JSON.parse(req.body.coordinates),
+            zoom: JSON.parse(req.body.zoom)
 		})
 		.eq('slug', req.body.slug)
 

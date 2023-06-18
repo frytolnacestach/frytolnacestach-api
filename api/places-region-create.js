@@ -20,9 +20,9 @@ router.post("/", async (req, res) => {
 			slug: req.body.slug,
             name: req.body.name,
             information_chatgpt: req.body.information_chatgpt,
-            coordinates: req.body.coordinates,
-            zoom: req.body.zoom,
-            affiliate: req.body.affiliate
+            coordinates: JSON.parse(req.body.coordinates),
+            zoom: JSON.parse(req.body.zoom),
+            affiliate: JSON.parse(req.body.affiliate)
         })
 
         return res.status(201).send("Create Continents");

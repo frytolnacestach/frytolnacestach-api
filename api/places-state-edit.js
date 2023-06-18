@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
             id_city_main: req.body.id_city_main,
             id_image_cover: req.body.id_image_cover,
             id_image_hero: req.body.id_image_hero,
-            ids_neighboring_countries: req.body.ids_neighboring_countries,
+            ids_neighboring_countries: JSON.parse(req.body.ids_neighboring_countries),
             type_place: req.body.type_place,
 			slug: req.body.slug,
             name: req.body.name,
@@ -30,14 +30,14 @@ router.post("/", async (req, res) => {
             phone_numbers_emergency: req.body.phone_numbers_emergency,
             currency_name: req.body.currency_name,
             currency_code: req.body.currency_code,
-            money_prices: req.body.money_prices,
-            people_religion: req.body.people_religion,
-            people_nationality: req.body.people_nationality,
-            visitors_entry: req.body.visitors_entry,
-            coordinates: req.body.coordinates,
-            zoom: req.body.zoom,
-            affiliate: req.body.affiliate,
-            alerts: req.body.alerts
+            money_prices: JSON.parse(req.body.money_prices),
+            people_religion: JSON.parse(req.body.people_religion),
+            people_nationality: JSON.parse(req.body.people_nationality),
+            visitors_entry: JSON.parse(req.body.visitors_entry),
+            coordinates: JSON.parse(req.body.coordinates),
+            zoom: JSON.parse(req.body.zoom),
+            affiliate: JSON.parse(req.body.affiliate),
+            alerts: JSON.parse(req.body.alerts)
 		})
 		.eq('slug', req.body.slug)
 

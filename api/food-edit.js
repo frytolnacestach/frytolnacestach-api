@@ -16,10 +16,10 @@ router.post("/", async (req, res) => {
             slug: req.body.slug,
             id_image_cover: req.body.id_image_cover,
             id_image_hero: req.body.id_image_hero,
-            ids_states: req.body.ids_states,
+            ids_states: JSON.parse(req.body.ids_states),
             name: req.body.name,
             description: req.body.description,
-            ingredients: req.body.ingredients,
+            ingredients: JSON.parse(req.body.ingredients),
             recipe: req.body.recipe
 		})
 		.eq('slug', req.body.slug)
