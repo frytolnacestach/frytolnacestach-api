@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
 		.from('events')
 		.update({
             id_state: req.body.id_state,
+            id_region: req.body.id_region,
             id_city: req.body.id_city,
             id_spot: req.body.id_spot,
             id_image_cover: req.body.id_image_cover,
