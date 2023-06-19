@@ -177,6 +177,7 @@ const placesSpots = require("./api/places-spots");
 const placesSpotsArray = require("./api/places-spots-array");
 const placesSpot = require("./api/places-spot");
 const placesSpotID = require("./api/places-spot-id");
+const placesSpotIDcity = require("./api/places-spot-id-city");
 //places - spot - post
 const placesSpotCreate = require("./api/places-spot-create");
 const placesSpotEdit = require("./api/places-spot-edit");
@@ -347,6 +348,7 @@ app.use("/api/places-spots", placesSpots);
 app.use("/api/places-spots-array", placesSpotsArray);
 app.use("/api/places-spot", placesSpot);
 app.use("/api/places-spot-id", placesSpotID);
+app.use("/api/places-spot-id-city", placesSpotIDcity);
 //api - places - spot - post
 app.use("/api/places-spot-create", placesSpotCreate);
 app.use("/api/places-spot-edit", placesSpotEdit);
