@@ -187,6 +187,7 @@ const event = require("./api/event");
 const eventsIDstate = require("./api/events-id-state");
 const eventsIDregion = require("./api/events-id-region");
 const eventsIDcity = require("./api/events-id-city");
+const eventsIDspot = require("./api/events-id-spot");
 //event - post
 const eventCreate = require("./api/event-create");
 const eventEdit = require("./api/event-edit");
@@ -356,6 +357,7 @@ app.use("/api/event", event);
 app.use("/api/events-id-state", eventsIDstate);
 app.use("/api/events-id-region", eventsIDregion);
 app.use("/api/events-id-city", eventsIDcity);
+app.use("/api/events-id-spot", eventsIDspot);
 //api - eventy - post
 app.use("/api/event-create", eventCreate);
 app.use("/api/event-edit", eventEdit);
