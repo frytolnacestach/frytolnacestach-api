@@ -9,8 +9,15 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
   const search = req.query.search || ''
+  const showType = req.query.showType || ''
   const page = parseInt(req.query.page, 10)
   const items = parseInt(req.query.items, 10)
+
+  //setting Select
+  let supabaseSelect;
+  if (showType === "list"){
+    supabaseSelect = "'id, id_image_cover, slug, type_place, name'";
+  }
 
   try {
     let data;
@@ -22,7 +29,7 @@ router.get("/", async (req, res) => {
 
       const response = await supabase
       .from('places_states')
-      .select()
+      .select(supabaseSelect)
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true })
       .range(itemsStart, itemsEnd);
@@ -32,7 +39,7 @@ router.get("/", async (req, res) => {
     } else {
       const response = await supabase
       .from('places_states')
-      .select()
+      .select(supabaseSelect)
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true });
 
