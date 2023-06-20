@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
     if ( showType === "list" ) {
       const response =  await supabase
       .from('places_states')
-      .select('id', 'id_image_cover', 'slug', 'name')
+      .select('id, id_image_cover, slug, type_place, name')
       .in("id", ids)
       .order('id', { ascending: false })
 
