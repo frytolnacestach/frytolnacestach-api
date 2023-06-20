@@ -14,9 +14,9 @@ router.get("/", async (req, res) => {
   const items = parseInt(req.query.items, 10)
 
   //setting Select
-  let supabaseSelect;
+  let supabaseSelect = '';
   if (showType === "list"){
-    supabaseSelect = "'id, id_image_cover, slug, type_place, name'";
+    supabaseSelect = 'id, id_image_cover, slug, type_place, name';
   }
 
   try {
@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
 
       const response = await supabase
       .from('places_states')
-      .select('id, id_image_cover, slug, type_place, name')
+      .select(supabaseSelect)
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true })
       .range(itemsStart, itemsEnd);
@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
     } else {
       const response = await supabase
       .from('places_states')
-      .select('id, id_image_cover, slug, type_place, name')
+      .select(supabaseSelect)
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true });
 
