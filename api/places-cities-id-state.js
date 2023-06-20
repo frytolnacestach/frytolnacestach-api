@@ -14,7 +14,7 @@ router.get('/:slug', async (req, res) => {
   //setting Select
   let supabaseSelect;
   if (showType === "list"){
-    supabaseSelect = 'id, id_image_cover, slug, type_place, name';
+    supabaseSelect = 'id, id_image_cover, slug, type_place, name, biggest';
   }
 
   try {
@@ -29,7 +29,7 @@ router.get('/:slug', async (req, res) => {
     console.error(error);
     return res.status(500).send("Server error");
   }
-  
+
 });
 
 module.exports = router;
