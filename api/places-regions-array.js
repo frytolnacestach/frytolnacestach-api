@@ -8,25 +8,40 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
+  
   try {
+    let data;
+    let error;
 
-    const { id } = req.query;
+    const { id, showType } = req.query;
     const ids = id.split(",").map((id) => parseInt(id));
 
-    const { data, error } = await supabase
-    .from('places_regions')
-    .select()
-    .in("id", ids)
-    .order('id', { ascending: false })
+    if ( showType === "list" ) {
+      const response =  await supabase
+      .from('places_regions')
+      .select('id, id_image_cover, slug, type_place, name')
+      .in("id", ids)
+      .order('id', { ascending: false })
+
+      data = response.data;
+      error = response.error;
+    } else {
+      const response =  await supabase
+      .from('places_regions')
+      .select()
+      .in("id", ids)
+      .order('id', { ascending: false })
+
+      data = response.data;
+      error = response.error;
+    }
 
     res.send(JSON.stringify(data))
-
   } catch (error) {
-
     console.error(error);
     return res.status(500).send("Server error");
-    
   }
+
 });
 
 module.exports = router;
