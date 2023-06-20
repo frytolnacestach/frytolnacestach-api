@@ -8,8 +8,8 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
-  const search = req.query.search || ''
   const showType = req.query.showType
+  const search = req.query.search || ''
   const page = parseInt(req.query.page, 10)
   const items = parseInt(req.query.items, 10)
 
