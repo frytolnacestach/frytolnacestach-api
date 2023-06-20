@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
 
       const response = await supabase
       .from('places_states')
-      .select()
+      .select(supabaseSelect)
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true })
       .range(itemsStart, itemsEnd);
@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
     } else {
       const response = await supabase
       .from('places_states')
-      .select()
+      .select(supabaseSelect)
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true });
 
