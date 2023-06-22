@@ -56,7 +56,7 @@ router.post("/", async (req, res) => {
 						// add review
 						const { data, error } = await supabase
 						.from('users_place_review_duplicate')
-						.update({
+						.insert({
 							//date_edit: dateEdit,
 							id_place: req.body.id_place,
 							id_user: idUser,
@@ -65,7 +65,6 @@ router.post("/", async (req, res) => {
 							text: req.body.text,
 							status: status
 						})
-						.eq('slug', req.body.slug)
 
 						return res.status(201).send("Záznam uložen");
 					} catch (error) {
