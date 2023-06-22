@@ -40,8 +40,8 @@ router.post("/", async (req, res) => {
 				.from('users_place_review_duplicate')
 				.select()
 				.eq('id_place', id_place)
-				.eq('id_user', id_user)
-				.eq('type', type)
+				.eq('id_user', idUser)
+				.eq('type', req.body.type)
 
 				if (error) {
 					console.error(error);
