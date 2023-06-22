@@ -11,20 +11,32 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
     var idPlace = req.query.id_place
+    var idUser = req.query.id_user
     var type = req.query.type
 
     try {
-        const { data, error } = await supabase
-        .from('users_place_review_duplicate')
-        .select()
-        .eq('id_place', idPlace)
-        .eq('type', type)
-        .eq('status', 1)
-
-        if (error) {
-            console.error(error);
-            return res.status(500).send("Chyba při aktualizaci");
-        }
+        if ( idUser ) {
+            const response =  await supabase
+            .from('users_place_review_duplicate')
+            .select()
+            .eq('id_place', idPlace)
+            .eq('id_user', idUser)
+            .eq('type', type)
+            .eq('status', 1)
+      
+            data = response.data;
+            error = response.error;
+          } else {
+            const response =  await supabase
+            .from('users_place_review_duplicate')
+            .select()
+            .eq('id_place', idPlace)
+            .eq('type', type)
+            .eq('status', 1)
+      
+            data = response.data;
+            error = response.error;
+          }
         
         res.send(JSON.stringify(data))
     } catch (error) {
