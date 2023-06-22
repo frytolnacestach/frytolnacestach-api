@@ -11,11 +11,11 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
     var idPlace = req.query.id_place
-    var idUser = req.query.id_user
+    var idUser = req.query.id_user || null
     var type = req.query.type
 
     try {
-        if ( idUser ) {
+        if ( idUser !== null ) {
             const response =  await supabase
             .from('users_place_review_duplicate')
             .select()
