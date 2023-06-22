@@ -27,6 +27,7 @@ app.use(function(req, res, next) {
 //CONSTS
 //user
 const users = require("./api/users");
+const usersIDS = require("./api/users-ids");
 const user = require("./api/user");
 const userRegistration = require("./api/user-registration");
 const userActivation = require("./api/user-activation");
@@ -206,6 +207,7 @@ const eventEdit = require("./api/event-edit");
 //API
 //api - user
 app.use("/api/users", users);
+app.use("/api/users-ids", usersIDS);
 app.use("/api/user", user);
 app.use("/api/user-registration", userRegistration);
 app.use("/api/user-activation", userActivation);
