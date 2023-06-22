@@ -43,8 +43,8 @@ const userReview = require("./api/user-review");
 //user - post
 
 //review
-const reviewIDplace = require("./api/review-id-place");
-const reviewIDuser = require("./api/review-id-user");
+const reviewsIDplace = require("./api/reviews-id-place");
+const reviewsIDuser = require("./api/reviews-id-user");
 //review - post
 const reviewCreate = require("./api/review-create");
 const reviewEdit = require("./api/review-edit");
@@ -222,8 +222,8 @@ app.use("/api/user-review", userReview);
 //api - user - post
 
 //api - review
-app.use("/api/review-id-place", reviewIDplace);
-app.use("/api/review-id-user", reviewIDuser);
+app.use("/api/reviews-id-place", reviewsIDplace);
+app.use("/api/reviews-id-user", reviewsIDuser);
 //api - review - post
 app.use("/api/review-create", reviewCreate);
 app.use("/api/review-edit", reviewEdit);
