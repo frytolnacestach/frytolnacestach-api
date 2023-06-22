@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
 
         if (error) {
             console.error(error);
-            return res.status(500).send("Server error");
+            return res.status(501).send("Server error");
         }
 
         if (data.length === 0) {
@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
 
 				if (error) {
 					console.error(error);
-					return res.status(500).send("Server error");
+					return res.status(502).send("Server error");
 				}
 		
 				if (data.length !== 0) {
@@ -69,17 +69,17 @@ router.post("/", async (req, res) => {
 						return res.status(201).send("Záznam uložen");
 					} catch (error) {
 						console.error(error);
-						return res.status(500).send("Server error");
+						return res.status(503).send("Server error");
 					}
 				}
 			} catch (error) {
 				console.error(error);
-				return res.status(500).send("Server error");
+				return res.status(504).send("Server error");
 			}
 		}
 	} catch (error) {
 		console.error(error);
-		return res.status(500).send("Server error");
+		return res.status(505).send("Server error");
 	}
 	
 });
