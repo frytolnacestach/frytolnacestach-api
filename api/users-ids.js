@@ -10,13 +10,14 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 router.get("/", async (req, res) => {
   
   try {
-    const { id, showType } = req.query;
+    const { id } = req.query;
     const ids = id.split(",").map((id) => parseInt(id));
 
     const { data, error } = await supabase
     .from('users')
     .select('id, nickname, slug, surname, lastname, status')
     .in("id", ids)
+    .order('id', { ascending: false })
 
     res.send(JSON.stringify(data))
   } catch (error) {
