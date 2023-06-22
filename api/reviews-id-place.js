@@ -10,6 +10,9 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
+    let data;
+    let error;
+    
     var idPlace = req.query.id_place
     var idUser = req.query.id_user || null
     var type = req.query.type
