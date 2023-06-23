@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
 					text: req.body.text,
 				})
 				.eq('id_place', req.body.id_place)
-				.eq('id_user', req.body.idUser)
+				.eq('id_user', idUser)
 				.eq('type', req.body.type)
 
 				return res.status(201).send("Záznam uložen");
