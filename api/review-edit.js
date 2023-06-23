@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
 				// add review
 				const { data, error } = await supabase
 				.from('users_place_review_duplicate')
-				.insert({
+				.update({
 					//date_edit: dateEdit,
 					rating: req.body.rating,
 					text: req.body.text,
