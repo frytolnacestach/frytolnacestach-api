@@ -11,11 +11,16 @@ router.post("/", async (req, res) => {
 	// user
 	var email = req.body.email
     var passwordHash = req.body.password_hash
+	let rating = req.body.rating
 	// other var
 	//let dateEdit
 	let status = 1
 	let idUser
 	
+	if(rating < 1 || rating > 5 ) {
+		return res.status(406).send('Neplatné hodnoty u hodnocení');
+	}
+
 	try {
 		// Check user
 		const { data, error } = await supabase
@@ -61,7 +66,7 @@ router.post("/", async (req, res) => {
 							id_place: req.body.id_place,
 							id_user: idUser,
 							type: req.body.type,
-							rating: req.body.rating,
+							rating: rating,
 							text: req.body.text,
 							status: status
 						})
