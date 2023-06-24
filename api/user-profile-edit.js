@@ -16,7 +16,8 @@ router.post("/:email", async (req, res) => {
         .from('users')
         .update({
             surname: req.body.surname,
-            lastname: req.body.lastname
+            lastname: req.body.lastname,
+            urls: req.body.urls
         })
         .eq('email', email);
 
