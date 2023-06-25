@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
 			try {
 				//check review
 				const { data, error } = await supabase
-				.from('users_place_review_duplicate')
+				.from('users_place_review')
 				.select()
 				.eq('id_place', req.body.id_place)
 				.eq('id_user', idUser)
@@ -60,7 +60,7 @@ router.post("/", async (req, res) => {
 					try {
 						// add review
 						const { data, error } = await supabase
-						.from('users_place_review_duplicate')
+						.from('users_place_review')
 						.insert({
 							//date_edit: dateEdit,
 							id_place: req.body.id_place,

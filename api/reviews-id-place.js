@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
     try {
         if ( idUser !== null ) {
             const response =  await supabase
-            .from('users_place_review_duplicate')
+            .from('users_place_review')
             .select()
             .eq('id_place', idPlace)
             .eq('id_user', idUser)
@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
             error = response.error;
           } else {
             const response =  await supabase
-            .from('users_place_review_duplicate')
+            .from('users_place_review')
             .select()
             .eq('id_place', idPlace)
             .eq('type', type)
