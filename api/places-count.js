@@ -10,32 +10,32 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 router.get('/', async (req, res) => {
   try {
 
-    const { count: placesStatesCount, error: placesContinentsCountError } = await supabase
+    const { count: placesContinentsCount, error: placesContinentsCountError } = await supabase
         .from('places_continents')
         .select('*', { count: 'exact', head: true })
 
-    /*const { count: placesStatesCount, error: placesStatesCountError } = await supabase
+    const { count: placesStatesCount, error: placesStatesCountError } = await supabase
       .from('places_states')
-      .select('*', { count: 'exact' })
+      .select('*', { count: 'exact', head: true })
 
     const { count: placesRegionsCount, error: placesRegionsCountError } = await supabase
       .from('places_regions')
-      .select('*', { count: 'exact' })
+      .select('*', { count: 'exact', head: true })
 
     const { count: placesCitiesCount, error: placesCitiesCountError } = await supabase
       .from('places_cities')
-      .select('*', { count: 'exact' })
+      .select('*', { count: 'exact', head: true })
 
     const { count: placesSpotsCount, error: placesSpotsCountError } = await supabase
       .from('places_spots')
-      .select('*', { count: 'exact' })*/
+      .select('*', { count: 'exact', head: true })
 
     const places = {
-        places_continents: placesStatesCount,
-        //places_states:  placesStatesCount[0].count,
-        //places_regions: placesRegionsCount[0].count,
-        //places_cities: placesCitiesCount[0].count,
-        //places_spots: placesSpotsCount[0].count
+        places_continents: placesContinentsCount,
+        places_states:  placesStatesCount,
+        places_regions: placesRegionsCount,
+        places_cities: placesCitiesCount,
+        places_spots: placesSpotsCount
     }
 
     res.send(JSON.stringify(places))
