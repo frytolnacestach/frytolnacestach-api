@@ -10,9 +10,9 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 router.get('/', async (req, res) => {
   try {
 
-    const { placesStatesCount, error: placesContinentsCountError } = await supabase
+    const { count: placesStatesCount, error: placesContinentsCountError } = await supabase
         .from('places_continents')
-        .select('*', { placesStatesCount: 'exact', head: true })
+        .select('*', { count: 'exact', head: true })
 
     /*const { count: placesStatesCount, error: placesStatesCountError } = await supabase
       .from('places_states')
