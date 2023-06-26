@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
       .select('*', { count: 'exact' })*/
 
     const places = {
-        places_continents: placesContinentsCount,
+        places_continents: placesContinentsCount[0].count,
         //places_states:  placesStatesCount[0].count,
         //places_regions: placesRegionsCount[0].count,
         //places_cities: placesCitiesCount[0].count,
