@@ -25,6 +25,9 @@ router.get("/", async (req, res) => {
   }
 
   try {
+    let data;
+    let error;
+    
     if(page && items) {
       // items filter
       const itemsStart = (page * items) - items;
