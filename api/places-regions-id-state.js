@@ -12,7 +12,7 @@ router.get('/:slug', async (req, res) => {
   try {
 
     const { data, error } = await supabase
-    .from('places_spots')
+    .from('places_regions')
     .select()
     .eq('id_state', id)
 
