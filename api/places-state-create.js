@@ -37,7 +37,10 @@ router.post("/", async (req, res) => {
             coordinates: JSON.parse(req.body.coordinates),
             zoom: JSON.parse(req.body.zoom),
             affiliate: JSON.parse(req.body.affiliate),
-            alerts: JSON.parse(req.body.alerts)
+            alerts: JSON.parse(req.body.alerts),
+            organization: JSON.parse(req.body.organization),
+            apps: JSON.parse(req.body.apps),
+            links: JSON.parse(req.body.links)
         })
 
         return res.status(201).send("Create Continents");
