@@ -167,6 +167,7 @@ const placesStateEdit = require("./api/places-state-edit");
 //places - region
 const placesRegions = require("./api/places-regions");
 const placesRegionsArray = require("./api/places-regions-array");
+const placesRegionsIDstate = require("./api/places-regions-id-state");
 const placesRegion = require("./api/places-region");
 const placesRegionID = require("./api/places-region-id");
 //places - region - post
@@ -350,6 +351,7 @@ app.use("/api/places-state-edit", placesStateEdit);
 //api - places - region
 app.use("/api/places-regions", placesRegions);
 app.use("/api/places-regions-array", placesRegionsArray);
+app.use("/api/places-regions-id-state", placesRegionsIDstate);
 app.use("/api/places-region", placesRegion);
 app.use("/api/places-region-id", placesRegionID);
 //api - places - region - post
