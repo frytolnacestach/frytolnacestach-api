@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
   const search = req.query.search || ''
   const page = parseInt(req.query.page, 10)
   const items = parseInt(req.query.items, 10)
+  const idContinent = req.query.idContinent || ''
 
   // setting Select
   let supabaseSelect;
@@ -23,34 +24,26 @@ router.get("/", async (req, res) => {
   }
 
   try {
-    let data;
-    let error;
-    
-    if(page && items) {
-      // items filter
+    // Base query
+    let query = supabase.from('places_states')
+      .select(supabaseSelect)
+      .ilike('name', `%${search}%`)
+      .order('name', { ascending: true });
+
+    // ADD idContinent - Check if idContinent is not empty, then add it as a filter
+    if (idContinent !== '') {
+      query = query.eq('id_continent', idContinent);
+    }
+
+    // ADD range
+    if (page && items) {
       const itemsStart = (page * items) - items;
       const itemsEnd = itemsStart + items - 1;
-      // db
-      const response = await supabase
-        .from('places_states')
-        .select(supabaseSelect)
-        .ilike('name', `%${search}%`)
-        .order('name', { ascending: true })
-        .range(itemsStart, itemsEnd);
-      // response
-      data = response.data;
-      error = response.error;
-    } else {
-      // db
-      const response = await supabase
-        .from('places_states')
-        .select(supabaseSelect)
-        .ilike('name', `%${search}%`)
-        .order('name', { ascending: true });
-      // response
-      data = response.data;
-      error = response.error;
+      query = query.range(itemsStart, itemsEnd);
     }
+
+    // DATA
+    const { data, error } = await query;
 
     res.send(JSON.stringify(data))
   } catch (error) {
