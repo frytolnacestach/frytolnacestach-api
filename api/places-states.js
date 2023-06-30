@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
       .ilike('name', `%${search}%`)
       .order('name', { ascending: true });
 
-    // ADD idContinent - Check if idContinent is not empty, then add it as a filter
+    // ADD idContinent
     if (idContinent !== '') {
       query = query.eq('id_continent', idContinent);
     }
