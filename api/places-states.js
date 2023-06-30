@@ -21,6 +21,8 @@ router.get("/", async (req, res) => {
     supabaseSelect = 'id, id_image_cover, slug, type_place, name';
   } else if (showType === "search") {
     supabaseSelect = 'id, slug, type_place, name';
+  } else if (showType === "filter") {
+    supabaseSelect = 'id, name';
   }
 
   try {
