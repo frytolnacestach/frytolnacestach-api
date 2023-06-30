@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
   const items = parseInt(req.query.items, 10)
   const start = parseInt(req.query.start || '0')
   const end = parseInt(req.query.end || '999')
+  const idState = req.query.idState || ''
   
   // setting Select
   let supabaseSelect;
@@ -25,35 +26,31 @@ router.get("/", async (req, res) => {
   }
 
   try {
-    let data;
-    let error;
-    
-    if(page && items) {
-      // items filter
+    // Base query
+    let query = supabase.from('places_regions')
+      .select(supabaseSelect)
+      .ilike('name', `%${search}%`)
+      .order('name', { ascending: true });
+
+    // ADD idState
+    if (idState !== '' && idState !== null) {
+      query = query.eq('id_state', idState);
+    }
+
+    // ADD range
+    if (page && items) {
       const itemsStart = (page * items) - items;
       const itemsEnd = itemsStart + items - 1;
-      // db
-      const response = await supabase
-        .from('places_regions')
-        .select(supabaseSelect)
-        .ilike('name', `%${search}%`)
-        .order('name', { ascending: true })
-        .range(itemsStart, itemsEnd);
-      // response
-      data = response.data;
-      error = response.error;
-    } else {
-      // db
-      const response = await supabase
-        .from('places_regions')
-        .select(supabaseSelect)
-        .ilike('name', `%${search}%`)
-        .order('name', { ascending: true })
-        .range(start, end);
-      // response
-      data = response.data;
-      error = response.error;
+      query = query.range(itemsStart, itemsEnd);
     }
+
+    // ADD range large
+    if (!page && !items) {
+      query = query.range(start, end);
+    }
+
+    // DATA
+    const { data, error } = await query;
 
     res.send(JSON.stringify(data))
   } catch (error) {
