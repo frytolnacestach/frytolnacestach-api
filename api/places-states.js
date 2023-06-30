@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
       .order('name', { ascending: true });
 
     // ADD idContinent
-    if (idContinent !== '') {
+    if (idContinent !== '' || idContinent !== null) {
       query = query.eq('id_continent', idContinent);
     }
 
