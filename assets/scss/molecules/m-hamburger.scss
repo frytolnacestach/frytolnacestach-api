@@ -1,62 +1,109 @@
-.m-headline {
-    $self: &;
+.m-hamburger {
+	$self: &;
 
-    display: inline-block;
-    width: 100%;
+    display: flex;
+    position: fixed;
+    z-index: 1001;
+    cursor: pointer;
+    top: 10px;
+    right: 10px;
 
-    &__title {
-        display: inline-block;
-        font-size: $fs-large;
-        font-weight: 600;
-        text-transform: uppercase;
-        margin: 0;
+	@media only screen and (min-width: $ti) {
+		right: 20px;
+	}
+
+	@media only screen and (min-width: $lg) {
+        display: none;
     }
 
-    &__perex {
-        width: 100%;
-        max-width: 640px;
-        margin: 0 auto;
-    }
+	//LINES
+	&__lines {
+		display: inline-block;
+		position: relative;
+		height: 40px;
+		width: 30px;
+	}
 
-    &.-dark {
-        #{$self}__title {
-            color: $white;
-        }
+	&__line {
+		@include transition(all, .3s);
+		position: absolute;
+		left: 0;
+		right: 0;
+		width: 30px;
+		height: 3px;
+		background-color: $brand1;
+		border-radius: 1.5px;
+		transform-origin: center;
+		transform: rotate(0);
 
-        #{$self}__perex {
-            color: $white;
-        }
-    }
+		&.-first {
+			top: 10px;
+		}
 
-    &.-world {
-        #{$self}__title {
-            color: $worldTEXT;
-        }
+		&.-second {
+			top: 19px;
+		}
 
-        #{$self}__perex {
-            color: $worldTEXT;
-        }
-    }
+		&.-third {
+			top: 28px;
+		}
+	}
 
-    &.-world-dark {
-        padding-right: 10px;
-        padding-left: 10px;
 
-        @media only screen and (min-width: $ti) {
-            padding-right: 20px;
-            padding-left: 20px;
-        }
+	//TEXTS
+	&__texts {
+		display: none;
+	}
 
-        #{$self}__title {
-            color: $white;
-        }
+	&__text {
+		padding-right: 10px;
+		color: $black;
+		font-size: $fs-normal;
+		line-height: 40px;
 
-        #{$self}__perex {
-            color: $white;
-        }
-    }
+		&.-close {
+			display: none;
+		}
 
-    &.-center {
-        text-align: center;
-    }
+		&.-open {
+			display: block;
+		}
+	}
+
+
+
+	//ACTION OPEN
+	&.open {
+		#{$self}__text {
+            color: $black;
+
+			&.-close {
+				display: block;
+			}
+
+			&.-open {
+				display: none;
+			}
+		}
+
+		#{$self}__line {
+            background-color: $black;
+
+			&.-first {
+				top: 19px;
+				transform: rotate(45deg);
+			}
+
+			&.-second {
+				top: 19px;
+				opacity: 0;
+			}
+
+			&.-third {
+				top: 19px;
+				transform: rotate(-45deg);
+			}
+		}
+	}
 }
+
