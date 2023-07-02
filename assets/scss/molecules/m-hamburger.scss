@@ -1,104 +1,62 @@
-.m-hamburger {
-	$self: &;
+.m-headline {
+    $self: &;
 
-    display: flex;
-    position: absolute;
-    z-index: 1001;
-    cursor: pointer;
-    top: 10px;
-    right: 15px;
+    display: inline-block;
+    width: 100%;
 
-	@media only screen and (min-width: $lg) {
-        display: none;
+    &__title {
+        display: inline-block;
+        font-size: $fs-large;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin: 0;
     }
 
-	//LINES
-	&__lines {
-		display: inline-block;
-		position: relative;
-		height: 40px;
-		width: 30px;
-	}
+    &__perex {
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto;
+    }
 
-	&__line {
-		@include transition(all, .3s);
-		position: absolute;
-		left: 0;
-		right: 0;
-		width: 30px;
-		height: 2px;
-		background-color: $white;
-		border-radius: 1.5px;
-		transform-origin: center;
-		transform: rotate(0);
+    &.-dark {
+        #{$self}__title {
+            color: $white;
+        }
 
-		&--1 {
-			top: 11px;
-		}
+        #{$self}__perex {
+            color: $white;
+        }
+    }
 
-		&--2 {
-			top: 19px;
-		}
+    &.-world {
+        #{$self}__title {
+            color: $worldTEXT;
+        }
 
-		&--3 {
-			top: 27px;
-		}
-	}
+        #{$self}__perex {
+            color: $worldTEXT;
+        }
+    }
 
+    &.-world-dark {
+        padding-right: 10px;
+        padding-left: 10px;
 
-	//TEXTS
-	&__texts {
-		display: block;
-	}
+        @media only screen and (min-width: $ti) {
+            padding-right: 20px;
+            padding-left: 20px;
+        }
 
-	&__text {
-		padding-right: 10px;
-		color: $white;
-		font-size: $fs-normal;
-		line-height: 40px;
+        #{$self}__title {
+            color: $white;
+        }
 
-		&--close {
-			display: none;
-		}
+        #{$self}__perex {
+            color: $white;
+        }
+    }
 
-		&--open {
-			display: block;
-		}
-	}
-
-
-
-	//ACTION OPEN
-	&.open {
-		#{$self}__text {
-            color: $black;
-
-			&--close {
-				display: block;
-			}
-
-			&--open {
-				display: none;
-			}
-		}
-
-		#{$self}__line {
-            background-color: $black;
-
-			&--1 {
-				top: 19px;
-				transform: rotate(45deg);
-			}
-
-			&--2 {
-				top: 19px;
-				opacity: 0;
-			}
-
-			&--3 {
-				top: 19px;
-				transform: rotate(-45deg);
-			}
-		}
-	}
+    &.-center {
+        text-align: center;
+    }
 }
