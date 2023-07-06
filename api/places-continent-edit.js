@@ -19,6 +19,7 @@ router.post("/", async (req, res) => {
             slug: req.body.slug,
             name: req.body.name,
             information_chatgpt: req.body.information_chatgpt,
+            information_author: JSON.parse(req.body.information_author),
             area: req.body.area,
             population: req.body.population,
             population_density: req.body.populationDensity,
