@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
             area: req.body.area,
             population: req.body.population,
             phone_prefix: req.body.phone_prefix,
-            phone_numbers_emergency: req.body.phone_numbers_emergency,
+            phone_numbers_emergency: JSON.parse(req.body.phone_numbers_emergency),
             currency_name: req.body.currency_name,
             currency_code: req.body.currency_code,
             money_prices: JSON.parse(req.body.money_prices),
