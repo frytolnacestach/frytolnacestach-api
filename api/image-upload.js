@@ -80,7 +80,7 @@ router.post('/', async (req, res) => {
       const response = await client.raw('getreply');
         console.log('Odpověď od FTP serveru:', response);
     
-      //client.close();
+      client.close();
     
       /*if (response && response.includes('226')) {
         return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. Přenos souboru proběhl úspěšně.');
