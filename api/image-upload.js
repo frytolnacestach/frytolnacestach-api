@@ -10,6 +10,38 @@ const FTPHost = process.env.FTP_IMAGE_HOST
 const FTPUser = process.env.FTP_IMAGE_USER
 const FTPPass = process.env.FTP_IMAGE_PASS
 
+router.get('/', async (req, res) => {
+    try {
+
+        client = new FTPClient();
+        client.connect({
+            host: FTPHost,
+            user: FTPUser,
+            password: FTPPass,
+        });
+      
+        client.on('ready', () => {
+            client.cwd('/subdoms/image/storage/aaatest', (error) => {
+                if (error) {
+                    console.error(error);
+                    return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
+                }
+            });
+        });
+
+        client.on('error', (error) => {
+            console.error(error);
+            return res.status(500).send('Chyba při připojování k FTP serveru.');
+        });
+
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send('Chyba při připojování k FTP serveru. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
+    }
+  });
+
+/*
+
 router.post('/', async (req, res) => {
     let client;
 
@@ -18,43 +50,43 @@ router.post('/', async (req, res) => {
 
         client = new FTPClient();
         client.connect({
-        host: FTPHost,
-        user: FTPUser,
-        password: FTPPass,
+            host: FTPHost,
+            user: FTPUser,
+            password: FTPPass,
         });
 
         client.on('ready', () => {
-        client.cwd('/subdoms/image/storage/aaatest', (error) => {
-            if (error) {
-            console.error(error);
-            return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
-            }
-
-            client.put(image.data, image.name, (error) => {
-            if (error) {
-                console.error(error);
-                return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
-            }
-
-            client.list((error, files) => {
+            client.cwd('/subdoms/image/storage/aaatest', (error) => {
                 if (error) {
-                console.error(error);
-                return res.status(500).send('Chyba při získávání seznamu souborů z FTP serveru.');
+                    console.error(error);
+                    return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
                 }
 
-                const fileList = files.map(file => file.name).join('\n');
-                const message = 'Seznam souborů na FTP serveru:\n' + fileList;
+                client.put(image.data, image.name, (error) => {
+                    if (error) {
+                        console.error(error);
+                        return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
+                    }
 
-                client.end();
-                return res.status(201).send(message);
+                    client.list((error, files) => {
+                        if (error) {
+                            console.error(error);
+                            return res.status(500).send('Chyba při získávání seznamu souborů z FTP serveru.');
+                        }
+
+                        const fileList = files.map(file => file.name).join('\n');
+                        const message = 'Seznam souborů na FTP serveru:\n' + fileList;
+
+                        client.end();
+                        return res.status(201).send(message);
+                    });
+                });
             });
-            });
-        });
         });
 
         client.on('error', (error) => {
-        console.error(error);
-        return res.status(500).send('Chyba při připojování k FTP serveru.');
+            console.error(error);
+            return res.status(500).send('Chyba při připojování k FTP serveru.');
         });
 
 
@@ -76,7 +108,7 @@ router.post('/', async (req, res) => {
       console.error(error);
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
     }
-  });
+  });*/
 
 module.exports = router;
 
