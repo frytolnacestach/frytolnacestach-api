@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
 
 
         await client.cd('/subdoms/image/storage/aaatest');
-      //await client.put(image.data, image.name);
+        await client.put(image.data, image.name);
 
       //await client.delete('/subdoms/image/storage/aaatest/test_raw2.png');
 
