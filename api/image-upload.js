@@ -26,6 +26,9 @@ router.get('/', async (req, res) => {
                     console.error(error);
                     return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
                 }
+
+                client.end();
+                return res.status(201).send("přepnutí adresáře je v pořádku");
             });
         });
 
@@ -39,6 +42,9 @@ router.get('/', async (req, res) => {
       return res.status(500).send('Chyba při připojování k FTP serveru. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
     }
   });
+
+module.exports = router;
+
 
 /*
 
@@ -109,9 +115,6 @@ router.post('/', async (req, res) => {
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
     }
   });*/
-
-module.exports = router;
-
 
 
 /*
