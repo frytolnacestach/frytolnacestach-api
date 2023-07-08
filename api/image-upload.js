@@ -75,10 +75,13 @@ router.post('/', async (req, res) => {
 
       await client.cd('/subdoms/image/storage/aaatest');
       await client.put(image.data, image.name); // změna z 'image.path' na 'image.data'
+
+      const response = await client.raw('getreply');
+        console.log('Odpověď od FTP serveru:', response);
     
       //client.close();
     
-      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server.' );
+      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server.' + response);
     } catch (error) {
       console.error(error);
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
