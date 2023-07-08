@@ -6,7 +6,7 @@ const FTPSClient = require('ftps');
 const FTPHost = process.env.FTP_IMAGE_HOST
 const FTPUser = process.env.FTP_IMAGE_USER
 const FTPPass = process.env.FTP_IMAGE_PASS
-
+/*
 router.get('/', async (req, res) => {
     try {
   
@@ -25,20 +25,21 @@ router.get('/', async (req, res) => {
       console.error(error);
       return res.status(500).send('Chyba při připojování k FTP serveru. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
     }
-  });
+  });*/
 
-/*
+
 router.post('/', async (req, res) => {
   try {
     const image = req.files.image;
 
-    const client = new FTPClient();
+    const client = new FTPSClient();
     
     await client.access({
-      host: process.env.FTP_IMAGE_HOST,
-      user: process.env.FTP_IMAGE_USER,
-      password: process.env.FTP_IMAGE_PASS,
-      port: 21,
+      host: FTPHost,
+        username: FTPUser,
+        password: FTPPass,
+        protocol: 'ftp',
+        port: 21,
     });
 
     await client.uploadFrom(image.path, '/storage/__test/' + image.name);
@@ -50,6 +51,6 @@ router.post('/', async (req, res) => {
     console.error(error);
     return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
   }
-});*/
+});
 
 module.exports = router;
