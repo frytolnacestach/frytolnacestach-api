@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
     const client = new ftp.Client()
     client.ftp.verbose = true
 
+    console.log("router")
 
     try {
         console.log("try")
@@ -28,6 +29,7 @@ router.get('/', async (req, res) => {
         return res.status(201).send("ftp je v pořádku");
       
     } catch (error) {
+        console.log("Error")
       console.error(error);
       return res.status(500).send('Chyba při připojování k FTP serveru OUT. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
     }
