@@ -4,9 +4,9 @@ const router = express.Router();
 const FTPClient = require('basic-ftp');
 
 router.post('/', async (req, res) => {
-
-  try {
-
+    let imageSize;
+  
+try {
     const image = req.files.image;
 
     const fs = require('fs');
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     const stat = util.promisify(fs.stat);
 
     const imageStats = await stat(image.path);
-    const imageSize = imageStats.size;
+    imageSize = imageStats.size;
 
     const client = new FTPClient();
 
@@ -32,7 +32,11 @@ router.post('/', async (req, res) => {
     return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server.');
   } catch (error) {
     console.error(error);
-    return res.status(500).send(`Chyba při nahrávání obrázku na jiný server. Velikost souboru: ${imageSize} bajtů.`);
+    if (imageSize) {
+        return res.status(500).send(`Chyba při nahrávání obrázku na jiný server. Velikost souboru: ${imageSize} bajtů.`);
+      } else {
+        return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
+      }
   }
 });
 
