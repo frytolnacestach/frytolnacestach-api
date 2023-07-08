@@ -18,45 +18,44 @@ router.post('/', async (req, res) => {
 
         client = new FTPClient();
         client.connect({
-            host: FTPHost,
-            username: FTPUser,
-            password: FTPPass
+        host: FTPHost,
+        user: FTPUser,
+        password: FTPPass,
         });
 
-
         client.on('ready', () => {
-            client.cwd('/subdoms/image/storage/aaatest', (error) => {
-              if (error) {
-                console.error(error);
-                return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
-              }
-      
-              client.put(image.data, image.name, (error) => {
-                if (error) {
-                  console.error(error);
-                  return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
-                }
-      
-                client.list((error, files) => {
-                  if (error) {
-                    console.error(error);
-                    return res.status(500).send('Chyba při získávání seznamu souborů z FTP serveru.');
-                  }
-      
-                  const fileList = files.map(file => file.name).join('\n');
-                  const message = 'Seznam souborů na FTP serveru:\n' + fileList;
-      
-                  client.end();
-                  return res.status(201).send(message);
-                });
-              });
-            });
-          });
-      
-          client.on('error', (error) => {
+        client.cwd('/subdoms/image/storage/aaatest', (error) => {
+            if (error) {
             console.error(error);
-            return res.status(500).send('Chyba při připojování k FTP serveru.');
-          });
+            return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
+            }
+
+            client.put(image.data, image.name, (error) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
+            }
+
+            client.list((error, files) => {
+                if (error) {
+                console.error(error);
+                return res.status(500).send('Chyba při získávání seznamu souborů z FTP serveru.');
+                }
+
+                const fileList = files.map(file => file.name).join('\n');
+                const message = 'Seznam souborů na FTP serveru:\n' + fileList;
+
+                client.end();
+                return res.status(201).send(message);
+            });
+            });
+        });
+        });
+
+        client.on('error', (error) => {
+        console.error(error);
+        return res.status(500).send('Chyba při připojování k FTP serveru.');
+        });
 
 
         //await client.delete('/subdoms/image/storage/aaatest/test_raw2.png');
