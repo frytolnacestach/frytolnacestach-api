@@ -77,7 +77,7 @@ router.post('/', async (req, res) => {
       //await client.cd('/subdoms/image/storage/__test');
       //await client.put(image.data, image.name); // změna z 'image.path' na 'image.data'
     
-      client.close();
+      //client.close();
     
       return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server.');
     } catch (error) {
