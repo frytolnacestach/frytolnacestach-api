@@ -10,15 +10,16 @@ const FTPPass = process.env.FTP_IMAGE_PASS
 
 router.get('/', async (req, res) => {
     try {
-      const client = new FTPSClient({
-        host: FTPHost,
-        username: FTPUser,
-        password: FTPPass,
-        protocol: 'ftp',
-        port: 21,
-      });
-  
-      client.close();
+
+        const client = new FTPSClient({
+            host: FTPHost,
+            username: FTPUser,
+            password: FTPPass,
+            protocol: 'ftp',
+            port: 21,
+          });
+      
+          await client.exec('noop'); // Odeslání prázdného příkazu
   
       return res.status(200).send('Připojení k FTP serveru bylo úspěšné. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
     } catch (error) {
