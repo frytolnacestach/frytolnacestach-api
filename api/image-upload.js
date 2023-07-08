@@ -84,5 +84,5 @@ router.post('/', async (req, res) => {
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
     }
   });
-
-module.exports = router;*/
+*/
+module.exports = router;
