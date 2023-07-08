@@ -30,26 +30,29 @@ router.get('/', async (req, res) => {
   });
   */
 
-router.post('/', async (req, res) => {
-  try {
-    const image = req.files.image;
-
-    const client = new FTPSClient({
-      host: FTPHost,
-      username: FTPUser,
-      password: FTPPass,
-      protocol: 'ftp',
-      port: 21,
-    });
-
-    await client.cd('/storage/__test');
-    await client.put(image.path, image.name);
-
-    return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server.');
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
-  }
-});
+  router.post('/', async (req, res) => {
+    try {
+      const image = req.files.image;
+  
+      const client = new FTPSClient({
+        host: FTPHost,
+        username: FTPUser,
+        password: FTPPass,
+        protocol: 'ftp',
+        port: 21,
+      });
+  
+      await client.cd('/storage/__test');
+      await client.put(image.path, image.name);
+  
+      client.close();
+  
+      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server.');
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
+    }
+  });
+  
 
 module.exports = router;
