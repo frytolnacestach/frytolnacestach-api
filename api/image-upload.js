@@ -5,7 +5,7 @@ const FTPClient = require('basic-ftp');
 
 router.post('/', async (req, res) => {
 
-    const image = req.files.image;
+    
 
     //test
     /*const fs = require('fs');
@@ -19,6 +19,8 @@ router.post('/', async (req, res) => {
 
   try {
 
+    const image = req.files.image;
+    
     const client = new FTPClient();
 
     await client.access({
