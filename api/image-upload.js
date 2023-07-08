@@ -84,10 +84,10 @@ router.post('/', async (req, res) => {
       //const transferSuccessful = response && response.includes('226');
 
     
-      /*if (response.includes('226')) {
+      /*if (response && response.includes('226')) {
         return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. Přenos souboru proběhl úspěšně.');
       } else {
-        return res.status(500).send('Chyba při přenosu souboru na jiný server. Odpověď FTP serveru: ' + JSON.stringify(response));
+        return res.status(500).send('Chyba při přenosu souboru na jiný server.');
       }*/
 
       return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + JSON.stringify(response));
