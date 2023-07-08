@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-      const image = req.files.image;
+      //const image = req.files.image;
   
       const client = new FTPSClient({
         host: FTPHost,
