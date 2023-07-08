@@ -78,9 +78,8 @@ router.post('/', async (req, res) => {
       await client.put(image.data, image.name); // změna z 'image.path' na 'image.data'
 
       const response = await client.raw('getreply');
-        console.log('Odpověď od FTP serveru:', response);
     
-      //client.close();
+      client.close();
 
       //const transferSuccessful = response && response.includes('226');
 
