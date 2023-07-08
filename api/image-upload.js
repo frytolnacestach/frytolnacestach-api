@@ -74,7 +74,7 @@ router.post('/', async (req, res) => {
       });
     
       await client.ls();
-      //await client.cd('/subdoms/image/storage/__test');
+      await client.cd('/subdoms/image/storage/__test');
       //await client.put(image.data, image.name); // změna z 'image.path' na 'image.data'
     
       //client.close();
