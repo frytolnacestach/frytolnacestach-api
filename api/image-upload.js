@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
         port: 21,
       });
 
-      //await client.cd('/subdoms/image/storage/aaatest');
+      await client.cd('/subdoms/image/storage/aaatest');
 
       //await client.delete('/subdoms/image/storage/aaatest/test_raw2.png');
 
