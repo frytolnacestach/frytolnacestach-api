@@ -4,7 +4,7 @@ const router = express.Router();
 const FTPClient = require('basic-ftp');
 
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
       const client = new FTPClient();
   
