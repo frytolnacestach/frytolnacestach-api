@@ -14,18 +14,18 @@ router.post('/', async (req, res) => {
     let client;
 
     try {
-      const image = req.files.image;
-    
-      client = new FTPSClient({
-        host: FTPHost,
-        username: FTPUser,
-        password: FTPPass,
-        protocol: 'ftps',
-        port: 21,
-      });
+        const image = req.files.image;
+
+        client = new FTPSClient({
+            host: FTPHost,
+            username: FTPUser,
+            password: FTPPass,
+            protocol: 'ftps',
+            port: 21,
+        });
 
 
-      await client.cd('/subdoms/image/storage/aaatest');
+        await client.cd('/subdoms/image/storage/aaatest');
       //await client.put(image.data, image.name);
 
       //await client.delete('/subdoms/image/storage/aaatest/test_raw2.png');
