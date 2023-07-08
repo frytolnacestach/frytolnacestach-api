@@ -10,7 +10,7 @@ const FTPHost = process.env.FTP_IMAGE_HOST
 const FTPUser = process.env.FTP_IMAGE_USER
 const FTPPass = process.env.FTP_IMAGE_PASS
 
-/*
+
 router.get('/', async (req, res) => {
     try {
 
@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
       return res.status(500).send('Chyba při připojování k FTP serveru. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
     }
   });
-  */
+
 
 
 /*
@@ -61,7 +61,7 @@ router.post('/', async (req, res) => {
   });
 */
 
-router.post('/', async (req, res) => {
+/*router.post('/', async (req, res) => {
     try {
       const image = req.files.image;
     
@@ -85,4 +85,4 @@ router.post('/', async (req, res) => {
     }
   });
 
-module.exports = router;
+module.exports = router;*/
