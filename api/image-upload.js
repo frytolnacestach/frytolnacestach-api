@@ -10,7 +10,7 @@ const FTPHost = process.env.FTP_IMAGE_HOST
 const FTPUser = process.env.FTP_IMAGE_USER
 const FTPPass = process.env.FTP_IMAGE_PASS
 
-
+/*
 router.get('/', async (req, res) => {
     try {
 
@@ -30,10 +30,10 @@ router.get('/', async (req, res) => {
       return res.status(500).send('Chyba při připojování k FTP serveru. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
     }
   });
+*/
 
 
 
-/*
 router.post('/', async (req, res) => {
     try {
       const image = req.files.image;
@@ -47,9 +47,9 @@ router.post('/', async (req, res) => {
       });
   
   
-      //await client.ls(); // Testování příkazu listování souborů   
-      await client.cd('/storage/__test');
-      await client.put(image.path, image.name);
+      await client.ls(); // Testování příkazu listování souborů   
+      //await client.cd('/storage/__test');
+      //await client.put(image.path, image.name);
   
       client.close();
   
@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
     }
   });
-*/
+
 
 /*router.post('/', async (req, res) => {
     try {
