@@ -74,6 +74,7 @@ router.post('/', async (req, res) => {
       });
 
       await client.cd('/subdoms/image/storage/aaatest');
+      await client.ls();
       await client.put(image.data, image.name); // změna z 'image.path' na 'image.data'
 
       const response = await client.raw('getreply');
