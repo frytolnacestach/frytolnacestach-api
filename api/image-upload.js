@@ -73,7 +73,7 @@ router.post('/', async (req, res) => {
         port: 21,
       });
 
-      await client.cd('/subdoms/image/storage/__test');
+      await client.cd('/subdoms/image/storage/aaatest');
       await client.put(image.data, image.name); // změna z 'image.path' na 'image.data'
     
       //client.close();
