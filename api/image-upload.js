@@ -82,13 +82,13 @@ router.post('/', async (req, res) => {
     
       //client.close();
     
-      /*if (response && response.includes('226')) {
+      if (response && response.includes('226')) {
         return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. Přenos souboru proběhl úspěšně.');
       } else {
-        return res.status(202).send('Chyba při přenosu souboru na jiný server.');
-      }*/
+        return res.status(500).send('Chyba při přenosu souboru na jiný server.');
+      }
 
-      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + JSON.stringify(response));
+      //return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + JSON.stringify(response));
     } catch (error) {
       console.error(error);
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
