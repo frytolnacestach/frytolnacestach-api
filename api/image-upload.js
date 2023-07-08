@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
     return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server.');
   } catch (error) {
     console.error(error);
-    return res.status(500).send('Chyba při nahrávání obrázku na jiný server. file:');
+    return res.status(500).send(`Chyba při nahrávání obrázku na jiný server. Velikost souboru: ${imageSize} bajtů.`);
   }
 });
 
