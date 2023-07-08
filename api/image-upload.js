@@ -10,6 +10,48 @@ const FTPHost = process.env.FTP_IMAGE_HOST
 const FTPUser = process.env.FTP_IMAGE_USER
 const FTPPass = process.env.FTP_IMAGE_PASS
 
+router.post('/', async (req, res) => {
+    let client;
+
+    try {
+      const image = req.files.image;
+    
+      client = new FTPSClient({
+        host: FTPHost,
+        username: FTPUser,
+        password: FTPPass,
+        protocol: 'ftp',
+        port: 21,
+      });
+
+      await client.cd('/subdoms/image/storage/aaatest');
+      await client.put(image.data, image.name);
+
+      const response = await client.raw('getreply');
+
+
+      //const transferSuccessful = response && response.includes('226');
+
+
+      
+      /*if (response.includes('226')) {
+        return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. Přenos souboru proběhl úspěšně.');
+      } else {
+        return res.status(500).send('Chyba při přenosu souboru na jiný server. Odpověď FTP serveru: ' + JSON.stringify(response));
+      }*/
+      
+
+      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + JSON.stringify(response));
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
+    }
+  });
+
+module.exports = router;
+
+
+
 /*
 router.get('/', async (req, res) => {
     try {
@@ -60,48 +102,3 @@ router.post('/', async (req, res) => {
     }
   });
 */
-
-router.post('/', async (req, res) => {
-    let client;
-
-    try {
-      const image = req.files.image;
-    
-      client = new FTPSClient({
-        host: FTPHost,
-        username: FTPUser,
-        password: FTPPass,
-        protocol: 'ftp',
-        port: 21,
-      });
-
-      await client.cd('/subdoms/image/storage/aaatest');
-      await client.put(image.data, image.name); // změna z 'image.path' na 'image.data'
-
-      const response = await client.raw('getreply');
-
-
-      //const transferSuccessful = response && response.includes('226');
-
-    
-      /*if (response && response.includes('226')) {
-        return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. Přenos souboru proběhl úspěšně.');
-      } else {
-        return res.status(500).send('Chyba při přenosu souboru na jiný server.');
-      }*/
-      
-      if (response.includes('226')) {
-        return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. Přenos souboru proběhl úspěšně.');
-      } else {
-        return res.status(500).send('Chyba při přenosu souboru na jiný server. Odpověď FTP serveru: ' + JSON.stringify(response));
-      }
-      
-
-      //return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + JSON.stringify(response));
-    } catch (error) {
-      console.error(error);
-      return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
-    }
-  });
-
-module.exports = router;
