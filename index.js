@@ -43,6 +43,9 @@ const userVisitedPlaceIDuser = require("./api/user-visited-place-id-user");
 const userReview = require("./api/user-review");
 //user - post
 
+//image
+const imageUpload = require("./api/image-upload");
+
 //review
 const reviewsIDplace = require("./api/reviews-id-place");
 const reviewsIDuser = require("./api/reviews-id-user");
@@ -226,6 +229,9 @@ app.use("/api/user-visited-place-edit", userVisitedPlaceEdit);
 app.use("/api/user-visited-place-id-user", userVisitedPlaceIDuser);
 app.use("/api/user-review", userReview);
 //api - user - post
+
+//api - image
+app.use("/api/image-upload", imageUpload);
 
 //api - review
 app.use("/api/reviews-id-place", reviewsIDplace);
