@@ -34,12 +34,12 @@ router.get('/', async (req, res) => {
 
         client.on('error', (error) => {
             console.error(error);
-            return res.status(500).send('Chyba při připojování k FTP serveru.');
+            return res.status(500).send('Chyba při připojování k FTP serveru IN. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
         });
 
     } catch (error) {
       console.error(error);
-      return res.status(500).send('Chyba při připojování k FTP serveru. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
+      return res.status(500).send('Chyba při připojování k FTP serveru OUT. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
     }
   });
 
