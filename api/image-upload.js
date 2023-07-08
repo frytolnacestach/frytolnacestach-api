@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fileUpload = require('express-fileupload');
-const FTPClient = require('ftp');
+const FTPClient = require('basic-ftp');
 
 router.use(fileUpload());
 
@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
             host: FTPHost,
             user: FTPUser,
             password: FTPPass,
+            secure: false
         });
       
         client.on('ready', () => {
