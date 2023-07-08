@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
 
 
     try {
+        console.log("try")
         await client.access({
             host: FTPHost,
             user: FTPUser,
