@@ -8,12 +8,12 @@ router.post('/', async (req, res) => {
     const image = req.files.image;
 
     //test
-    const fs = require('fs');
+    /*const fs = require('fs');
     const util = require('util');
     const stat = util.promisify(fs.stat);
 
     const imageStats = await stat(image.path);
-    const imageSize = imageStats.size;
+    const imageSize = imageStats.size;*/
 
 
 
