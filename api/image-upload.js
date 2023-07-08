@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-      const image = req.files.image;
+      //const image = req.files.image;
   
       const client = new FTPSClient({
         host: FTPHost,
@@ -47,8 +47,8 @@ router.post('/', async (req, res) => {
       });
   
   
-      await client.ls(); // Testování příkazu listování souborů   
-      //await client.cd('/storage/__test');
+     // await client.ls(); // Testování příkazu listování souborů   
+      await client.cd('/storage/__test');
       //await client.put(image.path, image.name);
   
       client.close();
