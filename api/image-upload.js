@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
             password: FTPPass,
             secure: false
         })
-        console.log(await client.list())
+        //console.log(await client.list())
 
         return res.status(201).send("ftp je v pořádku");
       
