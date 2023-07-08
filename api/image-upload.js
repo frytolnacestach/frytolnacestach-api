@@ -25,9 +25,13 @@ router.post('/', async (req, res) => {
       });
 
       await client.cd('/subdoms/image/storage/aaatest');
-      await client.put(image.data, image.name);
 
-      const response = await client.raw('getreply');
+      await client.delete('/subdoms/image/storage/aaatest/test_raw2.png');
+
+      //await client.put(image.data, image.name);
+
+      //const response = await client.raw('getreply');
+
 
 
       //const transferSuccessful = response && response.includes('226');
