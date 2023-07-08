@@ -7,8 +7,6 @@ const FTPHost = process.env.FTP_IMAGE_HOST
 const FTPUser = process.env.FTP_IMAGE_USER
 const FTPPass = process.env.FTP_IMAGE_PASS
 
-console.log("ftoHost: " + FTPHost)
-
 router.get('/', async (req, res) => {
     try {
       const client = new FTPClient();
@@ -22,10 +20,10 @@ router.get('/', async (req, res) => {
   
       client.close();
   
-      return res.status(200).send('Připojení k FTP serveru bylo úspěšné.');
+      return res.status(200).send('Připojení k FTP serveru bylo úspěšné. ftp:' + FTPHost);
     } catch (error) {
       console.error(error);
-      return res.status(500).send('Chyba při připojování k FTP serveru.');
+      return res.status(500).send('Chyba při připojování k FTP serveru. ftp:' + FTPHost);
     }
   });
 
