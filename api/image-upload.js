@@ -7,7 +7,7 @@ const FTPHost = process.env.FTP_IMAGE_HOST
 const FTPUser = process.env.FTP_IMAGE_USER
 const FTPPass = process.env.FTP_IMAGE_PASS
 
-router.post('/', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
       const client = new FTPClient();
   
