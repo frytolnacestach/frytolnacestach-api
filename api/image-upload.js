@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fileUpload = require('express-fileupload');
-const FTPSClient = require('ftps');
+const FTPClient = require('ftp');
 
 router.use(fileUpload());
 
@@ -16,28 +16,62 @@ router.post('/', async (req, res) => {
     try {
         const image = req.files.image;
 
-        client = new FTPSClient({
+        client = new FTPClient({
             host: FTPHost,
             username: FTPUser,
-            password: FTPPass,
-            protocol: 'ftps',
-            port: 21,
+            password: FTPPass
         });
+
+
+        client.on('ready', () => {
+            client.cwd('/subdoms/image/storage/aaatest', (error) => {
+              if (error) {
+                console.error(error);
+                return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
+              }
+      
+              client.put(image.data, image.name, (error) => {
+                if (error) {
+                  console.error(error);
+                  return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
+                }
+      
+                client.list((error, files) => {
+                  if (error) {
+                    console.error(error);
+                    return res.status(500).send('Chyba při získávání seznamu souborů z FTP serveru.');
+                  }
+      
+                  const fileList = files.map(file => file.name).join('\n');
+                  const message = 'Seznam souborů na FTP serveru:\n' + fileList;
+      
+                  client.end();
+                  return res.status(201).send(message);
+                });
+              });
+            });
+          });
+      
+          client.on('error', (error) => {
+            console.error(error);
+            return res.status(500).send('Chyba při připojování k FTP serveru.');
+          });
+
 
         //await client.delete('/subdoms/image/storage/aaatest/test_raw2.png');
 
-        await client.cd('/subdoms/image/storage/aaatest');
-        await client.put(image.data, image.name);
+        //await client.cd('/subdoms/image/storage/aaatest');
+        //await client.put(image.data, image.name);
 
         //const response = await client.raw('getreply');
 
-        const files = await client.list();
+        //const files = await client.list();
 
-        const fileList = files.map(file => file.name).join('\n');
+        //const fileList = files.map(file => file.name).join('\n');
       
 
       //return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + JSON.stringify(response));
-      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + fileList);
+      //return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + fileList);
     } catch (error) {
       console.error(error);
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
