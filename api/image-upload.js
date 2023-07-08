@@ -78,8 +78,7 @@ router.post('/', async (req, res) => {
       await client.put(image.data, image.name); // změna z 'image.path' na 'image.data'
 
       const response = await client.raw('getreply');
-    
-      client.close();
+
 
       //const transferSuccessful = response && response.includes('226');
 
@@ -94,7 +93,11 @@ router.post('/', async (req, res) => {
     } catch (error) {
       console.error(error);
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
-    }
+    } finally {
+        if (client) {
+          client.close();
+        }
+      }
   });
 
 module.exports = router;
