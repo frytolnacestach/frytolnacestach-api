@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const fileUpload = require('express-fileupload');
+const FTPSClient = require('ftps');
 
 router.use(fileUpload());
 
-const FTPSClient = require('ftps');
 
 const FTPHost = process.env.FTP_IMAGE_HOST
 const FTPUser = process.env.FTP_IMAGE_USER
@@ -24,32 +24,27 @@ router.post('/', async (req, res) => {
             port: 21,
         });
 
-        await client.delete('/subdoms/image/storage/aaatest/test_raw2.png');
+        //await client.delete('/subdoms/image/storage/aaatest/test_raw2.png');
 
         await client.cd('/subdoms/image/storage/aaatest');
         await client.put(image.data, image.name);
 
+        //const response = await client.raw('getreply');
+
+        const files = await client.list();
+
+        const fileList = files.map(file => file.name).join('\n');
       
 
-
-      const response = await client.raw('getreply');
-
-
-      //const transferSuccessful = response && response.includes('226');
-
-
-      
-      /*if (response.includes('226')) {
-        return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. Přenos souboru proběhl úspěšně.');
-      } else {
-        return res.status(500).send('Chyba při přenosu souboru na jiný server. Odpověď FTP serveru: ' + JSON.stringify(response));
-      }*/
-      
-
-      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + JSON.stringify(response));
+      //return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + JSON.stringify(response));
+      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + fileList);
     } catch (error) {
       console.error(error);
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
+    } finally {
+        if (client) {
+          client.disconnect();
+        }
     }
   });
 
