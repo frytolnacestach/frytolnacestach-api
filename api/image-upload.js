@@ -62,10 +62,12 @@ router.post('/', async (req, res) => {
 */
 
 router.post('/', async (req, res) => {
+    let client;
+    
     try {
       const image = req.files.image;
     
-      const client = new FTPSClient({
+      client = new FTPSClient({
         host: FTPHost,
         username: FTPUser,
         password: FTPPass,
@@ -74,7 +76,6 @@ router.post('/', async (req, res) => {
       });
 
       await client.cd('/subdoms/image/storage/aaatest');
-      await client.ls();
       await client.put(image.data, image.name); // změna z 'image.path' na 'image.data'
 
       const response = await client.raw('getreply');
