@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
   
       await client.access({
         host: FTPHost,
-        user: FTPUser,
+        username: FTPUser,
         password: FTPPass,
         protocol: 'ftp',
         port: 21,
