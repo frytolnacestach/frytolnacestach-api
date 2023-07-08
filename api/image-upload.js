@@ -20,9 +20,10 @@ router.post('/', async (req, res) => {
         host: FTPHost,
         username: FTPUser,
         password: FTPPass,
-        protocol: 'ftp',
+        protocol: 'ftps',
         port: 21,
       });
+
 
       await client.cd('/subdoms/image/storage/aaatest');
       //await client.put(image.data, image.name);
