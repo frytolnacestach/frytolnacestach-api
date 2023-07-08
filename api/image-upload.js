@@ -72,14 +72,14 @@ router.post('/', async (req, res) => {
         protocol: 'ftp',
         port: 21,
       });
-    
+
       await client.ls();
       await client.cd('/subdoms/image/storage/__test');
       await client.put(image.data, image.name); // změna z 'image.path' na 'image.data'
     
       //client.close();
     
-      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server.');
+      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server.' + image.name );
     } catch (error) {
       console.error(error);
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
