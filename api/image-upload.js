@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
             port: 21,
           });
       
-          await client.exec('noop'); // Odeslání prázdného příkazu
+          await client.ls(); // Testování příkazu listování souborů      
   
       return res.status(200).send('Připojení k FTP serveru bylo úspěšné. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
     } catch (error) {
