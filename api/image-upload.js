@@ -44,9 +44,9 @@ router.post('/', async (req, res) => {
       });
   
       await client.cd('/storage/__test');
-      await client.put(image.path, image.name);
+      //await client.put(image.path, image.name);
   
-      client.close();
+      //client.close();
   
       return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server.');
     } catch (error) {
