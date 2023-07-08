@@ -43,7 +43,9 @@ router.post('/', async (req, res) => {
         port: 21,
       });
   
-      await client.cd('/storage/__test');
+  
+      await client.ls(); // Testování příkazu listování souborů   
+      //await client.cd('/storage/__test');
       //await client.put(image.path, image.name);
   
       //client.close();
