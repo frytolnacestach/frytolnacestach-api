@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const FTPClient = require('basic-ftp');
+const FTPSClient = require('ftps');
 
 const FTPHost = process.env.FTP_IMAGE_HOST
 const FTPUser = process.env.FTP_IMAGE_USER
@@ -9,12 +9,13 @@ const FTPPass = process.env.FTP_IMAGE_PASS
 
 router.get('/', async (req, res) => {
     try {
-      const client = new FTPClient();
+      const client = new FTPSClient();
   
       await client.access({
         host: FTPHost,
         user: FTPUser,
         password: FTPPass,
+        protocol: 'ftp',
         port: 21,
       });
   
