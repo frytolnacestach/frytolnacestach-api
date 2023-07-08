@@ -81,7 +81,7 @@ router.post('/', async (req, res) => {
     
       //client.close();
     
-      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server.' + response);
+      return res.status(201).send('Obrázek byl úspěšně nahrán na jiný server. odpověd:' + response);
     } catch (error) {
       console.error(error);
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
