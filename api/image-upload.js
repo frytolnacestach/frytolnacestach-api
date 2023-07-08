@@ -24,9 +24,9 @@ router.post('/', async (req, res) => {
     console.error(error);
     return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
   }
-});
+});*/
 
-import { createClient } from '@supabase/supabase-js'*/
+import { createClient } from '@supabase/supabase-js'
 
 const express = require("express");
 const router = express.Router();
