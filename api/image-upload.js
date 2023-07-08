@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fileUpload = require('express-fileupload');
-const FTPClient = require('basic-ftp');
+const ftp = require('basic-ftp');
 
 router.use(fileUpload());
 
@@ -11,33 +11,21 @@ const FTPUser = process.env.FTP_IMAGE_USER
 const FTPPass = process.env.FTP_IMAGE_PASS
 
 router.get('/', async (req, res) => {
-    try {
+    const client = new ftp.Client()
+    client.ftp.verbose = true
 
-        client = new FTPClient();
-        client.connect({
+
+    try {
+        await client.access({
             host: FTPHost,
             user: FTPUser,
             password: FTPPass,
             secure: false
-        });
+        })
+        console.log(await client.list())
+
+        return res.status(201).send("ftp je v pořádku");
       
-        client.on('ready', () => {
-            client.cwd('/subdoms/image/storage/aaatest', (error) => {
-                if (error) {
-                    console.error(error);
-                    return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
-                }
-
-                client.end();
-                return res.status(201).send("přepnutí adresáře je v pořádku");
-            });
-        });
-
-        client.on('error', (error) => {
-            console.error(error);
-            return res.status(500).send('Chyba při připojování k FTP serveru IN. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
-        });
-
     } catch (error) {
       console.error(error);
       return res.status(500).send('Chyba při připojování k FTP serveru OUT. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
