@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const FTPClient = require('basic-ftp');
+/*const FTPClient = require('basic-ftp');
 
 router.post('/', async (req, res) => {
   try {
@@ -24,4 +24,4 @@ router.post('/', async (req, res) => {
     console.error(error);
     return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
   }
-});
+});*/
