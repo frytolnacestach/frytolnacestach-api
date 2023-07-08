@@ -20,10 +20,10 @@ router.get('/', async (req, res) => {
   
       client.close();
   
-      return res.status(200).send('Připojení k FTP serveru bylo úspěšné. ftp:' + FTPHost);
+      return res.status(200).send('Připojení k FTP serveru bylo úspěšné. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
     } catch (error) {
       console.error(error);
-      return res.status(500).send('Chyba při připojování k FTP serveru. ftp:' + FTPHost);
+      return res.status(500).send('Chyba při připojování k FTP serveru. ftpH:' + FTPHost + 'ftpU:' + FTPUser + 'ftpP:' + FTPPass);
     }
   });
 
