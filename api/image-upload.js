@@ -16,7 +16,8 @@ router.post('/', async (req, res) => {
     try {
         const image = req.files.image;
 
-        client = new FTPClient({
+        client = new FTPClient();
+        client.connect({
             host: FTPHost,
             username: FTPUser,
             password: FTPPass
