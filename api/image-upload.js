@@ -41,10 +41,6 @@ router.post('/', async (req, res) => {
     } catch (error) {
       console.error(error);
       return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
-    } finally {
-        if (client) {
-          client.disconnect();
-        }
     }
   });
 
