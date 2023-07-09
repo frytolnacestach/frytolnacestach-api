@@ -134,14 +134,15 @@ async function resizeImage(imageData, size) {
     }
   
     return await sharpObject.webp().toBuffer();
-  }
+}
   
-  // Funkce pro generování názvu zmenšeného obrázku ve formátu WebP
-  function getResizedImageName(originalFileName, size) {
+// Funkce pro generování názvu zmenšeného obrázku ve formátu WebP
+function getResizedImageName(originalFileName, size) {
     const { prefix, suffix, width, height } = size;
-    const baseName = path.basename(originalFileName);
+    const extension = path.extname(originalFileName);
+    const baseName = path.basename(originalFileName, extension);
     return `${prefix}${baseName}-${width ? width : height}${suffix || ''}.webp`;
-  }
+}
 
 
 // Funkce pro konverzi obrázku na formát WebP
