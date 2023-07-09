@@ -91,6 +91,10 @@ router.post('/', async (req, res) => {
                         }
 
                         for (const size of sizes) {
+                            await uploadResizedImage(client, image.data, image.name, size);
+                          }
+
+                        /*for (const size of sizes) {
                             const resizedImageData = await resizeImage(image.data, size);
                             const resizedImageName = getResizedImageName(image.name, size);
                             client.put(resizedImageData, resizedImageName, (error) => {
@@ -99,7 +103,7 @@ router.post('/', async (req, res) => {
                                 return res.status(500).send(`Chyba při nahrávání obrázku ve formátu WebP (${resizedImageName}) na FTP server.`);
                               }
                             });
-                          }
+                          }*/
 
                         
                         client.end();
@@ -118,6 +122,21 @@ router.post('/', async (req, res) => {
         return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
     }
 });
+
+// Funkce pro opakování nahrávání zmenšeného obrázku ve formátu WebP na FTP server
+async function uploadResizedImage(client, imageData, originalFileName, size) {
+    const resizedImageData = await resizeImage(imageData, size);
+    const resizedImageName = getResizedImageName(originalFileName, size);
+  
+    client.put(resizedImageData, resizedImageName, async (error) => {
+      if (error) {
+        console.error(error);
+        console.error(`Chyba při nahrávání obrázku ve formátu WebP (${resizedImageName}) na FTP server.`);
+        // Opakování nahrávání
+        await uploadResizedImage(client, imageData, originalFileName, size);
+      }
+    });
+  }
 
 // Funkce pro změnu velikosti obrázku a převod do formátu WebP
 async function resizeImage(imageData, size) {
