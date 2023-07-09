@@ -36,8 +36,18 @@ router.post('/', async (req, res) => {
                         return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
                     }
 
-                    client.end();
-                    return res.status(201).send(message);
+                    client.list((error, files) => {
+                        if (error) {
+                            console.error(error);
+                            return res.status(500).send('Chyba při získávání seznamu souborů z FTP serveru.');
+                        }
+
+                        const fileList = files.map(file => file.name).join('\n');
+                        const message = 'Seznam souborů na FTP serveru:\n' + fileList;
+
+                        client.end();
+                        return res.status(201).send(message);
+                    });
                 });
             });
         });
