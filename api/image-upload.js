@@ -14,7 +14,7 @@ const FTPUser = process.env.FTP_IMAGE_USER;
 const FTPPass = process.env.FTP_IMAGE_PASS;
 
 const inputDirPath = '/subdoms/image/storage/aaatest';
-const outputDirPath = '/new';
+const outputDirPath = '/subdoms/image/storage/aaatest';
 
 const sizes = [
     { width: 100, height: null, prefix: "h-" },
@@ -31,7 +31,7 @@ const sizes = [
 ];
 
 const convertToWebP = async (imagePath) => {
-    const outputImagePath = `${path.parse(imagePath).name}.webp`;
+    const outputImagePath = imagePath;
   
     await sharp(imagePath)
         .webp({ quality: 80 })
