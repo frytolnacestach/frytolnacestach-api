@@ -38,15 +38,14 @@ router.post('/', async (req, res) => {
                 const originalImagePath = path.join(inputDirPath, image.name);
                 const webpImagePath = path.join(inputDirPath, getWebPFileName(image.name));
 
-                client.put(image.data, image.name, async (error) => {
+                client.put(image.data, originalImagePath, async (error) => {
                     if (error) {
                         console.error(error);
                         return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
                     }
 
                     // Konverze obrázku na formát WebP
-                    await convertToWebP(originalImagePath, webpImagePath);
-
+                    //await convertToWebP(originalImagePath, webpImagePath);
 
                     client.end();
                     return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
