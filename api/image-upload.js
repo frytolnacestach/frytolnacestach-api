@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
             password: FTPPass,
         });
 
-        /*client.on('ready', async () => {
+        client.on('ready', async () => {
             client.cwd(inputDirPath, async (error) => {
                 if (error) {
                 console.error(error);
@@ -78,9 +78,9 @@ router.post('/', async (req, res) => {
                 return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
                 });
             });
-        });*/
+        });
 
-        client.on('ready', () => {
+        /*client.on('ready', () => {
             client.cwd('/subdoms/image/storage/aaatest', (error) => {
                 if (error) {
                     console.error(error);
@@ -97,7 +97,7 @@ router.post('/', async (req, res) => {
                     return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
                 });
             });
-        });
+        });*/
 
         client.on('error', (error) => {
             console.error(error);
