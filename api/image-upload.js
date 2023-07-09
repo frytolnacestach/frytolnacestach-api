@@ -15,6 +15,43 @@ const FTPPass = process.env.FTP_IMAGE_PASS;
 
 const inputDirPath = '/subdoms/image/storage/aaatest';
 
+const sizes = [
+    { width: 330, height: null, prefix: "h-" },
+    { width: 360, height: null, prefix: "h-" },
+    { width: 420, height: null, prefix: "h-" },
+    { width: 536, height: null, prefix: "h-" },
+    { width: 728, height: null, prefix: "h-" },
+    { width: 780, height: null, prefix: "h-" },
+    { width: 900, height: null, prefix: "h-" },
+    { width: 952, height: null, prefix: "h-" },
+    { width: 1248, height: null, prefix: "h-" },
+    { width: null, height: 172, prefix: "s-" },
+    { width: null, height: 186, prefix: "s-" },
+    { width: null, height: 210, prefix: "s-" },
+    { width: null, height: 224, prefix: "s-" },
+    { width: null, height: 240, prefix: "s-" },
+    { width: null, height: 274, prefix: "s-" },
+    { width: null, height: 306, prefix: "s-" },
+    { width: null, height: 360, prefix: "s-" },
+    { width: 330 * 2, height: null, prefix: "h-", suffix: "-2x" },
+    { width: 360 * 2, height: null, prefix: "h-", suffix: "-2x" },
+    { width: 420 * 2, height: null, prefix: "h-", suffix: "-2x" },
+    { width: 536 * 2, height: null, prefix: "h-", suffix: "-2x" },
+    { width: 728 * 2, height: null, prefix: "h-", suffix: "-2x" },
+    { width: 780 * 2, height: null, prefix: "h-", suffix: "-2x" },
+    { width: 900 * 2, height: null, prefix: "h-", suffix: "-2x" },
+    { width: 952 * 2, height: null, prefix: "h-", suffix: "-2x" },
+    { width: 1248 * 2, height: null, prefix: "h-", suffix: "-2x" },
+    { width: null, height: 172 * 2, prefix: "s-", suffix: "-2x" },
+    { width: null, height: 186 * 2, prefix: "s-", suffix: "-2x" },
+    { width: null, height: 210 * 2, prefix: "s-", suffix: "-2x" },
+    { width: null, height: 224 * 2, prefix: "s-", suffix: "-2x" },
+    { width: null, height: 240 * 2, prefix: "s-", suffix: "-2x" },
+    { width: null, height: 274 * 2, prefix: "s-", suffix: "-2x" },
+    { width: null, height: 306 * 2, prefix: "s-", suffix: "-2x" },
+    { width: null, height: 360 * 2, prefix: "s-", suffix: "-2x" }
+];
+
 router.post('/', async (req, res) => {
     let client;
 
@@ -42,6 +79,7 @@ router.post('/', async (req, res) => {
                         return res.status(500).send('Chyba při nahrávání původního obrázku na FTP server.');
                     }
 
+
                     // Vytvoření nové verze obrázku ve formátu WebP
                     const webpImageData = await convertToWebP(image.data);
 
@@ -50,6 +88,18 @@ router.post('/', async (req, res) => {
                         if (error) {
                             console.error(error);
                             return res.status(500).send('Chyba při nahrávání obrázku ve formátu WebP na FTP server.');
+                        }
+
+                        // Vytvoření a nahrání responzivních variant obrázku ve formátu WebP
+                        for (const size of sizes) {
+                            const resizedImageData = await resizeImage(webpImagePath, size.width, size.height);
+                            const variantFileName = getVariantFileName(image.name, size);
+                            client.put(resizedImageData, variantFileName, async (error) => {
+                                if (error) {
+                                    console.error(error);
+                                    return res.status(500).send(`Chyba při nahrávání responzivní varianty ${variantFileName} na FTP server.`);
+                                }
+                            });
                         }
 
                         client.end();
@@ -70,18 +120,35 @@ router.post('/', async (req, res) => {
 });
 
 // Funkce pro konverzi obrázku na formát WebP
-async function convertToWebP(imageData) {
-    return await sharp(imageData)
-        .toFormat('webp')
-        .toBuffer();
+async function convertToWebP(inputData, outputPath) {
+  await sharp(inputData)
+    .toFormat('webp')
+    .toFile(outputPath);
+}
+
+// Funkce pro změnu velikosti obrázku
+async function resizeImage(inputPath, width, height) {
+  return await sharp(inputPath)
+    .resize(width, height)
+    .toBuffer();
 }
 
 // Funkce pro získání názvu souboru ve formátu WebP
 function getWebPFileName(originalFileName) {
-    const extension = path.extname(originalFileName);
-    const baseName = path.basename(originalFileName, extension);
-    return baseName + '.webp';
+  const extension = path.extname(originalFileName);
+  const baseName = path.basename(originalFileName, extension);
+  return baseName + '.webp';
 }
+
+// Funkce pro získání názvu souboru responzivní varianty
+function getVariantFileName(originalFileName, size) {
+  const extension = path.extname(originalFileName);
+  const baseName = path.basename(originalFileName, extension);
+  const suffix = size.suffix ? size.suffix : '';
+  const variantFileName = `${size.prefix}${baseName}${suffix}${extension}`;
+  return variantFileName;
+}
+
 
 module.exports = router;
 
