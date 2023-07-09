@@ -5,10 +5,9 @@ const FTPClient = require('ftp');
 
 router.use(fileUpload());
 
-
-const FTPHost = process.env.FTP_IMAGE_HOST
-const FTPUser = process.env.FTP_IMAGE_USER
-const FTPPass = process.env.FTP_IMAGE_PASS
+const FTPHost = process.env.FTP_IMAGE_HOST;
+const FTPUser = process.env.FTP_IMAGE_USER;
+const FTPPass = process.env.FTP_IMAGE_PASS;
 
 router.post('/', async (req, res) => {
     let client;
@@ -36,18 +35,8 @@ router.post('/', async (req, res) => {
                         return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
                     }
 
-                    client.list((error, files) => {
-                        if (error) {
-                            console.error(error);
-                            return res.status(500).send('Chyba při získávání seznamu souborů z FTP serveru.');
-                        }
-
-                        const fileList = files.map(file => file.name).join('\n');
-                        const message = 'Seznam souborů na FTP serveru:\n' + fileList;
-
-                        client.end();
-                        return res.status(201).send(message);
-                    });
+                    client.end();
+                    return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
                 });
             });
         });
@@ -57,9 +46,9 @@ router.post('/', async (req, res) => {
             return res.status(500).send('Chyba při připojování k FTP serveru.');
         });
     } catch (error) {
-      console.error(error);
-      return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
+        console.error(error);
+        return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
     }
-  });
+});
 
 module.exports = router;
