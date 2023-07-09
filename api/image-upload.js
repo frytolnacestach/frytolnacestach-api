@@ -62,8 +62,10 @@ router.post('/', async (req, res) => {
                         return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
                     }
 
-                    const originalImagePath = path.join(outputDirPath, `${image.name}.webp`);
-                    await resizeAndSaveImage(originalImagePath, originalImagePath, null, null, '');
+                    //const originalImagePath = path.join(outputDirPath, `${image.name}.webp`);
+                    // save to webp
+                    //await resizeAndSaveImage(originalImagePath, originalImagePath, null, null, '');
+                    // save to webp - resizes
                     for (const sizeObj of sizes) {
                         const width = sizeObj.width;
                         const height = sizeObj.height;
