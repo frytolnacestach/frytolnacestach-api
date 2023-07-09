@@ -119,13 +119,12 @@ router.post('/', async (req, res) => {
     }
 });
 
-
-// Funkce pro změnu velikosti obrázku
+// Funkce pro změnu velikosti obrázku a převod do formátu WebP
 async function resizeImage(imageData, size) {
     const { width, height, prefix, suffix } = size;
   
     let sharpObject = sharp(imageData);
-    
+  
     if (width && height) {
       sharpObject = sharpObject.resize(width, height);
     } else if (width) {
@@ -133,18 +132,17 @@ async function resizeImage(imageData, size) {
     } else if (height) {
       sharpObject = sharpObject.resize(null, height);
     }
-    
-    return await sharpObject.toFormat('webp').toBuffer();
+  
+    return await sharpObject.webp().toBuffer();
   }
   
-  // Funkce pro generování názvu zmenšeného obrázku
+  // Funkce pro generování názvu zmenšeného obrázku ve formátu WebP
   function getResizedImageName(originalFileName, size) {
-    const { prefix, suffix } = size;
-    const extension = path.extname(originalFileName);
-    const baseName = path.basename(originalFileName, extension);
-    return `${prefix}${baseName}${suffix || ''}${extension}`;
+    const { prefix, suffix, width, height } = size;
+    const baseName = path.basename(originalFileName);
+    return `${prefix}${baseName}-${width ? width : height}${suffix || ''}.webp`;
   }
-  
+
 
 // Funkce pro konverzi obrázku na formát WebP
 async function convertToWebP(imageData) {
