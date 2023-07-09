@@ -50,19 +50,19 @@ const convertToWebPAndUpload = async (imageData, imageName) => {
   
     await sharp(imageData)
       .webp({ quality: 80 })
-      .toFile(path.join(outputDirPath, outputImagePath));
+      .toFile(outputImagePath);
   
     // Přenos souboru WebP na FTP server
-    client.put(fs.createReadStream(path.join(outputDirPath, outputImagePath)), outputImagePath, (error) => {
+    client.put(fs.createReadStream(outputImagePath), outputImagePath, (error) => {
       if (error) {
         console.error(error);
         return res.status(500).send('Chyba při nahrávání obrázku ve formátu WebP na FTP server.');
       }
   
       console.log('Obrázek ve formátu WebP byl úspěšně nahrán na FTP server.');
-      fs.unlinkSync(path.join(outputDirPath, outputImagePath)); // Smazat výsledný soubor WebP po nahrání na FTP server
     });
   };
+  
 
 router.post('/', async (req, res) => {
     let client;
