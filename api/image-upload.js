@@ -79,7 +79,7 @@ router.post('/', async (req, res) => {
                         return res.status(500).send('Chyba při nahrávání původního obrázku na FTP server.');
                     }
 
-
+                    
                     // Vytvoření nové verze obrázku ve formátu WebP
                     const webpImageData = await convertToWebP(image.data);
 
@@ -90,18 +90,7 @@ router.post('/', async (req, res) => {
                             return res.status(500).send('Chyba při nahrávání obrázku ve formátu WebP na FTP server.');
                         }
 
-                        // Vytvoření a nahrání responzivních variant obrázku ve formátu WebP
-                        for (const size of sizes) {
-                            const resizedImageData = await resizeImage(webpImagePath, size.width, size.height);
-                            const variantFileName = getVariantFileName(image.name, size);
-                            client.put(resizedImageData, variantFileName, async (error) => {
-                                if (error) {
-                                    console.error(error);
-                                    return res.status(500).send(`Chyba při nahrávání responzivní varianty ${variantFileName} na FTP server.`);
-                                }
-                            });
-                        }
-
+                        
                         client.end();
                         return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
                     });
@@ -120,35 +109,18 @@ router.post('/', async (req, res) => {
 });
 
 // Funkce pro konverzi obrázku na formát WebP
-async function convertToWebP(inputData, outputPath) {
-  await sharp(inputData)
-    .toFormat('webp')
-    .toFile(outputPath);
-}
-
-// Funkce pro změnu velikosti obrázku
-async function resizeImage(inputPath, width, height) {
-  return await sharp(inputPath)
-    .resize(width, height)
-    .toBuffer();
+async function convertToWebP(imageData) {
+    return await sharp(imageData)
+        .toFormat('webp')
+        .toBuffer();
 }
 
 // Funkce pro získání názvu souboru ve formátu WebP
 function getWebPFileName(originalFileName) {
-  const extension = path.extname(originalFileName);
-  const baseName = path.basename(originalFileName, extension);
-  return baseName + '.webp';
+    const extension = path.extname(originalFileName);
+    const baseName = path.basename(originalFileName, extension);
+    return baseName + '.webp';
 }
-
-// Funkce pro získání názvu souboru responzivní varianty
-function getVariantFileName(originalFileName, size) {
-  const extension = path.extname(originalFileName);
-  const baseName = path.basename(originalFileName, extension);
-  const suffix = size.suffix ? size.suffix : '';
-  const variantFileName = `${size.prefix}${baseName}${suffix}${extension}`;
-  return variantFileName;
-}
-
 
 module.exports = router;
 
