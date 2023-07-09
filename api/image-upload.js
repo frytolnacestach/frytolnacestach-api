@@ -63,7 +63,7 @@ router.post('/', async (req, res) => {
                 }
 
                 // Logika pro generování obrázků
-                const originalImagePath = path.join(outputDirPath, `${image.name}.webp`);
+                /*const originalImagePath = path.join(outputDirPath, `${image.name}.webp`);
                 await resizeAndSaveImage(originalImagePath, originalImagePath, null, null, '');
                 for (const sizeObj of sizes) {
                     const width = sizeObj.width;
@@ -72,7 +72,7 @@ router.post('/', async (req, res) => {
                     const suffix = sizeObj.suffix || '';
                     const outputImagePath = path.join(outputDirPath, `${prefix}${path.parse(image.name).name}-${width ? width : height}${suffix}.webp`);
                     await resizeAndSaveImage(originalImagePath, outputImagePath, width, height, suffix);
-                }
+                }*/
 
                 client.end();
                 return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
