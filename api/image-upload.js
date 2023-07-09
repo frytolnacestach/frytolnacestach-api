@@ -83,6 +83,7 @@ router.post('/', async (req, res) => {
                     // Vytvoření nové verze obrázku ve formátu WebP
                     const webpImageData = await convertToWebP(image.data);
 
+
                     // Nahrání nového obrázku ve formátu WebP na FTP server
                     client.put(webpImageData, getWebPFileName(image.name), async (error) => {
                         if (error) {
@@ -91,21 +92,10 @@ router.post('/', async (req, res) => {
                         }
 
                         for (const size of sizes) {
-                            await uploadResizedImage(client, image.data, image.name, size);
-                          }
+                            await processResizedImage(client, image.data, image.name, size);
+                            //await uploadResizedImage(client, image.data, image.name, size);
+                        }
 
-                        /*for (const size of sizes) {
-                            const resizedImageData = await resizeImage(image.data, size);
-                            const resizedImageName = getResizedImageName(image.name, size);
-                            client.put(resizedImageData, resizedImageName, (error) => {
-                              if (error) {
-                                console.error(error);
-                                return res.status(500).send(`Chyba při nahrávání obrázku ve formátu WebP (${resizedImageName}) na FTP server.`);
-                              }
-                            });
-                          }*/
-
-                        
                         client.end();
                         return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
                     });
@@ -122,6 +112,42 @@ router.post('/', async (req, res) => {
         return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
     }
 });
+
+
+// Funkce pro nahrání obrázku na FTP server
+function putImage(client, imageData, imageName) {
+    return new Promise((resolve, reject) => {
+      client.put(imageData, imageName, (error) => {
+        if (error) {
+          console.error(error);
+          return reject(`Chyba při nahrávání obrázku (${imageName}) na FTP server.`);
+        }
+        resolve();
+      });
+    });
+  }
+  
+// Funkce pro zpracování zmenšeného obrázku
+function processResizedImage(client, imageData, originalFileName, size) {
+    return new Promise((resolve, reject) => {
+      setTimeout(async () => {
+        try {
+          const resizedImageData = await resizeImage(imageData, size);
+          const resizedImageName = getResizedImageName(originalFileName, size);
+          await putImage(client, resizedImageData, resizedImageName);
+          resolve();
+        } catch (error) {
+          console.error(error);
+          console.error(`Chyba při zpracování obrázku ve formátu WebP (${resizedImageName}) na FTP server.`);
+          // Opakování zpracování
+          await processResizedImage(client, imageData, originalFileName, size);
+          resolve();
+        }
+      }, 1000); // Počkej 1 sekundu mezi zpracováním jednotlivých obrázků
+    });
+  }
+
+
 
 // Funkce pro opakování nahrávání zmenšeného obrázku ve formátu WebP na FTP server
 async function uploadResizedImage(client, imageData, originalFileName, size) {
