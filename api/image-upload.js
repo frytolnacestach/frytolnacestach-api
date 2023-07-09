@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
                     }
 
                     // Konverze obrázku na formát WebP
-                    //await convertToWebP(originalImagePath, webpImagePath);
+                    await convertToWebP(originalImagePath, webpImagePath);
 
                     client.end();
                     return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
