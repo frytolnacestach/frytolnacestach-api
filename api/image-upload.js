@@ -128,13 +128,17 @@ async function uploadResizedImage(client, imageData, originalFileName, size) {
     const resizedImageData = await resizeImage(imageData, size);
     const resizedImageName = getResizedImageName(originalFileName, size);
   
-    client.put(resizedImageData, resizedImageName, async (error) => {
-      if (error) {
-        console.error(error);
-        console.error(`Chyba při nahrávání obrázku ve formátu WebP (${resizedImageName}) na FTP server.`);
-        // Opakování nahrávání
-        await uploadResizedImage(client, imageData, originalFileName, size);
-      }
+    return new Promise((resolve, reject) => {
+      client.put(resizedImageData, resizedImageName, async (error) => {
+        if (error) {
+          console.error(error);
+          console.error(`Chyba při nahrávání obrázku ve formátu WebP (${resizedImageName}) na FTP server.`);
+          // Opakování nahrávání
+          await uploadResizedImage(client, imageData, originalFileName, size).then(resolve).catch(reject);
+        } else {
+          resolve();
+        }
+      });
     });
   }
 
