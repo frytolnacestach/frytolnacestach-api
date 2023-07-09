@@ -14,55 +14,6 @@ const FTPUser = process.env.FTP_IMAGE_USER;
 const FTPPass = process.env.FTP_IMAGE_PASS;
 
 const inputDirPath = '/subdoms/image/storage/aaatest';
-const outputDirPath = '/subdoms/image/storage/aaatest';
-
-const sizes = [
-    { width: 100, height: null, prefix: "h-" },
-    { width: 108, height: null, prefix: "h-" },
-    { width: 126, height: null, prefix: "h-" },
-    { width: 172, height: null, prefix: "h-" },
-    { width: 192, height: null, prefix: "h-" },
-    { width: 220, height: null, prefix: "h-" },
-    { width: 258, height: null, prefix: "h-" },
-    { width: 286, height: null, prefix: "h-" },
-    { width: 310, height: null, prefix: "h-" },
-    { width: 312, height: null, prefix: "h-" },
-    { width: 320, height: null, prefix: "h-" }
-];
-
-const convertToWebP = async (imagePath) => {
-    const outputImagePath = imagePath;
-  
-    await sharp(imagePath)
-        .webp({ quality: 80 })
-        .toFile(path.join(outputDirPath, outputImagePath));
-};
-
-const resizeAndSaveImage = async (imageData, outputPath, width, height) => {
-    const image = sharp(imageData);
-    const resizedImage = await image.resize({ width: width, height: height, fit: 'contain' }).webp({ quality: 80 });
-    await resizedImage.toFile(outputPath);
-};
-
-
-const convertToWebPAndUpload = async (imageData, imageName) => {
-    const outputImagePath = `${imageName}.webp`;
-  
-    await sharp(imageData)
-      .webp({ quality: 80 })
-      .toFile(outputImagePath);
-  
-    // Přenos souboru WebP na FTP server
-    client.put(fs.createReadStream(outputImagePath), outputImagePath, (error) => {
-      if (error) {
-        console.error(error);
-        return res.status(500).send('Chyba při nahrávání obrázku ve formátu WebP na FTP server.');
-      }
-  
-      console.log('Obrázek ve formátu WebP byl úspěšně nahrán na FTP server.');
-    });
-  };
-  
 
 router.post('/', async (req, res) => {
     let client;
@@ -84,33 +35,18 @@ router.post('/', async (req, res) => {
                     return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
                 }
 
+                const originalImagePath = path.join(inputDirPath, image.name);
+                const webpImagePath = path.join(inputDirPath, getWebPFileName(image.name));
+
                 client.put(image.data, image.name, async (error) => {
                     if (error) {
                         console.error(error);
                         return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
                     }
 
-                    // Převod a přenos souboru do formátu WebP
-                    await convertToWebPAndUpload(image.data, image.name);
+                    // Konverze obrázku na formát WebP
+                    await convertToWebP(originalImagePath, webpImagePath);
 
-
-                    // named webp variant
-                    //const originalWebPImagePath = path.join(outputDirPath, `${image.name}.webp`);
-                    // Convert to WebP
-                    //await convertToWebP(originalWebPImagePath);
-
-                    // save to webp
-                    //await resizeAndSaveImage(image.data, originalImagePath, null, null);
-                    
-                    // save to webp - resizes
-                    /*for (const sizeObj of sizes) {
-                        const width = sizeObj.width;
-                        const height = sizeObj.height;
-                        const prefix = sizeObj.prefix || '';
-                        const suffix = sizeObj.suffix || '';
-                        const outputImagePath = path.join(outputDirPath, `${prefix}${path.parse(image.name).name}-${width ? width : height}${suffix}.webp`);
-                        await resizeAndSaveImage(originalImagePath, outputImagePath, width, height, suffix);
-                    }*/
 
                     client.end();
                     return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
@@ -128,4 +64,100 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Funkce pro konverzi obrázku na formát WebP
+async function convertToWebP(inputPath, outputPath) {
+    await sharp(inputPath)
+        .toFormat('webp')
+        .toFile(outputPath);
+}
+
+// Funkce pro získání názvu souboru ve formátu WebP
+function getWebPFileName(originalFileName) {
+    const extension = path.extname(originalFileName);
+    const baseName = path.basename(originalFileName, extension);
+    return baseName + '.webp';
+}
+
 module.exports = router;
+
+
+// Převod a přenos souboru do formátu WebP
+//await convertToWebPAndUpload(image.data, image.name);
+
+
+// named webp variant
+//const originalWebPImagePath = path.join(outputDirPath, `${image.name}.webp`);
+// Convert to WebP
+//await convertToWebP(originalWebPImagePath);
+
+// save to webp
+//await resizeAndSaveImage(image.data, originalImagePath, null, null);
+
+// save to webp - resizes
+/*for (const sizeObj of sizes) {
+    const width = sizeObj.width;
+    const height = sizeObj.height;
+    const prefix = sizeObj.prefix || '';
+    const suffix = sizeObj.suffix || '';
+    const outputImagePath = path.join(outputDirPath, `${prefix}${path.parse(image.name).name}-${width ? width : height}${suffix}.webp`);
+    await resizeAndSaveImage(originalImagePath, outputImagePath, width, height, suffix);
+}*/
+
+/*
+
+const convertToWebP = async (imagePath) => {
+    const outputImagePath = imagePath;
+  
+    await sharp(imagePath)
+        .webp({ quality: 80 })
+        .toFile(path.join(outputDirPath, outputImagePath));
+};
+
+const resizeAndSaveImage = async (imageData, outputPath, width, height) => {
+    const image = sharp(imageData);
+    const resizedImage = await image.resize({ width: width, height: height, fit: 'contain' }).webp({ quality: 80 });
+    await resizedImage.toFile(outputPath);
+};
+
+
+
+const inputDirPath = '/subdoms/image/storage/aaatest';
+const outputDirPath = '/subdoms/image/storage/aaatest';
+
+const sizes = [
+    { width: 100, height: null, prefix: "h-" },
+    { width: 108, height: null, prefix: "h-" },
+    { width: 126, height: null, prefix: "h-" },
+    { width: 172, height: null, prefix: "h-" },
+    { width: 192, height: null, prefix: "h-" },
+    { width: 220, height: null, prefix: "h-" },
+    { width: 258, height: null, prefix: "h-" },
+    { width: 286, height: null, prefix: "h-" },
+    { width: 310, height: null, prefix: "h-" },
+    { width: 312, height: null, prefix: "h-" },
+    { width: 320, height: null, prefix: "h-" }
+];
+
+
+
+
+const convertToWebPAndUpload = async (imageData, imageName) => {
+  const outputImagePath = `${imageName}.webp`;
+
+  await sharp(imageData)
+    .webp({ quality: 80 })
+    .toFile(outputImagePath);
+
+  // Přenos souboru WebP na FTP server
+  client.put(fs.createReadStream(outputImagePath), outputImagePath, (error) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).send('Chyba při nahrávání obrázku ve formátu WebP na FTP server.');
+    }
+
+    console.log('Obrázek ve formátu WebP byl úspěšně nahrán na FTP server.');
+    fs.unlinkSync(outputImagePath); // Smazat výsledný soubor WebP po nahrání na FTP server
+  });
+};
+
+*/
