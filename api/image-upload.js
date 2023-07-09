@@ -73,7 +73,24 @@ router.post('/', async (req, res) => {
                 }
 
                 // Nahrání původního obrázku na FTP server
-                client.put(image.data, image.name, async (error) => {
+                await putImage(client, image.data, image.name);
+
+                // Vytvoření nové verze obrázku ve formátu WebP
+                const webpImageData = await convertToWebP(image.data);
+
+                // Nahrání nového obrázku ve formátu WebP na FTP server
+                await putImage(client, webpImageData, getWebPFileName(image.name));
+
+                // Zpracování zmenšených obrázků
+                for (const size of sizes) {
+                await processResizedImage(client, image.data, image.name, size);
+                }
+
+                client.end();
+                        return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
+
+                // Nahrání původního obrázku na FTP server
+                /*client.put(image.data, image.name, async (error) => {
                     if (error) {
                         console.error(error);
                         return res.status(500).send('Chyba při nahrávání původního obrázku na FTP server.');
@@ -99,7 +116,7 @@ router.post('/', async (req, res) => {
                         client.end();
                         return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
                     });
-                });
+                });*/
             });
         });
 
