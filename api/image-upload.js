@@ -49,45 +49,36 @@ router.post('/', async (req, res) => {
             password: FTPPass,
         });
 
-        client.on('ready', async () => {
-            console.log('FTP server ready');
-          });
-      
-          client.on('error', (error) => {
-            console.error(error);
-            return res.status(500).send('Chyba při připojování k FTP serveru.');
-          });
-      
-          // Přesun metody client.cwd mimo událost 'ready'
-          client.cwd(inputDirPath, async (error) => {
-            if (error) {
-              console.error(error);
-              return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
-            }
-      
-            client.put(image.data, image.name, async (error) => {
-              if (error) {
+        client.on('ready', () => {
+            client.cwd(inputDirPath, (error) => {
+                if (error) {
                 console.error(error);
-                return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
-              }
-      
-              // Logika pro generování obrázků
-              const originalImagePath = path.join(outputDirPath, `${image.name}.webp`);
-              await resizeAndSaveImage(originalImagePath, originalImagePath, null, null, '');
-              for (const sizeObj of sizes) {
-                const width = sizeObj.width;
-                const height = sizeObj.height;
-                const prefix = sizeObj.prefix || '';
-                const suffix = sizeObj.suffix || '';
-                const outputImagePath = path.join(outputDirPath, `${prefix}${path.parse(image.name).name}-${width ? width : height}${suffix}.webp`);
-                await resizeAndSaveImage(originalImagePath, outputImagePath, width, height, suffix);
-              }
-      
-              client.end();
-              return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
+                return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
+                }
+
+                client.put(image.data, image.name, (error) => {
+                    if (error) {
+                        console.error(error);
+                        return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
+                    }
+
+                    // Logika pro generování obrázků
+                    /*const originalImagePath = path.join(outputDirPath, `${image.name}.webp`);
+                    await resizeAndSaveImage(originalImagePath, originalImagePath, null, null, '');
+                    for (const sizeObj of sizes) {
+                        const width = sizeObj.width;
+                        const height = sizeObj.height;
+                        const prefix = sizeObj.prefix || '';
+                        const suffix = sizeObj.suffix || '';
+                        const outputImagePath = path.join(outputDirPath, `${prefix}${path.parse(image.name).name}-${width ? width : height}${suffix}.webp`);
+                        await resizeAndSaveImage(originalImagePath, outputImagePath, width, height, suffix);
+                    }*/
+
+                    client.end();
+                    return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
+                });
             });
-          });
- 
+        });
 
         /*client.on('ready', () => {
             client.cwd('/subdoms/image/storage/aaatest', (error) => {
@@ -108,7 +99,10 @@ router.post('/', async (req, res) => {
             });
         });*/
 
-     
+        client.on('error', (error) => {
+            console.error(error);
+            return res.status(500).send('Chyba při připojování k FTP serveru.');
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
