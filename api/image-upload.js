@@ -64,7 +64,7 @@ router.post('/', async (req, res) => {
 
                     const originalImagePath = path.join(outputDirPath, `${image.name}.webp`);
                     // save to webp
-                    await resizeAndSaveImage(originalImagePath, originalImagePath, null, null, '');
+                    //await resizeAndSaveImage(originalImagePath, originalImagePath, null, null, '');
                     // save to webp - resizes
                     /*for (const sizeObj of sizes) {
                         const width = sizeObj.width;
