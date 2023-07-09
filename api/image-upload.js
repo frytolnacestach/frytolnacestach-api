@@ -14,7 +14,7 @@ const FTPUser = process.env.FTP_IMAGE_USER;
 const FTPPass = process.env.FTP_IMAGE_PASS;
 
 const inputDirPath = '/subdoms/image/storage/aaatest';
-const outputDirPath = '/subdoms/image/storage/aaatest';
+const outputDirPath = '/new';
 
 const sizes = [
     { width: 100, height: null, prefix: "h-" },
