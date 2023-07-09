@@ -160,7 +160,7 @@ function processResizedImage(client, imageData, originalFileName, size) {
           await processResizedImage(client, imageData, originalFileName, size);
           resolve();
         }
-      }, 1000); // Počkej 1 sekundu mezi zpracováním jednotlivých obrázků
+      }, 0); // Počkej 1 sekundu mezi zpracováním jednotlivých obrázků
     });
   }
 
