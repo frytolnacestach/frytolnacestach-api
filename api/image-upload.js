@@ -44,6 +44,27 @@ const resizeAndSaveImage = async (imageData, outputPath, width, height) => {
     await resizedImage.toFile(outputPath);
 };
 
+
+const convertToWebPAndUpload = async (imageData, imagePath) => {
+    const outputImagePath = `${path.parse(imagePath).name}.webp`;
+  
+    await sharp(imageData)
+      .webp({ quality: 80 })
+      .toFile(outputImagePath);
+  
+    // Přenos souboru WebP na FTP server
+    client.put(fs.createReadStream(outputImagePath), outputImagePath, (error) => {
+      if (error) {
+        console.error(error);
+        return res.status(500).send('Chyba při nahrávání obrázku ve formátu WebP na FTP server.');
+      }
+  
+      console.log('Obrázek ve formátu WebP byl úspěšně nahrán na FTP server.');
+      fs.unlinkSync(outputImagePath); // Smazat výsledný soubor WebP po nahrání na FTP server
+    });
+  };
+
+
 router.post('/', async (req, res) => {
     let client;
 
@@ -70,10 +91,14 @@ router.post('/', async (req, res) => {
                         return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
                     }
 
+                    // Převod a přenos souboru do formátu WebP
+                    await convertToWebPAndUpload(image.data, image.name);
+
+
                     // named webp variant
-                    const originalWebPImagePath = path.join(outputDirPath, `${image.name}.webp`);
+                    //const originalWebPImagePath = path.join(outputDirPath, `${image.name}.webp`);
                     // Convert to WebP
-                    await convertToWebP(originalWebPImagePath);
+                    //await convertToWebP(originalWebPImagePath);
 
                     // save to webp
                     //await resizeAndSaveImage(image.data, originalImagePath, null, null);
