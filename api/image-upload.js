@@ -3,6 +3,10 @@ const router = express.Router();
 const fileUpload = require('express-fileupload');
 const FTPClient = require('ftp');
 
+const sharp = require('sharp');
+const fs = require('fs');
+const path = require('path');
+
 router.use(fileUpload());
 
 const FTPHost = process.env.FTP_IMAGE_HOST;
