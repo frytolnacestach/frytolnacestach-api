@@ -35,20 +35,26 @@ router.post('/', async (req, res) => {
                     return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
                 }
 
-                const originalImagePath = path.join(inputDirPath, image.name);
-                const webpImagePath = path.join(inputDirPath, getWebPFileName(image.name));
-
-                client.put(image.data, originalImagePath, async (error) => {
+                // Nahrání původního obrázku na FTP server
+                client.put(image.data, image.name, async (error) => {
                     if (error) {
                         console.error(error);
-                        return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
+                        return res.status(500).send('Chyba při nahrávání původního obrázku na FTP server.');
                     }
 
-                    // Konverze obrázku na formát WebP
-                    await convertToWebP(originalImagePath, webpImagePath);
+                    // Vytvoření nové verze obrázku ve formátu WebP
+                    const webpImageData = await convertToWebP(image.data);
 
-                    client.end();
-                    return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
+                    // Nahrání nového obrázku ve formátu WebP na FTP server
+                    client.put(webpImageData, getWebPFileName(image.name), async (error) => {
+                        if (error) {
+                            console.error(error);
+                            return res.status(500).send('Chyba při nahrávání obrázku ve formátu WebP na FTP server.');
+                        }
+
+                        client.end();
+                        return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
+                    });
                 });
             });
         });
@@ -64,10 +70,10 @@ router.post('/', async (req, res) => {
 });
 
 // Funkce pro konverzi obrázku na formát WebP
-async function convertToWebP(inputPath, outputPath) {
-    await sharp(inputPath)
+async function convertToWebP(imageData) {
+    return await sharp(imageData)
         .toFormat('webp')
-        .toFile(outputPath);
+        .toBuffer();
 }
 
 // Funkce pro získání názvu souboru ve formátu WebP
@@ -78,6 +84,7 @@ function getWebPFileName(originalFileName) {
 }
 
 module.exports = router;
+
 
 
 // Převod a přenos souboru do formátu WebP
