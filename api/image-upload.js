@@ -30,8 +30,8 @@ const sizes = [
     { width: 320, height: null, prefix: "h-" }
 ];
 
-const resizeAndSaveImage = async (inputPath, outputPath, width, height, suffix) => {
-    const image = sharp(inputPath);
+const resizeAndSaveImage = async (imageData, outputPath, width, height, suffix) => {
+    const image = sharp(imageData);
     const resizedImage = await image.resize({ width: width, height: height, fit: 'contain' }).webp({ quality: 80 });
     await resizedImage.toFile(outputPath);
 };
@@ -62,9 +62,9 @@ router.post('/', async (req, res) => {
                         return res.status(500).send('Chyba při nahrávání obrázku na FTP server.');
                     }
 
-                    const originalImagePath = path.join(outputDirPath, `${image.name}.webp`);
+                    //const originalImagePath = path.join(outputDirPath, `${image.name}.webp`);
                     // save to webp
-                    await resizeAndSaveImage(image.data, originalImagePath, null, null, '');
+                    await resizeAndSaveImage(image.data, outputImagePath, null, null, '');
                     // save to webp - resizes
                     /*for (const sizeObj of sizes) {
                         const width = sizeObj.width;
