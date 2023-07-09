@@ -30,6 +30,14 @@ const sizes = [
     { width: 320, height: null, prefix: "h-" }
 ];
 
+const convertToWebP = async (imagePath) => {
+    const outputImagePath = `${path.parse(imagePath).name}.webp`;
+  
+    await sharp(imagePath)
+        .webp({ quality: 80 })
+        .toFile(path.join(outputDirPath, outputImagePath));
+};
+
 const resizeAndSaveImage = async (imageData, outputPath, width, height) => {
     const image = sharp(imageData);
     const resizedImage = await image.resize({ width: width, height: height, fit: 'contain' }).webp({ quality: 80 });
@@ -63,9 +71,13 @@ router.post('/', async (req, res) => {
                     }
 
                     // named webp variant
-                    const originalImagePath = path.join(outputDirPath, `${image.name}.webp`);
+                    const originalWebPImagePath = path.join(outputDirPath, `${image.name}.webp`);
+                    // Convert to WebP
+                    await convertToWebP(originalWebPImagePath);
+
                     // save to webp
-                    await resizeAndSaveImage(image.data, originalImagePath, null, null);
+                    //await resizeAndSaveImage(image.data, originalImagePath, null, null);
+                    
                     // save to webp - resizes
                     /*for (const sizeObj of sizes) {
                         const width = sizeObj.width;
