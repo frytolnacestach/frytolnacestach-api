@@ -55,7 +55,7 @@ router.get('/', async (req, res) => {
                         const webpImageData = await convertToWebP(data);
 
 						client.end();
-						return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server.');
+						return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server. 2');
 
                         // Uložení převedeného obrázku zpět na FTP server
                         /*client.put(webpImageData, fileLoad + '.webp', (error) => {
