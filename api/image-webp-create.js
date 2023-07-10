@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 
     const dirPath = '/subdoms/image/storage' + imageSource;
     const fileLoad = "test"; //only test
-	const fileLoadExtension = ".jpg"
+	const fileLoadExtension = ".png"
 
     let client;
 
