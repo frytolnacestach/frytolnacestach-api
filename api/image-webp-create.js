@@ -51,12 +51,40 @@ router.post('/', async (req, res) => {
 					}
 
 
-					let byteCount = 0; // Proměnná pro ukládání velikosti streamu
+					// Když je stream kompletně načten, zavolá se 'end'
+					stream.on('end', () => {
+						const streamData = Buffer.concat(data); // Sloučení dat ze streamu do jednoho Bufferu
+
+						// Konverze souboru do formátu WebP pomocí sharp
+						sharp(streamData)
+							.toFormat('webp')
+							.toBuffer((error, convertedImage) => {
+								if (error) {
+									console.error(error);
+									return res.status(500).send('Chyba při konverzi obrázku na formát WebP.');
+								}
+
+								// Uložení převedeného obrázku zpět na FTP server
+								client.put(convertedImage, fileLoad + '.webp', (error) => {
+									if (error) {
+										console.error(error);
+										return res.status(500).send('Chyba při ukládání souboru na FTP server.');
+									}
+
+									client.end();
+									return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server.');
+								});
+							});
+					});
+
+
+
+					//let byteCount = 0; // Proměnná pro ukládání velikosti streamu
 
 					// Získání velikosti streamu
-					stream.on('data', (chunk) => {
+					/*stream.on('data', (chunk) => {
 						byteCount += chunk.length;
-					});
+					});*/
 
 					// Vytvoření nové verze obrázku ve formátu WebP
                     const webpImageData = await convertToWebP(stream.data);
