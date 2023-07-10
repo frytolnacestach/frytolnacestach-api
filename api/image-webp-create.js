@@ -27,8 +27,6 @@ router.post('/', async (req, res) => {
     let client;
 
     try {
-        const image = req.files.image;
-
         client = new FTPClient();
         client.connect({
             host: FTPHost,
@@ -43,13 +41,49 @@ router.post('/', async (req, res) => {
                     return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
                 }
 
+
+				// Stáhnutí souboru "test.png" z FTP serveru
+				const imagePath = path.join(__dirname, dirPath, 'test.png');
+
+				await promisify(client.get).bind(client)('test.png', async (error, stream) => {
+				  if (error) {
+					console.error(error);
+					return res.status(500).send('Chyba při načítání obrázku z FTP serveru.');
+				  }
+				  
+				  const chunks = [];
+				  stream.on('data', (chunk) => {
+					chunks.push(chunk);
+				  });
+				  
+				  stream.on('end', async () => {
+					const imageData = Buffer.concat(chunks);
+					
+					// Konverze na formát WebP
+					const webpImageData = await convertToWebP(imageData);
+					
+					// Nahrání nového obrázku ve formátu WebP na FTP server
+					await promisify(client.put).bind(client)(webpImageData, 'test.webp', async (error) => {
+					  if (error) {
+						console.error(error);
+						return res.status(500).send('Chyba při nahrávání obrázku ve formátu WebP na FTP server.');
+					  }
+					  
+					  client.end();
+					  return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
+					});
+
+
+					
+				  });
+				});
                 
-                    
+
                     // Vytvoření nové verze obrázku ve formátu WebP
-                    const webpImageData = await convertToWebP(image.data);
+                    //const webpImageData = await convertToWebP(image.data);
 
                     // Nahrání nového obrázku ve formátu WebP na FTP server
-                    client.put(webpImageData, getWebPFileName(image.name), async (error) => {
+                    /*client.put(webpImageData, getWebPFileName(image.name), async (error) => {
                         if (error) {
                             console.error(error);
                             return res.status(500).send('Chyba při nahrávání obrázku ve formátu WebP na FTP server.');
@@ -62,7 +96,7 @@ router.post('/', async (req, res) => {
                         
                         client.end();
                         return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
-                    });
+                    });*/
             });
         });
 
