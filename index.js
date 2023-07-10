@@ -43,9 +43,6 @@ const userVisitedPlaceIDuser = require("./api/user-visited-place-id-user");
 const userReview = require("./api/user-review");
 //user - post
 
-//image
-const imageUpload = require("./api/image-upload");
-
 //review
 const reviewsIDplace = require("./api/reviews-id-place");
 const reviewsIDuser = require("./api/reviews-id-user");
@@ -75,6 +72,8 @@ const platformEdit = require("./api/platform-edit");
 const images = require("./api/images");
 const imagesArray = require("./api/images-array");
 const imageID = require("./api/image-id");
+const imageUpload = require("./api/image-upload");
+const imageCreate = require("./api/image-create");
 
 //video
 const videos = require("./api/videos");
@@ -230,9 +229,6 @@ app.use("/api/user-visited-place-id-user", userVisitedPlaceIDuser);
 app.use("/api/user-review", userReview);
 //api - user - post
 
-//api - image
-app.use("/api/image-upload", imageUpload);
-
 //api - review
 app.use("/api/reviews-id-place", reviewsIDplace);
 app.use("/api/reviews-id-user", reviewsIDuser);
@@ -262,6 +258,8 @@ app.use("/api/platform-edit", platformEdit);
 app.use("/api/images", images);
 app.use("/api/images-array", imagesArray);
 app.use("/api/image-id", imageID);
+app.use("/api/image-upload", imageUpload);
+app.use("/api/image-create", imageCreate);
 
 //api - video
 app.use("/api/videos", videos);
