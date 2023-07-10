@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
 					});
 
 					// Vytvoření nové verze obrázku ve formátu WebP
-                    const webpImageData = await convertToWebP(stream);
+                    const webpImageData = await convertToWebP(stream.data);
 
 					// Konverze souboru do formátu WebP pomocí sharp
 					//const convertedImage = await sharp(stream).webp().toBuffer();
