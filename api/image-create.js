@@ -50,7 +50,6 @@ router.post('/', async (req, res) => {
 						.insert({ 
 							name: req.body.name,
 							source: req.body.source,
-							date_create: req.body.date_create,
 							type: req.body.type,
 							author: req.body.author
 						})
