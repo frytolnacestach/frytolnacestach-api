@@ -54,11 +54,8 @@ router.get('/', async (req, res) => {
                     stream.pipe(concat(async (data) => {
                         const webpImageData = await convertToWebP(data);
 
-						client.end();
-						return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server. 2');
-
                         // Uložení převedeného obrázku zpět na FTP server
-                        /*client.put(webpImageData, fileLoad + '.webp', (error) => {
+                        client.put(webpImageData, fileLoad + '.webp', (error) => {
                             if (error) {
                                 console.error(error);
                                 return res.status(500).send('Chyba při ukládání souboru na FTP server.');
@@ -66,7 +63,7 @@ router.get('/', async (req, res) => {
 
                             client.end();
                             return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server.');
-                        });*/
+                        });
                     }));
                 });
             });
