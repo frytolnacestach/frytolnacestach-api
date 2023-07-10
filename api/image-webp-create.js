@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
 	const imageSubfix = req.query.subfix
 
 	const dirPath = '/subdoms/image/storage' + imageSource;
+	const fileLoad = "test.png" //only test
 
     let client;
 
@@ -41,9 +42,34 @@ router.post('/', async (req, res) => {
                     return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
                 }
 
+				
+				// Načtení souboru z FTP serveru
+				client.get(fileLoad, async (error, stream) => {
+					if (error) {
+						console.error(error);
+						return res.status(500).send('Chyba při čtení souboru z FTP serveru.');
+					}
+			
+					// Konverze souboru do formátu WebP pomocí sharp
+					const convertedImage = await sharp(stream)
+						.toFormat('webp')
+						.toBuffer();
+			
+					// Uložení převedeného obrázku zpět na FTP server
+					client.put(convertedImage, fileLoad + '.webp', (error) => {
+						if (error) {
+							console.error(error);
+							return res.status(500).send('Chyba při ukládání souboru na FTP server.');
+						}
+			
+						client.end();
+						return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server.');
+					});
+				});
+
                 
-				client.end();
-				return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
+				//client.end();
+				//return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
             });
         });
 
