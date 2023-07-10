@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
 							author: req.body.author
 						})
 				
-						return res.status(201).send("Create images req:" + req.body.name);
+						return res.status(201).send("Create images");
 					} catch (error) {
 						console.error(error);
 						return res.status(500).send("Server error");
