@@ -25,7 +25,8 @@ router.get('/', async (req, res) => {
     const imageSuffix = req.query.suffix;
 
     const dirPath = '/subdoms/image/storage' + imageSource;
-    const fileLoad = "test.png"; //only test
+    const fileLoad = "test"; //only test
+	const fileLoadExtension = ".jpg"
 
     let client;
 
@@ -45,7 +46,7 @@ router.get('/', async (req, res) => {
                 }
 
                 // Načtení souboru z FTP serveru
-                client.get(fileLoad, async (error, stream) => {
+                client.get(fileLoad + fileLoadExtension, async (error, stream) => {
                     if (error) {
                         console.error(error);
                         return res.status(500).send('Chyba při čtení souboru z FTP serveru.');
