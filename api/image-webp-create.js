@@ -67,7 +67,9 @@ router.get('/', async (req, res) => {
 
 
 					stream.on('end', () => {
-						const webpImageData = convertToWebP(stream);
+						stream.on('data', (chunk) => {
+							const webpImageData = convertToWebP(chunk);
+						});
 
 						client.end();
 						return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server. velikost:' + byteCount);
