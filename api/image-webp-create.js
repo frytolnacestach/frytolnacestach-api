@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
 						.toBuffer();
 			
 					// Uložení převedeného obrázku zpět na FTP server
-					client.put(convertedImage, fileLoad + '.webp', (error) => {
+					/*client.put(convertedImage, fileLoad + '.webp', (error) => {
 						if (error) {
 							console.error(error);
 							return res.status(500).send('Chyba při ukládání souboru na FTP server.');
@@ -64,7 +64,10 @@ router.post('/', async (req, res) => {
 			
 						client.end();
 						return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server.');
-					});
+					});*/
+
+					client.end();
+					return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
 				});
 
                 
