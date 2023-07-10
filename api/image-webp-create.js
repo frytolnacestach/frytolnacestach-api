@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
 						return res.status(500).send('Chyba při čtení souboru z FTP serveru.');
 					}
 
-					/ Získání velikosti streamu
+					// Získání velikosti streamu
 					stream.on('data', (chunk) => {
 						byteCount = chunk
 						console.log("velikost obrázku:" + byteCount)
