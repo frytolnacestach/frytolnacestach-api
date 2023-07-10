@@ -58,10 +58,14 @@ router.post('/', async (req, res) => {
 						byteCount += chunk.length;
 					});
 
+					// Vytvoření nové verze obrázku ve formátu WebP
+                    const webpImageData = await convertToWebP(stream);
 
 					// Konverze souboru do formátu WebP pomocí sharp
-					const convertedImage = await sharp(stream).webp().toBuffer();
-			
+					//const convertedImage = await sharp(stream).webp().toBuffer();
+					/*const convertedImage2 = await sharp(stream)
+					.toFormat('webp')
+						.toBuffer();*/
 					// Uložení převedeného obrázku zpět na FTP server
 					/*client.put(convertedImage, fileLoad + '.webp', (error) => {
 						if (error) {
@@ -93,5 +97,12 @@ router.post('/', async (req, res) => {
         return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
     }
 });
+
+// Funkce pro konverzi obrázku na formát WebP
+async function convertToWebP(imageData) {
+    return await sharp(imageData)
+        .toFormat('webp')
+        .toBuffer();
+}
 
 module.exports = router;
