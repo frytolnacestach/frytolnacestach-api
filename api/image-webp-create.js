@@ -17,6 +17,7 @@ const FTPPass = process.env.FTP_IMAGE_PASS;
 
 
 router.get('/', async (req, res) => {
+	const imageRaw = req.query.raw;
     const imageName = req.query.name;
     const imageSource = req.query.source;
     const imageWidth = req.query.width;
@@ -25,8 +26,7 @@ router.get('/', async (req, res) => {
     const imageSuffix = req.query.suffix;
 
     const dirPath = '/subdoms/image/storage' + imageSource;
-    const fileLoad = "test"; //only test
-	const fileLoadExtension = ".png"
+	const fileLoadExtension = imageRaw ? ".png" : ".webp";
 
     let client;
 
@@ -39,24 +39,33 @@ router.get('/', async (req, res) => {
         });
 
         client.on('ready', async () => {
+			// Přepnutí do správného adresáře v FTP serveru
             client.cwd(dirPath, async (error) => {
                 if (error) {
                     console.error(error);
                     return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
                 }
 
-                // Načtení souboru z FTP serveru
-                client.get(fileLoad + fileLoadExtension, async (error, stream) => {
+                // Načtení požadovaného obrázku z FTP serveru
+                client.get(imageName + fileLoadExtension, async (error, stream) => {
                     if (error) {
                         console.error(error);
                         return res.status(500).send('Chyba při čtení souboru z FTP serveru.');
                     }
 
                     stream.pipe(concat(async (data) => {
-                        const webpImageData = await convertToWebP(data);
+
+						// Resize and convert
+						let webpImageData
+						if (imageRaw) {
+							webpImageData = await convertToWebP(data);
+						} else {
+							const resizedImageData = await resizeImage(data, imageWidth, imageHeight);
+							webpImageData = resizedImageData;
+						}
 
                         // Uložení převedeného obrázku zpět na FTP server
-                        client.put(webpImageData, fileLoad + '.webp', (error) => {
+                        client.put(webpImageData, getOutputFileName(imageRaw, imageName, imageWidth, imageHeight, imagePrefix, imageSuffix), (error) => {
                             if (error) {
                                 console.error(error);
                                 return res.status(500).send('Chyba při ukládání souboru na FTP server.');
@@ -80,99 +89,27 @@ router.get('/', async (req, res) => {
     }
 });
 
-/*
-router.get('/', async (req, res) => {
-	const imageName = req.query.name
-	const imageSource = req.query.source
-	const imageWidth = req.query.width
-	const imageHeight = req.query.height
-	const imagePrefix = req.query.prefix
-	const imageSubfix = req.query.subfix
-
-	const dirPath = '/subdoms/image/storage' + imageSource;
-	const fileLoad = "test.png" //only test
-
-    let client;
-
-    try {
-        client = new FTPClient();
-        client.connect({
-            host: FTPHost,
-            user: FTPUser,
-            password: FTPPass,
-        });
-
-        client.on('ready', async () => {
-            client.cwd(dirPath, async (error) => {
-                if (error) {
-                    console.error(error);
-                    return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
-                }
-
-				
-				// Načtení souboru z FTP serveru
-				client.get(fileLoad, async (error, stream) => {
-					if (error) {
-						console.error(error);
-						return res.status(500).send('Chyba při čtení souboru z FTP serveru.');
-					}
-
-					
-
-					let byteCount = 0; // Proměnná pro ukládání velikosti streamu
-					let byteCount2 = 0
-
-					// Získání velikosti streamu
-					stream.on('data', (chunk) => {
-						byteCount += chunk.length;
-					});
-
-
-					// Vytvoření nové verze obrázku ve formátu WebP
-                    const webpImageData = await convertToWebP(stream);
-
-					// Konverze souboru do formátu WebP pomocí sharp
-					//const convertedImage = await sharp(stream).webp().toBuffer();
-					const convertedImage2 = await sharp(stream)
-					.toFormat('webp')
-						.toBuffer();
-					// Uložení převedeného obrázku zpět na FTP server
-					client.put(convertedImage, fileLoad + '.webp', (error) => {
-						if (error) {
-							console.error(error);
-							return res.status(500).send('Chyba při ukládání souboru na FTP server.');
-						}
-			
-						client.end();
-						return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server.');
-					});
-					stream.on('end', () => {
-						client.end();
-						return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server. velikost:' + byteCount + 'velikost2:' + byteCount2);
-					})
-				});
-
-                
-				//client.end();
-				//return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
-            });
-        });
-
-        client.on('error', (error) => {
-            console.error(error);
-            return res.status(500).send('Chyba při připojování k FTP serveru.');
-        });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
-    }
-});*/
-
 // Funkce pro konverzi obrázku na formát WebP
 async function convertToWebP(imageData) {
     return await sharp(imageData)
         .toFormat('webp')
         .toBuffer();
+}
+
+// Funkce pro změnu velikosti obrázku
+async function resizeImage(imageData, width, height) {
+    return await sharp(imageData)
+        .resize(width, height)
+        .toBuffer();
+}
+
+// Funkce pro generování názvu výstupního souboru
+function getOutputFileName(raw, baseName, width, height, prefix, suffix) {
+	if (raw) {
+		return `${baseName}.webp`;
+	} else {
+		return `${prefix || ''}${baseName}-${width ? width : height}${suffix || ''}.webp`;
+	}
 }
 
 module.exports = router;
