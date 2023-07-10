@@ -7,8 +7,6 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-const { promisify } = require('util');
-
 router.use(fileUpload());
 
 const FTPHost = process.env.FTP_IMAGE_HOST;
@@ -16,7 +14,7 @@ const FTPUser = process.env.FTP_IMAGE_USER;
 const FTPPass = process.env.FTP_IMAGE_PASS;
 
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
 	const imageName = req.query.name
 	const imageSource = req.query.source
 	const imageWidth = req.query.width
@@ -52,31 +50,17 @@ router.get('/', async (req, res) => {
 						return res.status(500).send('Chyba při čtení souboru z FTP serveru.');
 					}
 
-					// Získání velikosti streamu
-					stream.on('data', (chunk) => {
-						byteCount = chunk.length
-						console.log("velikost obrázku:" + byteCount)
-					});
-
-					/*
-					const streamEnd = promisify(stream.once).bind(stream);
-					await streamEnd('end');
-
-					const webpImageData = convertToWebP(stream);
-					*/
-
-
-
-					stream.on('end', () => {
-						client.end();
-						return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server. velikost:' + byteCount);
-					});
 					
 
-					//let byteCount = ''; // Proměnná pro ukládání velikosti streamu
+					let byteCount = 0; // Proměnná pro ukládání velikosti streamu
+
+					// Získání velikosti streamu
+					stream.on('data', (chunk) => {
+						byteCount += chunk.length;
+					});
 
 					// Vytvoření nové verze obrázku ve formátu WebP
-                    //const webpImageData = await convertToWebP(stream);
+                    //const webpImageData = await convertToWebP(stream.data);
 
 					// Konverze souboru do formátu WebP pomocí sharp
 					//const convertedImage = await sharp(stream).webp().toBuffer();
@@ -93,10 +77,10 @@ router.get('/', async (req, res) => {
 						client.end();
 						return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server.');
 					});*/
-					/*stream.on('end', () => {
+					stream.on('end', () => {
 						client.end();
 						return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server. velikost:' + byteCount);
-					})*/
+					})
 				});
 
                 
@@ -116,8 +100,8 @@ router.get('/', async (req, res) => {
 });
 
 // Funkce pro konverzi obrázku na formát WebP
-async function convertToWebP(stream) {
-    return await sharp(stream)
+async function convertToWebP(imageData) {
+    return await sharp(imageData)
         .toFormat('webp')
         .toBuffer();
 }
