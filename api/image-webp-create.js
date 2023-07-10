@@ -56,11 +56,11 @@ router.post('/', async (req, res) => {
 
 					// Získání velikosti streamu
 					stream.on('data', (chunk) => {
-						byteCount = chunk;
+						byteCount = chunk
 					});
 
 					// Vytvoření nové verze obrázku ve formátu WebP
-                    //const webpImageData = await convertToWebP(stream.data);
+                    const webpImageData = await convertToWebP(byteCount);
 
 					// Konverze souboru do formátu WebP pomocí sharp
 					//const convertedImage = await sharp(stream).webp().toBuffer();
