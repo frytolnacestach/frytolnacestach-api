@@ -52,10 +52,16 @@ router.get('/', async (req, res) => {
 						return res.status(500).send('Chyba při čtení souboru z FTP serveru.');
 					}
 
-					const streamEnd = promisify(stream.once).bind(stream);
+					/ Získání velikosti streamu
+					stream.on('data', (chunk) => {
+						byteCount = chunk
+						console.log("velikost obrázku:" + byteCount)
+					});
+
+					/*const streamEnd = promisify(stream.once).bind(stream);
 					await streamEnd('end');
 
-					const webpImageData = await convertToWebP(stream);
+					const webpImageData = await convertToWebP(stream);*/
 
 
 
@@ -66,11 +72,6 @@ router.get('/', async (req, res) => {
 					
 
 					//let byteCount = ''; // Proměnná pro ukládání velikosti streamu
-
-					// Získání velikosti streamu
-					/*stream.on('data', (chunk) => {
-						byteCount = chunk
-					});*/
 
 					// Vytvoření nové verze obrázku ve formátu WebP
                     //const webpImageData = await convertToWebP(stream);
