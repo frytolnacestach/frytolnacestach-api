@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
             client.cwd(dirPath, async (error) => {
                 if (error) {
                     console.error(error);
-                    return res.status(505).send('Chyba při přepnutí adresáře na FTP serveru.');
+                    return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
                 }
 
 				
@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
 				client.get(fileLoad, async (error, stream) => {
 					if (error) {
 						console.error(error);
-						return res.status(506).send('Chyba při čtení souboru z FTP serveru.');
+						return res.status(500).send('Chyba při čtení souboru z FTP serveru.');
 					}
 
 					// Konverze souboru do formátu WebP pomocí sharp
@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
 					});*/
 
 					client.end();
-					return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.');
+					return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.' + stream.byteCount);
 				});
 
                 
@@ -78,11 +78,11 @@ router.post('/', async (req, res) => {
 
         client.on('error', (error) => {
             console.error(error);
-            return res.status(508).send('Chyba při připojování k FTP serveru.');
+            return res.status(500).send('Chyba při připojování k FTP serveru.');
         });
     } catch (error) {
         console.error(error);
-        return res.status(507).send('Chyba při nahrávání obrázku na jiný server.');
+        return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
     }
 });
 
