@@ -58,9 +58,9 @@ router.get('/', async (req, res) => {
 						console.log("velikost obrázku:" + byteCount)
 					});
 
-					/*const streamEnd = promisify(stream.once).bind(stream);
+					const streamEnd = promisify(stream.once).bind(stream);
 					await streamEnd('end');
-
+/*
 					const webpImageData = await convertToWebP(stream);*/
 
 
