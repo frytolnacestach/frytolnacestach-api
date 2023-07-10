@@ -52,11 +52,11 @@ router.post('/', async (req, res) => {
 
 					
 
-					let byteCount = 0; // Proměnná pro ukládání velikosti streamu
+					let byteCount = ''; // Proměnná pro ukládání velikosti streamu
 
 					// Získání velikosti streamu
 					stream.on('data', (chunk) => {
-						byteCount += chunk.length;
+						byteCount = chunk;
 					});
 
 					// Vytvoření nové verze obrázku ve formátu WebP
