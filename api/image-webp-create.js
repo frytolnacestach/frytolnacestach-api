@@ -51,9 +51,9 @@ router.post('/', async (req, res) => {
 					}
 			
 					// Konverze souboru do formátu WebP pomocí sharp
-					/*const convertedImage = await sharp(stream)
+					const convertedImage = await sharp(stream)
 						.toFormat('webp')
-						.toBuffer();*/
+						.toBuffer();
 			
 					// Uložení převedeného obrázku zpět na FTP server
 					/*client.put(convertedImage, fileLoad + '.webp', (error) => {
