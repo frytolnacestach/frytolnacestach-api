@@ -54,7 +54,7 @@ router.get('/', async (req, res) => {
 
 					// Získání velikosti streamu
 					stream.on('data', (chunk) => {
-						byteCount = chunk
+						byteCount = chunk.length
 						console.log("velikost obrázku:" + byteCount)
 					});
 
