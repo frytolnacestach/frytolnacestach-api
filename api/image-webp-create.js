@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
 						return res.status(506).send('Chyba při čtení souboru z FTP serveru.');
 					}
 			
-					const filePath = '/subdoms/image/storage/aaatest/test.png';
+					const filePath = 'test.png';
 
 					fs.stat(filePath, (error, stats) => {
 					if (error) {
