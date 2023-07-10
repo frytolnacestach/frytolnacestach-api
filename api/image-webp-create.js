@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
             client.cwd(dirPath, async (error) => {
                 if (error) {
                     console.error(error);
-                    return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
+                    return res.status(505).send('Chyba při přepnutí adresáře na FTP serveru.');
                 }
 
 				
@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
 				client.get(fileLoad, async (error, stream) => {
 					if (error) {
 						console.error(error);
-						return res.status(500).send('Chyba při čtení souboru z FTP serveru.');
+						return res.status(506).send('Chyba při čtení souboru z FTP serveru.');
 					}
 			
 					const filePath = '/subdoms/image/storage' + imageSource + '/' + fileLoad;
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
 					fs.stat(filePath, (error, stats) => {
 					if (error) {
 						console.error(error);
-						return res.status(500).send('Chyba při čtení informací o souboru.');
+						return res.status(509).send('Chyba při čtení informací o souboru.');
 					}
 
 					const fileSize = stats.size;
@@ -92,11 +92,11 @@ router.post('/', async (req, res) => {
 
         client.on('error', (error) => {
             console.error(error);
-            return res.status(500).send('Chyba při připojování k FTP serveru.');
+            return res.status(508).send('Chyba při připojování k FTP serveru.');
         });
     } catch (error) {
         console.error(error);
-        return res.status(500).send('Chyba při nahrávání obrázku na jiný server.');
+        return res.status(507).send('Chyba při nahrávání obrázku na jiný server.');
     }
 });
 
