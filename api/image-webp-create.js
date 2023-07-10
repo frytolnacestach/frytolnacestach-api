@@ -50,6 +50,15 @@ router.post('/', async (req, res) => {
 						return res.status(500).send('Chyba při čtení souboru z FTP serveru.');
 					}
 
+
+					let byteCount = 0; // Proměnná pro ukládání velikosti streamu
+
+					// Získání velikosti streamu
+					stream.on('data', (chunk) => {
+						byteCount += chunk.length;
+					});
+
+
 					// Konverze souboru do formátu WebP pomocí sharp
 					/*const convertedImage = await sharp(stream)
 						.toFormat('webp')
@@ -67,7 +76,7 @@ router.post('/', async (req, res) => {
 					});*/
 
 					client.end();
-					return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server.' + stream.byteCount);
+					return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server. velikost:' + byteCount);
 				});
 
                 
