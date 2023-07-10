@@ -7,6 +7,8 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
+const { promisify } = require('util');
+
 router.use(fileUpload());
 
 const FTPHost = process.env.FTP_IMAGE_HOST;
@@ -50,17 +52,28 @@ router.post('/', async (req, res) => {
 						return res.status(500).send('Chyba při čtení souboru z FTP serveru.');
 					}
 
+					const streamEnd = promisify(stream.once).bind(stream);
+					await streamEnd('end');
+
+					const webpImageData = await convertToWebP(stream);
+
+
+
+					stream.on('end', () => {
+						client.end();
+						return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server. velikost:' + byteCount);
+					});
 					
 
-					let byteCount = ''; // Proměnná pro ukládání velikosti streamu
+					//let byteCount = ''; // Proměnná pro ukládání velikosti streamu
 
 					// Získání velikosti streamu
-					stream.on('data', (chunk) => {
+					/*stream.on('data', (chunk) => {
 						byteCount = chunk
-					});
+					});*/
 
 					// Vytvoření nové verze obrázku ve formátu WebP
-                    const webpImageData = await convertToWebP(byteCount);
+                    //const webpImageData = await convertToWebP(stream);
 
 					// Konverze souboru do formátu WebP pomocí sharp
 					//const convertedImage = await sharp(stream).webp().toBuffer();
@@ -77,10 +90,10 @@ router.post('/', async (req, res) => {
 						client.end();
 						return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server.');
 					});*/
-					stream.on('end', () => {
+					/*stream.on('end', () => {
 						client.end();
 						return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server. velikost:' + byteCount);
-					})
+					})*/
 				});
 
                 
@@ -100,8 +113,8 @@ router.post('/', async (req, res) => {
 });
 
 // Funkce pro konverzi obrázku na formát WebP
-async function convertToWebP(imageData) {
-    return await sharp(imageData)
+async function convertToWebP(stream) {
+    return await sharp(stream)
         .toFormat('webp')
         .toBuffer();
 }
