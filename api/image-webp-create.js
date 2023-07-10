@@ -60,12 +60,9 @@ router.get('/', async (req, res) => {
 						byteCount += chunk.length;
 					});
 
-					stream.on('end', (chunk) => {
-						byteCount2 = chunk.length;
-					})
 
 					// Vytvoření nové verze obrázku ve formátu WebP
-                    //const webpImageData = await convertToWebP(stream.data);
+                    const webpImageData = await convertToWebP(stream.data);
 
 					// Konverze souboru do formátu WebP pomocí sharp
 					//const convertedImage = await sharp(stream).webp().toBuffer();
