@@ -49,20 +49,6 @@ router.post('/', async (req, res) => {
 						console.error(error);
 						return res.status(506).send('Chyba při čtení souboru z FTP serveru.');
 					}
-			
-					const filePath = 'test.png';
-
-					fs.stat(filePath, (error, stats) => {
-					if (error) {
-						console.error(error);
-						return res.status(509).send('Chyba při čtení informací o souboru.');
-					}
-
-					const fileSize = stats.size;
-					const fileType = path.extname(fileLoad);
-
-					return res.status(201).send(`Soubor ${fileLoad} (${fileType}) s velikostí ${fileSize} byl úspěšně nahrán na FTP server.`);
-					});
 
 					// Konverze souboru do formátu WebP pomocí sharp
 					/*const convertedImage = await sharp(stream)
