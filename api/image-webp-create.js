@@ -53,11 +53,16 @@ router.get('/', async (req, res) => {
 					
 
 					let byteCount = 0; // Proměnná pro ukládání velikosti streamu
+					let byteCount2 = 0
 
 					// Získání velikosti streamu
 					stream.on('data', (chunk) => {
 						byteCount += chunk.length;
 					});
+
+					stream.on('end', (chunk) => {
+						byteCount2 = chunk.length;
+					})
 
 					// Vytvoření nové verze obrázku ve formátu WebP
                     //const webpImageData = await convertToWebP(stream.data);
@@ -79,7 +84,7 @@ router.get('/', async (req, res) => {
 					});*/
 					stream.on('end', () => {
 						client.end();
-						return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server. velikost:' + byteCount);
+						return res.status(201).send('Obrázek byl úspěšně nahrán na FTP server. velikost:' + byteCount + 'velikost2:' + byteCount2);
 					})
 				});
 
