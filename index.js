@@ -74,6 +74,7 @@ const imagesArray = require("./api/images-array");
 const imageID = require("./api/image-id");
 const imageUpload = require("./api/image-upload");
 const imageCreate = require("./api/image-create");
+const imageWebpCreate = require("./api/image-webp-create");
 
 //video
 const videos = require("./api/videos");
@@ -260,6 +261,7 @@ app.use("/api/images-array", imagesArray);
 app.use("/api/image-id", imageID);
 app.use("/api/image-upload", imageUpload);
 app.use("/api/image-create", imageCreate);
+app.use("/api/image-webp-create", imageWebpCreate);
 
 //api - video
 app.use("/api/videos", videos);
