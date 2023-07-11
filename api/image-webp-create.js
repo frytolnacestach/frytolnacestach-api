@@ -60,8 +60,9 @@ router.get('/', async (req, res) => {
 						if (imageRaw) {
 							webpImageData = await convertToWebP(data);
 						} else {
-							const resizedImageData = await resizeImage(data, imageWidth, imageHeight);
-							webpImageData = resizedImageData;
+							webpImageData = await convertToWebP(data);
+							//const resizedImageData = await resizeImage(data, imageWidth, imageHeight);
+							//webpImageData = resizedImageData;
 						}
 
                         // Uložení převedeného obrázku zpět na FTP server
@@ -105,9 +106,12 @@ async function resizeImage(imageData, width, height) {
 
 // Funkce pro generování názvu výstupního souboru
 function getOutputFileName(raw, baseName, width, height, prefix, suffix) {
-
-	return `${baseName}.webp`;
-
+	if (raw) {
+		return `${baseName}.webp`;
+	} else {
+		return `${baseName}.webp`;
+		//return `${prefix || ''}${baseName}-${width ? width : height}${suffix || ''}.webp`;
+	}
 }
 
 module.exports = router;
