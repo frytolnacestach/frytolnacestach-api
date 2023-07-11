@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     const imageSuffix = req.query.suffix;
 
     const dirPath = '/subdoms/image/storage' + imageSource;
-	const fileLoadExtension = imageRaw ? ".png" : ".webp";
+	const fileLoadExtension = imageRaw ? ".jpg" : ".webp";
 
     let client;
 
