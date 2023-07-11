@@ -109,8 +109,7 @@ function getOutputFileName(raw, baseName, width, height, prefix, suffix) {
 	if (raw) {
 		return `${baseName}.webp`;
 	} else {
-		return `${baseName}.webp`;
-		//return `${prefix || ''}${baseName}-${width ? width : height}${suffix || ''}.webp`;
+		return `${prefix || ''}${baseName}-${width ? width : height}${suffix || ''}.webp`;
 	}
 }
 
