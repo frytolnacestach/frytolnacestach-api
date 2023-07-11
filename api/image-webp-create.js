@@ -102,7 +102,7 @@ async function resizeImage(imageData, width, height) {
 
 	const image = sharp(imageData);
 	// Změna velikosti obrázku
-	return await image.resize({ width: width, height: height, fit: 'contain' }).webp({ quality: 80 });
+	return await image.resize({ width: 500, height: 300, fit: 'contain' }).webp({ quality: 80 }).toBuffer();
 }
 
 // Funkce pro generování názvu výstupního souboru
