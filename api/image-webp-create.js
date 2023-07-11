@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
 							webpImageData = await convertToWebP(data);
 						} else {
 							//webpImageData = await convertToWebP(data);
-							const resizedImageData = await resizeImage(data, imageWidth, imageHeight);
+							const resizedImageData = await resizeImage(data, 500, 300);
 							webpImageData = resizedImageData;
 						}
 
@@ -102,7 +102,7 @@ async function resizeImage(imageData, width, height) {
 
 	const image = sharp(imageData);
 	// Změna velikosti obrázku
-	return await image.resize({ width: 500, height: 300, fit: 'contain' }).webp({ quality: 80 }).toBuffer();
+	return await image.resize({ width: width, height: height, fit: 'contain' }).webp({ quality: 80 }).toBuffer();
 }
 
 // Funkce pro generování názvu výstupního souboru
