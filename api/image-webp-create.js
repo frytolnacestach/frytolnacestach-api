@@ -20,8 +20,8 @@ router.get('/', async (req, res) => {
 	const imageRaw = req.query.raw;
     const imageName = req.query.name;
     const imageSource = req.query.source;
-    const imageWidth = req.query.width;
-    const imageHeight = req.query.height;
+    const imageWidth = parseInt(req.query.width, 10);
+    const imageHeight = parseInt(req.query.height, 10);
     const imagePrefix = req.query.prefix;
     const imageSuffix = req.query.suffix;
 
@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
 							webpImageData = await convertToWebP(data);
 						} else {
 							//webpImageData = await convertToWebP(data);
-							const resizedImageData = await resizeImage(data, 500, 300);
+							const resizedImageData = await resizeImage(data, imageWidth, imageHeight);
 							webpImageData = resizedImageData;
 						}
 
