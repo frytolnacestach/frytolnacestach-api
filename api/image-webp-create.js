@@ -105,11 +105,9 @@ async function resizeImage(imageData, width, height) {
 
 // Funkce pro generování názvu výstupního souboru
 function getOutputFileName(raw, baseName, width, height, prefix, suffix) {
-	if (raw) {
-		return `${baseName}.webp`;
-	} else {
-		return `${prefix || ''}${baseName}-${width ? width : height}${suffix || ''}.webp`;
-	}
+
+	return `${baseName}.webp`;
+
 }
 
 module.exports = router;
