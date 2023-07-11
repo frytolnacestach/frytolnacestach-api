@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
 
 					try {
 						const { error } = await supabase
-						.from('images_duplicate')
+						.from('images')
 						.insert({ 
 							name: req.body.name,
 							source: req.body.source,
