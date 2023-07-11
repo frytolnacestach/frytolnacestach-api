@@ -71,7 +71,7 @@ router.post('/', async (req, res) => {
                             }
 
                             client.end();
-                            return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server.');
+                            return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server.' + dirPath);
                         });
                     }));
                 });
