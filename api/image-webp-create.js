@@ -99,9 +99,15 @@ async function convertToWebP(imageData) {
 
 // Funkce pro změnu velikosti obrázku
 async function resizeImage(imageData, width, height) {
-    return await sharp(imageData)
+
+	const image = sharp(imageData);
+	// Změna velikosti obrázku
+	const resizedImage = await image.resize({ width: width, height: height, fit: 'contain' }).webp({ quality: 80 });
+
+	return resizedImage.toBuffer();
+    /*return await sharp(imageData)
         .resize(width, height)
-        .toBuffer();
+        .toBuffer();*/
 }
 
 // Funkce pro generování názvu výstupního souboru
