@@ -15,7 +15,7 @@ const FTPUser = process.env.FTP_IMAGE_USER;
 const FTPPass = process.env.FTP_IMAGE_PASS;
 
 router.post('/', async (req, res) => {
-	const imageType = req.query.type;
+	const imageTypeCreate = req.query.type_create;
     const imageName = req.query.name;
     const imageSource = req.query.source;
     const imageWidth = parseInt(req.query.width, 10);
@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     const imageSuffix = req.query.suffix;
 
     const dirPath = '/subdoms/image/storage' + imageSource;
-	const fileLoadExtension = imageType === 'raw' ? ".jpg" : ".webp";
+	const fileLoadExtension = imageTypeCreate === 'raw' ? ".jpg" : ".webp";
 
     let client;
 
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
 
 						// Resize and convert
 						let webpImageData
-						if (imageType === "raw") {
+						if (imageTypeCreate === "raw") {
 							webpImageData = await convertToWebP(data);
 						} else {
 							//webpImageData = await convertToWebP(data);
@@ -64,7 +64,7 @@ router.post('/', async (req, res) => {
 						}
 
                         // Uložení převedeného obrázku zpět na FTP server
-                        client.put(webpImageData, getOutputFileName(imageType, imageName, imageWidth, imageHeight, imagePrefix, imageSuffix), (error) => {
+                        client.put(webpImageData, getOutputFileName(imageTypeCreate, imageName, imageWidth, imageHeight, imagePrefix, imageSuffix), (error) => {
                             if (error) {
                                 console.error(error);
                                 return res.status(500).send('Chyba při ukládání souboru na FTP server.');
