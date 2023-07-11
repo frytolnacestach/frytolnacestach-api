@@ -16,7 +16,7 @@ const FTPPass = process.env.FTP_IMAGE_PASS;
 
 
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
 	const imageRaw = req.query.raw;
     const imageName = req.query.name;
     const imageSource = req.query.source;
