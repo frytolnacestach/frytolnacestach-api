@@ -18,8 +18,8 @@ router.post('/', async (req, res) => {
 	const imageTypeCreate = req.query.type_create;
     const imageName = req.query.name;
     const imageSource = req.query.source;
-    const imageWidth = req.query.width !== null ? parseInt(req.query.width, 10) : null;
-    const imageHeight = req.query.height !== null ? parseInt(req.query.height, 10) : null;
+    const imageWidth = req.query.width !== "null" && req.query.width !== null ? parseInt(req.query.width, 10) : null;
+    const imageHeight = req.query.height !== "null" && req.query.height !== null ? parseInt(req.query.height, 10) : null;
     const imagePrefix = req.query.prefix;
     const imageSuffix = req.query.suffix;
 
