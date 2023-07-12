@@ -70,7 +70,7 @@ router.post('/', async (req, res) => {
                             }
 
                             client.end();
-                            return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server.');
+                            return res.status(201).send('Obrázek byl úspěšně převeden na formát WebP a nahrán zpět na FTP server. width:' + imageWidth + 'height:' + imageHeight);
                         });
                     }));
                 });
@@ -100,7 +100,7 @@ async function resizeImage(imageData, width, height) {
 	const image = sharp(imageData);
 	
 	// Změna velikosti obrázku
-	return await image.resize({ width: width, height: height, fit: 'contain' }).webp({ quality: 80 }).toBuffer();
+	return await image.resize({ width: 300, height: 180, fit: 'contain' }).webp({ quality: 80 }).toBuffer();
 }
 
 // Funkce pro generování názvu výstupního souboru
