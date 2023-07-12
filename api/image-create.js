@@ -11,14 +11,16 @@ const FTPHost = process.env.FTP_IMAGE_HOST;
 const FTPUser = process.env.FTP_IMAGE_USER;
 const FTPPass = process.env.FTP_IMAGE_PASS;
 
-const dirPath = '/subdoms/image/storage/aaatest';
-
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.post('/', async (req, res) => {
     let client;
+
+    const dirPath = '/subdoms/image/storage';
+    
+    let dirPathFinal = dirPath + req.body.source
 
     try {
         const image = req.files.image;
@@ -31,7 +33,7 @@ router.post('/', async (req, res) => {
         });
 
         client.on('ready', async () => {
-            client.cwd(dirPath, async (error) => {
+            client.cwd(dirPathFinal, async (error) => {
                 if (error) {
                     console.error(error);
                     return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.');
