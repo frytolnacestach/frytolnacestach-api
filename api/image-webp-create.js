@@ -58,9 +58,8 @@ router.post('/', async (req, res) => {
 						if (imageTypeCreate === "raw") {
 							webpImageData = await convertToWebP(data);
 						} else {
-							webpImageData = await convertToWebP(data);
-							//const resizedImageData = await resizeImage(data, imageWidth, imageHeight);
-							//webpImageData = resizedImageData;
+							const resizedImageData = await resizeImage(data, imageWidth, imageHeight);
+							webpImageData = resizedImageData;
 						}
 
                         // Uložení převedeného obrázku zpět na FTP server
