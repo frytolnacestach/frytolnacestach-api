@@ -22,6 +22,7 @@ router.post("/", async (req, res) => {
             name: req.body.name,
             information_chatgpt: req.body.information_chatgpt,
             information_author: JSON.parse(req.body.information_author),
+            information_duration: JSON.parse(req.body.information_duration),
             altitude: req.body.altitude,
             coordinates: JSON.parse(req.body.coordinates),
             zoom: JSON.parse(req.body.zoom),
