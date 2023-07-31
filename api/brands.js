@@ -15,6 +15,12 @@ router.get("/", async (req, res) => {
   const start = parseInt(req.query.start || '0')
   const end = parseInt(req.query.end || '999')
 
+  // setting Select
+  let supabaseSelect;
+  if (showType === "list"){
+    supabaseSelect = 'id, id_image_cover, slug, name';
+  }
+  
   try {
     // Base query
     let query = supabase.from('brands')
@@ -43,5 +49,6 @@ router.get("/", async (req, res) => {
     return res.status(500).send("Server error");
   }
 });
+
 
 module.exports = router;
