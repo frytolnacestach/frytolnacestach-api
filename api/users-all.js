@@ -11,9 +11,7 @@ router.get("/", async (req, res) => {
   try {
     const { data, error } = await supabase
     .from('users')
-    .select('id, nickname, slug, surname, lastname, status')
     .order('id', { ascending: false })
-    .eq('status', 3)
 
     res.send(JSON.stringify(data))
 
