@@ -22,6 +22,7 @@ router.get("/", async (req, res) => {
     // Base query
     let query = supabase.from('travel_dictionaries')
       .select(supabaseSelect)
+      .order('random()', { ascending: true })
       .neq('id', actualID)
       .limit(quantity);
 
