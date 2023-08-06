@@ -59,6 +59,9 @@ const baseEdit = require("./api/base-edit");
 
 //top
 const topPlaces = require("./api/top-places");
+const topPlace = require("./api/top-place");
+const topPlaceEdit = require("./api/top-place-edit");
+const topPlaceCreate = require("./api/top-place-create");
 
 //login
 const login = require("./api/login");
@@ -248,6 +251,9 @@ app.use("/api/base-edit", baseEdit);
 
 //top
 app.use("/api/top-places", topPlaces);
+app.use("/api/top-place", topPlace);
+app.use("/api/top-place-edit", topPlaceEdit);
+app.use("/api/top-place-create", topPlaceCreate);
 
 //api - login
 app.use("/api/login", login);
