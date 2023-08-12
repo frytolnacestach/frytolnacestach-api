@@ -10,7 +10,7 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.post("/", async (req, res) => {
-    var email = req.body.email
+    /*var email = req.body.email
     var passwordHash = req.body.password_hash
     var idFollower = req.body.id_follower
     var status = parseInt(req.body.status)
@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
-    }
+    }*/
     
 });
 
