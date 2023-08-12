@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
     try {
         const { data, error } = await supabase
         .from('users')
-        .select('id')
+        .select('id','slug','nickname')
         .eq('email', email)
         .eq('password', passwordHash)
 
@@ -31,6 +31,8 @@ router.post("/", async (req, res) => {
             return res.status(404).send('Uživatel neexistuje');
         } else {
             const userId = data[0].id;
+            const userSlug = data[0].slug;
+            const userNickname = data[0].nickname;
 
             //follower load
             try {
@@ -56,7 +58,22 @@ router.post("/", async (req, res) => {
                             status: status
                         })
 
-                        return res.status(201).send("Záznam uložen");
+                        // Odeslat email
+                        try {
+                            const response = await axios.post('https://mail.frytolnacestach.cz/api/follower', {
+                                email: req.body.email,
+                                user_slug: userSlug,
+                                user_nickname: userNickname
+                            });
+
+                            if (response.status === 200 || response.status === 201) {
+                                return res.status(response.status).send('Přidáno do sledujících a e-mail odeslán.');
+                            } else {
+                                return res.status(500).send('Chyba při komunikaci s API');
+                            }
+                        } catch (error) {
+                            return res.status(500).send('Chyba připojení k API MAIL');
+                        }
                     } catch (error) {
                         console.error(error);
                         return res.status(500).send("Server error");
