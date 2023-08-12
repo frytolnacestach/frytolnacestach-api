@@ -58,21 +58,34 @@ router.post("/", async (req, res) => {
                             status: status
                         })
 
-                        // Odeslat email
+                        // zjistit informace o sledujícím
                         try {
-                            const response = await axios.post('https://mail.frytolnacestach.cz/api/follower', {
-                                email: req.body.email,
-                                user_slug: userSlug,
-                                user_nickname: userNickname
-                            });
+                            const { data, error } = await supabase
+                            .from('users')
+                            .select('email')
+                            .eq('id', idFollower)
 
-                            if (response.status === 200 || response.status === 201) {
-                                return res.status(response.status).send('Přidáno do sledujících a e-mail odeslán.');
-                            } else {
-                                return res.status(500).send('Chyba při komunikaci s API');
+                            const followerEmail = data[0].email;
+
+                            // Odeslat email
+                            try {
+                                const response = await axios.post('https://mail.frytolnacestach.cz/api/test', {
+                                    email: followerEmail,
+                                    user_slug: userSlug,
+                                    user_nickname: userNickname
+                                });
+
+                                if (response.status === 200 || response.status === 201) {
+                                    return res.status(response.status).send('Přidáno do sledujících a e-mail odeslán.');
+                                } else {
+                                    return res.status(500).send('Chyba při komunikaci s API');
+                                }
+                            } catch (error) {
+                                return res.status(500).send('Chyba připojení k API MAIL');
                             }
                         } catch (error) {
-                            return res.status(500).send('Chyba připojení k API MAIL');
+                            console.error(error);
+                            return res.status(500).send("Server error");
                         }
                     } catch (error) {
                         console.error(error);
