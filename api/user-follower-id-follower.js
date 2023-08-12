@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     var email = req.body.email
     var passwordHash = req.body.password_hash
     var idFollower = req.query.id_follower
-    var status = req.query.status
+    var status = parseInt(req.body.status)
 
     try {
         const { data, error } = await supabase
