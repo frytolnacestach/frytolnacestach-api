@@ -69,7 +69,7 @@ router.post("/", async (req, res) => {
 
                             // Odeslat email
                             try {
-                                const response = await axios.post('https://mail.frytolnacestach.cz/api/test', {
+                                const response = await axios.post('https://mail.frytolnacestach.cz/api/follower', {
                                     email: followerEmail,
                                     user_slug: userSlug,
                                     user_nickname: userNickname
