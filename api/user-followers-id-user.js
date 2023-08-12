@@ -11,7 +11,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
     var idUser = req.query.id_user
-    var status = req.query.status
+    var status = parseInt(req.body.status)
 
     try {
         const { data, error } = await supabase
