@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 
     try {
         const { data, error } = await supabase
-        .from('users_followers')
+        .from('users_followers_duplicate')
         .select()
         .eq('id_user', idUser)
         .eq('status', status)
