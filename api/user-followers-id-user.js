@@ -10,7 +10,7 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
-    /*var idUser = req.query.id_user
+    var idUser = req.query.id_user
     var status = req.query.status
 
     try {
@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
-    }*/
+    }
     
 });
 
