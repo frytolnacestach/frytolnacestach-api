@@ -32,7 +32,74 @@ router.post("/", async (req, res) => {
         } else {
             const userId = data[0].id;
 
-            return res.status(201).send("Záznam uložen");
+            //follower load
+            try {
+                const { data, error } = await supabase
+                .from('users_followers')
+                .select()
+                .eq('id_follower', idFollower)
+                .eq('id_user', userId)
+        
+                if (error) {
+                    console.error(error);
+                    return res.status(500).send("Chyba při aktualizaci");
+                }
+        
+                if (data.length === 0) {
+                    //Add to followers
+                    try {
+                        const { data, error } = await supabase
+                        .from('users_followers')
+                        .insert({ 
+                            id_user: userId,
+                            id_follower: idFollower,
+                            status: status
+                        })
+
+                        return res.status(201).send("Záznam uložen");
+                    } catch (error) {
+                        console.error(error);
+                        return res.status(500).send("Server error");
+                    }
+                } else {
+                    //Update followers
+                    const followerId = data[0].id;
+                    const followerStatus = data[0].status;
+
+                    if (followerStatus === status ) {
+                        try {
+                            const { data, error } = await supabase
+                            .from('users_followers')
+                            .update(
+                                { status: 0 }
+                            )
+                            .eq('id', followerId)
+                    
+                            return res.status(200).send("Záznam odebrán");
+                        } catch (error) {
+                            console.error(error);
+                            return res.status(500).send("Server error");
+                        }
+                    } else {
+                        try {
+                            const { data, error } = await supabase
+                            .from('users_followers')
+                            .update(
+                                { status: status }
+                            )
+                            .eq('id', followerId)
+                    
+                            return res.status(201).send("Záznam uložen");
+                        } catch (error) {
+                            console.error(error);
+                            return res.status(500).send("Server error");
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+                return res.status(500).send("Server error");
+            }
         }
        
     } catch (error) {
