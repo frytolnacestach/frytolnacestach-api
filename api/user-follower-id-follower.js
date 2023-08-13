@@ -10,10 +10,9 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
-    var email = req.body.email
-    var passwordHash = req.body.password_hash
+    var email = req.query.email
+    var passwordHash = req.query.password_hash
     var idFollower = req.query.id_follower
-    var status = parseInt(req.body.status)
 
     try {
         const { data, error } = await supabase
@@ -38,7 +37,7 @@ router.get("/", async (req, res) => {
                 .select()
                 .eq('id_user', userId)
                 .eq('id_follower', idFollower)
-                .eq('status', status)
+                .eq('status', 1)
         
                 if (error) {
                     console.error(error);
