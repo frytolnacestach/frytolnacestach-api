@@ -10,15 +10,14 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
-    var idUser = req.query.id_user
-    var status = parseInt(req.body.status)
+    var idUser = parseInt(req.query.id_user)
 
     try {
         const { data, error } = await supabase
         .from('users_followers_duplicate')
         .select()
         .eq('id_user', idUser)
-        .eq('status', status)
+        .eq('status', 1)
 
         if (error) {
             console.error(error);
