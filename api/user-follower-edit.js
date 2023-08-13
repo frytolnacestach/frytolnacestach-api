@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
             //follower load
             try {
                 const { data, error } = await supabase
-                .from('users_followers_duplicate')
+                .from('users_followers')
                 .select()
                 .eq('id_follower', idFollower)
                 .eq('id_user', userId)
@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
                     //Add to followers
                     try {
                         const { data, error } = await supabase
-                        .from('users_followers_duplicate')
+                        .from('users_followers')
                         .insert({ 
                             id_user: userId,
                             id_follower: idFollower,
@@ -99,7 +99,7 @@ router.post("/", async (req, res) => {
                     if (followerStatus === status ) {
                         try {
                             const { data, error } = await supabase
-                            .from('users_followers_duplicate')
+                            .from('users_followers')
                             .update(
                                 { status: 0 }
                             )
@@ -113,7 +113,7 @@ router.post("/", async (req, res) => {
                     } else {
                         try {
                             const { data, error } = await supabase
-                            .from('users_followers_duplicate')
+                            .from('users_followers')
                             .update(
                                 { status: status }
                             )
