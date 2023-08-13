@@ -76,7 +76,7 @@ router.post("/", async (req, res) => {
                                 });
 
                                 if (response.status === 200 || response.status === 201) {
-                                    return res.status(response.status).send('Přidáno do sledujících a e-mail odeslán.');
+                                    return res.status(201).send('Přidáno do sledujících a e-mail odeslán.');
                                 } else {
                                     return res.status(500).send('Chyba při komunikaci s API');
                                 }
