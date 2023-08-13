@@ -43,8 +43,15 @@ router.get("/", async (req, res) => {
                     console.error(error);
                     return res.status(500).send("Chyba při načtení");
                 }
+
+                if (data.length === 0) {
+                    return res.status(405).send('Uživatel, uživatele nesleduje');
+                }
                 
-                res.send(JSON.stringify(data))
+                res.json({
+                    status: 200,
+                    message: data,
+                });
             } catch (error) {
                 console.error(error);
                 return res.status(500).send("Server error");
