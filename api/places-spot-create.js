@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
             affiliate: JSON.parse(req.body.affiliate)
         })
 
-        return res.status(201).send("Create Continents");
+        return res.status(201).send("Create Spot");
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");

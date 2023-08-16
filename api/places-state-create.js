@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
             links: JSON.parse(req.body.links)
         })
 
-        return res.status(201).send("Create Continents");
+        return res.status(201).send("Create State");
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");

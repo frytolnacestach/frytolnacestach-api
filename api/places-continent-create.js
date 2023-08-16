@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
             zoom: JSON.parse(req.body.zoom)
         })
 
-        return res.status(201).send("Create Continents");
+        return res.status(201).send("Create Continent");
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");

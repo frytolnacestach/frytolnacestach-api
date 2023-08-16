@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
             parking: JSON.parse(req.body.parking)
         })
 
-        return res.status(201).send("Create Continents");
+        return res.status(201).send("Create City");
     } catch (error) {
         console.error(error);
         return res.status(500).send("Server error");
