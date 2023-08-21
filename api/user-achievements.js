@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
                 .eq('type', type)
                 .eq('status', 1);
 
-            responseData[type] = result.data;
+            responseData[type] = result.data.length;
         }
 
         const formattedResponse = types.map(type => ({ [type]: responseData[type] }));
