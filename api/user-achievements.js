@@ -17,45 +17,44 @@ router.get("/", async (req, res) => {
         const queryPromises = [
             supabase
                 .from('users_visited_place')
-                .select('type', { count: 'exact' })
+                .select('*', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'continent')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('type', { count: 'exact' })
+                .select('*', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'state')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('type', { count: 'exact' })
+                .select('*', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'region')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('type', { count: 'exact' })
+                .select('*', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'city')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('type', { count: 'exact' })
+                .select('*', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'spot')
                 .eq('status', 1),
         ];
 
-        if (queryResult.error) {
-            console.error(queryResult.error);
-            return res.status(500).send("Chyba při získávání dat");
-        }
+        const results = await Promise.all(queryPromises);
 
-        const responseData = {};
-
-        queryResult.data.forEach(({ type, count }) => {
-            responseData[type] = count;
+        const responseData = results.map(({ data, error }) => {
+            if (error) {
+                console.error(error);
+                return null;
+            }
+            return data;
         });
 
         res.send(JSON.stringify(responseData));
