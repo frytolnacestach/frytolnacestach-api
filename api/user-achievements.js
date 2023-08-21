@@ -17,31 +17,31 @@ router.get("/", async (req, res) => {
         const queryPromises = [
             supabase
                 .from('users_visited_place')
-                .select('*', { count: 'exact', head: true })
+                .select('*', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'continent')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('*', { count: 'exact', head: true })
+                .select('*', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'state')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('*', { count: 'exact', head: true })
+                .select('*', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'region')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('*', { count: 'exact', head: true })
+                .select('*', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'city')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('*', { count: 'exact', head: true })
+                .select('*', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'spot')
                 .eq('status', 1),
