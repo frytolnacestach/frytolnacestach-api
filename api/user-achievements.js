@@ -17,48 +17,45 @@ router.get("/", async (req, res) => {
         const queryPromises = [
             supabase
                 .from('users_visited_place')
-                .select('*', { count: 'exact' })
+                .select('type', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'continent')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('*', { count: 'exact' })
+                .select('type', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'state')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('*', { count: 'exact' })
+                .select('type', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'region')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('*', { count: 'exact' })
+                .select('type', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'city')
                 .eq('status', 1),
             supabase
                 .from('users_visited_place')
-                .select('*', { count: 'exact' })
+                .select('type', { count: 'exact' })
                 .eq('id_user', idUser)
                 .eq('type', 'spot')
                 .eq('status', 1),
         ];
 
-        const results = await Promise.all(queryPromises);
+        if (queryResult.error) {
+            console.error(queryResult.error);
+            return res.status(500).send("Chyba při získávání dat");
+        }
 
         const responseData = {};
 
-        results.forEach(({ data, error }) => {
-            if (error) {
-                console.error(error);
-            } else {
-                data.forEach(({ type, count }) => {
-                    responseData[type] = count;
-                });
-            }
+        queryResult.data.forEach(({ type, count }) => {
+            responseData[type] = count;
         });
 
         res.send(JSON.stringify(responseData));
