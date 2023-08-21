@@ -49,12 +49,19 @@ router.get("/", async (req, res) => {
 
         const results = await Promise.all(queryPromises);
 
-        const responseData = results.map(({ count, error }) => {
+        const responseData = results.map(({ data, error }) => {
             if (error) {
                 console.error(error);
                 return null;
             }
-            return count[0].count;
+
+            const category = data[0] ? data[0].type : null;
+            const count = data[0] ? data[0].count : 0;
+
+            return {
+                category,
+                count,
+            };
         });
 
         res.send(JSON.stringify(responseData));
