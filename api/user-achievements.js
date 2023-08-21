@@ -27,7 +27,9 @@ router.get("/", async (req, res) => {
             responseData[type] = result.data;
         }
 
-        res.send(JSON.stringify(responseData));
+        const formattedResponse = types.map(type => ({ [type]: responseData[type] }));
+
+        res.send(JSON.stringify(formattedResponse));
 
     } catch (error) {
         console.error(error);
