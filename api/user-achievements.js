@@ -12,50 +12,20 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 router.get("/", async (req, res) => {
     var idUser = parseInt(req.query.id_user)
 
-    //pocet navštíveních kontinentů
+    const types = ['continent', 'state', 'region', 'city', 'spot'];
+    const responseData = {};
+
     try {
-        const queryPromises = [
-            supabase
+        for (const type of types) {
+            const result = await supabase
                 .from('users_visited_place')
                 .select('*', { count: 'exact' })
                 .eq('id_user', idUser)
-                .eq('type', 'continent')
-                .eq('status', 1),
-            supabase
-                .from('users_visited_place')
-                .select('*', { count: 'exact' })
-                .eq('id_user', idUser)
-                .eq('type', 'state')
-                .eq('status', 1),
-            supabase
-                .from('users_visited_place')
-                .select('*', { count: 'exact' })
-                .eq('id_user', idUser)
-                .eq('type', 'region')
-                .eq('status', 1),
-            supabase
-                .from('users_visited_place')
-                .select('*', { count: 'exact' })
-                .eq('id_user', idUser)
-                .eq('type', 'city')
-                .eq('status', 1),
-            supabase
-                .from('users_visited_place')
-                .select('*', { count: 'exact' })
-                .eq('id_user', idUser)
-                .eq('type', 'spot')
-                .eq('status', 1),
-        ];
+                .eq('type', type)
+                .eq('status', 1);
 
-        const results = await Promise.all(queryPromises);
-
-        const responseData = results.map(({ data, error }) => {
-            if (error) {
-                console.error(error);
-                return null;
-            }
-            return data;
-        });
+            responseData[type] = result.data;
+        }
 
         res.send(JSON.stringify(responseData));
 
