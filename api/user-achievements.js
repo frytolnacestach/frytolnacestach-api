@@ -12,18 +12,57 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 router.get("/", async (req, res) => {
     var idUser = parseInt(req.query.id_user)
 
-
     //pocet navštíveních kontinentů
+    try {
+        const queryPromises = [
+            supabase
+                .from('users_visited_place')
+                .select('*', { count: 'exact' })
+                .eq('id_user', idUser)
+                .eq('type', 'continent')
+                .eq('status', 1),
+            supabase
+                .from('users_visited_place')
+                .select('*', { count: 'exact' })
+                .eq('id_user', idUser)
+                .eq('type', 'state')
+                .eq('status', 1),
+            supabase
+                .from('users_visited_place')
+                .select('*', { count: 'exact' })
+                .eq('id_user', idUser)
+                .eq('type', 'region')
+                .eq('status', 1),
+            supabase
+                .from('users_visited_place')
+                .select('*', { count: 'exact' })
+                .eq('id_user', idUser)
+                .eq('type', 'city')
+                .eq('status', 1),
+            supabase
+                .from('users_visited_place')
+                .select('*', { count: 'exact' })
+                .eq('id_user', idUser)
+                .eq('type', 'spot')
+                .eq('status', 1),
+        ];
 
-    //pocet navštíveních států
+        const results = await Promise.all(queryPromises);
 
-    //pocet navštíveních regionu
+        const responseData = results.map(({ data, error }) => {
+            if (error) {
+                console.error(error);
+                return null;
+            }
+            return data;
+        });
 
-    //pocet navštíveních měst
+        res.send(JSON.stringify(responseData));
 
-    //pocet navštíveních míst
-
-    return res.status(200).send("OK");
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send("Server error");
+    }
 });
 
 module.exports = router;
