@@ -25,11 +25,10 @@ router.get("/", async (req, res) => {
                 .eq('status', 1);
 
             responseData[type] = result.data.length;
+            formattedResponse[type] = responseData[type];
         }
 
-        const formattedResponse = types.map(type => ({ [type]: responseData[type] }));
-
-        res.send(JSON.stringify(formattedResponse));
+        res.send(JSON.stringify([formattedResponse]));
 
     } catch (error) {
         console.error(error);
