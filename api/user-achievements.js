@@ -16,6 +16,8 @@ router.get("/", async (req, res) => {
     const responseData = {};
 
     try {
+        const formattedResponse = {};
+
         for (const type of types) {
             const result = await supabase
                 .from('users_visited_place')
