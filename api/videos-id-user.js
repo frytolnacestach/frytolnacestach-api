@@ -8,15 +8,13 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get('/:slug', async (req, res) => {
+  var id = req.params.slug
   try {
-    const { id } = req.query;
-    const ids = id.split(",").map((id) => parseInt(id));
 
     const { data, error } = await supabase
     .from('videos')
     .select()
-    .in("id_user", ids)
-    .order('id', { ascending: false })
+    .eq('id_user', id)
 
     res.send(JSON.stringify(data))
 
