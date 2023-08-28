@@ -105,6 +105,7 @@ const postsIDstate = require("./api/posts-id-state");
 const postsIDregion = require("./api/posts-id-region");
 const postsIDcity = require("./api/posts-id-city");
 const postsIDspot = require("./api/posts-id-spot");
+const postsIDuser = require("./api/posts-id-user");
 const post = require("./api/post");
 const postLast = require("./api/post-last");
 //post - post
@@ -302,6 +303,7 @@ app.use("/api/posts-id-state", postsIDstate);
 app.use("/api/posts-id-region", postsIDregion);
 app.use("/api/posts-id-city", postsIDcity);
 app.use("/api/posts-id-spot", postsIDspot);
+app.use("/api/posts-id-user", postsIDuser);
 app.use("/api/post", post);
 app.use("/api/post-last", postLast);
 //api - post - post
