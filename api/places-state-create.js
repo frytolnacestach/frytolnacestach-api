@@ -42,7 +42,8 @@ router.post("/", async (req, res) => {
             alerts: JSON.parse(req.body.alerts),
             organization: JSON.parse(req.body.organization),
             apps: JSON.parse(req.body.apps),
-            links: JSON.parse(req.body.links)
+            links: JSON.parse(req.body.links),
+            language_phrases: JSON.parse(req.body.language_phrases)
         })
 
         return res.status(201).send("Create State");
