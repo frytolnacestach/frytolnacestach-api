@@ -31,6 +31,7 @@ router.post("/", async (req, res) => {
             phone_numbers_emergency: req.body.phone_numbers_emergency,
             currency_name: req.body.currency_name,
             currency_code: req.body.currency_code,
+            seo_tags: JSON.parse(req.body.seo_tags),
             money_prices: JSON.parse(req.body.money_prices),
             people_religion: JSON.parse(req.body.people_religion),
             people_nationality: JSON.parse(req.body.people_nationality),

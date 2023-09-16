@@ -24,6 +24,7 @@ router.post("/", async (req, res) => {
             population: req.body.population,
             population_density: req.body.populationDensity,
             number_states: req.body.states,
+            seo_tags: JSON.parse(req.body.seo_tags),
             coordinates: JSON.parse(req.body.coordinates),
             zoom: JSON.parse(req.body.zoom)
 		})

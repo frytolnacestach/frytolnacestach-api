@@ -13,17 +13,18 @@ router.post("/", async (req, res) => {
 		const { data, error } = await supabase
 		.from('videos')
 		.update({
-            slug: req.body.slug,
-            id_continent: req.body.id_continent,
-            id_state: req.body.id_state,
-            id_region: req.body.id_region,
-            id_city: req.body.id_city,
-            id_spot: req.body.id_spot,
-            id_image: req.body.id_image,
-            platform: req.body.platform,
-            title: req.body.title,
-            perex: req.body.perex,
-            url: req.body.url
+                  slug: req.body.slug,
+                  id_continent: req.body.id_continent,
+                  id_state: req.body.id_state,
+                  id_region: req.body.id_region,
+                  id_city: req.body.id_city,
+                  id_spot: req.body.id_spot,
+                  id_image: req.body.id_image,
+                  platform: req.body.platform,
+                  title: req.body.title,
+                  perex: req.body.perex,
+                  url: req.body.url,
+                  seo_tags: JSON.parse(req.body.seo_tags)
 		})
 		.eq('slug', req.body.slug)
 

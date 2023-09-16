@@ -16,6 +16,7 @@ router.post("/", async (req, res) => {
             slug: req.body.slug,
             id_image_cover: req.body.id_image_cover,
             id_image_hero: req.body.id_image_hero,
+            seo_tags: JSON.parse(req.body.seo_tags),
             ids_states: JSON.parse(req.body.ids_states),
             name: req.body.name,
             name_lat: req.body.name_lat,
