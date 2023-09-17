@@ -112,6 +112,20 @@ const postLast = require("./api/post-last");
 const postCreate = require("./api/post-create");
 const postEdit = require("./api/post-edit");
 
+//chains
+const chains = require("./api/chains");
+const chain = require("./api/chain");
+//chains - post
+const chainCreate = require("./api/chain-create");
+const chainEdit = require("./api/chain-edit");
+
+//wall-sockets
+const wallSockets = require("./api/wall-sockets");
+const wallSocket = require("./api/wall-socket");
+//wall-sockets - post
+const wallSocketCreate = require("./api/wall-socket-create");
+const wallSocketEdit = require("./api/wall-socket-edit");
+
 //brands
 const brands = require("./api/brands");
 const brandsArray = require("./api/brands-array");
@@ -318,6 +332,20 @@ app.use("/api/brand", brand);
 //api - brands - post
 app.use("/api/brand-create", brandCreate);
 app.use("/api/brand-edit", brandEdit);
+
+//api - chains
+app.use("/api/chains", chains);
+app.use("/api/chain", chain);
+//api - chains - post
+app.use("/api/chain-create", chainCreate);
+app.use("/api/chain-edit", chainEdit);
+
+//api - wall-sockets
+app.use("/api/wallSockets", wallSockets);
+app.use("/api/wallSocket", wallSocket);
+//api - wall-sockets - post
+app.use("/api/wallSocket-create", wallSocketCreate);
+app.use("/api/wallSocket-edit", wallSocketEdit);
 
 //api - foods
 app.use("/api/foods", foods);
