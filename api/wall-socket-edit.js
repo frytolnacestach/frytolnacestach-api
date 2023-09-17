@@ -18,7 +18,8 @@ router.post("/", async (req, res) => {
 			slug: req.body.slug,
 			label: req.body.label,
 			name: req.body.name,
-			description: req.body.description
+			description: req.body.description,
+			seo_tags: JSON.parse(req.body.seo_tags)
 		})
 		.eq('slug', req.body.slug)
 

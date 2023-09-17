@@ -18,7 +18,8 @@ router.post("/", async (req, res) => {
 			slug: req.body.slug,
 			name: req.body.name,
 			description: req.body.description,
-            information: JSON.parse(req.body.information)
+            information: JSON.parse(req.body.information),
+            seo_tags: JSON.parse(req.body.seo_tags)
         })
 
         return res.status(201).send("Create Continents");
