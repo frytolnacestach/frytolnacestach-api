@@ -14,7 +14,7 @@ router.get('/:slug', async (req, res) => {
     // Setting select
     let supabaseSelect;
     if (showType === "list"){
-        supabaseSelect = 'id, id_image_cover, slug, name';
+        supabaseSelect = 'id, id_image_cover, slug, name'
     }
 
     try {
