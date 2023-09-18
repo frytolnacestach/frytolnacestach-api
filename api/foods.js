@@ -37,11 +37,11 @@ router.get("/", async (req, res) => {
 
         // ADD range large
         if (!page && !items) {
-            query = query.range(start, end);
+            query = query.range(start, end)
         }
 
         // DATA
-        const { data, error } = await query;
+        const { data, error } = await query
 
         res.send(JSON.stringify(data))
     } catch (error) {
