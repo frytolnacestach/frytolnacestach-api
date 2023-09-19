@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
-const express = require("express");
-const router = express.Router();
+const express = require("express")
+const router = express.Router()
 
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
@@ -13,27 +13,25 @@ router.post("/", async (req, res) => {
 
     try {
         const { data, error } = await supabase
-        .from('users')
-        .update({ status: 3 })
-        .select()
-        .eq('email', email)
-        .eq('code_activation', codeActivation)
-        .eq('status', 2)
+            .from('users')
+            .update({ status: 3 })
+            .select()
+            .eq('email', email)
+            .eq('code_activation', codeActivation)
+            .eq('status', 2)
 
         if (error) {
-            console.error(error);
-            return res.status(500).send("Chyba při aktualizaci");
+            return res.status(500).send("Chyba při aktualizaci")
         }
 
         if (data.length === 0) {
-            return res.status(404).send('Záznam neexistuje');
+            return res.status(404).send('Záznam neexistuje')
         }
 
-        return res.status(200).send('Účet byl aktivován');
+        return res.status(200).send('Účet byl aktivován')
     } catch (error) {
-        console.error(error);
-        return res.status(500).send("Server error");
+        return res.status(500).send("Server error")
     }
-});
+})
 
-module.exports = router;
+module.exports = router

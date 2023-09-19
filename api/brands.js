@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     const end = parseInt(req.query.end || '999')
 
     // Setting select
-    let supabaseSelect;
+    let supabaseSelect
     if (showType === "list"){
         supabaseSelect = 'id, id_image_cover, slug, name'
     }

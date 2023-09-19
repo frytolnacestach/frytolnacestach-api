@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
 
-const axios = require('axios');
+const axios = require('axios')
 
-const express = require("express");
-const router = express.Router();
+const express = require("express")
+const router = express.Router()
 
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
@@ -14,22 +14,19 @@ router.get("/", async (req, res) => {
 
     try {
         const { data, error } = await supabase
-        .from('users_followers')
-        .select()
-        .eq('id_user', idUser)
-        .eq('status', 1)
+            .from('users_followers')
+            .select()
+            .eq('id_user', idUser)
+            .eq('status', 1)
 
         if (error) {
-            console.error(error);
-            return res.status(500).send("Chyba při načtení");
+            return res.status(500).send("Chyba při načtení")
         }
         
         res.send(JSON.stringify(data))
     } catch (error) {
-        console.error(error);
-        return res.status(500).send("Server error");
+        return res.status(500).send("Server error")
     }
-    
-});
+})
 
-module.exports = router;
+module.exports = router

@@ -76,7 +76,7 @@ router.post('/', async (req, res) => {
 
         client.on('error', (error) => {
             return res.status(500).send('Chyba při připojování k FTP serveru.')
-        });
+        })
     } catch (error) {
         return res.status(500).send('Chyba při nahrávání obrázku na jiný server.')
     }

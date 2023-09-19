@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 
         res.send(JSON.stringify(data))
     } catch (error) {
-        return res.status(500).send("Server error");
+        return res.status(500).send("Server error")
     }
 })
 

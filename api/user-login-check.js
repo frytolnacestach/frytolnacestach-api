@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
 
-const express = require("express");
-const router = express.Router();
+const express = require("express")
+const router = express.Router()
 
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
@@ -17,27 +17,25 @@ router.post("/", async (req, res) => {
             .from('users')
             .select()
             .eq('email', email)
-            .eq('password', password);
+            .eq('password', password)
 
         if (error) {
-            console.error(error);
-            return res.status(500).send("Server error");
+            return res.status(500).send("Server error")
         }
 
         if (data.length === 0) {
-            return res.status(404).send("User not found");
+            return res.status(404).send("User not found")
         }
 
-        const user = data[0];
+        const user = data[0]
         if (password !== user.password) {
-            return res.status(401).send("Invalid password");
+            return res.status(401).send("Invalid password")
         }
 
-        res.sendStatus(200);
+        res.sendStatus(200)
     } catch (error) {
-        console.error(error);
-        return res.status(500).send("Server error");
+        return res.status(500).send("Server error")
     }
-});
+})
 
-module.exports = router;
+module.exports = router

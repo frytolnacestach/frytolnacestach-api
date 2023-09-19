@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
 
-const axios = require('axios');
+const axios = require('axios')
 
-const express = require("express");
-const router = express.Router();
+const express = require("express")
+const router = express.Router()
 
 const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
@@ -17,55 +17,53 @@ router.post("/", async (req, res) => {
 
     try {
         const { data, error } = await supabase
-        .from('users')
-        .select('id, slug, nickname')
-        .eq('email', email)
-        .eq('password', passwordHash)
+            .from('users')
+            .select('id, slug, nickname')
+            .eq('email', email)
+            .eq('password', passwordHash)
 
         if (error) {
-            console.error(error);
-            return res.status(500).send("Server error");
+            return res.status(500).send("Server error")
         }
 
         if (data.length === 0) {
-            return res.status(404).send('Uživatel neexistuje');
+            return res.status(404).send('Uživatel neexistuje')
         } else {
-            const userId = data[0].id;
-            const userSlug = data[0].slug;
-            const userNickname = data[0].nickname;
+            const userId = data[0].id
+            const userSlug = data[0].slug
+            const userNickname = data[0].nickname
 
             //follower load
             try {
                 const { data, error } = await supabase
-                .from('users_followers')
-                .select()
-                .eq('id_follower', idFollower)
-                .eq('id_user', userId)
+                    .from('users_followers')
+                    .select()
+                    .eq('id_follower', idFollower)
+                    .eq('id_user', userId)
         
                 if (error) {
-                    console.error(error);
-                    return res.status(500).send("Chyba při aktualizaci");
+                    return res.status(500).send("Chyba při aktualizaci")
                 }
         
                 if (data.length === 0) {
                     //Add to followers
                     try {
                         const { data, error } = await supabase
-                        .from('users_followers')
-                        .insert({ 
-                            id_user: userId,
-                            id_follower: idFollower,
-                            status: status
-                        })
+                            .from('users_followers')
+                            .insert({ 
+                                id_user: userId,
+                                id_follower: idFollower,
+                                status: status
+                            })
 
                         // zjistit informace o sledujícím
                         try {
                             const { data, error } = await supabase
-                            .from('users')
-                            .select('email')
-                            .eq('id', idFollower)
+                                .from('users')
+                                .select('email')
+                                .eq('id', idFollower)
 
-                            const followerEmail = data[0].email;
+                            const followerEmail = data[0].email
 
                             // Odeslat email
                             try {
@@ -73,70 +71,62 @@ router.post("/", async (req, res) => {
                                     email: followerEmail,
                                     user_slug: userSlug,
                                     user_nickname: userNickname
-                                });
+                                })
 
                                 if (response.status === 200 || response.status === 201) {
-                                    return res.status(201).send('Přidáno do sledujících a e-mail odeslán.');
+                                    return res.status(201).send('Přidáno do sledujících a e-mail odeslán.')
                                 } else {
-                                    return res.status(500).send('Chyba při komunikaci s API');
+                                    return res.status(500).send('Chyba při komunikaci s API')
                                 }
                             } catch (error) {
-                                return res.status(500).send('Chyba připojení k API MAIL');
+                                return res.status(500).send('Chyba připojení k API MAIL')
                             }
                         } catch (error) {
-                            console.error(error);
-                            return res.status(500).send("Server error");
+                            return res.status(500).send("Server error")
                         }
                     } catch (error) {
-                        console.error(error);
-                        return res.status(500).send("Server error");
+                        return res.status(500).send("Server error")
                     }
                 } else {
                     //Update followers
-                    const followerId = data[0].id;
-                    const followerStatus = data[0].status;
+                    const followerId = data[0].id
+                    const followerStatus = data[0].status
 
                     if (followerStatus === status ) {
                         try {
                             const { data, error } = await supabase
-                            .from('users_followers')
-                            .update(
-                                { status: 0 }
-                            )
-                            .eq('id', followerId)
+                                .from('users_followers')
+                                .update(
+                                    { status: 0 }
+                                )
+                                .eq('id', followerId)
                     
-                            return res.status(200).send("Záznam odebrán");
+                            return res.status(200).send("Záznam odebrán")
                         } catch (error) {
-                            console.error(error);
-                            return res.status(500).send("Server error");
+                            return res.status(500).send("Server error")
                         }
                     } else {
                         try {
                             const { data, error } = await supabase
-                            .from('users_followers')
-                            .update(
-                                { status: status }
-                            )
-                            .eq('id', followerId)
+                                .from('users_followers')
+                                .update(
+                                    { status: status }
+                                )
+                                .eq('id', followerId)
                     
-                            return res.status(201).send("Záznam uložen");
+                            return res.status(201).send("Záznam uložen")
                         } catch (error) {
-                            console.error(error);
-                            return res.status(500).send("Server error");
+                            return res.status(500).send("Server error")
                         }
                     }
                 }
             } catch (error) {
-                console.error(error);
-                return res.status(500).send("Server error");
+                return res.status(500).send("Server error")
             }
         }
-       
     } catch (error) {
-        console.error(error);
-        return res.status(500).send("Server error");
+        return res.status(500).send("Server error")
     }
-    
-});
+})
 
-module.exports = router;
+module.exports = router

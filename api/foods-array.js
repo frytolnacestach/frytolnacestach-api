@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
         let data
         let error
 
-        const { id, showType } = req.query;
+        const { id, showType } = req.query
         const ids = id.split(",").map((id) => parseInt(id))
 
         if ( showType === "list" ) {
