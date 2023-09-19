@@ -12,7 +12,7 @@ router.get('/:slug', async (req, res) => {
 
     try {
         const { data, error } = await supabase
-            .from('wall-sockets')
+            .from('wall_sockets')
             .select()
             .eq('slug', slug)
 

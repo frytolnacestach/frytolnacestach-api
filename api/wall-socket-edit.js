@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 router.post("/", async (req, res) => {
     try {
         const { data, error } = await supabase
-            .from('wall-sockets')
+            .from('wall_sockets')
             .update({
                 id_image_cover: req.body.id_image_cover,
                 id_image_hero: req.body.id_image_hero,

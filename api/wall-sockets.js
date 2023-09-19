@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 
     try {
         // Base query
-        let query = supabase.from('wall-sockets')
+        let query = supabase.from('wall_sockets')
             .select(supabaseSelect)
             .ilike('name', `%${search}%`)
             .order('name', { ascending: true })
