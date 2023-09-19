@@ -341,11 +341,11 @@ app.use("/api/chain-create", chainCreate);
 app.use("/api/chain-edit", chainEdit);
 
 //api - wall-sockets
-app.use("/api/wallSockets", wallSockets);
-app.use("/api/wallSocket", wallSocket);
+app.use("/api/wall-sockets", wallSockets);
+app.use("/api/wall-socket", wallSocket);
 //api - wall-sockets - post
-app.use("/api/wallSocket-create", wallSocketCreate);
-app.use("/api/wallSocket-edit", wallSocketEdit);
+app.use("/api/wall-socket-create", wallSocketCreate);
+app.use("/api/wall-socket-edit", wallSocketEdit);
 
 //api - foods
 app.use("/api/foods", foods);
