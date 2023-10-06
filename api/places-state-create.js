@@ -13,20 +13,8 @@ router.post("/", async (req, res) => {
             .from('places_states')
             .insert({
                 id_continent: req.body.id_continent,
-                id_city_main: req.body.id_city_main,
-                id_image_cover: req.body.id_image_cover,
-                id_image_hero: req.body.id_image_hero,
-                type_place: req.body.type_place,
                 slug: req.body.slug,
-                name: req.body.name,
-                mpz: req.body.mpz,
-                tld: req.body.tld,
-                area: req.body.area,
-                population: req.body.population,
-                phone_prefix: req.body.phone_prefix,
-                phone_numbers_emergency: req.body.phone_numbers_emergency,
-                currency_name: req.body.currency_name,
-                currency_code: req.body.currency_code,
+                name: req.body.name
             })
 
         return res.status(201).send("Create State")
