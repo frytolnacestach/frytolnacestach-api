@@ -61,7 +61,7 @@ router.post('/', async (req, res) => {
 						}
 
                         // Uložení převedeného obrázku zpět na FTP server
-                        client.put(webpImageData, getOutputFileName(imageTypeCreate, imageName, imageWidth, imageHeight, imagePrefix), (error) => {
+                        client.put(webpImageData, getOutputFileName(imageTypeCreate, imageName, imageWidth, imageHeight, imagePrefix, imageSuffix), (error) => {
                             if (error) {
                                 return res.status(500).send('Chyba při ukládání souboru na FTP server.')
                             }
@@ -98,7 +98,7 @@ async function resizeImage(imageData, width, height) {
 }
 
 // Funkce pro generování názvu výstupního souboru
-function getOutputFileName(type, baseName, width, height, prefix) {
+function getOutputFileName(type, baseName, width, height, prefix, suffix) {
 	if (type === "raw") {
 		return `${baseName}.webp`
 	} else {
