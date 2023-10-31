@@ -256,7 +256,7 @@ app.use("/api/user-follower-id-follower", userFollowerIDfollower);
 app.use("/api/user-followers-id-user", userFollowersIDuser);
 app.use("/api/user-login", userLogin);
 app.use("/api/user-login-check", userLoginCheck);
-app.use("/api/user-password-cahnge", userPasswordChange);
+app.use("/api/user-password-change", userPasswordChange);
 app.use("/api/user-profile", userProfile);
 app.use("/api/user-profile-edit", userProfileEdit);
 app.use("/api/user-visited-place", userVisitedPlace);
