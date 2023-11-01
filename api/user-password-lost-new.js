@@ -44,32 +44,48 @@ router.post("/", async (req, res) => {
                 return res.status(500).send("Server error")
             }
 
-            //znovu načtení uživatele
-            try {
+            //vymazání code_reset
+            try {    
                 const { data, error } = await supabase
                     .from('users')
-                    .select()
+                    .update({
+                        code_reset: '',
+                    })
                     .eq('email', email)
-        
+    
                 if (error) {
                     return res.status(500).send("Server error")
                 }
-        
-                if (data.length === 0) {
-                    return res.status(404).send("User not found")
-                }
-        
-                const user = data[0]
-                const passwordMatchNew = await bcrypt.compare(passwordNew, user.password)
-        
-                if (!passwordMatchNew) {
-                    return res.status(401).send("Invalid password")
-                }
+    
+                //znovu načtení uživatele
+                try {
+                    const { data, error } = await supabase
+                        .from('users')
+                        .select()
+                        .eq('email', email)
+            
+                    if (error) {
+                        return res.status(500).send("Server error")
+                    }
+            
+                    if (data.length === 0) {
+                        return res.status(404).send("User not found")
+                    }
+            
+                    const user = data[0]
+                    const passwordMatchNew = await bcrypt.compare(passwordNew, user.password)
+            
+                    if (!passwordMatchNew) {
+                        return res.status(401).send("Invalid password")
+                    }
 
-                res.json({
-                    status: 200,
-                    message: data
-                })
+                    res.json({
+                        status: 200,
+                        message: data
+                    })
+                } catch (error) {
+                    return res.status(500).send("Server error")
+                }
             } catch (error) {
                 return res.status(500).send("Server error")
             }
