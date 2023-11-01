@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
         // Odeslat e-mail o resetu hesla
         try {
             const response = await axios.post('https://mail.frytolnacestach.cz/api/password-lost', {
-                email: req.body.email,
+                email: email,
                 code_password: randomCode
             })
 
