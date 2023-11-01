@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
         //uložení do databaze
         const { error } = await supabase
             .from('users')
-            .insert({ 
+            .update({ 
                 code_reset: randomCode,
             })
             .eq('email', email)
