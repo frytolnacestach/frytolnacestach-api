@@ -18,7 +18,8 @@ router.post("/:email", async (req, res) => {
                 surname: req.body.surname,
                 lastname: req.body.lastname,
                 agreement_mail: req.body.agreement_mail,
-                urls: req.body.urls
+                urls: req.body.urls,
+                seo_tags: req.body.seo_tags
             })
             .eq('email', email)
 
