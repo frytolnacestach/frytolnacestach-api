@@ -13,7 +13,7 @@ router.get('/:slug', async (req, res) => {
     try {
         const { data, error } = await supabase
             .from('users')
-            .select('id, email, nickname, slug, surname, lastname, status, urls')
+            .select('id, email, nickname, slug, surname, lastname, status, urls, seo_tags')
             .eq('slug', slug)
 
         res.send(JSON.stringify(data))
