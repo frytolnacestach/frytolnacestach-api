@@ -14,13 +14,18 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.post("/", async (req, res) => {
+    var email = req.body.email
+    var password = req.body.password
+    var nickname = req.body.nickname
+    var agreementMail = req.body.agreement_mail
+
     var slug = slugify(req.body.nickname, { lower: true })
 
     // Kontrola existence uživatele - email
     const { data: existingUser, error: existingError } = await supabase
         .from('users')
         .select('id')
-        .eq('email', req.body.email)
+        .eq('email', email)
         .limit(1)
 
     if (existingError) {
@@ -57,18 +62,18 @@ router.post("/", async (req, res) => {
         const randomCode = await generateRandomCode(24)
 
         //hash hesla
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        const hashedPassword = await bcrypt.hash(password, 10)
 
         //uložení do databaze
         const { error } = await supabase
             .from('users')
             .insert({ 
-                email: req.body.email,
+                email: email,
                 password: hashedPassword,
-                nickname: req.body.nickname,
+                nickname: nickname,
                 slug: slug,
                 status: 2,
-                agreement_mail: req.body.agreement_mail,
+                agreement_mail: agreementMail,
                 code_activation: randomCode
             })
 
@@ -79,7 +84,7 @@ router.post("/", async (req, res) => {
         // Odeslat registrační e-mail
         try {
             const response = await axios.post('https://mail.frytolnacestach.cz/api/registration', {
-                email: req.body.email,
+                email: email,
                 code_activation: randomCode
             })
 
