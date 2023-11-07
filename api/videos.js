@@ -44,7 +44,7 @@ router.get("/", async (req, res) => {
         } else {
             // db
             const response = await supabase
-                .from('places_continents')
+                .from('videos')
                 .select(supabaseSelect)
                 .ilike('name', `%${search}%`)
                 .order('name', { ascending: true })
