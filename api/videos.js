@@ -47,7 +47,7 @@ router.get("/", async (req, res) => {
                 .from('videos')
                 .select(supabaseSelect)
                 .ilike('name', `%${search}%`)
-                .order('name', { ascending: true })
+                .order('id', { ascending: false })
 
             // response
             data = response.data
