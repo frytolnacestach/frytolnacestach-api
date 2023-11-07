@@ -34,7 +34,7 @@ router.get("/", async (req, res) => {
             const response = await supabase
                 .from('videos')
                 .select(supabaseSelect)
-                .ilike('name', `%${search}%`)
+                .ilike('title', `%${search}%`)
                 .order('id', { ascending: false })
                 .range(itemsStart, itemsEnd)
 
@@ -46,7 +46,7 @@ router.get("/", async (req, res) => {
             const response = await supabase
                 .from('videos')
                 .select(supabaseSelect)
-                .ilike('name', `%${search}%`)
+                .ilike('title', `%${search}%`)
                 .order('id', { ascending: false })
 
             // response
