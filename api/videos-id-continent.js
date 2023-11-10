@@ -9,12 +9,53 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get('/:slug', async (req, res) => {
     var id = req.params.slug
+    const showType = req.query.showType
+    const search = req.query.search || ''
+    const page = parseInt(req.query.page, 10)
+    const items = parseInt(req.query.items, 10)
+
+    // Setting select
+    let supabaseSelect
+    if (showType === "list"){
+        supabaseSelect = 'id, id_image, slug, title'
+    } else if (showType === "search") {
+        supabaseSelect = 'id, slug, title'
+    }
 
     try {
-        const { data, error } = await supabase
-            .from('videos')
-            .select()
-            .eq('id_continent', id)
+        let data
+        let error
+
+        if(page && items) {
+            // items filter
+            const itemsStart = (page * items) - items
+            const itemsEnd = itemsStart + items - 1
+
+            // db
+            const response = await supabase
+                .from('videos')
+                .select(supabaseSelect)
+                .ilike('title', `%${search}%`)
+                .order('id', { ascending: false })
+                .range(itemsStart, itemsEnd)
+                .eq('id_continent', id)
+
+            // response
+            data = response.data
+            error = response.error
+        } else {
+            // db
+            const response = await supabase
+                .from('videos')
+                .select(supabaseSelect)
+                .ilike('title', `%${search}%`)
+                .order('id', { ascending: false })
+                .eq('id_continent', id)
+
+            // response
+            data = response.data
+            error = response.error
+        }
 
         res.send(JSON.stringify(data))
     } catch (error) {
