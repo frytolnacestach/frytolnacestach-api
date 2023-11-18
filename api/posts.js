@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
             const itemsEnd = itemsStart + items - 1
 
             // Base query
-            const response = await supabase
+            let query = supabase
                 .from('posts')
                 .select(supabaseSelect)
                 .ilike('title', `%${search}%`)
@@ -66,7 +66,7 @@ router.get("/", async (req, res) => {
             res.send(JSON.stringify(data))
         } else {
             // Base query
-            const response = await supabase
+            let query = supabase
                 .from('posts')
                 .select(supabaseSelect)
                 .ilike('title', `%${search}%`)
