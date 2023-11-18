@@ -26,9 +26,6 @@ router.get("/", async (req, res) => {
     }
 
     try {
-        let data
-        let error
-
         if(page && items) {
             // items filter
             const itemsStart = (page * items) - items
@@ -95,7 +92,6 @@ router.get("/", async (req, res) => {
             // response
             res.send(JSON.stringify(data))
         }
-
     } catch (error) {
         return res.status(500).send("Server error")
     }
