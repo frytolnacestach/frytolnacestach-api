@@ -18,7 +18,8 @@ router.post("/", async (req, res) => {
                 type_place: req.body.type_place,
                 slug: req.body.slug,
                 name: req.body.name,
-                information_chatgpt: req.body.information_chatgpt
+                information_chatgpt: req.body.information_chatgpt,
+                seo_tags: JSON.parse(req.body.seo_tags)
             })
 
         return res.status(201).send("Create region")
