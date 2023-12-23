@@ -14,12 +14,12 @@ router.post("/", async (req, res) => {
             .insert({
                 id_image_cover: req.body.id_image_cover,
                 id_image_hero: req.body.id_image_hero,
-                ids_states: JSON.parse(req.body.ids_states),
+                ids_states: req.body.ids_states,
                 slug: req.body.slug,
                 name: req.body.name,
                 description: req.body.description,
-                information: JSON.parse(req.body.information),
-                seo_tags: JSON.parse(req.body.seo_tags)
+                information: req.body.information,
+                seo_tags: req.body.seo_tags)
             })
 
         return res.status(201).send("Create Continents")
