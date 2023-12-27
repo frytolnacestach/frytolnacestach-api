@@ -7,7 +7,7 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-router.post("/", async (req, res) => {
+router.put("/", async (req, res) => {
 	try {
 		const { data, error } = await supabase
 			.from('fauna')
