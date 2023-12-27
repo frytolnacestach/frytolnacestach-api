@@ -21,8 +21,6 @@ router.post("/", async (req, res) => {
                 id_image_cover: req.body.id_image_cover,
                 id_image_hero: req.body.id_image_hero,
                 id_image_map: req.body.id_image_map,
-                date: req.body.date,
-                date_update: req.body.date_update,
                 date_information: req.body.date_information,
                 url_youtube: req.body.url_youtube,
                 url_wiki: req.body.url_wiki,
