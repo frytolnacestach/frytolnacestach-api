@@ -18,14 +18,14 @@ router.post("/", async (req, res) => {
                 slug: req.body.slug,
                 name: req.body.name,
                 information_chatgpt: req.body.information_chatgpt,
-                information_author: JSON.parse(req.body.information_author),
+                information_author: req.body.information_author,
                 area: req.body.area,
                 population: req.body.population,
                 population_density: req.body.populationDensity,
                 number_states: req.body.states,
-                seo_tags: JSON.parse(req.body.seo_tags),
-                coordinates: JSON.parse(req.body.coordinates),
-                zoom: JSON.parse(req.body.zoom)
+                seo_tags: req.body.seo_tags,
+                coordinates: req.body.coordinates,
+                zoom: req.body.zoom
             })
 
         return res.status(201).send("Create Continent")

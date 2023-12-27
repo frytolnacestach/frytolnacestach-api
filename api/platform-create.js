@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
                 name: req.body.name,
                 perex: req.body.perex,
                 url: req.body.url,
-                facts: JSON.parse(req.body.facts),
+                facts: req.body.facts,
                 date: req.body.date
             })
 

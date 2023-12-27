@@ -26,12 +26,12 @@ router.post("/", async (req, res) => {
                 slug: req.body.slug,
                 name: req.body.name,
                 description: req.body.description,
-                seo_tags: JSON.parse(req.body.seo_tags),
-                coordinates: JSON.parse(req.body.coordinates),
-                zoom: JSON.parse(req.body.zoom),
-                affiliate: JSON.parse(req.body.affiliate),
-                prices: JSON.parse(req.body.prices),
-                links: JSON.parse(req.body.links)
+                seo_tags: req.body.seo_tags,
+                coordinates: req.body.coordinates,
+                zoom: req.body.zoom,
+                affiliate: req.body.affiliate,
+                prices: req.body.prices,
+                links: req.body.links
             })
 
         return res.status(201).send("Create event")

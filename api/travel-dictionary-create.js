@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
                 slug: req.body.slug,
                 name: req.body.name,
                 description: req.body.description,
-                seo_tags: JSON.parse(req.body.seo_tags)
+                seo_tags: req.body.seo_tags
             })
 
         return res.status(201).send("Create post")

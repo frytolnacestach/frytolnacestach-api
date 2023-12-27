@@ -37,13 +37,13 @@ router.post("/", async (req, res) => {
                 perex_price: req.body.perex_price,
                 perex_triplength: req.body.perex_triplength,
                 perex_time: req.body.perex_time,
-                seo_tags: JSON.parse(req.body.seo_tags),
-                tags: JSON.parse(req.body.tags),
-                locations: JSON.parse(req.body.locations),
-                travels: JSON.parse(req.body.travels),
-                prices: JSON.parse(req.body.prices),
-                triplengths: JSON.parse(req.body.triplengths),
-                times: JSON.parse(req.body.times)
+                seo_tags: req.body.seo_tags,
+                tags: req.body.tags,
+                locations: req.body.locations,
+                travels: req.body.travels,
+                prices: req.body.prices,
+                triplengths: req.body.triplengths,
+                times: req.body.times
             })
 
         return res.status(201).send("Create post")

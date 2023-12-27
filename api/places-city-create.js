@@ -20,16 +20,16 @@ router.post("/", async (req, res) => {
                 slug: req.body.slug,
                 name: req.body.name,
                 information_chatgpt: req.body.information_chatgpt,
-                information_author: JSON.parse(req.body.information_author),
+                information_author: req.body.information_author,
                 population: req.body.population,
                 area: req.body.area,
                 altitude: req.body.altitude,
-                seo_tags: JSON.parse(req.body.seo_tags),
-                coordinates: JSON.parse(req.body.coordinates),
-                zoom: JSON.parse(req.body.zoom),
-                affiliate: JSON.parse(req.body.affiliate),
-                alerts: JSON.parse(req.body.alerts),
-                parking: JSON.parse(req.body.parking)
+                seo_tags: req.body.seo_tags,
+                coordinates: req.body.coordinates,
+                zoom: req.body.zoom,
+                affiliate: req.body.affiliate,
+                alerts: req.body.alerts,
+                parking: req.body.parking
             })
 
         return res.status(201).send("Create City")

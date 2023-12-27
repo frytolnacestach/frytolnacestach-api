@@ -14,12 +14,12 @@ router.post("/", async (req, res) => {
             .insert({
                 id_image_cover: req.body.id_image_cover,
                 id_image_hero: req.body.id_image_hero,
-                ids_states: JSON.parse(req.body.ids_states),
+                ids_states: req.body.ids_states,
                 slug: req.body.slug,
                 label: req.body.label,
                 name: req.body.name,
                 description: req.body.description,
-                seo_tags: JSON.parse(req.body.seo_tags)
+                seo_tags: req.body.seo_tags
             })
 
         return res.status(201).send("Create Wall sockets")

@@ -20,13 +20,13 @@ router.post("/", async (req, res) => {
                 slug: req.body.slug,
                 name: req.body.name,
                 information_chatgpt: req.body.information_chatgpt,
-                information_author: JSON.parse(req.body.information_author),
-                information_duration: JSON.parse(req.body.information_duration),
+                information_author: req.body.information_author,
+                information_duration: req.body.information_duration,
                 altitude: req.body.altitude,
-                seo_tags: JSON.parse(req.body.seo_tags),
-                coordinates: JSON.parse(req.body.coordinates),
-                zoom: JSON.parse(req.body.zoom),
-                affiliate: JSON.parse(req.body.affiliate)
+                seo_tags: req.body.seo_tags,
+                coordinates: req.body.coordinates,
+                zoom: req.body.zoom,
+                affiliate: req.body.affiliate
             })
 
         return res.status(201).send("Create Spot")

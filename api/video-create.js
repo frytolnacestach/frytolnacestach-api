@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
             title: req.body.title,
             perex: req.body.perex,
             url: req.body.url,
-            seo_tags: JSON.parse(req.body.seo_tags)
+            seo_tags: req.body.seo_tags
         })
 
         return res.status(201).send("Create video")
