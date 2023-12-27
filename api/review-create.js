@@ -14,7 +14,6 @@ router.post("/", async (req, res) => {
     let rating = req.body.rating
 
     // other var
-    // let dateEdit
     let status = 1
     let idUser
 
@@ -60,7 +59,6 @@ router.post("/", async (req, res) => {
                         const { data, error } = await supabase
                             .from('users_place_review')
                             .insert({
-                                //date_edit: dateEdit,
                                 id_place: req.body.id_place,
                                 id_user: idUser,
                                 type: req.body.type,
