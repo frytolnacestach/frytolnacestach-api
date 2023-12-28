@@ -84,7 +84,9 @@ const platformEdit = require("./api/platform-edit");
 const images = require("./api/images");
 const imagesArray = require("./api/images-array");
 const imageID = require("./api/image-id");
+//image - post
 const imageCreate = require("./api/image-create");
+const imageEdit = require("./api/image-edit");
 const imageWebpCreate = require("./api/image-webp-create");
 
 //video
@@ -301,7 +303,9 @@ app.use("/api/platform-edit", platformEdit);
 app.use("/api/images", images);
 app.use("/api/images-array", imagesArray);
 app.use("/api/image-id", imageID);
+//api - image - post
 app.use("/api/image-create", imageCreate);
+app.use("/api/image-edit", imageEdit);
 app.use("/api/image-webp-create", imageWebpCreate);
 
 //api - video
