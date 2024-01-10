@@ -8,17 +8,30 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
+    const limit = req.query.limit || ''
+    const status = req.query.status || ''
     const search = req.query.search || ''
     const start = parseInt(req.query.start || '0')
     const end = parseInt(req.query.end || '999')
+    const currentTime = new Date().toISOString()
 
     try {
-        const { data, error } = await supabase
+        let query = supabase.from('places_cities')
             .from('events')
             .select()
             .ilike('name', `%${search}%`)
-            .order('name', { ascending: true })
             .range(start, end)
+            .limit(limit)
+
+        if (status === "nearby") {
+            query = query.gte('date_start', currentTime)
+            query = query.order('date_start', { ascending: true, nullsFirst: true })
+        } else {
+            query = query.order('name', { ascending: true })
+        }
+
+        // DATA
+        const { data, error } = await query
 
         res.send(JSON.stringify(data))
     } catch (error) {
