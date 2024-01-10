@@ -18,7 +18,6 @@ router.put("/", async (req, res) => {
                 id_spot: req.body.id_spot,
                 id_image_cover: req.body.id_image_cover,
                 id_image_hero: req.body.id_image_hero,
-                date_update: req.body.date_update,
                 date_start: req.body.date_start,
                 date_end: req.body.date_end,
                 slug: req.body.slug,
