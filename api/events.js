@@ -20,8 +20,11 @@ router.get("/", async (req, res) => {
             .select()
             .ilike('name', `%${search}%`)
             .range(start, end)
-            .limit(limit)
 
+        if (limit) {
+            query = query.limit(limit)
+        }
+        
         if (status === "nearby") {
             query = query.gte('date_start', currentTime)
             query = query.order('date_start', { ascending: true, nullsFirst: true })
