@@ -16,8 +16,7 @@ router.get("/", async (req, res) => {
     const currentTime = new Date().toISOString()
 
     try {
-        let query = supabase.from('places_cities')
-            .from('events')
+        let query = supabase.from('events')
             .select()
             .ilike('name', `%${search}%`)
             .range(start, end)
