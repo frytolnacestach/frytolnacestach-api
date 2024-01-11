@@ -11,6 +11,8 @@ router.get("/", async (req, res) => {
     const limit = req.query.limit || ''
     const status = req.query.status || ''
     const search = req.query.search || ''
+    const page = parseInt(req.query.page, 10)
+    const items = parseInt(req.query.items, 10)
     const start = parseInt(req.query.start || '0')
     const end = parseInt(req.query.end || '999')
     const currentTime = new Date().toISOString()
@@ -19,12 +21,25 @@ router.get("/", async (req, res) => {
         let query = supabase.from('events')
             .select()
             .ilike('name', `%${search}%`)
-            .range(start, end)
 
+        // ADD range
+        if (page && items) {
+            const itemsStart = (page * items) - items
+            const itemsEnd = itemsStart + items - 1
+            query = query.range(itemsStart, itemsEnd)
+        }
+
+        // ADD range large
+        if (!page && !items) {
+            query = query.range(start, end)
+        }
+
+        // ADD limit
         if (limit) {
             query = query.limit(limit)
         }
         
+        // ADD order and gte
         if (status === "nearby") {
             query = query.gte('date_start', currentTime)
             query = query.order('date_start', { ascending: true, nullsFirst: true })
