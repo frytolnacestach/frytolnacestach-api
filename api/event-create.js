@@ -23,7 +23,6 @@ router.post("/", async (req, res) => {
                 slug: req.body.slug,
                 name: req.body.name,
                 description: req.body.description,
-                ids_compatibility: req.body.ids_compatibility,
                 seo_tags: req.body.seo_tags,
                 coordinates: req.body.coordinates,
                 zoom: req.body.zoom,

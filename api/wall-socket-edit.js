@@ -14,6 +14,7 @@ router.put("/", async (req, res) => {
             .update({
                 id_image_cover: req.body.id_image_cover,
                 id_image_hero: req.body.id_image_hero,
+                ids_compatibility: JSON.parse(req.body.ids_compatibility),
                 ids_states: JSON.parse(req.body.ids_states),
                 slug: req.body.slug,
                 label: req.body.label,
