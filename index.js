@@ -128,6 +128,7 @@ const chainEdit = require("./api/chain-edit");
 //wall-sockets
 const wallSockets = require("./api/wall-sockets");
 const wallSocketsIDstate = require("./api/wall-sockets-id-state");
+const wallSocketsID = require("./api/wall-sockets-id");
 const wallSocket = require("./api/wall-socket");
 //wall-sockets - post
 const wallSocketCreate = require("./api/wall-socket-create");
@@ -356,6 +357,7 @@ app.use("/api/chain-edit", chainEdit);
 //api - wall-sockets
 app.use("/api/wall-sockets", wallSockets);
 app.use("/api/wall-sockets-id-state", wallSocketsIDstate);
+app.use("/api/wall-sockets-id", wallSocketsID);
 app.use("/api/wall-socket", wallSocket);
 //api - wall-sockets - post
 app.use("/api/wall-socket-create", wallSocketCreate);
