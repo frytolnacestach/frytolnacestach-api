@@ -7,7 +7,8 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-router.get('/:slug', async (req, res) => {
+router.get('/', async (req, res) => {
+    
     const { id } = req.query
     const ids = id.split(",").map((id) => parseInt(id))
     const showType = req.query.showType
