@@ -8,7 +8,8 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get('/:slug', async (req, res) => {
-    var id = req.params.slug
+    const { id } = req.query
+    const ids = id.split(",").map((id) => parseInt(id))
     const showType = req.query.showType
 
     // Setting select
@@ -21,7 +22,8 @@ router.get('/:slug', async (req, res) => {
         const { data, error } = await supabase
             .from('wall_sockets')
             .select(supabaseSelect)
-            .contains("id", JSON.stringify([{ id: parseInt(id) }]))
+            .in("id", ids)
+            .order('id', { ascending: false })
 
         res.send(JSON.stringify(data))
     } catch (error) {
