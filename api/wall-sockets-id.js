@@ -21,7 +21,7 @@ router.get('/:slug', async (req, res) => {
         const { data, error } = await supabase
             .from('wall_sockets')
             .select(supabaseSelect)
-            .contains("ids_states", JSON.stringify([{ id: parseInt(id) }]))
+            .contains("id", JSON.stringify([{ id: parseInt(id) }]))
 
         res.send(JSON.stringify(data))
     } catch (error) {
