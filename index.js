@@ -98,7 +98,6 @@ const videosIDcity = require("./api/videos-id-city");
 const videosIDspot = require("./api/videos-id-spot");
 const videosIDuser = require("./api/videos-id-user");
 const video = require("./api/video");
-const videoLast = require("./api/video-last");
 //video - post
 const videoCreate = require("./api/video-create");
 const videoEdit = require("./api/video-edit");
@@ -112,7 +111,6 @@ const postsIDcity = require("./api/posts-id-city");
 const postsIDspot = require("./api/posts-id-spot");
 const postsIDuser = require("./api/posts-id-user");
 const post = require("./api/post");
-const postLast = require("./api/post-last");
 //post - post
 const postCreate = require("./api/post-create");
 const postEdit = require("./api/post-edit");
@@ -318,7 +316,6 @@ app.use("/api/videos-id-city", videosIDcity);
 app.use("/api/videos-id-spot", videosIDspot);
 app.use("/api/videos-id-user", videosIDuser);
 app.use("/api/video", video);
-app.use("/api/video-last", videoLast);
 //api - video - post
 app.use("/api/video-create", videoCreate);
 app.use("/api/video-edit", videoEdit);
@@ -332,7 +329,6 @@ app.use("/api/posts-id-city", postsIDcity);
 app.use("/api/posts-id-spot", postsIDspot);
 app.use("/api/posts-id-user", postsIDuser);
 app.use("/api/post", post);
-app.use("/api/post-last", postLast);
 //api - post - post
 app.use("/api/post-create", postCreate);
 app.use("/api/post-edit", postEdit);
