@@ -9,6 +9,8 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
     // Varible - query
+    const limit = req.query.limit || ''
+    const status = req.query.status || ''
     const showType = req.query.showType
     const search = req.query.search || ''
     const page = parseInt(req.query.page, 10)
@@ -84,6 +86,11 @@ router.get("/", async (req, res) => {
             // ADD range large
             if (!page && !items) {
                 query = query.range(start, end)
+            }
+
+            // ADD limit
+            if (limit) {
+                query = query.limit(limit)
             }
 
             // DATA
