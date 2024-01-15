@@ -14,15 +14,15 @@ router.get('/', async (req, res) => {
         const { dataRegions, errorRegions } = await supabase
             .from('places_regions')
             .select()
-            .eq('id_states', id)
+            .eq('id_state', id)
         const { dataCities, errorCities } = await supabase
             .from('places_cities')
             .select()
-            .eq('id_states', id)
+            .eq('id_state', id)
         const { dataSpots, errorSpots } = await supabase
             .from('places_spots')
             .select()
-            .eq('id_states', id)
+            .eq('id_state', id)
         const hasWhatToSee = dataRegions !== null || dataCities !== null || dataSpots !== null
 
         const { data, error } = await supabase
