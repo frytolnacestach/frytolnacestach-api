@@ -22,8 +22,8 @@ router.get('/:id', async (req, res) => {
             .select('*', { count: 'exact', head: true })
 
         const tabs = {
-            tabVideos: tabVideos > 0,
-            tabArticles: tabArticles > 0
+            tabVideos: tabVideos,
+            tabArticles: tabArticles
         }
 
         res.send(JSON.stringify(tabs))
