@@ -7,8 +7,8 @@ const supabaseUrl = 'https://qdjxqerpuvcwnbiqojnv.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-router.get('/', async (req, res) => {
-    var id = 56
+router.get('/:slug', async (req, res) => {
+    var id = req.params.slug
     
     try {
         const { dataRegions, errorRegions } = await supabase
