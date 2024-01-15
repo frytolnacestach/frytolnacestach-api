@@ -33,8 +33,8 @@ router.get('/', async (req, res) => {
         const hasPeople = data[0].people_religion !== null || data[0].people_nationality !== null
         const hasContacts = data[0].phone_prefix !== null
         const hasTrip = data[0].visitors_entry !== null
-        //const hasHotel = data[0].affiliate !== null && data[0].affiliate.some(item => item.name === 'booking' && item.value === true)
-        const hasNeighboring = data[0].ids_neighboring_countries !== null && data[0].ids_neighboring_countries.length > 0
+        const hasHotel = data[0].affiliate !== null && data[0].affiliate.some(item => item.name === 'booking' && item.value === true)
+        //const hasNeighboring = data[0].ids_neighboring_countries !== null && data[0].ids_neighboring_countries.length > 0
 
         const { count: tabVideos, error: tabVideosError } = await supabase
             .from('videos')
@@ -62,8 +62,8 @@ router.get('/', async (req, res) => {
             tabPeople: hasPeople,
             tabTrip: hasTrip,
             tabContact: hasContacts,
-            //tabHotel: hasHotel,
-            tabNeighboring: hasNeighboring,
+            tabHotel: hasHotel,
+            //tabNeighboring: hasNeighboring,
             tabVideos: tabVideos,
             tabArticles: tabArticles,
             tabWallSockets: tabWallSockets,
