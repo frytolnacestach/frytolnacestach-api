@@ -25,6 +25,9 @@ app.use(function(req, res, next) {
 
 
 //CONSTS
+//config
+const configWorldStateTabs = require("./api/config-world-state-tabs");
+
 //user
 const users = require("./api/users");
 const usersAll = require("./api/users-all");
@@ -243,6 +246,9 @@ const eventEdit = require("./api/event-edit");
 
 
 //API
+//api - config
+app.use("/api/config-world-state-tabs", configWorldStateTabs);
+
 //api - user
 app.use("/api/users", users);
 app.use("/api/users-all", usersAll);
