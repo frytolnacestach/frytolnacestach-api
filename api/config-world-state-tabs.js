@@ -8,16 +8,18 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get('/', async (req, res) => {
-    //var id = req.params.id
+    var id = 56
     
     try {
         const { count: tabVideos, error: tabVideosError } = await supabase
             .from('videos')
             .select('*', { count: 'exact', head: true })
+            .eq('id_state', id)
 
         const { count: tabArticles, error: tabArticlesError } = await supabase
             .from('posts')
             .select('*', { count: 'exact', head: true })
+            .eq('id_state', id)
 
         const tabs = {
             tabVideos: tabVideos,
