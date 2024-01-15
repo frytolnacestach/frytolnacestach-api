@@ -11,13 +11,30 @@ router.get('/', async (req, res) => {
     var id = 56
     
     try {
+        const { dataRegions, errorRegions } = await supabase
+            .from('places_regions')
+            .select()
+            .eq('id_states', id)
+        const { dataCities, errorCities } = await supabase
+            .from('places_cities')
+            .select()
+            .eq('id_states', id)
+        const { dataSpots, errorSpots } = await supabase
+            .from('places_spots')
+            .select()
+            .eq('id_states', id)
+        const hasWhatToSee = dataRegions !== null || dataCities !== null || dataSpots !== null
+
         const { data, error } = await supabase
             .from('places_states')
-            .select('currency_code, visitors_entry')
+            .select('currency_code, people_religion, people_nationality, phone_prefix, visitors_entry, affiliate')
             .eq('id', id)
-
-        const hasCurrencyCode = data[0].currency_code !== null;
-        const hasVisitorsEntry = data[0].visitors_entry !== null;
+        const hasPrice = data[0].currency_code !== null
+        const hasPeople = data[0].people_religion !== null || data[0].people_nationality !== null
+        const hasContacts = data[0].phone_prefix !== null
+        const hasTrip = data[0].visitors_entry !== null
+        const hasHotel = data[0].affiliate !== null && data[0].affiliate.some(item => item.name === 'booking' && item.value === true)
+        const hasNeighboring = data[0].ids_neighboring_countries !== null && data[0].ids_neighboring_countries.length > 0
 
         const { count: tabVideos, error: tabVideosError } = await supabase
             .from('videos')
@@ -40,12 +57,17 @@ router.get('/', async (req, res) => {
             .contains("ids_states", JSON.stringify([{ id: parseInt(id) }]))
 
         const tabs = {
+            tabWhatToSee: hasWhatToSee,
+            tabPrice: hasPrice,
+            tabPeople: hasPeople,
+            tabTrip: hasTrip,
+            tabContact: hasContacts,
+            tabHotel: hasHotel,
+            tabNeighboring: hasNeighboring,
             tabVideos: tabVideos,
             tabArticles: tabArticles,
             tabWallSockets: tabWallSockets,
-            tabChains: tabChains,
-            tabCurrencyCode: hasCurrencyCode,
-            tabVisitorsEntry: hasVisitorsEntry
+            tabChains: tabChains
         }
 
         res.send(JSON.stringify(tabs))
