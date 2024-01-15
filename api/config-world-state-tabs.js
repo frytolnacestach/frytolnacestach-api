@@ -11,6 +11,14 @@ router.get('/', async (req, res) => {
     var id = 56
     
     try {
+        const { data, error } = await supabase
+            .from('places_states')
+            .select('currency_code, visitors_entry')
+            .eq('id', id)
+
+        const hasCurrencyCode = data[0].currency_code !== null;
+        const hasVisitorsEntry = data[0].visitors_entry !== null;
+
         const { count: tabVideos, error: tabVideosError } = await supabase
             .from('videos')
             .select('*', { count: 'exact', head: true })
@@ -35,7 +43,9 @@ router.get('/', async (req, res) => {
             tabVideos: tabVideos,
             tabArticles: tabArticles,
             tabWallSockets: tabWallSockets,
-            tabChains: tabChains
+            tabChains: tabChains,
+            tabCurrencyCode: hasCurrencyCode,
+            tabVisitorsEntry: hasVisitorsEntry
         }
 
         res.send(JSON.stringify(tabs))
