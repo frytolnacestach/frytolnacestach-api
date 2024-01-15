@@ -21,9 +21,21 @@ router.get('/', async (req, res) => {
             .select('*', { count: 'exact', head: true })
             .eq('id_state', id)
 
+        const { count: tabWallSockets, error: tabWallSocketsError } = await supabase
+            .from('posts')
+            .select('*', { count: 'exact', head: true })
+            .contains("ids_states", JSON.stringify([{ id: parseInt(id) }]))
+
+        const { count: tabChains, error: tabChainsError } = await supabase
+            .from('posts')
+            .select('*', { count: 'exact', head: true })
+            .contains("ids_states", JSON.stringify([{ id: parseInt(id) }]))
+
         const tabs = {
             tabVideos: tabVideos,
-            tabArticles: tabArticles
+            tabArticles: tabArticles,
+            tabWallSockets: tabWallSockets,
+            tabChains: tabChains
         }
 
         res.send(JSON.stringify(tabs))
