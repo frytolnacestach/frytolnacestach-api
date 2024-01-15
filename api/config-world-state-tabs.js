@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
     var id = 56
     
     try {
-        const { dataRegions, errorRegions } = await supabase
+        /*const { dataRegions, errorRegions } = await supabase
             .from('places_regions')
             .select()
             .eq('id_state', id)
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
             .from('places_spots')
             .select()
             .eq('id_state', id)
-        const hasWhatToSee = dataRegions !== null || dataCities !== null || dataSpots !== null
+        const hasWhatToSee = dataRegions !== null || dataCities !== null || dataSpots !== null*/
 
         const { data, error } = await supabase
             .from('places_states')
@@ -57,7 +57,7 @@ router.get('/', async (req, res) => {
             .contains("ids_states", JSON.stringify([{ id: parseInt(id) }]))
 
         const tabs = {
-            tabWhatToSee: hasWhatToSee,
+            //tabWhatToSee: hasWhatToSee,
             tabPrice: hasPrice,
             tabPeople: hasPeople,
             tabTrip: hasTrip,
