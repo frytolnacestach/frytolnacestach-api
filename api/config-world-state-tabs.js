@@ -12,12 +12,18 @@ router.get('/:id', async (req, res) => {
     
     try {
         const { count: tabVideos, error: tabVideosError } = await supabase
-            .from('places_continents')
-            .eq('id_spot', id)
+            .from('videos')
+            .eq('id_state', id)
+            .select('*', { count: 'exact', head: true })
+
+        const { count: tabArticles, error: tabArticlesError } = await supabase
+            .from('posts')
+            .eq('id_state', id)
             .select('*', { count: 'exact', head: true })
 
         const tabs = {
-            tabVideos: tabVideos
+            tabVideos: tabVideos > 0,
+            tabArticles: tabArticles > 0
         }
 
         res.send(JSON.stringify(tabs))
