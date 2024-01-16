@@ -56,6 +56,26 @@ router.get('/:slug', async (req, res) => {
             .select('*', { count: 'exact', head: true })
             .contains("ids_states", JSON.stringify([{ id: parseInt(id) }]))
 
+        const { count: tabFauna, error: tabFaunaError } = await supabase
+            .from('fauna')
+            .select('*', { count: 'exact', head: true })
+            .contains("ids_states", JSON.stringify([{ id: parseInt(id) }]))
+
+        const { count: tabFlora, error: tabFloraError } = await supabase
+            .from('flora')
+            .select('*', { count: 'exact', head: true })
+            .contains("ids_states", JSON.stringify([{ id: parseInt(id) }]))
+
+        const { count: tabFoods, error: tabFoodsError } = await supabase
+            .from('foods')
+            .select('*', { count: 'exact', head: true })
+            .contains("ids_states", JSON.stringify([{ id: parseInt(id) }]))
+
+        const { count: tabBrands, error: tabBrandsError } = await supabase
+            .from('brands')
+            .select('*', { count: 'exact', head: true })
+            .contains("ids_states", JSON.stringify([{ id: parseInt(id) }]))
+
         const tabs = {
             tabWhatToSee: hasWhatToSee,
             tabPrice: hasPrice,
@@ -67,7 +87,11 @@ router.get('/:slug', async (req, res) => {
             tabVideos: tabVideos,
             tabArticles: tabArticles,
             tabWallSockets: tabWallSockets,
-            tabChains: tabChains
+            tabChains: tabChains,
+            tabFauna: tabFauna,
+            tabFlora: tabFlora,
+            tabFoods: tabFoods,
+            tabBrands: tabBrands
         }
 
         res.send(JSON.stringify(tabs))
