@@ -16,6 +16,7 @@ router.post("/", async (req, res) => {
                 id_image_cover: req.body.id_image_cover,
                 id_image_hero: req.body.id_image_hero,
                 type_place: req.body.type_place,
+                type_region: req.body.type_region,
                 slug: req.body.slug,
                 name: req.body.name,
                 name_original: req.body.name_original,
