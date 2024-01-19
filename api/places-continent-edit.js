@@ -17,6 +17,7 @@ router.put("/", async (req, res) => {
                 type_place: req.body.type_place,
                 slug: req.body.slug,
                 name: req.body.name,
+                name_original: req.body.name_original,
                 information_chatgpt: req.body.information_chatgpt,
                 information_author: JSON.parse(req.body.information_author),
                 area: req.body.area,

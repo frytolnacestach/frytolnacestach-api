@@ -19,6 +19,7 @@ router.post("/", async (req, res) => {
                 importance: req.body.importance,
                 slug: req.body.slug,
                 name: req.body.name,
+                name_original: req.body.name_original,
                 information_chatgpt: req.body.information_chatgpt,
                 information_author: req.body.information_author,
                 population: req.body.population,
