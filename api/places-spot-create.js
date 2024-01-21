@@ -17,18 +17,18 @@ router.post("/", async (req, res) => {
                 id_image_cover: req.body.id_image_cover,
                 id_image_hero: req.body.id_image_hero,
                 type_place: req.body.type_place,
-                type_spot: req.body.type_spot ? JSON.parse(req.body.type_spot) : [],
+                type_spot: parseJson(req.body.type_spot),
                 slug: req.body.slug,
                 name: req.body.name,
                 name_original: req.body.name_original,
                 information_chatgpt: req.body.information_chatgpt,
-                information_author: req.body.information_author ? JSON.parse(req.body.information_author) : [],
-                information_duration: req.body.information_duration ? JSON.parse(req.body.information_duration) : [],
+                information_author: parseJson(req.body.information_author),
+                information_duration: parseJson(req.body.information_duration),
                 altitude: req.body.altitude,
-                seo_tags: req.body.seo_tags ? JSON.parse(req.body.seo_tags) : [],
-                coordinates: req.body.coordinates ? JSON.parse(req.body.coordinates) : [],
-                zoom: req.body.zoom ? JSON.parse(req.body.zoom) : [],
-                affiliate: req.body.affiliate ? JSON.parse(req.body.affiliate) : []
+                seo_tags: parseJson(req.body.seo_tags),
+                coordinates: parseJson(req.body.coordinates),
+                zoom: parseJson(req.body.zoom),
+                affiliate: parseJson(req.body.affiliate)
             })
 
         return res.status(201).send("Create Spot")
@@ -36,5 +36,14 @@ router.post("/", async (req, res) => {
         return res.status(500).send("Server error")
     }
 })
+
+function parseJson(value) {
+    try {
+        return value ? JSON.parse(value) : null;
+    } catch (error) {
+        console.error(`Error parsing JSON: ${value}`);
+        return null;
+    }
+}
 
 module.exports = router
