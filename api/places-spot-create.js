@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
                 id_image_cover: req.body.id_image_cover,
                 id_image_hero: req.body.id_image_hero,
                 type_place: req.body.type_place,
-                type_spot: req.body.type_spot,
+                type_spot: req.body.type_spot ? JSON.parse(req.body.type_spot) : [],
                 slug: req.body.slug,
                 name: req.body.name,
                 name_original: req.body.name_original,
