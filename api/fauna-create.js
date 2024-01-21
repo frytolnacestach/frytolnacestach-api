@@ -15,8 +15,8 @@ router.post("/", async (req, res) => {
                 slug: req.body.slug,
                 id_image_cover: req.body.id_image_cover,
                 id_image_hero: req.body.id_image_hero,
-                seo_tags: req.body.seo_tags,
-                ids_states: req.body.ids_states,
+                seo_tags: parseJson(req.body.seo_tags),
+                ids_states: parseJson(req.body.ids_states),
                 name: req.body.name,
                 name_lat: req.body.name_lat,
                 location: req.body.location,
@@ -30,5 +30,14 @@ router.post("/", async (req, res) => {
         return res.status(500).send("Server error")
     }
 })
+
+function parseJson(value) {
+    try {
+        return value ? JSON.parse(value) : null;
+    } catch (error) {
+        console.error(`Error parsing JSON: ${value}`);
+        return null;
+    }
+}
 
 module.exports = router

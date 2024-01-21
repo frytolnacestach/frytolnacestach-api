@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
                 name: req.body.name,
                 perex: req.body.perex,
                 url: req.body.url,
-                facts: req.body.facts,
+                facts: parseJson(req.body.facts),
                 date: req.body.date
             })
 
@@ -25,5 +25,14 @@ router.post("/", async (req, res) => {
         return res.status(500).send("Server error")
     }
 })
+
+function parseJson(value) {
+    try {
+        return value ? JSON.parse(value) : null;
+    } catch (error) {
+        console.error(`Error parsing JSON: ${value}`);
+        return null;
+    }
+}
 
 module.exports = router

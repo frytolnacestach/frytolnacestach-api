@@ -21,16 +21,16 @@ router.post("/", async (req, res) => {
                 name: req.body.name,
                 name_original: req.body.name_original,
                 information_chatgpt: req.body.information_chatgpt,
-                information_author: req.body.information_author,
+                information_author: parseJson(req.body.information_author),
                 population: req.body.population,
                 area: req.body.area,
                 altitude: req.body.altitude,
-                seo_tags: req.body.seo_tags,
-                coordinates: req.body.coordinates,
-                zoom: req.body.zoom,
-                affiliate: req.body.affiliate,
-                alerts: req.body.alerts,
-                parking: req.body.parking
+                seo_tags: parseJson(req.body.seo_tags),
+                coordinates: parseJson(req.body.coordinates),
+                zoom: parseJson(req.body.zoom),
+                affiliate: parseJson(req.body.affiliate),
+                alerts: parseJson(req.body.alerts),
+                parking: parseJson(req.body.parking)
             })
 
         return res.status(201).send("Create City")
@@ -38,5 +38,14 @@ router.post("/", async (req, res) => {
         return res.status(500).send("Server error")
     }
 })
+
+function parseJson(value) {
+    try {
+        return value ? JSON.parse(value) : null;
+    } catch (error) {
+        console.error(`Error parsing JSON: ${value}`);
+        return null;
+    }
+}
 
 module.exports = router

@@ -35,13 +35,13 @@ router.post("/", async (req, res) => {
                 perex_price: req.body.perex_price,
                 perex_triplength: req.body.perex_triplength,
                 perex_time: req.body.perex_time,
-                seo_tags: req.body.seo_tags,
-                tags: req.body.tags,
-                locations: req.body.locations,
-                travels: req.body.travels,
-                prices: req.body.prices,
-                triplengths: req.body.triplengths,
-                times: req.body.times
+                seo_tags: parseJson(req.body.seo_tags),
+                tags: parseJson(req.body.tags),
+                locations: parseJson(req.body.locations),
+                travels: parseJson(req.body.travels),
+                prices: parseJson(req.body.prices),
+                triplengths: parseJson(req.body.triplengths),
+                times: parseJson(req.body.times)
             })
 
         return res.status(201).send("Create post")
@@ -49,5 +49,14 @@ router.post("/", async (req, res) => {
         return res.status(500).send("Server error")
     }
 })
+
+function parseJson(value) {
+    try {
+        return value ? JSON.parse(value) : null;
+    } catch (error) {
+        console.error(`Error parsing JSON: ${value}`);
+        return null;
+    }
+}
 
 module.exports = router

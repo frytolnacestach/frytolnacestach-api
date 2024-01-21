@@ -16,35 +16,35 @@ router.post("/", async (req, res) => {
                 id_city_main: req.body.id_city_main,
                 id_image_cover: req.body.id_image_cover,
                 id_image_hero: req.body.id_image_hero,
-                ids_neighboring_countries: req.body.ids_neighboring_countries,
+                ids_neighboring_countries: parseJson(req.body.ids_neighboring_countries),
                 type_place: req.body.type_place,
                 slug: req.body.slug,
                 name: req.body.name,
                 name_original: req.body.name_original,
                 information_chatgpt: req.body.information_chatgpt,
-                information_author: req.body.information_author,
+                information_author: parseJson(req.body.information_author),
                 mpz: req.body.mpz,
                 tld: req.body.tld,
                 area: req.body.area,
                 population: req.body.population,
                 phone_prefix: req.body.phone_prefix,
-                phone_numbers_emergency: req.body.phone_numbers_emergency,
+                phone_numbers_emergency: parseJson(req.body.phone_numbers_emergency),
                 currency_name: req.body.currency_name,
                 currency_code: req.body.currency_code,
-                seo_tags: req.body.seo_tags,
-                money_prices: req.body.money_prices,
-                people_religion: req.body.people_religion,
-                people_nationality: req.body.people_nationality,
-                visitors_entry: req.body.visitors_entry,
-                coordinates: req.body.coordinates,
-                zoom: req.body.zoom,
-                affiliate: req.body.affiliate,
-                alerts: req.body.alerts,
-                organization: req.body.organization,
-                apps: req.body.apps,
-                links: req.body.links,
-                language_phrases: req.body.language_phrases,
-                facts_place: req.body.facts_place
+                seo_tags: parseJson(req.body.seo_tags),
+                money_prices: parseJson(req.body.money_prices),
+                people_religion: parseJson(req.body.people_religion),
+                people_nationality: parseJson(req.body.people_nationality),
+                visitors_entry: parseJson(req.body.visitors_entry),
+                coordinates: parseJson(req.body.coordinates),
+                zoom: parseJson(req.body.zoom),
+                affiliate: parseJson(req.body.affiliate),
+                alerts: parseJson(req.body.alerts),
+                organization: parseJson(req.body.organization),
+                apps: parseJson(req.body.apps),
+                links: parseJson(req.body.links),
+                language_phrases: parseJson(req.body.language_phrases),
+                facts_place: parseJson(req.body.facts_place)
             })
 
         return res.status(201).send("Create State")
@@ -52,5 +52,14 @@ router.post("/", async (req, res) => {
         return res.status(500).send("Server error")
     }
 })
+
+function parseJson(value) {
+    try {
+        return value ? JSON.parse(value) : null;
+    } catch (error) {
+        console.error(`Error parsing JSON: ${value}`);
+        return null;
+    }
+}
 
 module.exports = router

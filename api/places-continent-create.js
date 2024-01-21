@@ -19,14 +19,14 @@ router.post("/", async (req, res) => {
                 name: req.body.name,
                 name_original: req.body.name_original,
                 information_chatgpt: req.body.information_chatgpt,
-                information_author: req.body.information_author,
+                information_author: parseJson(req.body.information_author),
                 area: req.body.area,
                 population: req.body.population,
                 population_density: req.body.populationDensity,
                 number_states: req.body.states,
-                seo_tags: req.body.seo_tags,
-                coordinates: req.body.coordinates,
-                zoom: req.body.zoom
+                seo_tags: parseJson(req.body.seo_tags),
+                coordinates: parseJson(req.body.coordinates),
+                zoom: parseJson(req.body.zoom)
             })
 
         return res.status(201).send("Create Continent")
@@ -34,5 +34,14 @@ router.post("/", async (req, res) => {
         return res.status(500).send("Server error")
     }
 })
+
+function parseJson(value) {
+    try {
+        return value ? JSON.parse(value) : null;
+    } catch (error) {
+        console.error(`Error parsing JSON: ${value}`);
+        return null;
+    }
+}
 
 module.exports = router

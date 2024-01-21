@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
             title: req.body.title,
             perex: req.body.perex,
             url: req.body.url,
-            seo_tags: req.body.seo_tags
+            seo_tags: parseJson(req.body.seo_tags)
         })
 
         return res.status(201).send("Create video")
@@ -31,5 +31,14 @@ router.post("/", async (req, res) => {
         return res.status(500).send("Server error")
     }
 })
+
+function parseJson(value) {
+    try {
+        return value ? JSON.parse(value) : null;
+    } catch (error) {
+        console.error(`Error parsing JSON: ${value}`);
+        return null;
+    }
+}
 
 module.exports = router
