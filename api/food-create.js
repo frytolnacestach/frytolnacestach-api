@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
                 name: req.body.name,
                 description: req.body.description,
                 ingredients: parseJson(req.body.ingredients),
-                recipe: req.body.recipe
+                recipe: parseJson(req.body.recipe)
             })
 
         return res.status(201).send("Create food")

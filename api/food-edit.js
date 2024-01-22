@@ -20,7 +20,7 @@ router.put("/", async (req, res) => {
 				name: req.body.name,
 				description: req.body.description,
 				ingredients: JSON.parse(req.body.ingredients),
-				recipe: req.body.recipe
+				recipe: JSON.parse(req.body.recipe)
 			})
 			.eq('slug', req.body.slug)
 
