@@ -10,7 +10,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 router.put("/", async (req, res) => {
 	try {
 		const { data, error } = await supabase
-			.from('food')
+			.from('foods')
 			.update({
 				slug: req.body.slug,
 				id_image_cover: req.body.id_image_cover,
