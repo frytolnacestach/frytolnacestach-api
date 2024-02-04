@@ -21,7 +21,9 @@ router.get("/", async (req, res) => {
 
     // Setting select
     let supabaseSelect
-    if (showType === "list"){
+    if (showType === "xml") {
+        supabaseSelect = 'id, slug'
+    } else if (showType === "list"){
         supabaseSelect = 'id, id_image, slug, title, type'
     } else if (showType === "search") {
         supabaseSelect = 'id, slug, title'

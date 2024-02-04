@@ -8,6 +8,7 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
+    const showType = req.query.showType
     const limit = req.query.limit || ''
     const status = req.query.status || ''
     const search = req.query.search || ''
@@ -17,9 +18,15 @@ router.get("/", async (req, res) => {
     const end = parseInt(req.query.end || '999')
     const currentTime = new Date().toISOString()
 
+    // Setting select
+    let supabaseSelect
+    if (showType === "xml") {
+        supabaseSelect = 'id, slug'
+    }
+
     try {
         let query = supabase.from('events')
-            .select()
+            .select(supabaseSelect)
             .ilike('name', `%${search}%`)
 
         // ADD range
