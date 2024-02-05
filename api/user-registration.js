@@ -73,6 +73,7 @@ router.post("/", async (req, res) => {
                 nickname: nickname,
                 slug: slug,
                 status: 2,
+                status_role: 9,
                 agreement_mail: agreementMail,
                 code_activation: randomCode
             })
