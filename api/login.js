@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
             .from('users')
             .select()
             .eq('email', email)
-            .eq('status_role', 9)
+            .eq('status_role', 1)
 
         if (error) {
             return res.status(500).send("Server error")
