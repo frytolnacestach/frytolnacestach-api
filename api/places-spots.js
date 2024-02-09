@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
     if (showType === "xml") {
         supabaseSelect = 'id, slug'
     } else if (showType === "list"){
-        supabaseSelect = 'id, id_image_cover, slug, type_place, name'
+        supabaseSelect = 'id, id_state, id_image_cover, slug, type_place, name'
     } else if (showType === "search") {
         supabaseSelect = 'id, slug, type_place, name'
     }
