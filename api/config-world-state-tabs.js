@@ -29,7 +29,7 @@ router.get('/:slug', async (req, res) => {
             .from('places_states')
             .select('ids_neighboring_countries, currency_code, people_religion, people_nationality, visitors_entry, phone_prefix, affiliate')
             .eq('id', id)
-        const hasPrice = data[0].currency_code !== null
+        const hasPrice = data[0].currency[0].code !== null
         const hasPeople = data[0].people_religion !== null || data[0].people_nationality !== null
         const hasContacts = data[0].phone_prefix !== null
         const hasTrip = data[0].visitors_entry !== null
