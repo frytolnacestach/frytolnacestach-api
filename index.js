@@ -28,6 +28,9 @@ app.use(function(req, res, next) {
 //config
 const configWorldStateTabs = require("./api/config-world-state-tabs");
 
+//search
+const searchAdmin = require("./api/search-admin");
+
 //user
 const users = require("./api/users");
 const usersAll = require("./api/users-all");
@@ -248,6 +251,9 @@ const eventEdit = require("./api/event-edit");
 //API
 //api - config
 app.use("/api/config-world-state-tabs", configWorldStateTabs);
+
+//api - search
+app.use("/api/search-admin", searchAdmin);
 
 //api - user
 app.use("/api/users", users);
