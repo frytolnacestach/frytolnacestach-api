@@ -51,9 +51,9 @@ router.get("/", async (req, res) => {
                 .ilike('name', `%${search}%`)
                 .order('name', { ascending: true })
                 .range(itemsStart, itemsEnd)
-        } else if (type === 'state') {
+        } else if (type === 'spot') {
             response = await supabase
-                .from('places_states')
+                .from('places_spots')
                 .select('id, slug, name, information_chatgpt, information_author')
                 .ilike('name', `%${search}%`)
                 .order('name', { ascending: true })
