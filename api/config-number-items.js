@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
                 .select('*', { count: 'exact', head: true }))
         } else if (type === 'city') {
             ({ count, error } = await supabase
-                .from('places_states')
+                .from('places_cities')
                 .select('*', { count: 'exact', head: true }))
         } else if (type === 'spot') {
             ({ count, error } = await supabase
