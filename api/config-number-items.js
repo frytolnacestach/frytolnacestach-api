@@ -39,10 +39,10 @@ router.get('/', async (req, res) => {
         }
 
         // response
-        data = response.data
+        count = response.count
         error = response.error
 
-        res.send(data)
+        res.send(count)
     } catch (error) {
         return res.status(500).send("Server error")
     }
