@@ -26,6 +26,7 @@ app.use(function(req, res, next) {
 
 //CONSTS
 //config
+const configNumberItems = require("./api/config-number-items");
 const configWorldStateTabs = require("./api/config-world-state-tabs");
 
 //search
@@ -250,6 +251,7 @@ const eventEdit = require("./api/event-edit");
 
 //API
 //api - config
+app.use("/api/config-number-items", configNumberItems);
 app.use("/api/config-world-state-tabs", configWorldStateTabs);
 
 //api - search
