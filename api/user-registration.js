@@ -75,7 +75,8 @@ router.post("/", async (req, res) => {
                 status: 2,
                 status_role: 9,
                 agreement_mail: agreementMail,
-                code_activation: randomCode
+                code_activation: randomCode,
+                setting_author_name: 1
             })
 
         if (error) {

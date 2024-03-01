@@ -19,7 +19,8 @@ router.post("/:email", async (req, res) => {
                 lastname: req.body.lastname,
                 agreement_mail: req.body.agreement_mail,
                 urls: req.body.urls,
-                seo_tags: req.body.seo_tags
+                seo_tags: req.body.seo_tags,
+                setting_author_name: req.body.setting_author_name
             })
             .eq('email', email)
 
