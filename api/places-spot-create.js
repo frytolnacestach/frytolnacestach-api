@@ -28,7 +28,8 @@ router.post("/", async (req, res) => {
                 seo_tags: parseJson(req.body.seo_tags),
                 coordinates: parseJson(req.body.coordinates),
                 zoom: parseJson(req.body.zoom),
-                affiliate: parseJson(req.body.affiliate)
+                affiliate: parseJson(req.body.affiliate),
+                setting_top: req.body.setting_top
             })
 
         return res.status(201).send("Create Spot")

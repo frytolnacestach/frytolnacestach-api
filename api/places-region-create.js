@@ -25,7 +25,8 @@ router.post("/", async (req, res) => {
                 information_author: parseJson(req.body.information_author),
                 coordinates: parseJson(req.body.coordinates),
                 zoom: parseJson(req.body.zoom),
-                affiliate: parseJson(req.body.affiliate)
+                affiliate: parseJson(req.body.affiliate),
+                setting_top: req.body.setting_top
             })
 
         return res.status(201).send("Create region")
