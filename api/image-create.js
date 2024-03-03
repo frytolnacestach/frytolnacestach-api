@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
                 }
 
                 // Nahrání originálního obrázku na FTP
-                client.put(image.data, image.name, async (error) => {
+                client.put(image.data, req.body.name, async (error) => {
                     if (error) {
                         return res.status(500).send('Chyba při nahrávání původního obrázku na FTP server.')
                     }
