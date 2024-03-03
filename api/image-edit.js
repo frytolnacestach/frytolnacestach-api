@@ -12,9 +12,6 @@ router.put("/", async (req, res) => {
 		const { data, error } = await supabase
 			.from('images')
 			.update({
-				name: req.body.name,
-				source: req.body.source,
-				type: req.body.type,
 				author: req.body.author
 			})
 			.eq('id', req.body.id)
