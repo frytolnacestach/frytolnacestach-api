@@ -4,6 +4,7 @@ const express = require('express')
 const router = express.Router()
 const fileUpload = require('express-fileupload')
 const FTPClient = require('ftp')
+const sharp = require('sharp')
 
 router.use(fileUpload())
 
@@ -38,8 +39,12 @@ router.post('/', async (req, res) => {
                     return res.status(500).send('Chyba při přepnutí adresáře na FTP serveru.')
                 }
 
+                const jpgImageBuffer = await sharp(image.data)
+                    .toFormat('jpg')
+                    .toBuffer();
+
                 // Nahrání originálního obrázku na FTP
-                client.put(image.data, (req.body.name + '.jpg'), async (error) => {
+                client.put(jpgImageBuffer, (req.body.name + '.jpg'), async (error) => {
                     if (error) {
                         return res.status(500).send('Chyba při nahrávání původního obrázku na FTP server.')
                     }
