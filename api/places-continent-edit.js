@@ -28,7 +28,7 @@ router.put("/", async (req, res) => {
                 coordinates: JSON.parse(req.body.coordinates),
                 zoom: JSON.parse(req.body.zoom),
                 setting_top: req.body.setting_top,
-                setting_status_public: req.body.setting_status_public
+                setting_status_public: 1
             })
             .eq('slug', req.body.slug)
 

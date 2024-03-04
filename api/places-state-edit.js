@@ -45,7 +45,7 @@ router.put("/", async (req, res) => {
                 language_phrases: JSON.parse(req.body.language_phrases),
                 facts_place: JSON.parse(req.body.facts_place),
                 setting_top: req.body.setting_top,
-                setting_status_public: req.body.setting_status_public
+                setting_status_public: 1
             })
             .eq('slug', req.body.slug)
 

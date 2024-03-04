@@ -30,7 +30,7 @@ router.put("/", async (req, res) => {
                 zoom: JSON.parse(req.body.zoom),
                 affiliate: JSON.parse(req.body.affiliate),
                 setting_top: req.body.setting_top,
-                setting_status_public: req.body.setting_status_public
+                setting_status_public: 1
             })
             .eq('slug', req.body.slug)
 

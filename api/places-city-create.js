@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
                 alerts: parseJson(req.body.alerts),
                 parking: parseJson(req.body.parking),
                 setting_top: req.body.setting_top,
-                setting_status_public: req.body.setting_status_public
+                setting_status_public: 1
             })
 
         return res.status(201).send("Create City")
