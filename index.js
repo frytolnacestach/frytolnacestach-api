@@ -28,6 +28,7 @@ app.use(function(req, res, next) {
 //config
 const configNumberItems = require("./api/config-number-items");
 const configWorldStateTabs = require("./api/config-world-state-tabs");
+const configPlacesCount = require("./api/config-places-count");
 
 //search
 const searchAdmin = require("./api/search-admin");
@@ -183,9 +184,6 @@ const travelDictionary = require("./api/travel-dictionary");
 const travelDictionaryCreate = require("./api/travel-dictionary-create");
 const travelDictionaryEdit = require("./api/travel-dictionary-edit");
 
-//places - count
-const placesCount = require("./api/places-count");
-
 //places - continent
 const placesContinents = require("./api/places-continents");
 const placesContinentsArray = require("./api/places-continents-array");
@@ -253,6 +251,7 @@ const eventEdit = require("./api/event-edit");
 //api - config
 app.use("/api/config-number-items", configNumberItems);
 app.use("/api/config-world-state-tabs", configWorldStateTabs);
+app.use("/api/config-places-count", configPlacesCount);
 
 //api - search
 app.use("/api/search-admin", searchAdmin);
@@ -407,9 +406,6 @@ app.use("/api/travel-dictionary", travelDictionary);
 //api - travel-dictionary - post
 app.use("/api/travel-dictionary-create", travelDictionaryCreate);
 app.use("/api/travel-dictionary-edit", travelDictionaryEdit);
-
-//api - places - count
-app.use("/api/places-count", placesCount);
 
 //api - places - continent
 app.use("/api/places-continents", placesContinents);
