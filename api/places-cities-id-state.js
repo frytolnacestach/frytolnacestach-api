@@ -23,6 +23,7 @@ router.get('/:slug', async (req, res) => {
             .select(supabaseSelect)
             .eq('id_state', id)
             .order('name', { ascending: true })
+            .eq('setting_status_public', 1)
 
         res.send(JSON.stringify(data))
     } catch (error) {

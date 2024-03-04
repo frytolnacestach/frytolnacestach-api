@@ -21,6 +21,7 @@ router.get("/", async (req, res) => {
                 .select('id, id_image_cover, slug, type_place, name')
                 .in("id", ids)
                 .order('id', { ascending: false })
+                .eq('setting_status_public', 1)
 
             data = response.data
             error = response.error
@@ -30,6 +31,7 @@ router.get("/", async (req, res) => {
                 .select()
                 .in("id", ids)
                 .order('id', { ascending: false })
+                .eq('setting_status_public', 1)
 
             data = response.data
             error = response.error

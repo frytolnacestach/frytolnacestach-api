@@ -15,6 +15,7 @@ var slug = req.params.slug
             .from('places_states')
             .select()
             .eq('slug', slug)
+            .eq('setting_status_public', 1)
 
         res.send(JSON.stringify(data))
     } catch (error) {

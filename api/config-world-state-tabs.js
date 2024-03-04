@@ -15,20 +15,24 @@ router.get('/:slug', async (req, res) => {
             .from('places_regions')
             .select()
             .eq('id_state', id)
+            .eq('setting_status_public', 1)
         const { dataCities, errorCities } = await supabase
             .from('places_cities')
             .select()
             .eq('id_state', id)
+            .eq('setting_status_public', 1)
         const { dataSpots, errorSpots } = await supabase
             .from('places_spots')
             .select()
             .eq('id_state', id)
+            .eq('setting_status_public', 1)
         const hasWhatToSee = dataRegions !== null || dataCities !== null || dataSpots !== null
 
         const { data, error } = await supabase
             .from('places_states')
             .select('ids_neighboring_countries, currency, people_religion, people_nationality, visitors_entry, phone_prefix, affiliate')
             .eq('id', id)
+            .eq('setting_status_public', 1)
         const hasPrice = data[0].currency[0] && data[0].currency[0].code !== null
         const hasPeople = data[0].people_religion !== null || data[0].people_nationality !== null
         const hasContacts = data[0].phone_prefix !== null

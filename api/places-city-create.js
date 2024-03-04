@@ -31,7 +31,8 @@ router.post("/", async (req, res) => {
                 affiliate: parseJson(req.body.affiliate),
                 alerts: parseJson(req.body.alerts),
                 parking: parseJson(req.body.parking),
-                setting_top: req.body.setting_top
+                setting_top: req.body.setting_top,
+                setting_status_public: req.body.setting_status_public
             })
 
         return res.status(201).send("Create City")

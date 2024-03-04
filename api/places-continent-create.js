@@ -27,7 +27,8 @@ router.post("/", async (req, res) => {
                 seo_tags: parseJson(req.body.seo_tags),
                 coordinates: parseJson(req.body.coordinates),
                 zoom: parseJson(req.body.zoom),
-                setting_top: req.body.setting_top
+                setting_top: req.body.setting_top,
+                setting_status_public: req.body.setting_status_public
             })
 
         return res.status(201).send("Create Continent")

@@ -27,7 +27,8 @@ router.put("/", async (req, res) => {
                 seo_tags: JSON.parse(req.body.seo_tags),
                 coordinates: JSON.parse(req.body.coordinates),
                 zoom: JSON.parse(req.body.zoom),
-                setting_top: req.body.setting_top
+                setting_top: req.body.setting_top,
+                setting_status_public: req.body.setting_status_public
             })
             .eq('slug', req.body.slug)
 

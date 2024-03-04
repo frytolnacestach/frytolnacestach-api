@@ -15,6 +15,7 @@ router.get('/:slug', async (req, res) => {
             .from('places_spots')
             .select()
             .eq('id_state', id)
+            .eq('setting_status_public', 1)
 
         res.send(JSON.stringify(data))
     } catch (error) {

@@ -33,6 +33,7 @@ router.get("/", async (req, res) => {
             .select(supabaseSelect)
             .ilike('name', `%${search}%`)
             .order('name', { ascending: true })
+            .eq('setting_status_public', 1)
 
         // ADD idContinent
         if (idContinent !== '' && idContinent !== null) {

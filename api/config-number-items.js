@@ -19,22 +19,27 @@ router.get('/', async (req, res) => {
             ({ count, error } = await supabase
                 .from('places_continents')
                 .select('*', { count: 'exact', head: true }))
+                .eq('setting_status_public', 1)
         } else if (type === 'state') {
             ({ count, error } = await supabase
                 .from('places_states')
                 .select('*', { count: 'exact', head: true }))
+                .eq('setting_status_public', 1)
         } else if (type === 'region') {
             ({ count, error } = await supabase
                 .from('places_regions')
                 .select('*', { count: 'exact', head: true }))
+                .eq('setting_status_public', 1)
         } else if (type === 'city') {
             ({ count, error } = await supabase
                 .from('places_cities')
                 .select('*', { count: 'exact', head: true }))
+                .eq('setting_status_public', 1)
         } else if (type === 'spot') {
             ({ count, error } = await supabase
                 .from('places_spots')
                 .select('*', { count: 'exact', head: true }))
+                .eq('setting_status_public', 1)
         } else {
             return res.status(400).json({ error: 'Invalid type parameter' })
         }
