@@ -9,6 +9,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
     // varible - query
+    const admin = req.query.admin === true ? true : false
     const showType = req.query.showType
     const search = req.query.search || ''
     const page = parseInt(req.query.page, 10)
@@ -33,7 +34,13 @@ router.get("/", async (req, res) => {
             .select(supabaseSelect)
             .ilike('name', `%${search}%`)
             .order('name', { ascending: true })
-            .eq('setting_status_public', 1)
+
+        // admin
+        if (admin) {
+            query = query.neq('setting_status_public', 0)
+        } else {
+            query = query.eq('setting_status_public', 1)
+        }
 
         // ADD idState
         if (idState !== '' && idState !== null) {

@@ -8,6 +8,7 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
+    const admin = req.query.admin === true ? true : false
     const showType = req.query.showType
     const search = req.query.search || ''
     const page = parseInt(req.query.page, 10)
@@ -26,39 +27,33 @@ router.get("/", async (req, res) => {
     }
 
     try {
-        let data
-        let error
+        // Base query
+        let query = supabase.from('places_continents')
+            .select(supabaseSelect)
+            .ilike('name', `%${search}%`)
+            .order('name', { ascending: true })
 
-        if(page && items) {
-            // items filter
+        // admin
+        if (admin) {
+            query = query.neq('setting_status_public', 0)
+        } else {
+            query = query.eq('setting_status_public', 1)
+        }
+
+        // ADD range
+        if (page && items) {
             const itemsStart = (page * items) - items
             const itemsEnd = itemsStart + items - 1
-
-            // db
-            const response = await supabase
-                .from('places_continents')
-                .select(supabaseSelect)
-                .ilike('name', `%${search}%`)
-                .order('name', { ascending: true })
-                .range(itemsStart, itemsEnd)
-                .eq('setting_status_public', 1)
-
-            // response
-            data = response.data
-            error = response.error
-        } else {
-            // db
-            const response = await supabase
-                .from('places_continents')
-                .select(supabaseSelect)
-                .ilike('name', `%${search}%`)
-                .order('name', { ascending: true })
-                .eq('setting_status_public', 1)
-
-            // response
-            data = response.data
-            error = response.error
+            query = query.range(itemsStart, itemsEnd)
         }
+
+        // ADD range large
+        if (!page && !items) {
+            query = query.range(start, end)
+        }
+
+        // DATA
+        const { data, error } = await query
 
         res.send(JSON.stringify(data))
     } catch (error) {
