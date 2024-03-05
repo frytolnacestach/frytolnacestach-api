@@ -8,19 +8,30 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get('/:slug', async (req, res) => {
-    var slug = req.params.slug
+    // varible - query
+    const admin = req.query.admin === true ? true : false
+    const slug = req.params.slug
 
     try {
-        const { data, error } = await supabase
-            .from('places_regions')
-            .select()
+        // Base query
+        let query = supabase.from('places_regions')
+            .select()    
             .eq('slug', slug)
-            .eq('setting_status_public', 1)
+
+        // admin
+        if (admin) {
+            query = query.neq('setting_status_public', 0)
+        } else {
+            query = query.eq('setting_status_public', 1)
+        }
+
+        // DATA
+        const { data, error } = await query
 
         res.send(JSON.stringify(data))
     } catch (error) {
         return res.status(500).send("Server error")
-  }
+    }
 })
 
 module.exports = router
