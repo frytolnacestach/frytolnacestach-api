@@ -15,34 +15,25 @@ router.get('/', async (req, res) => {
         let error
 
         // db
+        let query = null
         if (type === 'continent') {
-            ({ count, error } = await supabase
-                .from('places_continents')
-                .select('*', { count: 'exact', head: true }))
-                .neq('setting_status_public', 0)
+            query = supabase.from('places_continents')
         } else if (type === 'state') {
-            ({ count, error } = await supabase
-                .from('places_states')
-                .select('*', { count: 'exact', head: true }))
-                .neq('setting_status_public', 0)
+            query = supabase.from('places_states')
         } else if (type === 'region') {
-            ({ count, error } = await supabase
-                .from('places_regions')
-                .select('*', { count: 'exact', head: true }))
-                .neq('setting_status_public', 0)
+            query = supabase.from('places_regions')
         } else if (type === 'city') {
-            ({ count, error } = await supabase
-                .from('places_cities')
-                .select('*', { count: 'exact', head: true }))
-                .neq('setting_status_public', 0)
+            query = supabase.from('places_cities')
         } else if (type === 'spot') {
-            ({ count, error } = await supabase
-                .from('places_spots')
-                .select('*', { count: 'exact', head: true }))
-                .neq('setting_status_public', 0)
+            query = supabase.from('places_spots')
         } else {
             return res.status(400).json({ error: 'Invalid type parameter' })
         }
+
+        ({ count, error } = await query
+            .select('*', { count: 'exact', head: true })
+            .neq('setting_status_public', 0))
+
 
         if (error) {
             console.error(error);
