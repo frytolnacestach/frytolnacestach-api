@@ -8,6 +8,7 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 router.get("/", async (req, res) => {
+    // varible - query
     const admin = req.query.admin === true ? true : false
     const showType = req.query.showType
     const search = req.query.search || ''
@@ -45,11 +46,6 @@ router.get("/", async (req, res) => {
             const itemsStart = (page * items) - items
             const itemsEnd = itemsStart + items - 1
             query = query.range(itemsStart, itemsEnd)
-        }
-
-        // ADD range large
-        if (!page && !items) {
-            query = query.range(start, end)
         }
 
         // DATA
