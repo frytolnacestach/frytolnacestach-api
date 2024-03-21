@@ -94,7 +94,11 @@ async function resizeImage(imageData, width, height) {
 	const image = sharp(imageData)
 	
 	// Změna velikosti obrázku
-	return await image.resize({ width: width, height: height, fit: 'contain' }).webp({ quality: 80 }).toBuffer()
+    if (width !== null && height !== null && width === height) {
+        return await image.resize({ width: width, height: height, fit: 'cover', position: 'centre' }).webp({ quality: 80 }).toBuffer();
+    } else {
+        return await image.resize({ width: width, height: height, fit: 'contain' }).webp({ quality: 80 }).toBuffer();
+    }
 }
 
 // Funkce pro generování názvu výstupního souboru
